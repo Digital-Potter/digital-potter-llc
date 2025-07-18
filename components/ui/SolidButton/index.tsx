@@ -1,6 +1,7 @@
 import RightArrow from '@/components/icons/RightArrow';
 import Link from 'next/link';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface SolidButtonProps {
 	label: string;
@@ -10,7 +11,7 @@ interface SolidButtonProps {
 
 const ButtonIcon = () => {
 	return (
-		<RightArrow className="fill-white translate-x-0 opacity-0 group-hover:fill-digital-potter-body group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+		<RightArrow className="fill-white translate-x-0 opacity-0 group-hover:fill-dp-green group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
 	);
 };
 
@@ -27,15 +28,15 @@ const SolidButton = (props: SolidButtonProps) => {
 	const { label, onClick, href } = props;
 
 	const commonClasses =
-		'relative flex items-center bg-digital-potter-dark-green text-white px-9 py-3 rounded-xl border border-digital-potter-dark-green md:px-9 md:py-4 hover:border-white hover:bg-digital-potter-bgs transition-all group shadow-2xl';
+		'relative text-sm flex items-center bg-dp-green text-dp-yellowish font-primary-font uppercase font-bold px-7 py-3.5 rounded-dp-20 border-2 border-white/90 md:px-9 md:py-4 hover:text-dp-green hover:border-white hover:bg-dp-dark transition-all group shadow-xl';
 
 	return href ? (
-		<Link href={href} className={commonClasses}>
+		<Link href={href} className={twMerge(commonClasses)}>
 			<ButtonLabel label={label} />
 			<ButtonIcon />
 		</Link>
 	) : (
-		<button onClick={onClick} className={commonClasses}>
+		<button onClick={onClick} className={twMerge(commonClasses, 'text-sm')}>
 			<ButtonLabel label={label} /> <ButtonIcon />
 		</button>
 	);

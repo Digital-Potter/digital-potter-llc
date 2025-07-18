@@ -1,113 +1,126 @@
 @import 'tailwindcss';
 
 :root {
-	--digital-potter-bgs: #fffdee;
-	--digital-potter-body: #331f1f;
-	--digital-potter-light-gray: #efefef;
-	--digital-potter-green: #00d85c;
-	--digital-potter-dark: #331f1f;
-	--digital-potter-dark-green: #007431;
+	--dp-yellowish: #fffdee;
+	--dp-body: #331f1f;
+	--dp-light-gray: #efefef;
+	--dp-green: #00d85c;
+	--dp-dark: #331f1f;
+	--dp-dark-green: #007431;
 	--primary-font: 'Golos Text', 'sans';
-	--secondary-font: Figtree, 'sans';
+	--secondary-font: 'Figtree', 'sans';
 }
 
-@layer base {
-	body {
-		color: var(--digital-potter-body);
-		background: var(--digital-potter-bgs);
-		font-family: var(--secondary-font);
-	}
+@theme inline {
+	--color-dp-bg: var(--dp-yellowish);
+	--color-dp-yellowish: var(--dp-yellowish);
+	--color-dp-body: var(--dp-body);
+	--color-dp-light-gray: var(--dp-light-gray);
+	--color-dp-green: var(--dp-green);
+	--color-dp-dark: var(--dp-dark);
+	--color-dp-dark-green: var(--dp-dark-green);
 
-	section {
-		width: 95%;
-		max-width: 1500px;
-		margin: 0 auto;
-	}
+	--font-primary-font: var(--primary-font);
+	--font-secondary-font: var(--secondary-font);
 
-	p {
-		font-size: 1rem;
-		font-family: var(--secondary-font);
-	}
+	--radius-dp-20: 1.25rem;
+}
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: var(--digital-potter-dark);
-		font-family: var(--primary-font);
-		font-weight: 700;
-	}
+body {
+	color: var(--dp-body);
+	background: var(--dp-bgs);
+	font-family: var(--secondary-font);
+}
 
+section {
+	width: 95%;
+	max-width: 1500px;
+	margin: 0 auto;
+}
+
+p {
+	font-size: 1rem;
+	font-family: var(--secondary-font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--dp-dark);
+	font-family: var(--primary-font);
+	font-weight: 700;
+}
+
+h1 {
+	font-size: 4.375rem;
+	line-height: 1.1em;
+}
+
+h2 {
+	font-size: 4rem;
+	line-height: 1.3em;
+}
+
+h3 {
+	font-size: 3.4375rem;
+	line-height: 1.2em;
+}
+
+h4 {
+	font-size: 2.75rem;
+	line-height: 1.3em;
+}
+
+h5 {
+	font-size: 2.375rem;
+	line-height: 1.3em;
+}
+
+h6 {
+	font-size: 2rem;
+	line-height: 1.3em;
+}
+
+@media screen and (max-width: 768px) {
 	h1 {
-		font-size: 4.375rem;
-		line-height: 1.1em;
+		font-size: 3.5rem;
 	}
 
 	h2 {
-		font-size: 4rem;
-		line-height: 1.3em;
+		font-size: 3.1rem;
 	}
 
 	h3 {
-		font-size: 3.4375rem;
-		line-height: 1.2em;
+		font-size: 2.75rem;
 	}
 
 	h4 {
-		font-size: 2.75rem;
-		line-height: 1.3em;
+		font-size: 2.35rem;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	body,
+	p {
+		font-size: 0.87rem;
 	}
 
-	h5 {
-		font-size: 2.375rem;
-		line-height: 1.3em;
+	h1 {
+		font-size: 2.5rem;
 	}
 
-	h6 {
+	h2 {
+		font-size: 2.2rem;
+	}
+
+	h3 {
 		font-size: 2rem;
-		line-height: 1.3em;
 	}
 
-	@media screen and (max-width: 768px) {
-		h1 {
-			font-size: 3.5rem;
-		}
-
-		h2 {
-			font-size: 3.1rem;
-		}
-
-		h3 {
-			font-size: 2.75rem;
-		}
-
-		h4 {
-			font-size: 2.35rem;
-		}
-	}
-
-	@media screen and (max-width: 500px) {
-		body,
-		p {
-			font-size: 0.87rem;
-		}
-
-		h1 {
-			font-size: 2.5rem;
-		}
-
-		h2 {
-			font-size: 2.2rem;
-		}
-
-		h3 {
-			font-size: 2rem;
-		}
-
-		h4 {
-			font-size: 1.9rem;
-		}
+	h4 {
+		font-size: 1.9rem;
 	}
 }

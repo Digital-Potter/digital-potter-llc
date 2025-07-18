@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SolidButton matches snapshot 1`] = `
 <button
-  class="relative flex items-center bg-digital-potter-dark-green text-white px-9 py-3 rounded-xl border border-digital-potter-dark-green md:px-9 md:py-4 hover:border-white hover:bg-digital-potter-bgs transition-all group shadow-2xl"
+  class="relative flex items-center bg-dp-green text-dp-yellowish font-primary-font uppercase font-bold px-7 py-3.5 rounded-dp-20 border-2 border-white/90 md:px-9 md:py-4 hover:text-dp-green hover:border-white hover:bg-dp-dark transition-all group shadow-xl text-sm"
 >
   <span
     class="translate-x-2 group-hover:-translate-x-1 transition-all"
@@ -11,7 +11,7 @@ exports[`SolidButton matches snapshot 1`] = `
   </span>
    
   <svg
-    class="fill-white translate-x-0 opacity-0 group-hover:fill-digital-potter-body group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+    class="fill-white translate-x-0 opacity-0 group-hover:fill-dp-green group-hover:opacity-100 group-hover:translate-x-1 transition-all"
     height="1em"
     viewBox="0 0 448 512"
     width="1em"

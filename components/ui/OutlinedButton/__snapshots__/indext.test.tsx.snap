@@ -2,16 +2,16 @@
 
 exports[`OutlinedButton matches snapshot 1`] = `
 <button
-  class="relative flex items-center bg-transparent text-white px-9 py-3 rounded-xl border border-digital-potter-green hover:border-white transition-all group shadow-2xlcursor-pointer"
+  class="relative flex items-center bg-transparent text-white px-9 py-3 rounded-xl border border-dp-green hover:border-white transition-all group shadow-2xlcursor-pointer"
 >
   <span
-    class="translate-x-2 group-hover:-translate-x-1 transition-all text-digital-potter-green group-hover:text-digital-potter-body"
+    class="translate-x-2 group-hover:-translate-x-1 transition-all text-dp-green group-hover:text-dp-body"
   >
     Click Me
   </span>
    
   <svg
-    class="fill-digital-potter-green translate-x-0 opacity-0 group-hover:fill-digital-potter-body group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+    class="fill-dp-green translate-x-0 opacity-0 group-hover:fill-dp-body group-hover:opacity-100 group-hover:translate-x-1 transition-all"
     height="1em"
     viewBox="0 0 448 512"
     width="1em"

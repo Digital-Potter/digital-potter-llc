@@ -13,7 +13,7 @@ const OutlinedButton = (props: OutlinedButtonProps) => {
 	const { label, onClick, href, disabled } = props;
 
 	const commonClasses =
-		'relative flex items-center bg-transparent text-white px-9 py-3 rounded-xl border border-digital-potter-green hover:border-white transition-all group shadow-2xl';
+		'relative flex items-center bg-transparent text-white px-9 py-3 rounded-xl border border-dp-green hover:border-white transition-all group shadow-2xl';
 
 	const buttonOnly = disabled
 		? 'group:pointer-events-none pointer-events-none cursor-not-allowed'
@@ -37,14 +37,14 @@ const OutlinedButton = (props: OutlinedButtonProps) => {
 
 const ButtonIcon = () => {
 	return (
-		<RightArrow className="fill-digital-potter-green translate-x-0 opacity-0 group-hover:fill-digital-potter-body group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+		<RightArrow className="fill-dp-green translate-x-0 opacity-0 group-hover:fill-dp-body group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
 	);
 };
 
 const ButtonLabel = (props: { label: string }) => {
 	const { label } = props;
 	return (
-		<span className="translate-x-2 group-hover:-translate-x-1 transition-all text-digital-potter-green group-hover:text-digital-potter-body">
+		<span className="translate-x-2 group-hover:-translate-x-1 transition-all text-dp-green group-hover:text-dp-body">
 			{label}
 		</span>
 	);
