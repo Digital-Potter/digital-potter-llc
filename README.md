@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -16,21 +16,20 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project contains the basic kit that comes from a first installation plus some tweaks we use at Digital Potter.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Tailwinds with some changes in how to load fonts.
+- Some Global CSS pre-setup as we like to use in almost all of our projects.
+- Some TS tweaks to adapt to the way we feel more confortable working.
 
-## Learn More
+## About this repo
 
-To learn more about Next.js, take a look at the following resources:
+This git repository is a starting template for new clients. It has basic setup that we use every time we begin the development process of a new web application, and the intention is to avoid doing the same things we do every time and just replace things like fonts, or some basic styling that doesn't apply to the new client.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Things to start with
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Change the git origin of this repository to the one you will use for the new project
+- Change the name and port of the project in the `package.json`
+- Fonts in `FontSettings.ts` file and `Tailwind.config.ts`
+- Colors in `Tailwind.config.ts`
+- Folder customization for components and other utilities
