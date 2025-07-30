@@ -16,4 +16,5 @@ module.exports = {
 	trailingComma: 'all',
 	useTabs: true,
 	vueIndentScriptAndStyle: false,
+	plugins: ['prettier-plugin-tailwindcss'],
 };

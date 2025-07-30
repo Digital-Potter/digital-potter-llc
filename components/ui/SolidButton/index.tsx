@@ -1,13 +1,32 @@
-import RightArrow from '@/components/icons/RightArrow';
-import Link from 'next/link';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
+import Link from 'next/link';
+
+import { RightArrow } from '@/components/icons';
 
 interface SolidButtonProps {
 	label: string;
 	href?: string;
-	onClick?: () => void;
+	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
+
+const SolidButton = (props: SolidButtonProps) => {
+	const { label, onClick, href } = props;
+
+	const commonClasses =
+		'relative text-sm flex items-center bg-dp-dark-green text-dp-yellowish font-primary-font uppercase font-bold px-7 py-3.5 rounded-dp-20 border-2 border-white md:px-9 md:py-4 hover:text-dp-green hover:border-white hover:bg-dp-dark transition-all group shadow-2xl';
+
+	return href ? (
+		<Link href={href} className={twMerge(commonClasses)}>
+			<ButtonLabel label={label} />
+			<ButtonIcon />
+		</Link>
+	) : (
+		<button onClick={onClick} className={twMerge(commonClasses)}>
+			<ButtonLabel label={label} /> <ButtonIcon />
+		</button>
+	);
+};
 
 const ButtonIcon = () => {
 	return (
@@ -21,24 +40,6 @@ const ButtonLabel = (props: { label: string }) => {
 		<span className="translate-x-2 group-hover:-translate-x-1 transition-all">
 			{label}
 		</span>
-	);
-};
-
-const SolidButton = (props: SolidButtonProps) => {
-	const { label, onClick, href } = props;
-
-	const commonClasses =
-		'relative text-sm flex items-center bg-dp-green text-dp-yellowish font-primary-font uppercase font-bold px-7 py-3.5 rounded-dp-20 border-2 border-white/90 md:px-9 md:py-4 hover:text-dp-green hover:border-white hover:bg-dp-dark transition-all group shadow-xl';
-
-	return href ? (
-		<Link href={href} className={twMerge(commonClasses)}>
-			<ButtonLabel label={label} />
-			<ButtonIcon />
-		</Link>
-	) : (
-		<button onClick={onClick} className={twMerge(commonClasses, 'text-sm')}>
-			<ButtonLabel label={label} /> <ButtonIcon />
-		</button>
 	);
 };
 

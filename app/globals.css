@@ -27,20 +27,15 @@
 }
 
 body {
-	color: var(--dp-body);
-	background: var(--dp-bgs);
-	font-family: var(--secondary-font);
+	@apply text-dp-body bg-dp-yellowish font-secondary-font;
 }
 
 section {
-	width: 95%;
-	max-width: 1500px;
-	margin: 0 auto;
+	@apply w-11/12 max-w-[1500px] mx-auto;
 }
 
 p {
-	font-size: 1rem;
-	font-family: var(--secondary-font);
+	@apply text-xl font-secondary-font;
 }
 
 h1,
@@ -49,9 +44,7 @@ h3,
 h4,
 h5,
 h6 {
-	color: var(--dp-dark);
-	font-family: var(--primary-font);
-	font-weight: 700;
+	@apply text-dp-dark font-primary-font font-bold;
 }
 
 h1 {
