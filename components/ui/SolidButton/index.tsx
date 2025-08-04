@@ -1,6 +1,9 @@
+'use client';
+
 import React, { MouseEvent } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { RightArrow } from '@/components/icons';
 
@@ -8,21 +11,39 @@ interface SolidButtonProps {
 	label: string;
 	href?: string;
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+	classes?: string;
+	isTopBar?: boolean;
 }
 
 const SolidButton = (props: SolidButtonProps) => {
-	const { label, onClick, href } = props;
-
-	const commonClasses =
-		'relative text-sm flex items-center bg-dp-dark-green text-dp-yellowish font-primary-font uppercase font-bold px-7 py-3.5 rounded-dp-20 border-2 border-white md:px-9 md:py-4 hover:text-dp-green hover:border-white hover:bg-dp-dark transition-all group shadow-2xl';
+	const pathName = usePathname();
+	const { label, onClick, href, classes = '', isTopBar = false } = props;
 
 	return href ? (
-		<Link href={href} className={twMerge(commonClasses)}>
+		<Link
+			href={href}
+			className={twJoin(
+				'font-primary-font rounded-dp-20 hover:text-dp-green hover:bg-dp-dark group relative flex items-center border-2 border-white px-4 py-3.5 text-xs font-bold uppercase shadow-2xl transition-all hover:border-white md:px-9 md:py-4 lg:text-sm',
+				classes,
+				isTopBar && pathName === `/${href}`
+					? 'bg-dp-dark text-white'
+					: 'bg-dp-green text-dp-dark',
+			)}
+		>
 			<ButtonLabel label={label} />
 			<ButtonIcon />
 		</Link>
 	) : (
-		<button onClick={onClick} className={twMerge(commonClasses)}>
+		<button
+			onClick={onClick}
+			className={twMerge(
+				'font-primary-font rounded-dp-20 hover:text-dp-green hover:bg-dp-dark group relative flex items-center border-2 border-white px-4 py-3.5 text-xs font-bold uppercase shadow-2xl transition-all hover:border-white md:px-9 md:py-4 lg:text-sm',
+				classes,
+				isTopBar && pathName === `/${href}`
+					? 'bg-dp-dark text-white'
+					: 'bg-dp-green text-dp-dark',
+			)}
+		>
 			<ButtonLabel label={label} /> <ButtonIcon />
 		</button>
 	);
@@ -30,14 +51,14 @@ const SolidButton = (props: SolidButtonProps) => {
 
 const ButtonIcon = () => {
 	return (
-		<RightArrow className="fill-white translate-x-0 opacity-0 group-hover:fill-dp-green group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+		<RightArrow className="group-hover:fill-dp-green translate-x-0 fill-white opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
 	);
 };
 
 const ButtonLabel = (props: { label: string }) => {
 	const { label } = props;
 	return (
-		<span className="translate-x-2 group-hover:-translate-x-1 transition-all">
+		<span className="translate-x-2 transition-all group-hover:-translate-x-1">
 			{label}
 		</span>
 	);

@@ -1,18 +1,19 @@
+import Image from 'next/image';
+
 import OutlinedButton from '@/components/ui/OutlinedButton';
 import SolidButton from '@/components/ui/SolidButton';
-import Image from 'next/image';
 
 export default function Home() {
 	return (
-		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+		<div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
+			<main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
 				<h1 className="text-center">Ready for Digital Potter</h1>
-				<div className="flex flex-col md:flex-row items-center sm:justify-center sm:items-center w-full gap-4">
+				<div className="flex w-full flex-col items-center gap-4 sm:items-center sm:justify-center md:flex-row">
 					<OutlinedButton label="Button One" href="/" />
 					<SolidButton label="Button Two" href="/" />
 				</div>
 			</main>
-			<footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+			<footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
 				<a
 					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
 					href="https://digitalpotter.io"

@@ -1,4 +1,6 @@
 export interface PageProps extends NavProps {
+	isLive: boolean;
+	isMenu: boolean;
 	title: string;
 	subtitle: string;
 	content: string;
@@ -19,10 +21,7 @@ export interface PageProps extends NavProps {
 export interface NavProps {
 	_id: string;
 	position: number;
-	subtitle?: string;
 	label: string;
-	isLive: boolean;
-	isMenu: boolean;
 	isSubmenu?: boolean;
 	isUnder?: string;
 	link: string;
