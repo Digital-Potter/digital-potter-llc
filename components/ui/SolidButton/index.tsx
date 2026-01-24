@@ -1,6 +1,7 @@
 'use client';
 
-import React, { MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
+import React from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

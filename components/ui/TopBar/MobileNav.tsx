@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import React, { Fragment, MouseEvent, useRef } from 'react';
+import type { MouseEvent } from 'react';
+import React, { Fragment, useRef } from 'react';
 
 // Styling
 import mobileNavStyles from './nav.module.css';
 import { twMerge } from 'tailwind-merge';
-import { NavProps } from '@/types/pages';
+import type { NavProps } from '@/types/pages';
 
 interface MobileNavProps {
 	navItems: NavProps[];
@@ -38,9 +39,9 @@ const MobileNav = (props: MobileNavProps) => {
 		<Fragment>
 			<div className={mobileNavStyles.openerContainer}>
 				<button className={mobileNavStyles.opener} onClick={onOpen}>
-					<div className={mobileNavStyles.openerLineOne}></div>
-					<div className={mobileNavStyles.openerLineTwo}></div>
-					<div className={mobileNavStyles.openerLineThree}></div>
+					<div className={mobileNavStyles.openerLineOne} />
+					<div className={mobileNavStyles.openerLineTwo} />
+					<div className={mobileNavStyles.openerLineThree} />
 				</button>
 			</div>
 
@@ -52,8 +53,8 @@ const MobileNav = (props: MobileNavProps) => {
 				)}
 			>
 				<button className={mobileNavStyles.closer} onClick={onClose}>
-					<div className={mobileNavStyles.closeLineOne}></div>
-					<div className={mobileNavStyles.closeLineTwo}></div>
+					<div className={mobileNavStyles.closeLineOne} />
+					<div className={mobileNavStyles.closeLineTwo} />
 				</button>
 
 				<nav role="navigation">

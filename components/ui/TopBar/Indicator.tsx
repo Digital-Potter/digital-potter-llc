@@ -22,7 +22,7 @@ const Indicator = (props: IndicatorProps) => {
 					? 'bg-dp-dark/10'
 					: '',
 			)}
-		></div>
+		/>
 	);
 };
 

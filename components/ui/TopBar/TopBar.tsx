@@ -8,7 +8,7 @@ import MobileNav from './MobileNav';
 import SolidButton from '../SolidButton';
 import Indicator from './Indicator';
 
-import { NavProps } from '@/types/pages';
+import type { NavProps } from '@/types/pages';
 
 const TopBar = async () => {
 	const menuData: NavProps[] = await getMenuPages();
