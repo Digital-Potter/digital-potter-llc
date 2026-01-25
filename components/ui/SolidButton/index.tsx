@@ -59,7 +59,7 @@ const ButtonIcon = () => {
 const ButtonLabel = (props: { label: string }) => {
 	const { label } = props;
 	return (
-		<span className="translate-x-2 transition-all group-hover:-translate-x-1">
+		<span className="translate-x-2 text-center transition-all group-hover:-translate-x-1">
 			{label}
 		</span>
 	);
