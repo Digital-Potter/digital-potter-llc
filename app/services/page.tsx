@@ -95,7 +95,7 @@ export default async function ServicesPage() {
 					'Technical SEO audits, schema work, and rank monitoring',
 					'Daily backups, disaster recovery, and full ownership of your codebase',
 					'Quarterly performance reviews and optimization passes',
-					'Monthly support tiers from $149/mo — see Pricing',
+					'Hosting + CMS from $50/mo — flat fee, no traffic gates',
 				]}
 				icon={LayersIcon}
 				reverse
