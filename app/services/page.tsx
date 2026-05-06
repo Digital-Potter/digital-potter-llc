@@ -47,21 +47,21 @@ export default async function ServicesPage() {
 			<ServiceSection
 				id="mobile"
 				tag="Service · Mobile Apps"
-				headline="Native and cross-platform apps that earn home-screen space."
-				body="Your customers spend their day on their phone. We build the apps they keep coming back to — fast, polished, and connected to your business systems. From a Stripe-integrated subscription tool to a Bluetooth retail companion, we ship apps that work on day one and keep working on day 1,000."
+				headline="Cross-platform apps that earn home-screen space."
+				body="Your customers spend their day on their phone. We build the apps they keep coming back to using React Native and Expo — one codebase, both stores, native-quality performance. Same engineering hours that competitors spend on iOS alone, you get iOS and Android. Read the deep dive on our stack and process for the full picture."
 				bullets={[
-					'Native iOS (Swift / SwiftUI) for performance-critical experiences',
-					'Native Android (Kotlin / Jetpack Compose) for Android-first markets',
-					'Cross-platform (React Native, Expo) when shared code makes sense',
+					'React Native + Expo for one codebase across iOS and Android',
+					'EAS Build and Submit for cloud signing and store automation',
+					'Over-the-air updates for same-day fixes after launch',
 					'App Store and Google Play submission, review, and release management',
-					'Push notifications, deep links, and in-app purchases',
-					'Backend and API integration with the systems you already run',
+					'Push notifications, deep links, biometric auth, and in-app purchases',
+					'Stripe-powered payments through your own Stripe account',
 					'Crash reporting and analytics from launch day',
 				]}
 				icon={MobileIcon}
 				reverse
-				ctaHref={cta.href}
-				ctaLabel="Build a mobile app"
+				ctaHref="/mobile-development"
+				ctaLabel="Read about mobile development"
 			/>
 
 			<ServiceSection

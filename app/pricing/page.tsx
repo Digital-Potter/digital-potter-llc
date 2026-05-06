@@ -3,6 +3,7 @@ import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	PricingHero,
 	HowPricingWorks,
+	BuildScope,
 	BuildYourPlan,
 	ComparisonTable,
 	PopularCombos,
@@ -24,6 +25,7 @@ export default async function PricingPage() {
 		<>
 			<PricingHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
 			<HowPricingWorks />
+			<BuildScope />
 			<BuildYourPlan ctaHref={cta.href} ctaLabel="Get a custom proposal" />
 			<ComparisonTable />
 			<PopularCombos />

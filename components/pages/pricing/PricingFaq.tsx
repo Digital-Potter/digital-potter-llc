@@ -21,8 +21,8 @@ const faqs: Faq[] = [
 		a: "When the engagement ends — for any reason — you receive the full source code of your frontend, the design system, and any custom integrations we built. You can take it to another agency, host it elsewhere, or hire your own developer to extend it. The CMS itself stays on our infrastructure (or yours, if you've chosen the self-hosted option), but the frontend is yours.",
 	},
 	{
-		q: 'Do you charge transaction fees?',
-		a: 'No. The Ecommerce module includes Stripe checkout — Stripe charges its own processing fee (currently 2.9% + 30¢ per transaction in the US), but we add nothing on top. Compare this to Shopify Basic which adds 2% on every transaction.',
+		q: 'Do you charge transaction fees? Who handles payments?',
+		a: "We charge nothing on transactions. The Ecommerce and Subscription modules connect to your own Stripe account — payments go directly from your customer's card to your bank account, and Stripe charges you their standard processing fee (currently 2.9% + 30¢ per transaction in the US, set by Stripe and visible on every receipt). We don't sit in the middle, we don't take a cut, and we don't have access to your funds. Compare this to Shopify Basic which adds 2% on every sale on top of Stripe fees.",
 	},
 	{
 		q: 'What if I want to leave?',

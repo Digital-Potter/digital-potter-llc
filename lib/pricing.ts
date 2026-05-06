@@ -49,7 +49,7 @@ export const MODULES: PricingModule[] = [
 		tagline: 'Products, checkout, and orders',
 		price: 50,
 		bullets: [
-			'Stripe-powered checkout, no transaction fees from us',
+			'Stripe checkout connected to your own Stripe account',
 			'Inventory and product variants',
 			'Abandoned cart recovery',
 			'Tax rules and shipping zones',
@@ -62,7 +62,7 @@ export const MODULES: PricingModule[] = [
 		price: 50,
 		bullets: [
 			'Member-only pages and gated content',
-			'Stripe-powered recurring billing',
+			'Recurring billing through your own Stripe account',
 			'Member portal for self-service',
 			'Tier management and access control',
 		],

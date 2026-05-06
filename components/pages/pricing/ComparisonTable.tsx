@@ -22,9 +22,9 @@ const rows: Row[] = [
 	},
 	{
 		label: 'Transaction fees',
-		shopify: '2% (Basic plan)',
-		wix: '0%',
-		dp: '0%',
+		shopify: '2% on every sale (Basic plan)',
+		wix: '0% (Stripe fees apply)',
+		dp: '0% from us · your Stripe account, your fees',
 		dpEmphasis: true,
 	},
 	{

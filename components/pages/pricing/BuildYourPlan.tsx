@@ -177,11 +177,12 @@ export default function BuildYourPlan({
 								</span>
 							</p>
 							<p className="text-dp-body/70 mt-3 text-sm">
-								Plus a one-time custom frontend build from{' '}
+								Plus a one-time custom frontend build{' '}
 								<span className="text-dp-dark font-bold">
-									${FRONTEND_ONETIME.toLocaleString()}
+									starting at ${FRONTEND_ONETIME.toLocaleString()}
 								</span>
-								.
+								. Custom features beyond the foundation are quoted in your
+								proposal.
 							</p>
 						</div>
 

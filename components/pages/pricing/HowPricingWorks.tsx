@@ -17,9 +17,9 @@ const cards: Card[] = [
 	{
 		tag: '01 — Foundation',
 		headline: 'Custom frontend build',
-		body: 'A one-time investment for your custom-designed Next.js foundation. We build the brand, the design system, and the page templates. After launch, you add unlimited pages yourself through the CMS.',
-		price: `$${FRONTEND_ONETIME.toLocaleString()}`,
-		priceDetail: `or $${FRONTEND_INSTALLMENT_MONTHLY}/mo × ${FRONTEND_INSTALLMENT_MONTHS} months`,
+		body: 'A one-time investment for your custom-designed Next.js foundation. The base covers everything a typical small business needs to launch. Custom features beyond that are quoted in your proposal — see the next section for what each includes.',
+		price: `Starting at $${FRONTEND_ONETIME.toLocaleString()}`,
+		priceDetail: `or $${FRONTEND_INSTALLMENT_MONTHLY}/mo × ${FRONTEND_INSTALLMENT_MONTHS} months · custom features quoted separately`,
 	},
 	{
 		tag: '02 — Recurring',
