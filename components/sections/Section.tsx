@@ -1,12 +1,11 @@
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
-import { Container } from '@/components/layout/Container';
 
 const padding = {
 	none: 'py-0',
-	small: 'py-6',
-	medium: 'py-12',
-	large: 'py-20',
+	small: 'py-8',
+	medium: 'py-12 md:py-16',
+	large: 'py-16 md:py-24',
 } as const;
 
 export function Section({
@@ -18,17 +17,20 @@ export function Section({
 	children: ReactNode;
 	anchor?: string;
 	paddingY?: keyof typeof padding;
-	layout?: 'full' | 'contained' | 'narrow';
+	layout?: 'full' | 'contained' | 'narrow' | 'wide';
 }) {
 	const inner =
 		layout === 'narrow' ? (
 			<div className="mx-auto max-w-3xl">{children}</div>
-		) : (
+		) : layout === 'wide' ? (
 			children
+		) : (
+			<div className="mx-auto max-w-5xl">{children}</div>
 		);
+
 	return (
-		<section id={anchor} className={clsx(padding[paddingY])}>
-			{layout === 'full' ? <>{inner}</> : <Container>{inner}</Container>}
+		<section id={anchor} className={clsx('dp-container', padding[paddingY])}>
+			{layout === 'full' ? children : inner}
 		</section>
 	);
 }

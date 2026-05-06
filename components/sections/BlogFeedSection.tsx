@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import { Section } from './Section';
-import { Card } from '@/components/ui/Card';
 import { fetchBlogPosts } from '@/helpers/cms/blog';
 import type { CmsSection } from '@/helpers/cms/types';
 
+type BlogFeedContent = {
+	count?: number;
+};
+
 export async function BlogFeedSection({ section }: { section: CmsSection }) {
-	const c = section.content as { count?: number } | undefined;
+	const c = section.content as BlogFeedContent | undefined;
 	let items: Awaited<ReturnType<typeof fetchBlogPosts>>['items'] = [];
 	try {
 		const r = await fetchBlogPosts(1, c?.count ?? 3);
@@ -15,34 +18,39 @@ export async function BlogFeedSection({ section }: { section: CmsSection }) {
 	}
 	if (items.length === 0) return null;
 	return (
-		<Section>
+		<Section layout="wide">
 			{section.title && (
-				<h2 className="mb-8 text-center text-3xl font-bold">{section.title}</h2>
+				<div className="mx-auto mb-10 max-w-4xl text-center">
+					<h2 className="text-balance">{section.title}</h2>
+				</div>
 			)}
-			<div className="grid gap-6 md:grid-cols-3">
+			<ul className="grid gap-8 md:grid-cols-3">
 				{items.map((p) => (
-					<Card key={p._id}>
-						{p.featuredImage?.url && (
-							// eslint-disable-next-line @next/next/no-img-element
-							<img
-								src={p.featuredImage.url}
-								alt={p.featuredImage.alt ?? ''}
-								className="aspect-video w-full rounded-xl object-cover"
-							/>
-						)}
-						<h3 className="mt-4 font-bold">{p.title}</h3>
-						{p.excerpt && (
-							<p className="text-smoke mt-1 text-sm">{p.excerpt}</p>
-						)}
-						<Link
-							href={`/blog/${p.slug}`}
-							className="text-brand-green mt-3 inline-block font-bold"
-						>
-							Read more →
+					<li key={p._id}>
+						<Link href={`/blog/${p.slug}`} className="group block h-full">
+							{p.featuredImage?.url ? (
+								// eslint-disable-next-line @next/next/no-img-element
+								<img
+									src={p.featuredImage.url}
+									alt={p.featuredImage.alt ?? ''}
+									className="dp-box-design aspect-video w-full rounded-2xl object-cover"
+								/>
+							) : (
+								<div className="dp-box-design from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 aspect-video w-full rounded-2xl bg-gradient-to-br" />
+							)}
+							<h3 className="font-primary-font group-hover:text-dp-dark-green mt-4 text-xl font-bold transition-colors md:text-2xl">
+								{p.title}
+							</h3>
+							{p.excerpt && (
+								<p className="text-dp-body/75 mt-3 text-base">{p.excerpt}</p>
+							)}
+							<span className="text-dp-dark-green group-hover:text-dp-green mt-4 inline-block text-sm font-bold">
+								Read more →
+							</span>
 						</Link>
-					</Card>
+					</li>
 				))}
-			</div>
+			</ul>
 		</Section>
 	);
 }

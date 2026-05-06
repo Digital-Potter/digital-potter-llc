@@ -35,13 +35,27 @@ const map = {
 	CATEGORY_GRID: CategoryGridSection,
 } as const;
 
+type SectionTypeKey = keyof typeof map;
+
+/**
+ * Normalize a CMS section type string to the map key. Accepts any of:
+ *   "hero", "Hero", "HERO", "feature-grid", "feature_grid", "FEATURE_GRID"
+ * and returns the canonical SCREAMING_SNAKE form. Unknown types return null.
+ */
+function normalizeType(raw: string | undefined): SectionTypeKey | null {
+	if (!raw) return null;
+	const key = raw.toUpperCase().replace(/-/g, '_');
+	return key in map ? (key as SectionTypeKey) : null;
+}
+
 export function PageSectionRenderer({ sections }: { sections: CmsSection[] }) {
 	const ordered = [...sections].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 	return (
 		<>
 			{ordered.map((s, i) => {
-				const Comp = map[s._type as keyof typeof map];
-				if (!Comp) return null;
+				const key = normalizeType(s._type);
+				if (!key) return null;
+				const Comp = map[key];
 				return <Comp key={s._id ?? i} section={s} />;
 			})}
 		</>

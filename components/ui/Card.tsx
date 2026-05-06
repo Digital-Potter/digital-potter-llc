@@ -13,10 +13,10 @@ export function Card({
 	return (
 		<div
 			className={clsx(
-				'rounded-2xl border p-5',
+				'rounded-3xl border p-6 md:p-8',
 				dark
-					? 'bg-ink text-cream border-transparent'
-					: 'border-ink/10 bg-white',
+					? 'bg-dp-dark text-dp-yellowish border-transparent'
+					: 'border-dp-dark/10 bg-white/50',
 				className,
 			)}
 		>

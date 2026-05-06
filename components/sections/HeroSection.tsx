@@ -1,33 +1,48 @@
 import { Section } from './Section';
 import type { CmsSection } from '@/helpers/cms/types';
 
+type HeroContent = {
+	image?: { url: string; alt?: string };
+	description?: string;
+	eyebrow?: string;
+};
+
 export function HeroSection({ section }: { section: CmsSection }) {
-	const c = section.content as
-		| { image?: { url: string; alt?: string }; description?: string }
-		| undefined;
+	const c = section.content as HeroContent | undefined;
+	const eyebrow = c?.eyebrow ?? section.label;
+
 	return (
-		<Section paddingY="large">
-			<div className="text-center">
+		<Section paddingY="large" layout="wide">
+			<div className="mx-auto max-w-4xl text-center">
+				{eyebrow && (
+					<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
+						{eyebrow}
+					</p>
+				)}
 				{section.title && (
-					<h1 className="text-4xl font-bold md:text-5xl">{section.title}</h1>
+					<h1 className="mt-6 text-balance">{section.title}</h1>
 				)}
 				{section.subtitle && (
-					<p className="text-brand-green mt-3 text-lg font-semibold">
+					<p className="text-dp-dark-green mt-4 text-lg font-semibold md:text-xl">
 						{section.subtitle}
 					</p>
 				)}
 				{c?.description && (
-					<p className="text-smoke mx-auto mt-5 max-w-2xl">{c.description}</p>
-				)}
-				{c?.image?.url && (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img
-						src={c.image.url}
-						alt={c.image.alt ?? ''}
-						className="mx-auto mt-10 rounded-2xl shadow-xl"
-					/>
+					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+						{c.description}
+					</p>
 				)}
 			</div>
+			{c?.image?.url && (
+				<div className="mx-auto mt-12 max-w-5xl">
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
+						src={c.image.url}
+						alt={c.image.alt ?? section.title ?? ''}
+						className="dp-box-design w-full rounded-3xl"
+					/>
+				</div>
+			)}
 		</Section>
 	);
 }
