@@ -53,15 +53,40 @@ export type CmsProject = {
 	publishedAt?: string;
 };
 
+export type CmsBlogCategory = {
+	_id: string;
+	name: string;
+	slug: string;
+	status?: string;
+};
+
+export type CmsBlogAuthor = {
+	_id: string;
+	firstName?: string;
+	lastName?: string;
+	email?: string;
+};
+
 export type CmsBlogPost = {
 	_id: string;
 	slug: string;
 	title: string;
+	subtitle?: string;
 	excerpt?: string;
+	content?: string; // rich HTML — present on detail responses, omitted from list responses
 	featuredImage?: { url: string; alt?: string };
-	sections: CmsSection[];
+	categories?: CmsBlogCategory[];
+	tags?: string[];
+	author?: CmsBlogAuthor;
+	status?: 'draft' | 'published' | 'archived';
 	seo?: SeoMeta;
 	publishedAt?: string;
+};
+
+export type CmsBlogPostDetailResponse = {
+	success: true;
+	post: CmsBlogPost;
+	related: CmsBlogPost[];
 };
 
 export type CmsSubscriptionPlan = {
