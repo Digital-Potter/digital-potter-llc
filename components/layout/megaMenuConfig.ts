@@ -45,15 +45,15 @@ export const SERVICES_MENU: MegaMenuItem[] = [
 
 export const SERVICES_FEATURED: FeaturedCard[] = [
 	{
+		label: 'theDavid CMS',
+		href: '/cms',
+		headline: 'The platform behind every site we ship.',
+		body: 'Multi-tenant, headless, built around editorial control. The CMS we made for our own clients.',
+	},
+	{
 		label: 'Pricing',
 		href: '/pricing',
 		headline: 'See how the build is priced.',
 		body: 'Hosting from $50/mo, custom frontend from $3,500. No traffic gates, no per-page fees.',
-	},
-	{
-		label: 'Process',
-		href: '/about-digital-potter#our-story',
-		headline: 'How we work.',
-		body: 'A small Virginia studio. 20+ years of custom builds. Discovery, design, and dev under one roof.',
 	},
 ];

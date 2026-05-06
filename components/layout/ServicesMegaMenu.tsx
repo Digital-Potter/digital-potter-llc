@@ -1,5 +1,9 @@
+'use client';
+
 import type { ReactNode } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
 import { SERVICES_MENU, SERVICES_FEATURED } from './megaMenuConfig';
 import Indicator from './Indicator';
 
@@ -41,17 +45,64 @@ export default function ServicesMegaMenu({
 	triggerHref,
 	triggerLabel,
 }: ServicesMegaMenuProps) {
+	const [open, setOpen] = useState(false);
+	const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+	const cancelClose = () => {
+		if (closeTimerRef.current) {
+			clearTimeout(closeTimerRef.current);
+			closeTimerRef.current = null;
+		}
+	};
+
+	const scheduleClose = () => {
+		cancelClose();
+		closeTimerRef.current = setTimeout(() => setOpen(false), 120);
+	};
+
+	const handleClick = () => {
+		cancelClose();
+		setOpen(false);
+		// Blur the active element so :focus-within doesn't keep the menu visible
+		// after navigation completes.
+		if (
+			typeof document !== 'undefined' &&
+			document.activeElement instanceof HTMLElement
+		) {
+			document.activeElement.blur();
+		}
+	};
+
 	return (
-		<div className="group/mm relative">
+		<div
+			className="relative"
+			onMouseEnter={() => {
+				cancelClose();
+				setOpen(true);
+			}}
+			onMouseLeave={scheduleClose}
+			onFocus={() => {
+				cancelClose();
+				setOpen(true);
+			}}
+			onBlur={(e) => {
+				if (!e.currentTarget.contains(e.relatedTarget as Node)) scheduleClose();
+			}}
+		>
 			<Link
 				href={triggerHref}
+				onClick={handleClick}
 				className="bg-dp-dark-green/0 hover:bg-dp-dark-green flex items-center gap-1.5 rounded-2xl px-5 py-2.5 transition-all hover:text-white"
 				aria-haspopup="true"
+				aria-expanded={open}
 			>
 				{triggerLabel}
 				<svg
 					aria-hidden
-					className="h-3 w-3 transition-transform group-focus-within/mm:rotate-180 group-hover/mm:rotate-180"
+					className={twMerge(
+						'h-3 w-3 transition-transform',
+						open ? 'rotate-180' : '',
+					)}
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
@@ -64,15 +115,15 @@ export default function ServicesMegaMenu({
 				<Indicator path={triggerHref} isHome={false} />
 			</Link>
 
-			{/* Bridge area to keep hover alive between trigger and panel */}
-			<div
-				aria-hidden
-				className="pointer-events-none absolute top-full left-1/2 h-3 w-px -translate-x-1/2"
-			/>
-
 			<div
 				role="menu"
-				className="invisible absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 translate-y-1 opacity-0 transition-all duration-150 group-focus-within/mm:visible group-focus-within/mm:translate-y-0 group-focus-within/mm:opacity-100 group-hover/mm:visible group-hover/mm:translate-y-0 group-hover/mm:opacity-100"
+				aria-hidden={!open}
+				className={twMerge(
+					'absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 transition-all duration-150',
+					open
+						? 'visible translate-y-0 opacity-100'
+						: 'pointer-events-none invisible translate-y-1 opacity-0',
+				)}
 			>
 				<div className="bg-dp-yellowish/95 border-dp-dark/10 rounded-3xl border-2 p-6 normal-case shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] backdrop-blur-md">
 					<div className="px-2 pb-3">
@@ -90,6 +141,7 @@ export default function ServicesMegaMenu({
 								<li key={item.href}>
 									<Link
 										href={item.href}
+										onClick={handleClick}
 										className="hover:bg-dp-dark-green/5 group/link flex gap-3 rounded-2xl p-3 transition-colors"
 									>
 										<span className="bg-dp-dark-green/10 text-dp-dark-green group-hover/link:bg-dp-dark-green group-hover/link:text-dp-yellowish inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors">
@@ -124,6 +176,7 @@ export default function ServicesMegaMenu({
 								<li key={card.href}>
 									<Link
 										href={card.href}
+										onClick={handleClick}
 										className="hover:bg-dp-dark-green/5 block rounded-2xl p-3 transition-colors"
 									>
 										<span className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
