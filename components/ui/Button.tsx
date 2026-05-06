@@ -12,7 +12,7 @@ type CommonProps = {
 };
 
 const baseClasses =
-	'font-primary-font rounded-dp-20 group relative flex items-center text-xs font-bold uppercase shadow-2xl transition-all border-2 px-4 py-3.5 md:px-9 md:py-4 lg:text-sm';
+	'font-primary-font rounded-dp-20 group relative inline-flex items-center text-xs font-bold uppercase shadow-2xl transition-all border-2 px-4 py-3.5 md:px-9 md:py-4 lg:text-sm';
 
 const variantClasses: Record<ButtonVariant, string> = {
 	solid:

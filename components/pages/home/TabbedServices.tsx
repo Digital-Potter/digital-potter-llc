@@ -96,7 +96,7 @@ export default function TabbedServices() {
 				</p>
 			</div>
 
-			<div className="dp-box-design mx-auto mt-14 inline-flex w-full max-w-5xl rounded-2xl p-1.5">
+			<div className="dp-box-design mx-auto mt-14 flex w-full max-w-5xl rounded-2xl p-1.5">
 				<ul
 					role="tablist"
 					aria-label="Digital Potter services"
