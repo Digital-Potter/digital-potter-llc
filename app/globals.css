@@ -27,6 +27,19 @@
 	--radius-dp-5xl: 2.75rem;
 }
 
+@theme {
+	--color-cream: #f5f3ea;
+	--color-brand-green: #3dcc8c;
+	--color-deep-green: #1f4c3f;
+	--color-ink: #1a1a1a;
+	--color-smoke: #666666;
+
+	--font-display: 'InterDisplay', 'Inter', system-ui, sans-serif;
+	--font-body: 'Inter', system-ui, sans-serif;
+
+	--radius-pill: 9999px;
+}
+
 body {
 	@apply text-dp-body bg-dp-yellowish font-secondary-font;
 }

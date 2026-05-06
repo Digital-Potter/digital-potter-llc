@@ -35,3 +35,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# brainstorming + e2e artifacts
+.superpowers/
+playwright-report/
+test-results/
