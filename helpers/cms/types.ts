@@ -75,3 +75,95 @@ export type CmsSubscriptionPlan = {
 	currency?: string;
 	billing?: { interval: string; intervalCount: number };
 };
+
+// ---- Site settings (from /api/storefront/store-settings) ----
+
+export interface TenantChrome {
+	_id: string;
+	name: string;
+	slug: string;
+	domain?: string;
+	settings: {
+		storeName: string;
+		storeDescription: string;
+		contactEmail: string;
+		contactPhone: string;
+		address: string;
+		logoUrl: string;
+	};
+}
+
+export interface StoreSettingsRecord {
+	socialLinks?: Partial<
+		Record<'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok', string>
+	>;
+	policies?: Partial<
+		Record<
+			'refundPolicy' | 'privacyPolicy' | 'termsOfService' | 'shippingPolicy',
+			string
+		>
+	>;
+	siteStructure?: {
+		homepageSlug?: string | null;
+		blogSlug?: string | null;
+		productsSlug?: string | null;
+		productCategoriesSlug?: string | null;
+		coursesSlug?: string | null;
+	};
+	seo?: {
+		defaultTitle?: string;
+		titleTemplate?: string;
+		defaultDescription?: string;
+		defaultOgImage?: string;
+		faviconUrl?: string;
+		appleTouchIconUrl?: string;
+		robots?: { allowIndexing?: boolean; extraDirectives?: string };
+	};
+}
+
+export interface StoreSettingsResponse {
+	success: true;
+	tenant: TenantChrome;
+	settings: StoreSettingsRecord | null;
+}
+
+// ---- Navigation (from /api/storefront/navigation) ----
+
+export type NavigationLocation = 'header' | 'footer' | 'sidebar' | 'mobile';
+
+export type MenuItemType =
+	| 'page'
+	| 'blog_post'
+	| 'blog_category'
+	| 'product'
+	| 'product_category'
+	| 'course'
+	| 'custom';
+
+export interface ResolvedMenuItem {
+	_id: string;
+	label: string;
+	type: MenuItemType;
+	url?: string;
+	openInNewTab: boolean;
+	order: number;
+	cssClass?: string;
+	icon?: string;
+	reference?: string;
+	resolved?: { slug: string; title: string };
+	children: ResolvedMenuItem[];
+}
+
+export interface NavigationMenu {
+	_id: string;
+	name: string;
+	slug: string;
+	location: NavigationLocation;
+	items: ResolvedMenuItem[];
+}
+
+export interface NavigationResponse {
+	success: true;
+	count: number;
+	menus: NavigationMenu[];
+}
