@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { Container } from './Container';
+import DigitalPotterLogo from '@/components/DigitalPotterLogo';
 
 const sections = [
 	{
 		title: 'Company',
 		links: [
 			{ href: '/about', label: 'About Digital Potter' },
-			{ href: '/case-studies', label: 'Case Studies' },
+			{ href: '/portfolio', label: 'Portfolio' },
 			{ href: '/blog', label: 'Blog' },
 		],
 	},
@@ -32,28 +33,30 @@ const sections = [
 
 export function Footer() {
 	return (
-		<footer className="border-ink/10 bg-cream mt-20 border-t py-10 text-sm">
+		<footer className="border-dp-dark/10 bg-dp-yellowish mt-20 border-t py-10 text-sm">
 			<Container>
 				<div className="grid gap-10 md:grid-cols-4">
 					<div>
-						<Link href="/" className="text-lg font-bold">
-							digital<span className="font-extrabold">Potter</span>(&nbsp;)
+						<Link href="/" aria-label="Digital Potter — home">
+							<DigitalPotterLogo
+								width={262}
+								height={34}
+								className="w-[160px] md:w-[180px]"
+							/>
 						</Link>
-						<p className="text-smoke mt-3">
+						<p className="text-dp-body/70 mt-4 text-base">
 							© {new Date().getFullYear()} Digital Potter LLC.
 						</p>
-						{/* Reserved for future portal — comment out until my.digitalpotter.io is live. */}
-						{/* <a href="https://my.digitalpotter.io" className="mt-2 inline-block text-brand-green">Client Login →</a> */}
 					</div>
 					{sections.map((s) => (
 						<div key={s.title}>
-							<h3 className="mb-3 font-bold tracking-wider uppercase">
+							<h3 className="font-primary-font mb-3 text-sm font-bold tracking-wider uppercase">
 								{s.title}
 							</h3>
-							<ul className="text-smoke space-y-2">
+							<ul className="text-dp-body/70 space-y-2">
 								{s.links.map((l) => (
 									<li key={l.href}>
-										<Link href={l.href} className="hover:text-ink">
+										<Link href={l.href} className="hover:text-dp-dark">
 											{l.label}
 										</Link>
 									</li>

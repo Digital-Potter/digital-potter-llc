@@ -1,19 +1,30 @@
-import Link from 'next/link';
-import { Container } from '@/components/layout/Container';
+import type { Metadata } from 'next';
+import { ButtonLink } from '@/components/ui/Button';
+
+export const metadata: Metadata = {
+	title: 'Page Not Found · Digital Potter',
+	description: 'Could not find requested resource',
+	robots: 'noindex, nofollow',
+};
 
 export default function NotFound() {
 	return (
-		<Container className="py-24 text-center">
-			<h1 className="text-4xl font-bold">This page wandered off the wheel.</h1>
-			<p className="text-smoke mt-3">
-				The page you were looking for isn&apos;t here.
-			</p>
-			<Link
-				href="/"
-				className="bg-brand-green mt-8 inline-block rounded-full px-6 py-3 font-bold"
-			>
-				Back home
-			</Link>
-		</Container>
+		<div className="flex min-h-[60vh] flex-col items-center justify-center px-10 py-24">
+			<div className="max-w-7xl text-center">
+				<h1 className="mb-7 text-balance">404 - Page Not Found</h1>
+				<h2 className="text-balance">
+					Sorry, looks like something is not right
+				</h2>
+				<p className="mt-10 text-balance">
+					Oops, looks like the page you were looking for is not here anymore,
+					check your URL again or continue browsing our site.
+				</p>
+				<div className="mt-16 flex justify-center">
+					<ButtonLink href="/" variant="solid">
+						Go back home
+					</ButtonLink>
+				</div>
+			</div>
+		</div>
 	);
 }

@@ -1,16 +1,21 @@
-import OutlinedButton from '@/components/ui/OutlinedButton';
-import SolidButton from '@/components/ui/SolidButton';
+import { ButtonLink } from '@/components/ui/Button';
 
 export default function Home() {
 	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-			<main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-				<h1 className="text-center">Ready for Digital Potter</h1>
-				<div className="flex w-full flex-col items-center gap-4 sm:items-center sm:justify-center md:flex-row">
-					<OutlinedButton label="Button One" href="/" />
-					<SolidButton label="Button Two" href="/" />
-				</div>
-			</main>
-		</div>
+		<section className="dp-container py-24 text-center">
+			<h1 className="text-balance">Ready for Digital Potter</h1>
+			<p className="mx-auto mt-6 max-w-2xl text-balance">
+				Beautifully crafted web and mobile apps. Designed for clarity, delight,
+				and results.
+			</p>
+			<div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+				<ButtonLink href="/services" variant="solid">
+					Let&apos;s connect
+				</ButtonLink>
+				<ButtonLink href="/portfolio" variant="outlined">
+					See our work
+				</ButtonLink>
+			</div>
+		</section>
 	);
 }
