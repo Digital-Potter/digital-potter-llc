@@ -10,6 +10,9 @@
 		"lint:fix": "next lint --fix",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage",
 		"prepare": "husky"
 	},
 	"lint-staged": {

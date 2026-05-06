@@ -16,7 +16,9 @@ class Worker {
 	terminate() {}
 }
 
-Object.defineProperty(window, 'Worker', {
-	writable: true,
-	value: Worker,
-});
+if (typeof window !== 'undefined') {
+	Object.defineProperty(window, 'Worker', {
+		writable: true,
+		value: Worker,
+	});
+}
