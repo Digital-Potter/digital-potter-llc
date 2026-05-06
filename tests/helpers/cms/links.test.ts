@@ -111,4 +111,59 @@ describe('resolveMenuItemHref', () => {
 		};
 		expect(resolveMenuItemHref(item)).toBe('#');
 	});
+
+	it('maps a page whose slug matches siteStructure.blogSlug to "/blog"', () => {
+		const item = {
+			...baseItem,
+			type: 'page' as const,
+			resolved: { slug: 'digital-potter-blog', title: 'Blog' },
+		};
+		expect(resolveMenuItemHref(item, { blogSlug: 'digital-potter-blog' })).toBe(
+			'/blog',
+		);
+	});
+
+	it('maps a page whose slug matches siteStructure.productsSlug to "/products"', () => {
+		const item = {
+			...baseItem,
+			type: 'page' as const,
+			resolved: { slug: 'shop', title: 'Shop' },
+		};
+		expect(resolveMenuItemHref(item, { productsSlug: 'shop' })).toBe(
+			'/products',
+		);
+	});
+
+	it('maps a page whose slug matches siteStructure.productCategoriesSlug to "/collections"', () => {
+		const item = {
+			...baseItem,
+			type: 'page' as const,
+			resolved: { slug: 'browse', title: 'Browse' },
+		};
+		expect(resolveMenuItemHref(item, { productCategoriesSlug: 'browse' })).toBe(
+			'/collections',
+		);
+	});
+
+	it('maps a page whose slug matches siteStructure.coursesSlug to "/courses"', () => {
+		const item = {
+			...baseItem,
+			type: 'page' as const,
+			resolved: { slug: 'learn', title: 'Learn' },
+		};
+		expect(resolveMenuItemHref(item, { coursesSlug: 'learn' })).toBe(
+			'/courses',
+		);
+	});
+
+	it('falls back to "/{slug}" when a page slug matches nothing in siteStructure', () => {
+		const item = {
+			...baseItem,
+			type: 'page' as const,
+			resolved: { slug: 'contact-digital-potter', title: 'Contact' },
+		};
+		expect(
+			resolveMenuItemHref(item, { homepageSlug: 'home', blogSlug: 'blog' }),
+		).toBe('/contact-digital-potter');
+	});
 });

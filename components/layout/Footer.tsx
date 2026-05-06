@@ -19,7 +19,7 @@ export async function Footer() {
 	const columns = [...navData.menus].sort((a, b) =>
 		a.slug.localeCompare(b.slug),
 	);
-	const homepageSlug = settingsData?.settings?.siteStructure?.homepageSlug;
+	const siteStructure = settingsData?.settings?.siteStructure;
 	const colCount = 1 + columns.length;
 	const gridClass =
 		colCount === 2
@@ -58,10 +58,7 @@ export async function Footer() {
 							</h3>
 							<ul className="text-dp-body/70 space-y-2">
 								{menu.items.map((item) => {
-									const href = resolveMenuItemHref(
-										item,
-										homepageSlug ? { homepageSlug } : undefined,
-									);
+									const href = resolveMenuItemHref(item, siteStructure);
 									return (
 										<li key={item._id}>
 											<Link

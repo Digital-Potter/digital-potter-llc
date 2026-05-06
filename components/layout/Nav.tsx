@@ -9,7 +9,10 @@ import {
 	fetchStoreSettingsOrNull,
 } from '@/helpers/cms/settings';
 import { resolveMenuItemHref } from '@/helpers/cms/links';
-import type { ResolvedMenuItem } from '@/helpers/cms/types';
+import type {
+	ResolvedMenuItem,
+	StoreSettingsRecord,
+} from '@/helpers/cms/types';
 
 type RenderedNavItem = {
 	id: string;
@@ -20,12 +23,9 @@ type RenderedNavItem = {
 
 function toRendered(
 	item: ResolvedMenuItem,
-	homepageSlug: string | null | undefined,
+	siteStructure: StoreSettingsRecord['siteStructure'] | undefined,
 ): RenderedNavItem {
-	const href = resolveMenuItemHref(
-		item,
-		homepageSlug ? { homepageSlug } : undefined,
-	);
+	const href = resolveMenuItemHref(item, siteStructure);
 	const isHome = href === '/';
 	return { id: item._id, label: item.label, href, isHome };
 }
@@ -38,9 +38,9 @@ export async function Nav() {
 
 	const headerMenu = navData.menus[0];
 	const allItems = headerMenu?.items ?? [];
-	const homepageSlug = settingsData?.settings?.siteStructure?.homepageSlug;
+	const siteStructure = settingsData?.settings?.siteStructure;
 
-	const rendered = allItems.map((it) => toRendered(it, homepageSlug));
+	const rendered = allItems.map((it) => toRendered(it, siteStructure));
 	const navItems = rendered.slice(0, -1);
 	const ctaItem = rendered.at(-1);
 	const ctaHref = ctaItem?.href ?? '/lets-connect';
