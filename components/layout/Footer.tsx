@@ -20,15 +20,17 @@ export async function Footer() {
 		a.slug.localeCompare(b.slug),
 	);
 	const siteStructure = settingsData?.settings?.siteStructure;
-	const colCount = 1 + columns.length;
+
+	// Layout: chrome (logo + ©) | N menu columns | CTA
+	const colCount = 1 + columns.length + 1;
 	const gridClass =
-		colCount === 2
-			? 'grid gap-10 md:grid-cols-2'
-			: colCount === 3
-				? 'grid gap-10 md:grid-cols-3'
-				: colCount === 4
-					? 'grid gap-10 md:grid-cols-4'
-					: 'grid gap-10 md:grid-cols-5';
+		colCount === 3
+			? 'grid gap-10 md:grid-cols-3'
+			: colCount === 4
+				? 'grid gap-10 md:grid-cols-4'
+				: colCount === 5
+					? 'grid gap-10 md:grid-cols-5'
+					: 'grid gap-10 md:grid-cols-6';
 
 	return (
 		<footer className="border-dp-dark/10 bg-dp-yellowish mt-20 border-t py-10 text-sm">
@@ -45,11 +47,6 @@ export async function Footer() {
 						<p className="text-dp-body/70 mt-4 text-base">
 							© {new Date().getFullYear()} Digital Potter LLC.
 						</p>
-						<div className="mt-6">
-							<ButtonLink href={cta.href} variant="solid">
-								{cta.label}
-							</ButtonLink>
-						</div>
 					</div>
 					{columns.map((menu) => (
 						<div key={menu._id}>
@@ -77,6 +74,11 @@ export async function Footer() {
 							</ul>
 						</div>
 					))}
+					<div className="flex md:items-start">
+						<ButtonLink href={cta.href} variant="solid">
+							{cta.label}
+						</ButtonLink>
+					</div>
 				</div>
 			</Container>
 		</footer>
