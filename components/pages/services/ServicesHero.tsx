@@ -20,8 +20,8 @@ export default function ServicesHero({
 					solutions.
 				</h1>
 				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
-					Four services built to work together. Use one when you need it, all
-					four when you&apos;re ready to grow. Every engagement starts with
+					Three services built to work together. Use one when you need it, all
+					three when you&apos;re ready to grow. Every engagement starts with
 					questions, not a template.
 				</p>
 				<div className="mt-10 flex justify-center">

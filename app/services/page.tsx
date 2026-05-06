@@ -5,16 +5,15 @@ import {
 	ServiceSection,
 	CraftingProcess,
 	PenIcon,
-	MobileIcon,
 	CodeIcon,
 	LayersIcon,
 } from '@/components/pages/services';
 import { FinalCta } from '@/components/pages/home';
 
 export const metadata: Metadata = {
-	title: 'Services — Custom Web, Mobile, and CMS Development',
+	title: 'Services — Custom Web Design, Development, and CMS',
 	description:
-		'Four services from Digital Potter LLC: UI/UX design, native and cross-platform mobile apps, custom Next.js websites, and managed CMS + SEO + maintenance. Every engagement starts with research, not a template.',
+		'Three services from Digital Potter LLC: UI/UX design, custom Next.js websites, and managed CMS + SEO + maintenance. Every engagement starts with research, not a template.',
 };
 
 export default async function ServicesPage() {
@@ -42,26 +41,6 @@ export default async function ServicesPage() {
 				icon={PenIcon}
 				ctaHref={cta.href}
 				ctaLabel="Start a UI/UX project"
-			/>
-
-			<ServiceSection
-				id="mobile"
-				tag="Service · Mobile Apps"
-				headline="Cross-platform apps that earn home-screen space."
-				body="Your customers spend their day on their phone. We build the apps they keep coming back to using React Native and Expo — one codebase, both stores, native-quality performance. Same engineering hours that competitors spend on iOS alone, you get iOS and Android. Read the deep dive on our stack and process for the full picture."
-				bullets={[
-					'React Native + Expo for one codebase across iOS and Android',
-					'EAS Build and Submit for cloud signing and store automation',
-					'Over-the-air updates for same-day fixes after launch',
-					'App Store and Google Play submission, review, and release management',
-					'Push notifications, deep links, biometric auth, and in-app purchases',
-					'Stripe-powered payments through your own Stripe account',
-					'Crash reporting and analytics from launch day',
-				]}
-				icon={MobileIcon}
-				reverse
-				ctaHref="/mobile-development"
-				ctaLabel="Read about mobile development"
 			/>
 
 			<ServiceSection

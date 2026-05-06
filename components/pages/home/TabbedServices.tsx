@@ -46,7 +46,7 @@ const tabs: Tab[] = [
 			'Push notifications, deep links, and in-app purchases',
 			'Backend and API integration with the systems you already run',
 		],
-		href: '/services#mobile',
+		href: '/mobile-development',
 	},
 	{
 		id: 'web',
