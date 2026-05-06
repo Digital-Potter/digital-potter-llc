@@ -1,5 +1,6 @@
 'use client';
 
+import type { ComponentType, SVGProps } from 'react';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ButtonLink } from '@/components/ui/Button';
@@ -7,7 +8,7 @@ import { ButtonLink } from '@/components/ui/Button';
 type Tab = {
 	id: string;
 	label: string;
-	tag: string;
+	icon: ComponentType<SVGProps<SVGSVGElement>>;
 	headline: string;
 	body: string;
 	bullets: string[];
@@ -18,7 +19,7 @@ const tabs: Tab[] = [
 	{
 		id: 'design',
 		label: 'Planning & UI/UX Design',
-		tag: 'From idea to interface',
+		icon: PenIcon,
 		headline:
 			'Designs built around how your customers actually behave — not what looks good on Pinterest.',
 		body: 'We start with research. We map the journeys your real users take, audit how competitors fail them, and design every screen to move people toward the action that matters: contact, purchase, sign-up. The result is a site that looks like it was built for you, because it was.',
@@ -34,7 +35,7 @@ const tabs: Tab[] = [
 	{
 		id: 'mobile',
 		label: 'Mobile Apps Development',
-		tag: 'iOS, Android, everywhere',
+		icon: MobileIcon,
 		headline:
 			'Native and cross-platform apps that earn permanent home-screen space.',
 		body: 'Your customers spend their days on their phones. We build the apps they keep coming back to — fast, polished, and connected to your business systems. From a Stripe-integrated subscription tool to a Bluetooth-enabled retail companion, we ship apps that work on day one and keep working on day 1,000.',
@@ -49,8 +50,8 @@ const tabs: Tab[] = [
 	},
 	{
 		id: 'web',
-		label: 'All-Size Websites Development',
-		tag: 'Brochure to storefront',
+		label: 'All Size Websites Development',
+		icon: CodeIcon,
 		headline:
 			'From a one-page launch to a multi-region storefront, every site built bespoke.',
 		body: 'Whether you need a marketing site to land your first ten customers or a high-traffic e-commerce engine to scale a brand, we build sites that hold up under load and search. Every site is custom Next.js — fast, SEO-ready from the first commit, and entirely yours to keep.',
@@ -66,7 +67,7 @@ const tabs: Tab[] = [
 	{
 		id: 'ops',
 		label: 'SEO, CMS & Maintenance',
-		tag: 'Ship. Measure. Iterate.',
+		icon: LayersIcon,
 		headline:
 			"We don't disappear after launch — we keep your site fast, ranked, and current.",
 		body: "Most agencies build and bounce. We build and stay. Our headless CMS lets your team update content without engineers, our DevOps team keeps the lights on around the clock, and our SEO work keeps you findable as Google's rules — and AI-search engines — keep changing.",
@@ -103,6 +104,7 @@ export default function TabbedServices() {
 				>
 					{tabs.map((tab) => {
 						const isActive = tab.id === active.id;
+						const Icon = tab.icon;
 						return (
 							<li key={tab.id} className="flex-1">
 								<button
@@ -112,13 +114,20 @@ export default function TabbedServices() {
 									id={`tab-${tab.id}`}
 									onClick={() => setActiveId(tab.id)}
 									className={twMerge(
-										'font-primary-font block w-full rounded-xl px-4 py-3 text-center text-sm font-bold tracking-wider uppercase transition-all',
+										'font-primary-font flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold transition-all md:text-base',
 										isActive
 											? 'bg-dp-dark-green text-white shadow-md'
 											: 'text-dp-dark hover:bg-dp-light-gray',
 									)}
 								>
-									{tab.label}
+									<Icon
+										aria-hidden
+										className={twMerge(
+											'h-6 w-6 shrink-0 transition-colors',
+											isActive ? 'text-white' : 'text-dp-dark-green',
+										)}
+									/>
+									<span className="leading-tight">{tab.label}</span>
 								</button>
 							</li>
 						);
@@ -130,14 +139,11 @@ export default function TabbedServices() {
 				role="tabpanel"
 				id={`panel-${active.id}`}
 				aria-labelledby={`tab-${active.id}`}
-				className="border-dp-green/40 mx-auto mt-8 max-w-5xl rounded-3xl border-2 bg-white/40 p-8 md:p-12"
+				className="border-dp-green/70 mx-auto mt-6 max-w-5xl rounded-3xl border-2 bg-white/30 p-8 md:p-12"
 			>
 				<div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
 					<div>
-						<span className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
-							{active.tag}
-						</span>
-						<h3 className="mt-4 text-2xl md:text-3xl">{active.headline}</h3>
+						<h3 className="text-2xl md:text-3xl">{active.headline}</h3>
 						<p className="text-dp-body/80 mt-5 text-base md:text-lg">
 							{active.body}
 						</p>
@@ -151,7 +157,7 @@ export default function TabbedServices() {
 						{active.bullets.map((b) => (
 							<li
 								key={b}
-								className="text-dp-body/85 flex items-start gap-3 text-base"
+								className="text-dp-body/85 flex items-start gap-3 text-base font-bold"
 							>
 								<CheckIcon />
 								<span>{b}</span>
@@ -173,6 +179,76 @@ function CheckIcon() {
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path d="M16.704 5.296a1 1 0 0 1 0 1.408l-7.997 8a1 1 0 0 1-1.414 0l-3.997-4a1 1 0 1 1 1.414-1.408l3.29 3.293 7.29-7.293a1 1 0 0 1 1.414 0Z" />
+		</svg>
+	);
+}
+
+function PenIcon(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth={2}
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			{...props}
+		>
+			<path d="m4 21 5.5-1.5L20 9 15 4 4.5 14.5 3 20l1 1Z" />
+			<path d="m13 6 5 5" />
+			<path d="m4 21 1-5" />
+		</svg>
+	);
+}
+
+function MobileIcon(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth={2}
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			{...props}
+		>
+			<rect x="6" y="3" width="12" height="18" rx="2.5" />
+			<path d="M11 18h2" />
+		</svg>
+	);
+}
+
+function CodeIcon(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth={2}
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			{...props}
+		>
+			<rect x="2" y="5" width="20" height="14" rx="2" />
+			<path d="m9 10-2 2 2 2" />
+			<path d="m15 10 2 2-2 2" />
+		</svg>
+	);
+}
+
+function LayersIcon(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth={2}
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			{...props}
+		>
+			<rect x="3" y="3" width="14" height="14" rx="2" />
+			<path d="M7 21h12a2 2 0 0 0 2-2V7" />
 		</svg>
 	);
 }
