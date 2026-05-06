@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import DigitalPotterLogo from '@/components/DigitalPotterLogo';
 import Indicator from './Indicator';
 import MobileNav from './MobileNav';
+import ServicesMegaMenu from './ServicesMegaMenu';
 import { ButtonLink } from '@/components/ui/Button';
 import {
 	fetchNavigationOrEmpty,
@@ -57,22 +58,32 @@ export async function Nav() {
 			</Link>
 			<nav className="dp-box-design hidden p-1 lg:block">
 				<ul className="flex flex-row gap-1">
-					{navItems.map((item) => (
-						<li
-							key={item.id}
-							className="font-primary-font relative font-semibold uppercase"
-						>
-							<Link
-								href={item.href}
-								className={twMerge(
-									'bg-dp-dark-green/0 hover:bg-dp-dark-green block rounded-2xl px-5 py-2.5 transition-all hover:text-white',
-								)}
+					{navItems.map((item) => {
+						const isServices = item.label.toLowerCase() === 'services';
+						return (
+							<li
+								key={item.id}
+								className="font-primary-font relative font-semibold uppercase"
 							>
-								{item.label}
-								<Indicator path={item.href} isHome={item.isHome} />
-							</Link>
-						</li>
-					))}
+								{isServices ? (
+									<ServicesMegaMenu
+										triggerHref={item.href}
+										triggerLabel={item.label}
+									/>
+								) : (
+									<Link
+										href={item.href}
+										className={twMerge(
+											'bg-dp-dark-green/0 hover:bg-dp-dark-green block rounded-2xl px-5 py-2.5 transition-all hover:text-white',
+										)}
+									>
+										{item.label}
+										<Indicator path={item.href} isHome={item.isHome} />
+									</Link>
+								)}
+							</li>
+						);
+					})}
 				</ul>
 			</nav>
 			<div className="flex flex-row items-center gap-2 md:gap-4 lg:gap-8">

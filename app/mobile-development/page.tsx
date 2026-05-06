@@ -6,6 +6,7 @@ import {
 	WhatWeBuild,
 	TechStack,
 	MobileProcess,
+	MobilePricingCallouts,
 } from '@/components/pages/mobile';
 import { FinalCta } from '@/components/pages/home';
 
@@ -24,6 +25,7 @@ export default async function MobileDevelopmentPage() {
 			<WhyReactNativeExpo />
 			<WhatWeBuild />
 			<TechStack />
+			<MobilePricingCallouts />
 			<MobileProcess />
 			<FinalCta href={cta.href} label={cta.label} />
 		</>

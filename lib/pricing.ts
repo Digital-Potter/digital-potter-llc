@@ -8,6 +8,78 @@ export const FRONTEND_INSTALLMENT_MONTHLY = 349;
 export const FRONTEND_INSTALLMENT_MONTHS = 12;
 export const ANNUAL_PREPAY_DISCOUNT_PCT = 15;
 
+// Mobile app development
+export const MOBILE_APP_ONETIME = 20000;
+
+// Maintenance & support
+export const HOURLY_RATE = 200;
+export const HOURLY_MIN_HOURS = 3;
+
+export type MaintenanceTierId = 'care' | 'studio' | 'cto';
+
+export type MaintenanceTier = {
+	id: MaintenanceTierId;
+	label: string;
+	tagline: string;
+	price: number;
+	hours: string;
+	bestFor: string;
+	bullets: string[];
+	highlight?: boolean;
+};
+
+export const MAINTENANCE_TIERS: MaintenanceTier[] = [
+	{
+		id: 'care',
+		label: 'Care Plan',
+		tagline: 'Steady upkeep for the typical small business',
+		price: 399,
+		hours: '4 hours / month',
+		bestFor:
+			'Sites that need occasional content updates and routine peace of mind.',
+		bullets: [
+			'4 hours of dev or design work each month',
+			'Security and dependency updates',
+			'Priority email support — 24h response',
+			'Monthly health report',
+			'Unused hours roll over for one cycle',
+		],
+		highlight: true,
+	},
+	{
+		id: 'studio',
+		label: 'Studio Plan',
+		tagline: 'Active iteration for growing businesses',
+		price: 899,
+		hours: '10 hours / month',
+		bestFor:
+			'Businesses that ship changes regularly and want a faster turnaround.',
+		bullets: [
+			'10 hours of dev or design work each month',
+			'Priority response — 4h business-hours SLA',
+			'Monthly review call to plan the next sprint',
+			'Light advisory on roadmap and architecture',
+			'Unused hours roll over for one cycle',
+		],
+	},
+	{
+		id: 'cto',
+		label: 'Fractional CTO',
+		tagline: 'Strategic engagement for businesses scaling fast',
+		price: 2500,
+		hours: '20+ hours / month',
+		bestFor:
+			'Companies that need a tech partner — not just maintenance — without hiring a full-time CTO.',
+		bullets: [
+			'20+ hours each month, scaled to actual need',
+			'Weekly check-in and dedicated Slack channel',
+			'Hiring, architecture, and roadmap advisory',
+			'Stakeholder presentations and board prep when needed',
+			'Direct access to the senior engineer building your stack',
+		],
+	},
+];
+
 export type ModuleId = 'restaurant' | 'booking' | 'ecommerce' | 'subscription';
 
 export type PricingModule = {
