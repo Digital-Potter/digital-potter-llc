@@ -4,6 +4,7 @@ import './globals.css';
 import { primaryFont, secondaryFont } from '@/helpers/FontSettings';
 
 import { TopBar } from '@/components/ui/TopBar';
+import Footer from '@/components/ui/Footer/Footer';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -22,6 +23,7 @@ export default async function RootLayout({
 			>
 				<TopBar />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);

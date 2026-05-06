@@ -24,10 +24,15 @@
 	--font-secondary-font: var(--secondary-font);
 
 	--radius-dp-20: 1.25rem;
+	--radius-dp-5xl: 2.75rem;
 }
 
 body {
 	@apply text-dp-body bg-dp-yellowish font-secondary-font;
+}
+
+.dp-container {
+	@apply mx-auto w-11/12 max-w-[1500px];
 }
 
 section,

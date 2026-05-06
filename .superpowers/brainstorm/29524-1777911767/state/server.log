@@ -1,0 +1,9 @@
+{"type":"server-started","port":61312,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:61312","screen_dir":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content","state_dir":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/state"}
+{"type":"screen-added","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/overview.html"}
+{"type":"screen-added","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/quote-form.html"}
+{"type":"screen-updated","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/quote-form.html"}
+{"type":"screen-updated","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/overview.html"}
+{"type":"screen-added","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/pricing-page.html"}
+{"type":"screen-added","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/pricing-v2.html"}
+{"type":"screen-added","file":"/Volumes/DigitalPotter-Main/MyProjects/DigitalPotter/Corporate/digital-potter-llc/.superpowers/brainstorm/29524-1777911767/content/waiting.html"}
+{"type":"server-stopped","reason":"idle timeout"}

@@ -1,0 +1,74 @@
+<h2>Digital Potter — Brainstorm Overview</h2>
+<p class="subtitle">What I found in the designs and the new requirements you described</p>
+
+<div class="section">
+  <span class="label">Designs in <code>designs/digitalpotterio/</code></span>
+  <div class="cards" style="margin-top:12px">
+    <div class="card"><div class="card-body"><h3>Home</h3><p>Hero, "Art of Digital Pottery", 4 service pillars, CMS pitch, blog teaser</p></div></div>
+    <div class="card"><div class="card-body"><h3>About</h3><p>"Crafting Digital Excellence", values grid, <strong>Meet the Artisan</strong> founder bio</p></div></div>
+    <div class="card"><div class="card-body"><h3>Services</h3><p>UI/UX, Mobile, Web Dev, SEO/CMS/Maintenance, 3-step process</p></div></div>
+    <div class="card"><div class="card-body"><h3>Pricing</h3><p>3 fixed plans: Essentials $299, Pro $499, In-House $5000</p></div></div>
+    <div class="card"><div class="card-body"><h3>Contact</h3><p>3-step wizard: project type → budget/timeline → personal info</p></div></div>
+    <div class="card"><div class="card-body"><h3>Design System</h3><p>Logo, nav states, buttons (solid/outlined), H1–H6, body type</p></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="label">Brand snapshot</span>
+  <div class="mockup" style="margin-top:12px">
+    <div class="mockup-body" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:40px;height:40px;border-radius:8px;background:#f5f3ea;border:1px solid #ddd"></div>
+        <span>Cream background</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:40px;height:40px;border-radius:8px;background:#3dcc8c"></div>
+        <span>Vibrant green CTA</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:40px;height:40px;border-radius:8px;background:#1f4c3f"></div>
+        <span>Deep green accent</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:40px;height:40px;border-radius:8px;background:#1a1a1a"></div>
+        <span>Near-black text</span>
+      </div>
+      <div style="margin-left:auto"><strong style="font-size:18px">digital<span style="font-weight:900">Potter</span>( )</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="label">Tensions between the designs and your new requirements</span>
+  <div class="pros-cons" style="margin-top:12px">
+    <div class="pros">
+      <h4>Direct fit (use as-is)</h4>
+      <ul>
+        <li>Brand, color palette, typography from Design System</li>
+        <li>Home page structure & "Art of Digital Pottery" voice</li>
+        <li>Services page taxonomy and "Crafting Process" steps</li>
+        <li>Contact wizard's 3-step shell</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>Need adaptation</h4>
+      <ul>
+        <li><strong>About:</strong> "Meet the Artisan" founder bio → company-only ("we were Plitz, now Digital Potter, 20+ yrs, FullStack/DevOps/UI/UX")</li>
+        <li><strong>Pricing:</strong> 3 fixed tiers → quote-based per business type (Ecommerce, Restaurant, Booking, Subscription, Custom)</li>
+        <li><strong>Contact:</strong> remove the free-text message box (anti-solicitor) — answers go into Message.body via wizard</li>
+        <li><strong>Self-hosting offering:</strong> not in current pricing design — needs surface (one-time fee + maintenance, license restriction)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="label">Backend work this depends on</span>
+  <ul>
+    <li><strong>theDavid CMS</strong> — create the <em>DigitalPotterLLC</em> tenant content: Pages (Home/About/Services/Pricing/Contact), plan entries, navigation, store settings, media</li>
+    <li><strong>theDavid API</strong> — add public <code>POST /api/storefront/messages</code> (no public POST exists today; only admin can create). Plus reconcile tenant header: frontend uses <code>storedId</code>, API expects <code>x-tenant-id</code></li>
+    <li><strong>digital-potter-llc</strong> — implement App Router pages, section renderer for the 16 section types, multi-step quote form</li>
+  </ul>
+</div>
+
+<p class="subtitle" style="text-align:center;margin-top:24px">Browser will hold here while we discuss in the terminal. I'll push new screens when we hit visual decisions.</p>

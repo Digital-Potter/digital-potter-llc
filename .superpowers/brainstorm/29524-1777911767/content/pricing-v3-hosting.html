@@ -1,0 +1,97 @@
+<h2>Pricing Page v3 — adds Hosting Tiers</h2>
+<p class="subtitle">A new section sits between "How our pricing works" and the modules grid. Final number still arrives in the proposal — the tier table is just orientation.</p>
+
+<div class="mockup">
+  <div class="mockup-header">"Hosting tiers" section — between value model and modules</div>
+  <div class="mockup-body" style="padding:18px">
+    <div style="text-align:center;margin-bottom:14px">
+      <h3 style="margin:0">Hosting that scales with your traffic</h3>
+      <p style="color:#666;margin:6px 0 0;font-size:14px">We host on AWS in your region. Move tiers anytime — final price is set in your proposal based on your real numbers.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+
+      <div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:12px">
+        <span class="label" style="color:#3dcc8c">Starter</span>
+        <h4 style="margin:4px 0">Small business</h4>
+        <p style="font-size:13px;color:#666;margin:0">Up to ~10K visits/mo</p>
+        <ul style="font-size:12px;color:#555;padding-left:16px;margin:6px 0">
+          <li>1 production instance</li>
+          <li>Daily backups</li>
+          <li>SSL + CDN</li>
+        </ul>
+        <p style="margin:6px 0 0;font-weight:700">From $XX/mo</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:12px">
+        <span class="label" style="color:#3dcc8c">Growth</span>
+        <h4 style="margin:4px 0">Scaling brand</h4>
+        <p style="font-size:13px;color:#666;margin:0">10K – 100K visits/mo</p>
+        <ul style="font-size:12px;color:#555;padding-left:16px;margin:6px 0">
+          <li>Larger instance</li>
+          <li>Hourly backups</li>
+          <li>Staging environment</li>
+        </ul>
+        <p style="margin:6px 0 0;font-weight:700">From $XXX/mo</p>
+      </div>
+
+      <div style="background:#fff;border:2px solid #3dcc8c;border-radius:10px;padding:12px;position:relative">
+        <span style="position:absolute;top:-10px;right:10px;background:#3dcc8c;color:#fff;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:700">POPULAR</span>
+        <span class="label" style="color:#3dcc8c">Scale</span>
+        <h4 style="margin:4px 0">Established business</h4>
+        <p style="font-size:13px;color:#666;margin:0">100K – 500K visits/mo</p>
+        <ul style="font-size:12px;color:#555;padding-left:16px;margin:6px 0">
+          <li>Multi-AZ instance</li>
+          <li>Auto-scaling ready</li>
+          <li>Priority support</li>
+        </ul>
+        <p style="margin:6px 0 0;font-weight:700">From $XXX/mo</p>
+      </div>
+
+      <div style="background:#1a1a1a;color:#fff;border-radius:10px;padding:12px">
+        <span class="label" style="color:#3dcc8c">Enterprise</span>
+        <h4 style="margin:4px 0;color:#fff">High-traffic / regulated</h4>
+        <p style="font-size:13px;color:#cfcfcf;margin:0">500K+ visits/mo, or self-hosted</p>
+        <ul style="font-size:12px;color:#cfcfcf;padding-left:16px;margin:6px 0">
+          <li>Dedicated infra</li>
+          <li>SLA &amp; security review</li>
+          <li>Self-host option →</li>
+        </ul>
+        <p style="margin:6px 0 0;font-weight:700">Custom</p>
+      </div>
+    </div>
+    <p style="text-align:center;color:#888;font-size:12px;margin:14px 0 0">Final hosting price depends on traffic, storage, integrations, and AWS region. We confirm in your proposal.</p>
+  </div>
+</div>
+
+<div class="mockup">
+  <div class="mockup-header">Total bill — what a client sees on a monthly invoice</div>
+  <div class="mockup-body" style="font-family:monospace;font-size:13px;padding:14px;background:#f5f3ea">
+Hosting (Growth tier)             $XXX
+Restaurant module                  +$XX
+Booking &amp; Events module           +$XX
+Frontend maintenance (optional)    +$XX
+─────────────────────────────────────────
+Total monthly                     $XXX
+─────────────────────────────────────────
++ One-time frontend build:    $X,XXX  (or monthly installments)
+  </div>
+</div>
+
+<div class="mockup">
+  <div class="mockup-header">New question added to Step 2 of the form</div>
+  <div class="mockup-body" style="padding:14px">
+    <strong>Expected monthly visitors?</strong>
+    <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
+      <span class="mock-button" style="background:#fff;color:#333;border:1px solid #ccc">○ Under 10K</span>
+      <span class="mock-button" style="background:#fff;color:#333;border:1px solid #ccc">○ 10K – 100K</span>
+      <span class="mock-button" style="background:#fff;color:#333;border:1px solid #ccc">○ 100K – 500K</span>
+      <span class="mock-button" style="background:#fff;color:#333;border:1px solid #ccc">○ 500K+</span>
+      <span class="mock-button" style="background:#fff;color:#333;border:1px solid #ccc">○ Not sure / seasonal</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="label">Internal note (not shown to clients)</span>
+  <p style="font-size:13px;color:#555">The client sees one hosting price. Internally that bundles your AWS instance cost + ongoing maintenance + your margin. We'll keep an internal cost-vs-tier worksheet so you can set the actual "from $XX" numbers per tier — that's a worksheet decision, not a website decision.</p>
+</div>
