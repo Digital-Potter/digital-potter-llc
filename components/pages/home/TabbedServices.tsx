@@ -1,0 +1,178 @@
+'use client';
+
+import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { ButtonLink } from '@/components/ui/Button';
+
+type Tab = {
+	id: string;
+	label: string;
+	tag: string;
+	headline: string;
+	body: string;
+	bullets: string[];
+	href: string;
+};
+
+const tabs: Tab[] = [
+	{
+		id: 'design',
+		label: 'Planning & UI/UX Design',
+		tag: 'From idea to interface',
+		headline:
+			'Designs built around how your customers actually behave — not what looks good on Pinterest.',
+		body: 'We start with research. We map the journeys your real users take, audit how competitors fail them, and design every screen to move people toward the action that matters: contact, purchase, sign-up. The result is a site that looks like it was built for you, because it was.',
+		bullets: [
+			'User research and journey mapping for your specific audience',
+			'Competitor analysis that surfaces unmet needs',
+			'Custom visual design systems — no themes, no templates',
+			'WCAG-accessible by default, on every device size',
+			'Conversion-focused layouts that move visitors through your funnel',
+		],
+		href: '/services#design',
+	},
+	{
+		id: 'mobile',
+		label: 'Mobile Apps Development',
+		tag: 'iOS, Android, everywhere',
+		headline:
+			'Native and cross-platform apps that earn permanent home-screen space.',
+		body: 'Your customers spend their days on their phones. We build the apps they keep coming back to — fast, polished, and connected to your business systems. From a Stripe-integrated subscription tool to a Bluetooth-enabled retail companion, we ship apps that work on day one and keep working on day 1,000.',
+		bullets: [
+			'Native iOS (Swift) and Android (Kotlin) for performance-critical apps',
+			'Cross-platform (React Native, Expo) when shared code makes sense',
+			'App Store and Google Play submission, review, and updates',
+			'Push notifications, deep links, and in-app purchases',
+			'Backend and API integration with the systems you already run',
+		],
+		href: '/services#mobile',
+	},
+	{
+		id: 'web',
+		label: 'All-Size Websites Development',
+		tag: 'Brochure to storefront',
+		headline:
+			'From a one-page launch to a multi-region storefront, every site built bespoke.',
+		body: 'Whether you need a marketing site to land your first ten customers or a high-traffic e-commerce engine to scale a brand, we build sites that hold up under load and search. Every site is custom Next.js — fast, SEO-ready from the first commit, and entirely yours to keep.',
+		bullets: [
+			'Marketing sites, landing pages, and product launches',
+			'E-commerce with Stripe, inventory, and order management',
+			'Multi-language and multi-region support when you grow internationally',
+			'Performance budgets enforced — every page under 2-second load time',
+			'SEO architecture (schema, sitemaps, OG, canonical) baked in from day one',
+		],
+		href: '/services#web',
+	},
+	{
+		id: 'ops',
+		label: 'SEO, CMS & Maintenance',
+		tag: 'Ship. Measure. Iterate.',
+		headline:
+			"We don't disappear after launch — we keep your site fast, ranked, and current.",
+		body: "Most agencies build and bounce. We build and stay. Our headless CMS lets your team update content without engineers, our DevOps team keeps the lights on around the clock, and our SEO work keeps you findable as Google's rules — and AI-search engines — keep changing.",
+		bullets: [
+			'Our managed CMS — your team owns content, no developer in the loop',
+			'99.9% uptime monitoring with on-call response and incident postmortems',
+			'Monthly security patches and dependency updates',
+			'Technical SEO audits, schema work, and rank monitoring',
+			'Daily backups, disaster recovery, and full ownership of your codebase',
+		],
+		href: '/services#ops',
+	},
+];
+
+export default function TabbedServices() {
+	const [activeId, setActiveId] = useState(tabs[0].id);
+	const active = tabs.find((t) => t.id === activeId) ?? tabs[0];
+
+	return (
+		<section className="dp-container py-16 md:py-24">
+			<div className="mx-auto max-w-3xl text-center">
+				<h2 className="text-balance">What we do for you</h2>
+				<p className="text-dp-body/80 mt-6 text-balance">
+					Four services, one outcome: a digital product that fits your business
+					and grows with it. Pick a service to see how we work.
+				</p>
+			</div>
+
+			<div className="dp-box-design mx-auto mt-14 inline-flex w-full max-w-5xl rounded-2xl p-1.5">
+				<ul
+					role="tablist"
+					aria-label="Digital Potter services"
+					className="flex w-full flex-col gap-1 lg:flex-row"
+				>
+					{tabs.map((tab) => {
+						const isActive = tab.id === active.id;
+						return (
+							<li key={tab.id} className="flex-1">
+								<button
+									role="tab"
+									aria-selected={isActive}
+									aria-controls={`panel-${tab.id}`}
+									id={`tab-${tab.id}`}
+									onClick={() => setActiveId(tab.id)}
+									className={twMerge(
+										'font-primary-font block w-full rounded-xl px-4 py-3 text-center text-sm font-bold tracking-wider uppercase transition-all',
+										isActive
+											? 'bg-dp-dark-green text-white shadow-md'
+											: 'text-dp-dark hover:bg-dp-light-gray',
+									)}
+								>
+									{tab.label}
+								</button>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+
+			<div
+				role="tabpanel"
+				id={`panel-${active.id}`}
+				aria-labelledby={`tab-${active.id}`}
+				className="border-dp-green/40 mx-auto mt-8 max-w-5xl rounded-3xl border-2 bg-white/40 p-8 md:p-12"
+			>
+				<div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+					<div>
+						<span className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
+							{active.tag}
+						</span>
+						<h3 className="mt-4 text-2xl md:text-3xl">{active.headline}</h3>
+						<p className="text-dp-body/80 mt-5 text-base md:text-lg">
+							{active.body}
+						</p>
+						<div className="mt-8">
+							<ButtonLink href={active.href} variant="solid">
+								Learn more
+							</ButtonLink>
+						</div>
+					</div>
+					<ul className="space-y-4">
+						{active.bullets.map((b) => (
+							<li
+								key={b}
+								className="text-dp-body/85 flex items-start gap-3 text-base"
+							>
+								<CheckIcon />
+								<span>{b}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</section>
+	);
+}
+
+function CheckIcon() {
+	return (
+		<svg
+			aria-hidden
+			className="fill-dp-green mt-1 h-5 w-5 shrink-0"
+			viewBox="0 0 20 20"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path d="M16.704 5.296a1 1 0 0 1 0 1.408l-7.997 8a1 1 0 0 1-1.414 0l-3.997-4a1 1 0 1 1 1.414-1.408l3.29 3.293 7.29-7.293a1 1 0 0 1 1.414 0Z" />
+		</svg>
+	);
+}

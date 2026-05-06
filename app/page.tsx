@@ -1,9 +1,13 @@
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	HomeHero,
+	TripleUsp,
 	ArtOfPottery,
-	ServicePillars,
+	TabbedServices,
 	ValueCallouts,
+	SocialProof,
+	BlogTeaser,
+	PricingTeaser,
 	FinalCta,
 } from '@/components/pages/home';
 
@@ -13,9 +17,13 @@ export default async function Home() {
 	return (
 		<>
 			<HomeHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
+			<TripleUsp />
 			<ArtOfPottery />
-			<ServicePillars />
+			<TabbedServices />
 			<ValueCallouts />
+			<SocialProof />
+			<BlogTeaser />
+			<PricingTeaser />
 			<FinalCta href={cta.href} label={cta.label} />
 		</>
 	);

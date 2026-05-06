@@ -1,5 +1,9 @@
 export { default as HomeHero } from './HomeHero';
+export { default as TripleUsp } from './TripleUsp';
 export { default as ArtOfPottery } from './ArtOfPottery';
-export { default as ServicePillars } from './ServicePillars';
+export { default as TabbedServices } from './TabbedServices';
 export { default as ValueCallouts } from './ValueCallouts';
+export { default as SocialProof } from './SocialProof';
+export { default as BlogTeaser } from './BlogTeaser';
+export { default as PricingTeaser } from './PricingTeaser';
 export { default as FinalCta } from './FinalCta';
