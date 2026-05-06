@@ -33,6 +33,12 @@
 		@apply text-dp-body bg-dp-yellowish font-secondary-font;
 	}
 
+	button:not(:disabled),
+	[role='tab'],
+	[role='button'] {
+		cursor: pointer;
+	}
+
 	.dp-container {
 		@apply mx-auto w-11/12 max-w-[1500px];
 	}
