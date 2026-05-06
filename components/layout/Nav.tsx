@@ -1,39 +1,96 @@
 import Link from 'next/link';
-import { Container } from './Container';
+import { twMerge } from 'tailwind-merge';
+import DigitalPotterLogo from '@/components/DigitalPotterLogo';
+import Indicator from './Indicator';
+import MobileNav from './MobileNav';
+import { ButtonLink } from '@/components/ui/Button';
+import {
+	fetchNavigationOrEmpty,
+	fetchStoreSettingsOrNull,
+} from '@/helpers/cms/settings';
+import { resolveMenuItemHref } from '@/helpers/cms/links';
+import type { ResolvedMenuItem } from '@/helpers/cms/types';
 
-const links = [
-	{ href: '/', label: 'HOME' },
-	{ href: '/services', label: 'SERVICES' },
-	{ href: '/case-studies', label: 'CASE STUDIES' },
-	{ href: '/pricing', label: 'PRICING' },
-	{ href: '/blog', label: 'BLOG' },
-];
+type RenderedNavItem = {
+	id: string;
+	label: string;
+	href: string;
+	isHome: boolean;
+};
 
-export function Nav() {
+function toRendered(
+	item: ResolvedMenuItem,
+	homepageSlug: string | null | undefined,
+): RenderedNavItem {
+	const href = resolveMenuItemHref(
+		item,
+		homepageSlug ? { homepageSlug } : undefined,
+	);
+	const isHome = href === '/';
+	return { id: item._id, label: item.label, href, isHome };
+}
+
+export async function Nav() {
+	const [navData, settingsData] = await Promise.all([
+		fetchNavigationOrEmpty('header'),
+		fetchStoreSettingsOrNull(),
+	]);
+
+	const headerMenu = navData.menus[0];
+	const allItems = headerMenu?.items ?? [];
+	const homepageSlug = settingsData?.settings?.siteStructure?.homepageSlug;
+
+	const rendered = allItems.map((it) => toRendered(it, homepageSlug));
+	const navItems = rendered.slice(0, -1);
+	const ctaItem = rendered.at(-1);
+	const ctaHref = ctaItem?.href ?? '/lets-connect';
+	const ctaLabel = ctaItem?.label ?? 'Let´s Connect';
+
 	return (
-		<header className="bg-cream/90 sticky top-0 z-50 backdrop-blur">
-			<Container>
-				<nav className="flex items-center justify-between py-4">
-					<Link href="/" className="text-xl font-bold tracking-tight">
-						digital<span className="font-extrabold">Potter</span>(&nbsp;)
-					</Link>
-					<ul className="hidden gap-8 text-sm font-semibold tracking-wider md:flex">
-						{links.map((l) => (
-							<li key={l.href}>
-								<Link href={l.href} className="hover:text-brand-green">
-									{l.label}
-								</Link>
-							</li>
-						))}
-					</ul>
-					<Link
-						href="/contact"
-						className="bg-brand-green text-ink hover:bg-deep-green hover:text-cream rounded-full px-5 py-2 text-sm font-bold"
-					>
-						LET&apos;S CONNECT
-					</Link>
-				</nav>
-			</Container>
+		<header className="dp-container sticky top-0 z-50 flex h-[6.25rem] flex-row items-center justify-between">
+			<Link href="/" aria-label="Digital Potter — home">
+				<DigitalPotterLogo
+					width={262}
+					height={34}
+					className="w-[140px] md:w-[190px] lg:w-[262px]"
+				/>
+			</Link>
+			<nav className="dp-box-design hidden p-1 lg:block">
+				<ul className="flex flex-row gap-1">
+					{navItems.map((item) => (
+						<li
+							key={item.id}
+							className="font-primary-font relative font-semibold uppercase"
+						>
+							<Link
+								href={item.href}
+								className={twMerge(
+									'bg-dp-dark-green/0 hover:bg-dp-dark-green block rounded-2xl px-5 py-2.5 transition-all hover:text-white',
+								)}
+							>
+								{item.label}
+								<Indicator path={item.href} isHome={item.isHome} />
+							</Link>
+						</li>
+					))}
+				</ul>
+			</nav>
+			<div className="flex flex-row items-center gap-2 md:gap-4 lg:gap-8">
+				<ButtonLink
+					href={ctaHref}
+					variant="solid"
+					className="order-2 lg:order-1"
+				>
+					{ctaLabel}
+				</ButtonLink>
+				<div className="order-1 block lg:hidden">
+					<MobileNav
+						navItems={navItems}
+						ctaHref={ctaHref}
+						ctaLabel={ctaLabel}
+					/>
+				</div>
+			</div>
 		</header>
 	);
 }
