@@ -1,21 +1,22 @@
-import { ButtonLink } from '@/components/ui/Button';
+import { resolveCtaHref } from '@/components/layout/cta-href';
+import {
+	HomeHero,
+	ArtOfPottery,
+	ServicePillars,
+	ValueCallouts,
+	FinalCta,
+} from '@/components/pages/home';
 
-export default function Home() {
+export default async function Home() {
+	const cta = await resolveCtaHref();
+
 	return (
-		<section className="dp-container py-24 text-center">
-			<h1 className="text-balance">Ready for Digital Potter</h1>
-			<p className="mx-auto mt-6 max-w-2xl text-balance">
-				Beautifully crafted web and mobile apps. Designed for clarity, delight,
-				and results.
-			</p>
-			<div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-				<ButtonLink href="/services" variant="solid">
-					Let&apos;s connect
-				</ButtonLink>
-				<ButtonLink href="/portfolio" variant="outlined">
-					See our work
-				</ButtonLink>
-			</div>
-		</section>
+		<>
+			<HomeHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
+			<ArtOfPottery />
+			<ServicePillars />
+			<ValueCallouts />
+			<FinalCta href={cta.href} label={cta.label} />
+		</>
 	);
 }
