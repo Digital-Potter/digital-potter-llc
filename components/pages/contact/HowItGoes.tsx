@@ -19,7 +19,7 @@ const steps = [
 export default function HowItGoes() {
 	return (
 		<section className="dp-container py-16 md:py-24">
-			<div className="mx-auto max-w-3xl text-center">
+			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">How the process goes.</h2>
 				<p className="text-dp-body/80 mt-6 text-balance">
 					Three steps from your first message to your first sprint. No

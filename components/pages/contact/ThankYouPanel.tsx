@@ -6,7 +6,7 @@ type ThankYouPanelProps = {
 
 export default function ThankYouPanel({ name }: ThankYouPanelProps) {
 	return (
-		<div className="dp-box-design relative mx-auto max-w-3xl rounded-3xl px-8 py-16 text-center md:px-16 md:py-20">
+		<div className="dp-box-design relative mx-auto max-w-4xl rounded-3xl px-8 py-16 text-center md:px-16 md:py-20">
 			<svg
 				aria-hidden
 				className="text-dp-dark-green mx-auto h-16 w-16"
