@@ -1,14 +1,15 @@
 'use client';
 
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { FieldShell, RadioGroup } from './fields';
 import {
 	expectedTrafficOptions,
 	hostingBudgetOptions,
 	hostingModelOptions,
 	maintenanceOptions,
+	mobileBudgetOptions,
 	paymentPreferenceOptions,
-	stripeOptions,
+	paymentsNeededOptions,
 	targetLaunchOptions,
 	type QuoteFormData,
 } from '@/lib/quoteSchema';
@@ -18,31 +19,60 @@ export default function StepBudget() {
 		control,
 		formState: { errors },
 	} = useFormContext<QuoteFormData>();
+	const needType = useWatch({ control, name: 'needType' });
+	const needsWeb =
+		needType === 'Website only' || needType === 'Website AND mobile app';
+	const needsApp =
+		needType === 'Mobile app only' || needType === 'Website AND mobile app';
 
 	return (
 		<div className="space-y-8">
-			<FieldShell
-				id="hostingBudget"
-				label="Monthly budget — CMS hosting & management"
-				error={errors.hostingBudget?.message}
-			>
-				<Controller
-					control={control}
-					name="hostingBudget"
-					render={({ field }) => (
-						<RadioGroup
-							name="hostingBudget"
-							options={hostingBudgetOptions}
-							value={field.value}
-							onChange={field.onChange}
-						/>
-					)}
-				/>
-			</FieldShell>
+			{needsWeb && (
+				<FieldShell
+					id="hostingBudget"
+					label="Monthly budget — CMS hosting & management"
+					error={errors.hostingBudget?.message}
+				>
+					<Controller
+						control={control}
+						name="hostingBudget"
+						render={({ field }) => (
+							<RadioGroup
+								name="hostingBudget"
+								options={hostingBudgetOptions}
+								value={field.value}
+								onChange={field.onChange}
+							/>
+						)}
+					/>
+				</FieldShell>
+			)}
+
+			{needsApp && (
+				<FieldShell
+					id="mobileBudget"
+					label="Mobile app — initial investment range"
+					error={errors.mobileBudget?.message}
+					hint="Custom mobile apps start at $20K. Pick the range that lines up with how you're thinking about it."
+				>
+					<Controller
+						control={control}
+						name="mobileBudget"
+						render={({ field }) => (
+							<RadioGroup
+								name="mobileBudget"
+								options={mobileBudgetOptions}
+								value={field.value}
+								onChange={field.onChange}
+							/>
+						)}
+					/>
+				</FieldShell>
+			)}
 
 			<FieldShell
 				id="paymentPreference"
-				label="Frontend build payment preference"
+				label="Build payment preference"
 				error={errors.paymentPreference?.message}
 			>
 				<Controller
@@ -61,7 +91,7 @@ export default function StepBudget() {
 
 			<FieldShell
 				id="maintenance"
-				label="Frontend maintenance after launch"
+				label="Maintenance & support after launch"
 				error={errors.maintenance?.message}
 			>
 				<Controller
@@ -78,56 +108,61 @@ export default function StepBudget() {
 				/>
 			</FieldShell>
 
-			<FieldShell
-				id="hostingModel"
-				label="CMS hosting model"
-				error={errors.hostingModel?.message}
-			>
-				<Controller
-					control={control}
-					name="hostingModel"
-					render={({ field }) => (
-						<RadioGroup
+			{needsWeb && (
+				<>
+					<FieldShell
+						id="hostingModel"
+						label="CMS hosting model"
+						error={errors.hostingModel?.message}
+					>
+						<Controller
+							control={control}
 							name="hostingModel"
-							options={hostingModelOptions}
-							value={field.value}
-							onChange={field.onChange}
+							render={({ field }) => (
+								<RadioGroup
+									name="hostingModel"
+									options={hostingModelOptions}
+									value={field.value}
+									onChange={field.onChange}
+								/>
+							)}
 						/>
-					)}
-				/>
-			</FieldShell>
+					</FieldShell>
 
-			<FieldShell
-				id="expectedTraffic"
-				label="Expected monthly visitors"
-				error={errors.expectedTraffic?.message}
-			>
-				<Controller
-					control={control}
-					name="expectedTraffic"
-					render={({ field }) => (
-						<RadioGroup
+					<FieldShell
+						id="expectedTraffic"
+						label="Expected monthly visitors"
+						error={errors.expectedTraffic?.message}
+					>
+						<Controller
+							control={control}
 							name="expectedTraffic"
-							options={expectedTrafficOptions}
-							value={field.value}
-							onChange={field.onChange}
+							render={({ field }) => (
+								<RadioGroup
+									name="expectedTraffic"
+									options={expectedTrafficOptions}
+									value={field.value}
+									onChange={field.onChange}
+								/>
+							)}
 						/>
-					)}
-				/>
-			</FieldShell>
+					</FieldShell>
+				</>
+			)}
 
 			<FieldShell
-				id="needsStripe"
-				label="Stripe payments needed?"
-				error={errors.needsStripe?.message}
+				id="paymentsNeeded"
+				label="Will you need payment processing?"
+				error={errors.paymentsNeeded?.message}
+				hint="Stripe powers checkout for both website ecommerce and in-app purchases. Connects to your own Stripe account."
 			>
 				<Controller
 					control={control}
-					name="needsStripe"
+					name="paymentsNeeded"
 					render={({ field }) => (
 						<RadioGroup
-							name="needsStripe"
-							options={stripeOptions}
+							name="paymentsNeeded"
+							options={paymentsNeededOptions}
 							value={field.value}
 							onChange={field.onChange}
 						/>

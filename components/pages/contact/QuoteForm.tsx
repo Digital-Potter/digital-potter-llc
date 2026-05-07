@@ -5,8 +5,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
 import {
+	getStepFields,
 	quoteSchema,
-	stepFieldNames,
 	type QuoteFormData,
 } from '@/lib/quoteSchema';
 import StepProject from './StepProject';
@@ -30,13 +30,15 @@ export default function QuoteForm() {
 		resolver: zodResolver(quoteSchema),
 		mode: 'onTouched',
 		defaultValues: {
-			functionalities: [],
+			websiteFeatures: [],
+			mobileFeatures: [],
 			website: '',
 		},
 	});
 
 	const goNext = async () => {
-		const fields = stepFieldNames[step];
+		const needType = methods.getValues('needType');
+		const fields = getStepFields(step, needType);
 		const ok = await methods.trigger(fields);
 		if (!ok) return;
 		const next = (step + 1) as StepNumber;
