@@ -1,13 +1,16 @@
-// Placeholder blog posts. Replace with CMS-driven CmsBlogPost entries
-// once posts are published.
+import type { CmsBlogPost } from '@/helpers/cms/types';
+
+// Placeholder blog posts. The page falls back to these only if the API
+// returns an empty list — published posts always win.
 
 export type BlogPostCard = {
 	slug: string;
 	title: string;
 	excerpt: string;
 	category: string;
-	readTime: string;
-	publishedAt?: string; // ISO date string
+	readTime?: string;
+	publishedAt?: string;
+	featuredImage?: { url: string; alt?: string };
 };
 
 export const BLOG_PLACEHOLDERS: BlogPostCard[] = [
@@ -68,3 +71,30 @@ export const BLOG_PLACEHOLDERS: BlogPostCard[] = [
 		publishedAt: '2026-02-12',
 	},
 ];
+
+const WORDS_PER_MINUTE = 220;
+
+function estimateReadTime(html?: string): string | undefined {
+	if (!html) return undefined;
+	const text = html
+		.replace(/<[^>]*>/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+	if (!text) return undefined;
+	const words = text.split(/\s+/).length;
+	const minutes = Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+	return `${minutes} min read`;
+}
+
+/** Map a CMS blog post (list or detail shape) to the card the UI renders. */
+export function mapCmsBlogPostToCard(p: CmsBlogPost): BlogPostCard {
+	return {
+		slug: p.slug,
+		title: p.title,
+		excerpt: p.excerpt ?? '',
+		category: p.categories?.[0]?.name ?? 'Article',
+		readTime: estimateReadTime(p.content),
+		publishedAt: p.publishedAt,
+		featuredImage: p.featuredImage,
+	};
+}

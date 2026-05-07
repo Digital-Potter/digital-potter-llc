@@ -22,7 +22,36 @@ export const fetchProjects = (q: ProjectsQuery = {}) => {
 	);
 };
 
+export async function fetchProjectsOrEmpty(q: ProjectsQuery = {}) {
+	try {
+		return await fetchProjects(q);
+	} catch (err) {
+		if (process.env.NODE_ENV !== 'production') {
+			console.warn('[cms] fetchProjects failed:', err);
+		}
+		return {
+			success: true as const,
+			total: 0,
+			page: 1,
+			pages: 0,
+			count: 0,
+			items: [] as CmsProject[],
+		};
+	}
+}
+
 export const fetchProjectBySlug = (slug: string) =>
 	apiGet<StorefrontItem<CmsProject>>(`/api/storefront/projects/${slug}`).then(
 		(r) => r.item,
 	);
+
+export async function fetchProjectBySlugOrNull(slug: string) {
+	try {
+		return await fetchProjectBySlug(slug);
+	} catch (err) {
+		if (process.env.NODE_ENV !== 'production') {
+			console.warn('[cms] fetchProjectBySlug failed:', err);
+		}
+		return null;
+	}
+}

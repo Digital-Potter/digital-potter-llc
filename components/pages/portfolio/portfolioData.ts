@@ -1,33 +1,26 @@
-// Placeholder portfolio cards. Anonymized real-client work that's
-// awaiting full case studies — the user replaces these with CMS-driven
-// CmsProject entries when content is migrated.
-//
-// Convention: keep `slug` empty until the case study is published; the
-// card renders without a clickable detail link in that state.
+import type { CmsProject } from '@/helpers/cms/types';
 
-export type PortfolioCategory =
-	| 'Restaurant'
-	| 'Ecommerce'
-	| 'Booking & Events'
-	| 'Subscription'
-	| 'Custom Web App';
+// Placeholder portfolio cards. Anonymized real-client work awaiting full
+// case studies. When real Projects exist in theDavid CMS, the page falls
+// back to placeholders only if the API returns an empty list.
 
 export type PortfolioProject = {
 	id: string;
 	title: string;
 	excerpt: string;
-	category: PortfolioCategory;
-	slug?: string; // present only when the full case study is published
+	category: string;
+	slug?: string;
 	status?: 'live' | 'coming-soon';
+	featuredImage?: { url: string; alt?: string };
 };
 
-export const ALL_CATEGORIES: PortfolioCategory[] = [
+const PLACEHOLDER_CATEGORIES = [
 	'Restaurant',
 	'Ecommerce',
 	'Booking & Events',
 	'Subscription',
 	'Custom Web App',
-];
+] as const;
 
 export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 	{
@@ -79,3 +72,34 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		status: 'coming-soon',
 	},
 ];
+
+/** Map a CMS Project to the card shape this UI renders. */
+export function mapCmsProjectToCard(p: CmsProject): PortfolioProject {
+	return {
+		id: p._id,
+		title: p.title,
+		excerpt: p.excerpt ?? '',
+		category: p.category ?? 'Custom Web App',
+		slug: p.slug,
+		status: 'live',
+		featuredImage: p.featuredImage,
+	};
+}
+
+/**
+ * Returns the unique set of category labels present in the data, in a
+ * stable order: known canonical categories first, then any extras the
+ * CMS introduces.
+ */
+export function deriveCategories(projects: PortfolioProject[]): string[] {
+	const present = new Set(projects.map((p) => p.category));
+	const ordered: string[] = [];
+	for (const c of PLACEHOLDER_CATEGORIES) {
+		if (present.has(c)) {
+			ordered.push(c);
+			present.delete(c);
+		}
+	}
+	for (const c of present) ordered.push(c);
+	return ordered;
+}

@@ -1,26 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import {
-	ALL_CATEGORIES,
+	deriveCategories,
 	PORTFOLIO_PLACEHOLDERS,
-	type PortfolioCategory,
 	type PortfolioProject,
 } from './portfolioData';
 
-type Filter = 'all' | PortfolioCategory;
+type ProjectsGridProps = {
+	projects?: PortfolioProject[];
+};
 
-const FILTERS: Filter[] = ['all', ...ALL_CATEGORIES];
-
-export default function ProjectsGrid() {
-	const [active, setActive] = useState<Filter>('all');
+export default function ProjectsGrid({
+	projects = PORTFOLIO_PLACEHOLDERS,
+}: ProjectsGridProps) {
+	const categories = useMemo(() => deriveCategories(projects), [projects]);
+	const [active, setActive] = useState<string>('all');
 
 	const visible =
-		active === 'all'
-			? PORTFOLIO_PLACEHOLDERS
-			: PORTFOLIO_PLACEHOLDERS.filter((p) => p.category === active);
+		active === 'all' ? projects : projects.filter((p) => p.category === active);
 
 	return (
 		<section className="dp-container py-12 md:py-16">
@@ -29,27 +29,40 @@ export default function ProjectsGrid() {
 				aria-label="Filter projects by category"
 				className="dp-box-design mx-auto flex max-w-4xl flex-wrap justify-center gap-1 rounded-full p-1.5"
 			>
-				{FILTERS.map((f) => {
-					const isOn = active === f;
-					return (
-						<li key={f}>
-							<button
-								role="tab"
-								type="button"
-								aria-selected={isOn}
-								onClick={() => setActive(f)}
-								className={twMerge(
-									'font-primary-font rounded-full px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors',
-									isOn
-										? 'bg-dp-dark-green text-white'
-										: 'text-dp-dark hover:bg-dp-light-gray',
-								)}
-							>
-								{f === 'all' ? 'All' : f}
-							</button>
-						</li>
-					);
-				})}
+				<li>
+					<button
+						role="tab"
+						type="button"
+						aria-selected={active === 'all'}
+						onClick={() => setActive('all')}
+						className={twMerge(
+							'font-primary-font rounded-full px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors',
+							active === 'all'
+								? 'bg-dp-dark-green text-white'
+								: 'text-dp-dark hover:bg-dp-light-gray',
+						)}
+					>
+						All
+					</button>
+				</li>
+				{categories.map((c) => (
+					<li key={c}>
+						<button
+							role="tab"
+							type="button"
+							aria-selected={active === c}
+							onClick={() => setActive(c)}
+							className={twMerge(
+								'font-primary-font rounded-full px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors',
+								active === c
+									? 'bg-dp-dark-green text-white'
+									: 'text-dp-dark hover:bg-dp-light-gray',
+							)}
+						>
+							{c}
+						</button>
+					</li>
+				))}
 			</ul>
 
 			<ul className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -88,12 +101,23 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
 			className="group block h-full"
 		>
 			<div className="dp-box-design relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
-				<div className="from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 absolute inset-0 bg-gradient-to-br" />
-				<div className="absolute inset-0 flex items-center justify-center">
-					<span className="text-dp-body/30 text-xs font-bold tracking-widest uppercase">
-						Project cover
-					</span>
-				</div>
+				{project.featuredImage?.url ? (
+					// eslint-disable-next-line @next/next/no-img-element
+					<img
+						src={project.featuredImage.url}
+						alt={project.featuredImage.alt ?? project.title}
+						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+					/>
+				) : (
+					<>
+						<div className="from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 absolute inset-0 bg-gradient-to-br" />
+						<div className="absolute inset-0 flex items-center justify-center">
+							<span className="text-dp-body/30 text-xs font-bold tracking-widest uppercase">
+								Project cover
+							</span>
+						</div>
+					</>
+				)}
 				{project.status === 'coming-soon' ? (
 					<span className="bg-dp-dark/90 text-dp-yellowish absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase">
 						Coming soon
