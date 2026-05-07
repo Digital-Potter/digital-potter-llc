@@ -20,6 +20,13 @@ export type SeoMeta = {
 	noIndex?: boolean;
 };
 
+export type BlockButton = {
+	label: string;
+	url: string;
+	style?: 'primary' | 'secondary';
+	openInNewTab?: boolean;
+};
+
 export type CmsSection = {
 	_type: string;
 	_id?: string;

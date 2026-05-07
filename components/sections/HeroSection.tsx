@@ -1,10 +1,12 @@
 import { Section } from './Section';
-import type { CmsSection } from '@/helpers/cms/types';
+import SectionButtons from './SectionButtons';
+import type { BlockButton, CmsSection } from '@/helpers/cms/types';
 
 type HeroContent = {
 	image?: { url: string; alt?: string };
 	description?: string;
 	eyebrow?: string;
+	buttons?: BlockButton[];
 };
 
 export function HeroSection({ section }: { section: CmsSection }) {
@@ -32,6 +34,10 @@ export function HeroSection({ section }: { section: CmsSection }) {
 						{c.description}
 					</p>
 				)}
+				<SectionButtons
+					buttons={c?.buttons}
+					className="mt-10 flex flex-wrap items-center justify-center gap-4"
+				/>
 			</div>
 			{c?.image?.url && (
 				<div className="mx-auto mt-12 max-w-5xl">

@@ -1,9 +1,11 @@
 import { Section } from './Section';
-import type { CmsSection } from '@/helpers/cms/types';
+import SectionButtons from './SectionButtons';
+import type { BlockButton, CmsSection } from '@/helpers/cms/types';
 
 type TextContent = {
 	body?: string;
 	eyebrow?: string;
+	buttons?: BlockButton[];
 };
 
 export function TextSection({ section }: { section: CmsSection }) {
@@ -28,6 +30,10 @@ export function TextSection({ section }: { section: CmsSection }) {
 					{c.body}
 				</div>
 			)}
+			<SectionButtons
+				buttons={c?.buttons}
+				className="mt-8 flex flex-wrap gap-4"
+			/>
 		</Section>
 	);
 }

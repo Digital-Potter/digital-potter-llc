@@ -66,11 +66,16 @@ export function ButtonLink({
 	variant = 'solid',
 	className,
 	children,
-}: CommonProps & { href: string }) {
+	openInNewTab,
+}: CommonProps & { href: string; openInNewTab?: boolean }) {
+	const externalProps = openInNewTab
+		? { target: '_blank', rel: 'noopener noreferrer' }
+		: undefined;
 	return (
 		<Link
 			href={href}
 			className={twMerge(baseClasses, variantClasses[variant], className)}
+			{...externalProps}
 		>
 			<ButtonContent variant={variant}>{children}</ButtonContent>
 		</Link>

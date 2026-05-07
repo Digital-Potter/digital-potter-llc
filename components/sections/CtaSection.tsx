@@ -1,15 +1,22 @@
 import { Section } from './Section';
 import { ButtonLink } from '@/components/ui/Button';
-import type { CmsSection } from '@/helpers/cms/types';
+import SectionButtons from './SectionButtons';
+import type { BlockButton, CmsSection } from '@/helpers/cms/types';
 
 type CtaContent = {
 	description?: string;
+	buttons?: BlockButton[];
+	// Legacy single-button shape — kept for backward compatibility.
 	href?: string;
 	label?: string;
+	openInNewTab?: boolean;
 };
 
 export function CtaSection({ section }: { section: CmsSection }) {
 	const c = section.content as CtaContent | undefined;
+	const hasButtonsArray = c?.buttons && c.buttons.length > 0;
+	const hasLegacyHref = !hasButtonsArray && !!c?.href;
+
 	return (
 		<Section layout="wide" paddingY="large">
 			<div className="dp-box-design relative mx-auto max-w-4xl rounded-3xl px-8 py-16 text-center md:px-16 md:py-20">
@@ -19,11 +26,18 @@ export function CtaSection({ section }: { section: CmsSection }) {
 						{c.description}
 					</p>
 				)}
-				{c?.href && (
+				{hasButtonsArray ? (
+					<SectionButtons
+						buttons={c?.buttons}
+						className="mt-10 flex flex-wrap items-center justify-center gap-4"
+					/>
+				) : hasLegacyHref ? (
 					<div className="mt-10 flex justify-center">
-						<ButtonLink href={c.href}>{c.label ?? 'Get in touch'}</ButtonLink>
+						<ButtonLink href={c?.href ?? '#'} openInNewTab={c?.openInNewTab}>
+							{c?.label ?? 'Get in touch'}
+						</ButtonLink>
 					</div>
-				)}
+				) : null}
 			</div>
 		</Section>
 	);
