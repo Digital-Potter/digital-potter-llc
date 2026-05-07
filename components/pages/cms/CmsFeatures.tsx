@@ -12,7 +12,7 @@ const features = [
 			'Per-page SEO, featured image, parent / child relationships',
 			'Live preview before publishing',
 		],
-		screenshotSrc: '/cms-screenshots/page-editor.png',
+		screenshotSrc: '/cms/digital-potter-cms-editor.png',
 		screenshotAlt:
 			'theDavid page editor with title, content, and sections panel',
 		screenshotPlaceholder: 'Page editor',
@@ -29,7 +29,7 @@ const features = [
 			'Per-tenant pricing and module activation',
 			'Cross-tenant search and reporting for super admins',
 		],
-		screenshotSrc: '/cms-screenshots/pages-list.png',
+		screenshotSrc: '/cms/digital-potter-cms-items-list.png',
 		screenshotAlt: 'theDavid Pages list with tenant tags and status filters',
 		screenshotPlaceholder: 'Pages list',
 		reverse: true,
@@ -45,7 +45,7 @@ const features = [
 			'Stripe, Mailgun, Google Analytics, webmaster tool verification',
 			'Sales channels, social links, refund / privacy / terms policies',
 		],
-		screenshotSrc: '/cms-screenshots/site-options.png',
+		screenshotSrc: '/cms/digital-potter-cms-site-options.png',
 		screenshotAlt:
 			'theDavid Site Options screen with General tab and tabs across the top',
 		screenshotPlaceholder: 'Site options',
@@ -62,7 +62,7 @@ const features = [
 			'Latest registered customers list',
 			'Time-range filters: week, month, quarter, year',
 		],
-		screenshotSrc: '/cms-screenshots/dashboard.png',
+		screenshotSrc: '/cms/digital-potter-cms-home-dashboard.png',
 		screenshotAlt:
 			'theDavid dashboard welcome screen with KPI cards and activity feed',
 		screenshotPlaceholder: 'Dashboard',

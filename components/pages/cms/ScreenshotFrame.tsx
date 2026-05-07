@@ -13,8 +13,9 @@ type ScreenshotFrameProps = {
  * Wraps a CMS screenshot in a stylized "browser frame". When `src` is missing,
  * renders a brand-tinted gradient placeholder labeled with `placeholderLabel`.
  *
- * Drop real screenshots into /public/cms-screenshots/ and pass `src` to swap
- * them in. The placeholder ensures the page works today without files.
+ * Real screenshots live in /public/cms/. Pass the absolute `src` to swap
+ * the placeholder for the real image. The placeholder keeps the page
+ * presentable when an image is missing.
  */
 export default function ScreenshotFrame({
 	src,
