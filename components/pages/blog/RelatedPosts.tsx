@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import type { CmsBlogPost } from '@/helpers/cms/types';
+import type { SiteUrls } from '@/helpers/cms/urls';
 
 type RelatedPostsProps = {
 	posts: CmsBlogPost[];
+	urls: SiteUrls;
 };
 
-export default function RelatedPosts({ posts }: RelatedPostsProps) {
+export default function RelatedPosts({ posts, urls }: RelatedPostsProps) {
 	if (!posts || posts.length === 0) return null;
 
 	const limited = posts.slice(0, 3);
@@ -24,7 +26,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
 					const cat = p.categories?.[0];
 					return (
 						<li key={p._id}>
-							<Link href={`/blog/${p.slug}`} className="group block h-full">
+							<Link href={urls.blogPost(p.slug)} className="group block h-full">
 								{p.featuredImage?.url ? (
 									// eslint-disable-next-line @next/next/no-img-element
 									<img

@@ -1,24 +1,30 @@
 import Link from 'next/link';
 import { Section } from './Section';
 import { fetchBlogPosts } from '@/helpers/cms/blog';
+import { getSiteUrls } from '@/helpers/cms/urls';
 import type { CmsSection } from '@/helpers/cms/types';
 
 type BlogFeedContent = {
+	/** Admin source of truth. */
+	postCount?: number;
+	/** Legacy. */
 	count?: number;
 };
 
 export async function BlogFeedSection({ section }: { section: CmsSection }) {
 	const c = section.content as BlogFeedContent | undefined;
+	const limit = c?.postCount ?? c?.count ?? 3;
 	let items: Awaited<ReturnType<typeof fetchBlogPosts>>['items'] = [];
 	try {
-		const r = await fetchBlogPosts(1, c?.count ?? 3);
+		const r = await fetchBlogPosts(1, limit);
 		items = r.items;
 	} catch {
 		// CMS unavailable — render empty silently
 	}
 	if (items.length === 0) return null;
+	const urls = await getSiteUrls();
 	return (
-		<Section layout="wide">
+		<Section settings={section.settings}>
 			{section.title && (
 				<div className="mx-auto mb-10 max-w-4xl text-center">
 					<h2 className="text-balance">{section.title}</h2>
@@ -27,7 +33,7 @@ export async function BlogFeedSection({ section }: { section: CmsSection }) {
 			<ul className="grid gap-8 md:grid-cols-3">
 				{items.map((p) => (
 					<li key={p._id}>
-						<Link href={`/blog/${p.slug}`} className="group block h-full">
+						<Link href={urls.blogPost(p.slug)} className="group block h-full">
 							{p.featuredImage?.url ? (
 								// eslint-disable-next-line @next/next/no-img-element
 								<img

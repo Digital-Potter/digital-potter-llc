@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BLOG_PLACEHOLDERS, type BlogPostCard } from './blogData';
+import { type BlogPostCard } from './blogData';
 
 function formatDate(iso?: string) {
 	if (!iso) return null;
@@ -13,12 +13,10 @@ function formatDate(iso?: string) {
 }
 
 type PostsListProps = {
-	posts?: BlogPostCard[];
+	posts: BlogPostCard[];
 };
 
-export default function PostsList({
-	posts = BLOG_PLACEHOLDERS,
-}: PostsListProps) {
+export default function PostsList({ posts }: PostsListProps) {
 	const [feature, ...rest] = posts;
 
 	return (
@@ -42,7 +40,7 @@ function FeaturedPost({ post }: { post: BlogPostCard }) {
 	const date = formatDate(post.publishedAt);
 	return (
 		<Link
-			href={`/blog/${post.slug}`}
+			href={post.href}
 			className="group border-dp-green/40 hover:border-dp-green grid items-center gap-8 rounded-3xl border-2 bg-white/40 p-8 transition-colors md:grid-cols-2 md:gap-12 md:p-12"
 		>
 			<div className="dp-box-design relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
@@ -96,7 +94,7 @@ function FeaturedPost({ post }: { post: BlogPostCard }) {
 function PostCard({ post }: { post: BlogPostCard }) {
 	const date = formatDate(post.publishedAt);
 	return (
-		<Link href={`/blog/${post.slug}`} className="group block h-full">
+		<Link href={post.href} className="group block h-full">
 			<div className="dp-box-design relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
 				{post.featuredImage?.url ? (
 					// eslint-disable-next-line @next/next/no-img-element

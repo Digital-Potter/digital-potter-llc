@@ -39,7 +39,7 @@ export default function MobileProcess() {
 				</h2>
 			</div>
 
-			<ol className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-5">
+			<ol className="mx-auto mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
 				{phases.map((p) => (
 					<li
 						key={p.n}

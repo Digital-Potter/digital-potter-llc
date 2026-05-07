@@ -1,23 +1,38 @@
 import { Section } from './Section';
 import type { CmsSection } from '@/helpers/cms/types';
 
+type FaqEntry = {
+	question?: string;
+	answer?: string;
+	/** Legacy short keys. */
+	q?: string;
+	a?: string;
+};
+
 type FaqContent = {
-	items?: { q: string; a: string }[];
+	faqs?: FaqEntry[];
+	items?: FaqEntry[];
 };
 
 export function FaqSection({ section }: { section: CmsSection }) {
 	const c = section.content as FaqContent | undefined;
-	const items = c?.items ?? [];
-	if (items.length === 0) return null;
+	const items = c?.faqs ?? c?.items ?? [];
+	const normalized = items
+		.map((it) => ({
+			q: it.question ?? it.q ?? '',
+			a: it.answer ?? it.a ?? '',
+		}))
+		.filter((it) => it.q);
+	if (normalized.length === 0) return null;
 	return (
-		<Section layout="narrow">
+		<Section settings={section.settings} layout="narrow">
 			{section.title && (
 				<div className="mb-10 text-center">
 					<h2 className="text-balance">{section.title}</h2>
 				</div>
 			)}
 			<ul className="space-y-3">
-				{items.map((it, i) => (
+				{normalized.map((it, i) => (
 					<li key={i}>
 						<details className="group border-dp-dark/10 hover:border-dp-green/40 rounded-2xl border bg-white/50 transition-colors">
 							<summary className="font-primary-font text-dp-dark cursor-pointer list-none px-6 py-5 text-base font-bold md:text-lg">
@@ -40,9 +55,10 @@ export function FaqSection({ section }: { section: CmsSection }) {
 									</span>
 								</span>
 							</summary>
-							<div className="text-dp-body/85 px-6 pb-6 text-base leading-relaxed">
-								{it.a}
-							</div>
+							<div
+								className="prose prose-base prose-p:text-dp-body/85 prose-a:text-dp-dark-green hover:prose-a:text-dp-green max-w-none px-6 pb-6"
+								dangerouslySetInnerHTML={{ __html: it.a }}
+							/>
 						</details>
 					</li>
 				))}

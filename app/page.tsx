@@ -1,30 +1,20 @@
-import { resolveCtaHref } from '@/components/layout/cta-href';
-import {
-	HomeHero,
-	TripleUsp,
-	ArtOfPottery,
-	TabbedServices,
-	ValueCallouts,
-	SocialProof,
-	BlogTeaser,
-	PricingTeaser,
-	FinalCta,
-} from '@/components/pages/home';
+import type { Metadata } from 'next';
+import { HomepageTemplate } from '@/components/pageTemplates/HomepageTemplate';
+import { buildPageMetadata } from '@/helpers/cms/pageMetadata';
+import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 
-export default async function Home() {
-	const cta = await resolveCtaHref();
+const FALLBACK = {
+	title: 'Digital Potter — Custom Web & App Development',
+	description:
+		'Beautifully crafted web and mobile apps. Designed for clarity, delight, and results.',
+};
 
-	return (
-		<>
-			<HomeHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
-			<TripleUsp />
-			<ArtOfPottery />
-			<TabbedServices />
-			<ValueCallouts />
-			<SocialProof />
-			<BlogTeaser />
-			<PricingTeaser />
-			<FinalCta href={cta.href} label={cta.label} />
-		</>
-	);
+export async function generateMetadata(): Promise<Metadata> {
+	const settings = await fetchStoreSettingsOrNull();
+	const homepageSlug = settings?.settings?.siteStructure?.homepageSlug;
+	return buildPageMetadata({ slug: homepageSlug, fallback: FALLBACK });
+}
+
+export default function Home() {
+	return <HomepageTemplate />;
 }

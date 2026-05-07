@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import type { CmsBlogPost } from '@/helpers/cms/types';
+import type { SiteUrls } from '@/helpers/cms/urls';
 
 type PostHeaderProps = {
 	post: CmsBlogPost;
+	urls: SiteUrls;
 };
 
 function authorName(author?: CmsBlogPost['author']) {
@@ -22,7 +24,7 @@ function formatDate(iso?: string) {
 	});
 }
 
-export default function PostHeader({ post }: PostHeaderProps) {
+export default function PostHeader({ post, urls }: PostHeaderProps) {
 	const date = formatDate(post.publishedAt);
 	const author = authorName(post.author);
 	const primaryCategory = post.categories?.[0];
@@ -30,7 +32,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
 	return (
 		<section className="dp-container py-12 md:py-16">
 			<Link
-				href="/blog"
+				href={urls.blogIndex}
 				className="text-dp-dark-green hover:text-dp-green font-primary-font inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase"
 			>
 				<svg
@@ -51,7 +53,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
 			<div className="mx-auto mt-10 max-w-4xl text-center">
 				{primaryCategory && (
 					<Link
-						href={`/blog/category/${primaryCategory.slug}`}
+						href={urls.blogCategory(primaryCategory.slug)}
 						className="text-dp-dark-green font-primary-font hover:text-dp-green text-xs font-bold tracking-widest uppercase"
 					>
 						{primaryCategory.name}

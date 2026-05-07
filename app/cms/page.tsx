@@ -1,32 +1,18 @@
 import type { Metadata } from 'next';
-import { resolveCtaHref } from '@/components/layout/cta-href';
-import {
-	CmsHero,
-	WhyWeBuiltIt,
-	CmsFeatures,
-	UnderTheHood,
-	CmsComparison,
-} from '@/components/pages/cms';
-import { FinalCta } from '@/components/pages/home';
+import { CmsMarketingTemplate } from '@/components/pageTemplates/CmsMarketingTemplate';
+import { buildPageMetadata } from '@/helpers/cms/pageMetadata';
 
-export const metadata: Metadata = {
+const FALLBACK = {
 	title:
 		'theDavid CMS — The Headless Content Platform Behind Every Digital Potter Site',
 	description:
 		'theDavid is the multi-tenant headless CMS Digital Potter built for our own clients. Editorial control for your team, headless flexibility for your custom Next.js frontend, no plugin marketplace required.',
 };
 
-export default async function CmsPage() {
-	const cta = await resolveCtaHref();
+export function generateMetadata(): Promise<Metadata> {
+	return buildPageMetadata({ slug: 'cms', fallback: FALLBACK });
+}
 
-	return (
-		<>
-			<CmsHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
-			<WhyWeBuiltIt />
-			<CmsFeatures />
-			<UnderTheHood />
-			<CmsComparison />
-			<FinalCta href={cta.href} label={cta.label} />
-		</>
-	);
+export default function CmsPage() {
+	return <CmsMarketingTemplate />;
 }

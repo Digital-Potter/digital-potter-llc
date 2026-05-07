@@ -1,20 +1,50 @@
 import { Section } from './Section';
 import SectionButtons from './SectionButtons';
-import type { BlockButton, CmsSection } from '@/helpers/cms/types';
+import type {
+	BlockButton,
+	BlockColumn,
+	CmsSection,
+	MediaRef,
+} from '@/helpers/cms/types';
 
 type HeroContent = {
-	image?: { url: string; alt?: string };
-	description?: string;
-	eyebrow?: string;
+	image?: MediaRef | string;
+	imageAsBackground?: boolean;
+	columns?: BlockColumn[];
 	buttons?: BlockButton[];
+	eyebrow?: string;
+	/** Legacy. */
+	description?: string;
+};
+
+function imageRef(image: HeroContent['image']): MediaRef | null {
+	if (!image) return null;
+	if (typeof image === 'string') return { url: image };
+	return image;
+}
+
+const colsClass: Record<number, string> = {
+	1: 'grid-cols-1',
+	2: 'grid-cols-1 md:grid-cols-2',
+	3: 'grid-cols-1 md:grid-cols-3',
+	4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+	5: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
+	6: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-6',
 };
 
 export function HeroSection({ section }: { section: CmsSection }) {
 	const c = section.content as HeroContent | undefined;
 	const eyebrow = c?.eyebrow ?? section.label;
+	const image = imageRef(c?.image);
+	const columns = c?.columns ?? [];
+	const colCount = Math.min(Math.max(columns.length, 1), 6);
 
 	return (
-		<Section paddingY="large" layout="wide">
+		<Section
+			settings={section.settings}
+			paddingTop="large"
+			paddingBottom="large"
+		>
 			<div className="mx-auto max-w-4xl text-center">
 				{eyebrow && (
 					<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
@@ -39,15 +69,47 @@ export function HeroSection({ section }: { section: CmsSection }) {
 					className="mt-10 flex flex-wrap items-center justify-center gap-4"
 				/>
 			</div>
-			{c?.image?.url && (
+			{image?.url && (
 				<div className="mx-auto mt-12 max-w-5xl">
 					{/* eslint-disable-next-line @next/next/no-img-element */}
 					<img
-						src={c.image.url}
-						alt={c.image.alt ?? section.title ?? ''}
+						src={image.url}
+						alt={image.alt ?? section.title ?? ''}
 						className="dp-box-design w-full rounded-3xl"
 					/>
 				</div>
+			)}
+			{columns.length > 0 && (
+				<ul className={`mt-16 grid gap-8 ${colsClass[colCount]}`}>
+					{columns.map((col, i) => {
+						const colImg = imageRef(col.image);
+						return (
+							<li key={i} className="flex flex-col gap-3 text-center">
+								{colImg?.url && (
+									<div className="relative mx-auto h-12 w-12 overflow-hidden rounded-xl">
+										{/* eslint-disable-next-line @next/next/no-img-element */}
+										<img
+											src={colImg.url}
+											alt={colImg.alt ?? col.title ?? ''}
+											className="h-full w-full object-cover"
+										/>
+									</div>
+								)}
+								{col.title && (
+									<h3 className="font-primary-font text-lg font-bold">
+										{col.title}
+									</h3>
+								)}
+								{col.content && (
+									<div
+										className="prose prose-sm prose-p:text-dp-body/75 max-w-none"
+										dangerouslySetInnerHTML={{ __html: col.content }}
+									/>
+								)}
+							</li>
+						);
+					})}
+				</ul>
 			)}
 		</Section>
 	);

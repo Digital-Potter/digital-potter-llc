@@ -1,14 +1,16 @@
 import { ButtonLink } from '@/components/ui/Button';
+import { getSiteUrls } from '@/helpers/cms/urls';
 
 type HomeHeroProps = {
 	primaryCtaHref: string;
 	primaryCtaLabel: string;
 };
 
-export default function HomeHero({
+export default async function HomeHero({
 	primaryCtaHref,
 	primaryCtaLabel,
 }: HomeHeroProps) {
+	const urls = await getSiteUrls();
 	return (
 		<section className="dp-container py-16 md:py-24">
 			<div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -25,7 +27,7 @@ export default function HomeHero({
 						<ButtonLink href={primaryCtaHref} variant="solid">
 							{primaryCtaLabel}
 						</ButtonLink>
-						<ButtonLink href="/portfolio" variant="outlined">
+						<ButtonLink href={urls.portfolioIndex} variant="outlined">
 							See our work
 						</ButtonLink>
 					</div>
@@ -50,7 +52,7 @@ function HeroVisualPlaceholder() {
 				<div className="bg-dp-dark/10 h-3 w-2/5 rounded-full" />
 				<div className="bg-dp-green/40 mt-6 h-10 w-32 rounded-full" />
 				<p className="text-dp-body/60 mt-4 text-sm tracking-wider uppercase">
-					Site preview
+					Our canvas is ready for your vision.
 				</p>
 			</div>
 		</div>

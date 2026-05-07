@@ -15,6 +15,8 @@ import { ProductListSection } from './ProductListSection';
 import { CourseListSection } from './CourseListSection';
 import { BlogListSection } from './BlogListSection';
 import { CategoryGridSection } from './CategoryGridSection';
+import { CarouselSection } from './CarouselSection';
+import { BookingCalendarSection } from './BookingCalendarSection';
 
 const map = {
 	HERO: HeroSection,
@@ -33,6 +35,8 @@ const map = {
 	COURSE_LIST: CourseListSection,
 	BLOG_LIST: BlogListSection,
 	CATEGORY_GRID: CategoryGridSection,
+	CAROUSEL: CarouselSection,
+	BOOKING_CALENDAR: BookingCalendarSection,
 } as const;
 
 type SectionTypeKey = keyof typeof map;

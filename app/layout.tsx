@@ -19,6 +19,23 @@ const figtree = Figtree({
 	display: 'swap',
 });
 
+/**
+ * Resolve the public site URL used as `metadataBase`. Required so Next.js can
+ * turn relative OG/Twitter image paths and `alternates.canonical` values into
+ * absolute URLs — without it, OG images break in social previews.
+ */
+function siteBaseUrl(): URL {
+	const env = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? null;
+	if (env) {
+		try {
+			return new URL(env);
+		} catch {
+			// Fall through.
+		}
+	}
+	return new URL('http://localhost:3001');
+}
+
 export async function generateMetadata(): Promise<Metadata> {
 	const data = await fetchStoreSettingsOrNull();
 	const seo = data?.settings?.seo;
@@ -28,25 +45,40 @@ export async function generateMetadata(): Promise<Metadata> {
 	const fallbackDescription =
 		'Beautifully crafted web and mobile apps. Designed for clarity, delight, and results.';
 
+	const defaultTitle = seo?.defaultTitle ?? fallbackTitle;
+	// `template` only kicks in for child segments that return a string title.
+	// `buildPageMetadata` always returns `title: { absolute }`, so the
+	// template runs only for routes without explicit metadata (e.g. errors).
+	const titleTemplate = seo?.titleTemplate?.includes('%s')
+		? seo.titleTemplate
+		: `%s · ${tenantSettings?.storeName ?? 'Digital Potter'}`;
+
+	const description =
+		seo?.defaultDescription ??
+		tenantSettings?.storeDescription ??
+		fallbackDescription;
+	const storeName = tenantSettings?.storeName ?? 'Digital Potter';
+
 	return {
-		title: seo?.defaultTitle
-			? {
-					default: seo.defaultTitle,
-					template:
-						seo.titleTemplate ??
-						`%s · ${tenantSettings?.storeName ?? 'Digital Potter'}`,
-				}
-			: {
-					default: fallbackTitle,
-					template: '%s · Digital Potter',
-				},
-		description:
-			seo?.defaultDescription ??
-			tenantSettings?.storeDescription ??
-			fallbackDescription,
-		openGraph: seo?.defaultOgImage
-			? { images: [seo.defaultOgImage] }
-			: undefined,
+		metadataBase: siteBaseUrl(),
+		title: {
+			default: defaultTitle,
+			template: titleTemplate,
+		},
+		description,
+		openGraph: {
+			title: defaultTitle,
+			description,
+			siteName: storeName,
+			type: 'website',
+			images: seo?.defaultOgImage ? [{ url: seo.defaultOgImage }] : undefined,
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: defaultTitle,
+			description,
+			images: seo?.defaultOgImage ? [seo.defaultOgImage] : undefined,
+		},
 		icons: {
 			icon: seo?.faviconUrl ?? '/favicon.ico',
 			apple: seo?.appleTouchIconUrl,

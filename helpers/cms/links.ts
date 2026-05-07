@@ -41,6 +41,13 @@ export function resolveMenuItemHref(
 	}
 }
 
+/**
+ * App routes stay at fixed segments (`/blog`, `/portfolio`, `/products`, ...).
+ * The `*Slug` overrides in StoreSettings.siteStructure tell us which CMS Page
+ * acts as the landing for each section, so a menu item pointing at that Page
+ * resolves to the canonical front-end route. Per-tenant route renaming (e.g.
+ * `/case-studies/...`) would need dynamic catch-alls — out of scope.
+ */
 function canonicalRouteForPageSlug(
 	slug: string,
 	siteStructure: SiteStructure | undefined,
@@ -58,5 +65,7 @@ function canonicalRouteForPageSlug(
 		return '/collections';
 	if (siteStructure.coursesSlug && slug === siteStructure.coursesSlug)
 		return '/courses';
+	if (siteStructure.projectsSlug && slug === siteStructure.projectsSlug)
+		return '/portfolio';
 	return null;
 }

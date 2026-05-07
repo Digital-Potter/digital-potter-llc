@@ -21,7 +21,7 @@ const cards: UspCard[] = [
 export default function TripleUsp() {
 	return (
 		<section className="dp-container py-16 md:py-24">
-			<div className="mx-auto max-w-3xl text-center">
+			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">
 					Three things every Digital Potter site gives you.
 				</h2>

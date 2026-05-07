@@ -1,4 +1,5 @@
 import type { CmsProject } from '@/helpers/cms/types';
+import type { SiteUrls } from '@/helpers/cms/urls';
 
 // Placeholder portfolio cards. Anonymized real-client work awaiting full
 // case studies. When real Projects exist in theDavid CMS, the page falls
@@ -10,6 +11,7 @@ export type PortfolioProject = {
 	excerpt: string;
 	category: string;
 	slug?: string;
+	href?: string;
 	status?: 'live' | 'coming-soon';
 	featuredImage?: { url: string; alt?: string };
 };
@@ -74,13 +76,17 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 ];
 
 /** Map a CMS Project to the card shape this UI renders. */
-export function mapCmsProjectToCard(p: CmsProject): PortfolioProject {
+export function mapCmsProjectToCard(
+	p: CmsProject,
+	urls: SiteUrls,
+): PortfolioProject {
 	return {
 		id: p._id,
 		title: p.title,
 		excerpt: p.excerpt ?? '',
-		category: p.category ?? 'Custom Web App',
+		category: p.categories?.[0]?.name ?? 'Custom Web App',
 		slug: p.slug,
+		href: urls.project(p.slug),
 		status: 'live',
 		featuredImage: p.featuredImage,
 	};

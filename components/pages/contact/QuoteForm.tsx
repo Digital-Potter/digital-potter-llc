@@ -17,7 +17,11 @@ import ThankYouPanel from './ThankYouPanel';
 
 type StepNumber = 1 | 2 | 3;
 
-export default function QuoteForm() {
+type QuoteFormProps = {
+	portfolioHref: string;
+};
+
+export default function QuoteForm({ portfolioHref }: QuoteFormProps) {
 	const [step, setStep] = useState<StepNumber>(1);
 	const [maxReached, setMaxReached] = useState<StepNumber>(1);
 	const [submitState, setSubmitState] = useState<{
@@ -70,7 +74,9 @@ export default function QuoteForm() {
 	});
 
 	if (submitState.state === 'success') {
-		return <ThankYouPanel name={submitState.name} />;
+		return (
+			<ThankYouPanel name={submitState.name} portfolioHref={portfolioHref} />
+		);
 	}
 
 	return (

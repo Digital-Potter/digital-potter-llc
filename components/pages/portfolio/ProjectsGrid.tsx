@@ -91,9 +91,9 @@ export default function ProjectsGrid({
 }
 
 function ProjectCard({ project }: { project: PortfolioProject }) {
-	const isLinked = !!project.slug;
+	const isLinked = !!project.href;
 	const Wrapper = isLinked ? Link : 'div';
-	const wrapperProps = isLinked ? { href: `/portfolio/${project.slug}` } : {};
+	const wrapperProps = isLinked ? { href: project.href ?? '#' } : {};
 
 	return (
 		<Wrapper

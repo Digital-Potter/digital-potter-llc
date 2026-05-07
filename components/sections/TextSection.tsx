@@ -1,38 +1,105 @@
 import { Section } from './Section';
 import SectionButtons from './SectionButtons';
-import type { BlockButton, CmsSection } from '@/helpers/cms/types';
+import type {
+	BlockButton,
+	BlockColumn,
+	CmsSection,
+	MediaRef,
+} from '@/helpers/cms/types';
 
 type TextContent = {
-	body?: string;
-	eyebrow?: string;
+	columns?: BlockColumn[];
 	buttons?: BlockButton[];
+	eyebrow?: string;
+	/** Legacy single-blob fallback (pre-columns content). */
+	body?: string;
 };
+
+const colsClass: Record<number, string> = {
+	1: 'grid-cols-1',
+	2: 'grid-cols-1 md:grid-cols-2',
+	3: 'grid-cols-1 md:grid-cols-3',
+	4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+	5: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
+	6: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-6',
+};
+
+function imageRef(image: BlockColumn['image']): MediaRef | null {
+	if (!image) return null;
+	if (typeof image === 'string') return { url: image };
+	return image;
+}
 
 export function TextSection({ section }: { section: CmsSection }) {
 	const c = section.content as TextContent | undefined;
 	const eyebrow = c?.eyebrow ?? section.label;
+	const columns = c?.columns ?? [];
+	const hasColumns = columns.length > 0;
+	const colCount = Math.min(Math.max(columns.length, 1), 6);
 
 	return (
-		<Section layout="narrow">
-			{eyebrow && (
-				<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
-					{eyebrow}
-				</p>
+		<Section
+			settings={section.settings}
+			layout={hasColumns ? 'contained' : 'narrow'}
+		>
+			{(eyebrow || section.title || section.subtitle) && (
+				<div className="mx-auto mb-10 max-w-4xl text-center">
+					{eyebrow && (
+						<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
+							{eyebrow}
+						</p>
+					)}
+					{section.title && (
+						<h2 className="mt-4 text-balance">{section.title}</h2>
+					)}
+					{section.subtitle && (
+						<p className="text-dp-body/85 mt-4 text-lg md:text-xl">
+							{section.subtitle}
+						</p>
+					)}
+				</div>
 			)}
-			{section.title && <h2 className="mt-4 text-balance">{section.title}</h2>}
-			{section.subtitle && (
-				<p className="text-dp-body/85 mt-4 text-lg md:text-xl">
-					{section.subtitle}
-				</p>
-			)}
-			{c?.body && (
+
+			{hasColumns ? (
+				<ul className={`grid gap-8 ${colsClass[colCount]}`}>
+					{columns.map((col, i) => {
+						const img = imageRef(col.image);
+						return (
+							<li key={i} className="flex flex-col gap-4">
+								{img?.url && (
+									<div className="dp-box-design relative aspect-video overflow-hidden rounded-2xl">
+										{/* eslint-disable-next-line @next/next/no-img-element */}
+										<img
+											src={img.url}
+											alt={img.alt ?? col.title ?? ''}
+											className="h-full w-full object-cover"
+										/>
+									</div>
+								)}
+								{col.title && (
+									<h3 className="font-primary-font text-xl font-bold md:text-2xl">
+										{col.title}
+									</h3>
+								)}
+								{col.content && (
+									<div
+										className="prose prose-base prose-headings:font-primary-font prose-p:text-dp-body/85 prose-strong:text-dp-dark prose-a:text-dp-dark-green hover:prose-a:text-dp-green max-w-none"
+										dangerouslySetInnerHTML={{ __html: col.content }}
+									/>
+								)}
+							</li>
+						);
+					})}
+				</ul>
+			) : c?.body ? (
 				<div className="text-dp-body/85 mt-6 space-y-5 text-base whitespace-pre-wrap md:text-lg">
 					{c.body}
 				</div>
-			)}
+			) : null}
+
 			<SectionButtons
 				buttons={c?.buttons}
-				className="mt-8 flex flex-wrap gap-4"
+				className="mt-10 flex flex-wrap items-center justify-center gap-4"
 			/>
 		</Section>
 	);

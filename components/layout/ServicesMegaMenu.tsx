@@ -4,7 +4,16 @@ import type { ReactNode } from 'react';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
-import { SERVICES_MENU, SERVICES_FEATURED } from './megaMenuConfig';
+import {
+	COL1_BY_LABEL,
+	COL1_BY_SLUG,
+	COL2_BY_LABEL,
+	COL2_BY_SLUG,
+	SERVICES_FEATURED,
+	SERVICES_MEGAMENU_HEADER,
+	SERVICES_MENU,
+	type MegaIcon,
+} from './megaMenuConfig';
 import Indicator from './Indicator';
 
 const iconPaths: Record<string, ReactNode> = {
@@ -36,14 +45,117 @@ const iconPaths: Record<string, ReactNode> = {
 	),
 };
 
+export type MegaColumnItem = {
+	/** Stable key — the CMS menu item's _id. Used as React key so duplicate hrefs don't collide. */
+	id: string;
+	label: string;
+	href: string;
+	slug: string;
+	/** CMS-authored description; falls back to slug→label hardcoded copy. */
+	description?: string;
+	/** CMS-authored headline (col2 cards); falls back to slug→label hardcoded copy. */
+	headline?: string;
+	/** CMS-authored icon name; falls back to slug→label hardcoded icon. */
+	icon?: string;
+};
+
+export type MegaHeader = {
+	title?: string;
+	subtitle?: string;
+};
+
 type ServicesMegaMenuProps = {
 	triggerHref: string;
 	triggerLabel: string;
+	/** CMS-authored items for the icon column. When empty, the hardcoded SERVICES_MENU is used. */
+	col1?: MegaColumnItem[];
+	/** CMS-authored items for the featured-card column. When empty, the hardcoded SERVICES_FEATURED is used. */
+	col2?: MegaColumnItem[];
+	/** CMS-authored title/subtitle for the mega-menu header. Each field falls back to the hardcoded default if empty. */
+	header?: MegaHeader;
 };
+
+type ResolvedCol1 = {
+	id: string;
+	label: string;
+	href: string;
+	description: string;
+	icon: MegaIcon;
+};
+
+type ResolvedCol2 = {
+	id: string;
+	label: string;
+	href: string;
+	headline: string;
+	body: string;
+};
+
+/**
+ * Resolve hardcoded fallback copy for a column-1 item by trying its linked
+ * page slug first, then its lowercased label. Returns undefined when neither
+ * lookup matches.
+ */
+function col1Fallback(slug: string, label: string) {
+	return COL1_BY_SLUG[slug] ?? COL1_BY_LABEL[label.toLowerCase()] ?? undefined;
+}
+
+function col2Fallback(slug: string, label: string) {
+	return COL2_BY_SLUG[slug] ?? COL2_BY_LABEL[label.toLowerCase()] ?? undefined;
+}
+
+function resolveCol1(col1: MegaColumnItem[] | undefined): ResolvedCol1[] {
+	if (!col1 || col1.length === 0) {
+		return SERVICES_MENU.map((m, i) => ({
+			id: `static-${i}`,
+			label: m.label,
+			href: m.href,
+			description: m.description,
+			icon: m.icon,
+		}));
+	}
+	return col1.map((item, i) => {
+		const fb = col1Fallback(item.slug, item.label);
+		return {
+			id: item.id || `${item.href}-${i}`,
+			label: item.label,
+			href: item.href,
+			description: item.description?.trim() || fb?.description || '',
+			icon: ((item.icon as MegaIcon | undefined) ??
+				fb?.icon ??
+				'code') as MegaIcon,
+		};
+	});
+}
+
+function resolveCol2(col2: MegaColumnItem[] | undefined): ResolvedCol2[] {
+	if (!col2 || col2.length === 0) {
+		return SERVICES_FEATURED.map((c, i) => ({
+			id: `static-${i}`,
+			label: c.label,
+			href: c.href,
+			headline: c.headline,
+			body: c.body,
+		}));
+	}
+	return col2.map((item, i) => {
+		const fb = col2Fallback(item.slug, item.label);
+		return {
+			id: item.id || `${item.href}-${i}`,
+			label: item.label,
+			href: item.href,
+			headline: item.headline?.trim() || fb?.headline || item.label,
+			body: item.description?.trim() || fb?.body || '',
+		};
+	});
+}
 
 export default function ServicesMegaMenu({
 	triggerHref,
 	triggerLabel,
+	col1,
+	col2,
+	header,
 }: ServicesMegaMenuProps) {
 	const [open, setOpen] = useState(false);
 	const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -63,8 +175,6 @@ export default function ServicesMegaMenu({
 	const handleClick = () => {
 		cancelClose();
 		setOpen(false);
-		// Blur the active element so :focus-within doesn't keep the menu visible
-		// after navigation completes.
 		if (
 			typeof document !== 'undefined' &&
 			document.activeElement instanceof HTMLElement
@@ -72,6 +182,12 @@ export default function ServicesMegaMenu({
 			document.activeElement.blur();
 		}
 	};
+
+	const resolvedCol1 = resolveCol1(col1);
+	const resolvedCol2 = resolveCol2(col2);
+	const eyebrow = header?.title?.trim() || SERVICES_MEGAMENU_HEADER.eyebrow;
+	const subtitle =
+		header?.subtitle?.trim() || SERVICES_MEGAMENU_HEADER.subtitle;
 
 	return (
 		<div
@@ -119,26 +235,26 @@ export default function ServicesMegaMenu({
 				role="menu"
 				aria-hidden={!open}
 				className={twMerge(
-					'absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 transition-all duration-150',
+					'absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 backdrop-blur-3xl transition-all duration-150',
 					open
 						? 'visible translate-y-0 opacity-100'
 						: 'pointer-events-none invisible translate-y-1 opacity-0',
 				)}
 			>
-				<div className="bg-dp-yellowish/95 border-dp-dark/10 rounded-3xl border-2 p-6 normal-case shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] backdrop-blur-md">
+				<div className="bg-dp-yellowish/95 border-dp-dark/10 rounded-3xl border-2 p-6 normal-case shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] backdrop-blur-3xl">
 					<div className="px-2 pb-3">
 						<p className="font-primary-font text-dp-dark-green text-xs font-bold tracking-widest uppercase">
-							Our Services
+							{eyebrow}
 						</p>
 						<p className="text-dp-body/80 font-secondary-font mt-2 text-sm tracking-normal normal-case">
-							Custom websites, apps, and a CMS your team owns.
+							{subtitle}
 						</p>
 					</div>
 
-					<div className="grid gap-2 md:grid-cols-3">
-						<ul className="md:col-span-2">
-							{SERVICES_MENU.map((item) => (
-								<li key={item.href}>
+					<div className="grid gap-2 md:grid-cols-5">
+						<ul className="md:col-span-3">
+							{resolvedCol1.map((item) => (
+								<li key={item.id}>
 									<Link
 										href={item.href}
 										onClick={handleClick}
@@ -155,25 +271,27 @@ export default function ServicesMegaMenu({
 												strokeLinecap="round"
 												strokeLinejoin="round"
 											>
-												{iconPaths[item.icon]}
+												{iconPaths[item.icon] ?? iconPaths.code}
 											</svg>
 										</span>
 										<span className="min-w-0">
 											<span className="font-primary-font text-dp-dark block text-base font-bold tracking-normal normal-case">
 												{item.label}
 											</span>
-											<span className="text-dp-body/70 font-secondary-font block text-sm tracking-normal normal-case">
-												{item.description}
-											</span>
+											{item.description && (
+												<span className="text-dp-body/70 font-secondary-font block text-sm tracking-normal normal-case">
+													{item.description}
+												</span>
+											)}
 										</span>
 									</Link>
 								</li>
 							))}
 						</ul>
 
-						<ul className="border-dp-dark/10 mt-2 space-y-2 border-t pt-3 md:mt-0 md:border-t-0 md:border-l md:pt-0 md:pl-3">
-							{SERVICES_FEATURED.map((card) => (
-								<li key={card.href}>
+						<ul className="border-dp-dark/10 mt-2 space-y-2 border-t pt-3 md:col-span-2 md:mt-0 md:border-t-0 md:border-l md:pt-0 md:pl-3">
+							{resolvedCol2.map((card) => (
+								<li key={card.id}>
 									<Link
 										href={card.href}
 										onClick={handleClick}
@@ -185,9 +303,11 @@ export default function ServicesMegaMenu({
 										<span className="font-primary-font text-dp-dark mt-1 block text-base font-bold tracking-normal normal-case">
 											{card.headline}
 										</span>
-										<span className="text-dp-body/70 font-secondary-font mt-2 block text-sm tracking-normal normal-case">
-											{card.body}
-										</span>
+										{card.body && (
+											<span className="text-dp-body/70 font-secondary-font mt-2 block text-sm tracking-normal normal-case">
+												{card.body}
+											</span>
+										)}
 									</Link>
 								</li>
 							))}

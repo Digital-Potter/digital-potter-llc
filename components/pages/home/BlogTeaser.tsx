@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getSiteUrls } from '@/helpers/cms/urls';
 
 export type BlogTeaserPost = {
 	slug: string;
@@ -41,13 +42,15 @@ type BlogTeaserProps = {
 	posts?: BlogTeaserPost[];
 };
 
-export default function BlogTeaser({
+export default async function BlogTeaser({
 	posts = placeholderPosts,
 }: BlogTeaserProps) {
+	const urls = await getSiteUrls();
+
 	return (
 		<section className="dp-container py-16 md:py-24">
 			<div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-				<div className="max-w-2xl">
+				<div className="max-w-4xl">
 					<h2 className="text-balance">Fresh ideas & expert tips.</h2>
 					<p className="text-dp-body/80 mt-4 text-balance">
 						Notes from the studio on building, shipping, and maintaining digital
@@ -55,7 +58,7 @@ export default function BlogTeaser({
 					</p>
 				</div>
 				<Link
-					href="/blog"
+					href={urls.blogIndex}
 					className="text-dp-dark-green font-primary-font hover:text-dp-green text-sm font-bold tracking-wider uppercase"
 				>
 					See all posts →
@@ -65,7 +68,10 @@ export default function BlogTeaser({
 			<ul className="mt-12 grid gap-8 md:grid-cols-3">
 				{posts.map((post) => (
 					<li key={post.slug}>
-						<Link href={`/blog/${post.slug}`} className="group block h-full">
+						<Link
+							href={urls.blogPost(post.slug)}
+							className="group block h-full"
+						>
 							<div className="dp-box-design relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
 								<div className="from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 absolute inset-0 bg-gradient-to-br" />
 								<div className="absolute inset-0 flex items-center justify-center">

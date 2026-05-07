@@ -18,9 +18,14 @@ export function CtaSection({ section }: { section: CmsSection }) {
 	const hasLegacyHref = !hasButtonsArray && !!c?.href;
 
 	return (
-		<Section layout="wide" paddingY="large">
+		<Section settings={section.settings}>
 			<div className="dp-box-design relative mx-auto max-w-4xl rounded-3xl px-8 py-16 text-center md:px-16 md:py-20">
 				{section.title && <h2 className="text-balance">{section.title}</h2>}
+				{section.subtitle && (
+					<p className="text-dp-body/85 mx-auto mt-4 max-w-2xl text-lg text-balance">
+						{section.subtitle}
+					</p>
+				)}
 				{c?.description && (
 					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
 						{c.description}

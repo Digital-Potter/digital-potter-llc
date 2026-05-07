@@ -2,9 +2,13 @@ import Link from 'next/link';
 
 type ThankYouPanelProps = {
 	name?: string;
+	portfolioHref: string;
 };
 
-export default function ThankYouPanel({ name }: ThankYouPanelProps) {
+export default function ThankYouPanel({
+	name,
+	portfolioHref,
+}: ThankYouPanelProps) {
 	return (
 		<div className="dp-box-design relative mx-auto max-w-4xl rounded-3xl px-8 py-16 text-center md:px-16 md:py-20">
 			<svg
@@ -36,7 +40,7 @@ export default function ThankYouPanel({ name }: ThankYouPanelProps) {
 					Back to home
 				</Link>
 				<Link
-					href="/portfolio"
+					href={portfolioHref}
 					className="font-primary-font text-dp-dark-green hover:text-dp-green text-sm font-bold tracking-wider uppercase"
 				>
 					See our work →

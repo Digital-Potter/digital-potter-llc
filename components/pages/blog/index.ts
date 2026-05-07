@@ -4,4 +4,4 @@ export { default as PostHeader } from './PostHeader';
 export { default as PostBody } from './PostBody';
 export { default as PostTags } from './PostTags';
 export { default as RelatedPosts } from './RelatedPosts';
-export { BLOG_PLACEHOLDERS } from './blogData';
+export { getBlogPlaceholders, mapCmsBlogPostToCard } from './blogData';

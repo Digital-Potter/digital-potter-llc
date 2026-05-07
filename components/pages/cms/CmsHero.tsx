@@ -40,7 +40,7 @@ export default function CmsHero({
 					className="from-dp-green/20 to-dp-dark-green/10 absolute -inset-x-12 -top-8 -bottom-8 -z-10 rounded-[3rem] bg-gradient-to-br blur-2xl"
 				/>
 				<ScreenshotFrame
-					src="/cms/digital-potter-cms-home-dashboard.png"
+					src="/cms/featured-ss-cms-thedavid-by-digital-potter.png"
 					alt="theDavid dashboard with KPIs, store visits, and activity feed"
 					placeholderLabel="Dashboard"
 				/>

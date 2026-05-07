@@ -1,10 +1,12 @@
 import type { CmsBlogPost } from '@/helpers/cms/types';
+import type { SiteUrls } from '@/helpers/cms/urls';
 
 // Placeholder blog posts. The page falls back to these only if the API
 // returns an empty list — published posts always win.
 
 export type BlogPostCard = {
 	slug: string;
+	href: string;
 	title: string;
 	excerpt: string;
 	category: string;
@@ -13,7 +15,14 @@ export type BlogPostCard = {
 	featuredImage?: { url: string; alt?: string };
 };
 
-export const BLOG_PLACEHOLDERS: BlogPostCard[] = [
+/**
+ * Seeds for placeholder cards — no `href` because the URL prefix is
+ * resolved at request time from `siteStructure`. Use
+ * `getBlogPlaceholders(urls)` to materialize ready-to-render cards.
+ */
+type BlogPostSeed = Omit<BlogPostCard, 'href'>;
+
+const BLOG_PLACEHOLDER_SEEDS: BlogPostSeed[] = [
 	{
 		slug: 'why-we-built-our-own-cms',
 		title: 'Why we built our own CMS instead of using WordPress.',
@@ -87,9 +96,13 @@ function estimateReadTime(html?: string): string | undefined {
 }
 
 /** Map a CMS blog post (list or detail shape) to the card the UI renders. */
-export function mapCmsBlogPostToCard(p: CmsBlogPost): BlogPostCard {
+export function mapCmsBlogPostToCard(
+	p: CmsBlogPost,
+	urls: SiteUrls,
+): BlogPostCard {
 	return {
 		slug: p.slug,
+		href: urls.blogPost(p.slug),
 		title: p.title,
 		excerpt: p.excerpt ?? '',
 		category: p.categories?.[0]?.name ?? 'Article',
@@ -97,4 +110,12 @@ export function mapCmsBlogPostToCard(p: CmsBlogPost): BlogPostCard {
 		publishedAt: p.publishedAt,
 		featuredImage: p.featuredImage,
 	};
+}
+
+/** Materialize placeholder cards with hrefs derived from siteStructure. */
+export function getBlogPlaceholders(urls: SiteUrls): BlogPostCard[] {
+	return BLOG_PLACEHOLDER_SEEDS.map((seed) => ({
+		...seed,
+		href: urls.blogPost(seed.slug),
+	}));
 }

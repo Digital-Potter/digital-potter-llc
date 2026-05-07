@@ -1,16 +1,29 @@
 import { Section } from './Section';
-import type { CmsSection } from '@/helpers/cms/types';
+import type { CmsSection, MediaRef } from '@/helpers/cms/types';
 
 type GalleryContent = {
-	images?: { url: string; alt?: string }[];
+	/** Admin source of truth — array of image URL strings. */
+	galleryImages?: string[];
+	/** Legacy field name — array of `{url, alt}` objects. */
+	images?: MediaRef[];
 };
+
+function normalizeImages(c: GalleryContent | undefined): MediaRef[] {
+	if (c?.galleryImages?.length) {
+		return c.galleryImages.map((url) => ({ url }));
+	}
+	if (c?.images?.length) {
+		return c.images;
+	}
+	return [];
+}
 
 export function GallerySection({ section }: { section: CmsSection }) {
 	const c = section.content as GalleryContent | undefined;
-	const images = c?.images ?? [];
+	const images = normalizeImages(c);
 	if (images.length === 0) return null;
 	return (
-		<Section layout="wide">
+		<Section settings={section.settings}>
 			{section.title && (
 				<div className="mx-auto mb-10 max-w-4xl text-center">
 					<h2 className="text-balance">{section.title}</h2>
@@ -19,7 +32,7 @@ export function GallerySection({ section }: { section: CmsSection }) {
 			<ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				{images.map((img, i) => (
 					<li
-						key={i}
+						key={`${img.url}-${i}`}
 						className="dp-box-design relative aspect-[4/3] overflow-hidden rounded-2xl"
 					>
 						{/* eslint-disable-next-line @next/next/no-img-element */}
