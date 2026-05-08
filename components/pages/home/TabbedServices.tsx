@@ -30,7 +30,7 @@ const tabs: Tab[] = [
 			'WCAG-accessible by default, on every device size',
 			'Conversion-focused layouts that move visitors through your funnel',
 		],
-		href: '/services#design',
+		href: 'digital-potter-services-and-solutions#design',
 	},
 	{
 		id: 'mobile',
@@ -46,7 +46,7 @@ const tabs: Tab[] = [
 			'Push notifications, deep links, and in-app purchases',
 			'Backend and API integration with the systems you already run',
 		],
-		href: '/mobile-development',
+		href: '/mobile-development-services',
 	},
 	{
 		id: 'web',
@@ -62,7 +62,7 @@ const tabs: Tab[] = [
 			'Performance budgets enforced — every page under 2-second load time',
 			'SEO architecture (schema, sitemaps, OG, canonical) baked in from day one',
 		],
-		href: '/services#web',
+		href: '/web-services-by-digital-potter',
 	},
 	{
 		id: 'ops',
@@ -78,7 +78,7 @@ const tabs: Tab[] = [
 			'Technical SEO audits, schema work, and rank monitoring',
 			'Daily backups, disaster recovery, and full ownership of your codebase',
 		],
-		href: '/services#ops',
+		href: '/digital-potter-services-and-solutions#maintenance',
 	},
 ];
 

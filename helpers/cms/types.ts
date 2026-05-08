@@ -250,6 +250,20 @@ export type MenuItemType =
 	| 'course'
 	| 'custom';
 
+/**
+ * A NavigationMenu inlined inside a mega-menu trigger item. Storefront
+ * resolves these from the IDs in `megaMenuColumns`; their items are already
+ * fully enhanced (refs resolved, children populated).
+ */
+export interface ResolvedMegaMenuColumn {
+	_id: string;
+	name: string;
+	slug: string;
+	title?: string;
+	subtitle?: string;
+	items: ResolvedMenuItem[];
+}
+
 export interface ResolvedMenuItem {
 	_id: string;
 	label: string;
@@ -263,6 +277,12 @@ export interface ResolvedMenuItem {
 	description?: string;
 	/** Optional bold/lead text for card-style mega-menu columns. */
 	headline?: string;
+	/** When true, the front-end renders this item as a mega-menu trigger. */
+	isMegaMenu?: boolean;
+	/** Inlined column menus when `isMegaMenu` is true. */
+	megaMenuColumns?: ResolvedMegaMenuColumn[];
+	megaMenuTitle?: string;
+	megaMenuSubtitle?: string;
 	reference?: string;
 	resolved?: { slug: string; title: string };
 	children: ResolvedMenuItem[];

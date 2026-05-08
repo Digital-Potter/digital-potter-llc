@@ -1,11 +1,62 @@
 import QuoteForm from '@/components/pages/contact/QuoteForm';
 import HowItGoes from '@/components/pages/contact/HowItGoes';
+import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import { getSiteUrls } from '@/helpers/cms/urls';
+import { JsonLd, webPageSchema } from '@/helpers/seo/structuredData';
 
 export async function ContactTemplate() {
-	const urls = await getSiteUrls();
+	const [urls, settings] = await Promise.all([
+		getSiteUrls(),
+		fetchStoreSettingsOrNull(),
+	]);
+	const tenant = settings?.tenant;
+	const contactPoints = tenant
+		? [
+				...(tenant.settings.contactEmail
+					? [
+							{
+								'@type': 'ContactPoint',
+								contactType: 'customer support',
+								email: tenant.settings.contactEmail,
+								areaServed: 'Worldwide',
+								availableLanguage: ['English'],
+							},
+						]
+					: []),
+				...(tenant.settings.contactPhone
+					? [
+							{
+								'@type': 'ContactPoint',
+								contactType: 'sales',
+								telephone: tenant.settings.contactPhone,
+								areaServed: 'Worldwide',
+								availableLanguage: ['English'],
+							},
+						]
+					: []),
+			]
+		: [];
+	const contactSchema = tenant
+		? webPageSchema({
+				type: 'ContactPage',
+				name: `Contact ${tenant.settings.storeName}`,
+				description: 'Get in touch about your web or mobile app project.',
+				url: '/contact',
+				tenant,
+				mainEntity:
+					contactPoints.length > 0
+						? {
+								'@type': 'Organization',
+								name: tenant.settings.storeName,
+								contactPoint: contactPoints,
+							}
+						: undefined,
+			})
+		: null;
+
 	return (
 		<>
+			<JsonLd data={contactSchema} />
 			<section className="dp-container py-16 md:py-24">
 				<div className="mx-auto max-w-4xl text-center">
 					<h1 className="text-balance">

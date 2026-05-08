@@ -9,7 +9,7 @@ export type PortfolioProject = {
 	id: string;
 	title: string;
 	excerpt: string;
-	category: string;
+	categories: string[];
 	slug?: string;
 	href?: string;
 	status?: 'live' | 'coming-soon';
@@ -30,7 +30,7 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		title: 'Northern Virginia electrical contractor',
 		excerpt:
 			'Marketing site with project gallery and online inspection request form. Five-star reviews integration on the home page.',
-		category: 'Custom Web App',
+		categories: ['Custom Web App'],
 		status: 'live',
 	},
 	{
@@ -38,7 +38,7 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		title: 'Specialty haircare retailer',
 		excerpt:
 			'Multi-product Stripe ecommerce with subscription bundles, blog-driven content marketing, and abandoned-cart recovery.',
-		category: 'Ecommerce',
+		categories: ['Ecommerce'],
 		status: 'live',
 	},
 	{
@@ -46,7 +46,7 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		title: 'Boutique salon and product line',
 		excerpt:
 			'Two-brand site for a salon and an in-house product line. Online booking, product catalog, and storytelling sections.',
-		category: 'Booking & Events',
+		categories: ['Booking & Events'],
 		status: 'live',
 	},
 	{
@@ -54,7 +54,7 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		title: 'Custom glass artisan',
 		excerpt:
 			'Portfolio-first site for a one-person studio. Commission-inquiry workflow and large-format gallery.',
-		category: 'Custom Web App',
+		categories: ['Custom Web App'],
 		status: 'live',
 	},
 	{
@@ -62,7 +62,7 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		title: 'Neighborhood restaurant',
 		excerpt:
 			'Seasonal menu CMS, online reservations, gift-card storefront. Built around the staff who actually use it.',
-		category: 'Restaurant',
+		categories: ['Restaurant'],
 		status: 'coming-soon',
 	},
 	{
@@ -70,7 +70,7 @@ export const PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
 		title: 'Online learning community',
 		excerpt:
 			'Gated content library, recurring Stripe billing, member portal with progress tracking.',
-		category: 'Subscription',
+		categories: ['Subscription'],
 		status: 'coming-soon',
 	},
 ];
@@ -80,11 +80,13 @@ export function mapCmsProjectToCard(
 	p: CmsProject,
 	urls: SiteUrls,
 ): PortfolioProject {
+	const categories = p.categories?.map((c) => c.name).filter(Boolean) ?? [];
+
 	return {
 		id: p._id,
 		title: p.title,
 		excerpt: p.excerpt ?? '',
-		category: p.categories?.[0]?.name ?? 'Custom Web App',
+		categories: categories.length > 0 ? categories : ['Custom Web App'],
 		slug: p.slug,
 		href: urls.project(p.slug),
 		status: 'live',
@@ -98,7 +100,7 @@ export function mapCmsProjectToCard(
  * CMS introduces.
  */
 export function deriveCategories(projects: PortfolioProject[]): string[] {
-	const present = new Set(projects.map((p) => p.category));
+	const present = new Set(projects.flatMap((p) => p.categories));
 	const ordered: string[] = [];
 	for (const c of PLACEHOLDER_CATEGORIES) {
 		if (present.has(c)) {

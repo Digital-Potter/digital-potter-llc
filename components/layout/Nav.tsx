@@ -2,11 +2,8 @@ import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import DigitalPotterLogo from '@/components/DigitalPotterLogo';
 import Indicator from './Indicator';
-import MobileNav from './MobileNav';
-import ServicesMegaMenu, {
-	type MegaColumnItem,
-	type MegaHeader,
-} from './ServicesMegaMenu';
+import MobileNav, { type MobileMegaMenu } from './MobileNav';
+import MegaMenu, { type MegaMenuColumn, type MegaMenuLink } from './MegaMenu';
 import { ButtonLink } from '@/components/ui/Button';
 import {
 	fetchNavigationOrEmpty,
@@ -14,7 +11,7 @@ import {
 } from '@/helpers/cms/settings';
 import { resolveMenuItemHref } from '@/helpers/cms/links';
 import type {
-	NavigationMenu,
+	ResolvedMegaMenuColumn,
 	ResolvedMenuItem,
 	StoreSettingsRecord,
 } from '@/helpers/cms/types';
@@ -24,6 +21,7 @@ type RenderedNavItem = {
 	label: string;
 	href: string;
 	isHome: boolean;
+	megaMenu?: MobileMegaMenu;
 };
 
 function toRendered(
@@ -32,36 +30,41 @@ function toRendered(
 ): RenderedNavItem {
 	const href = resolveMenuItemHref(item, siteStructure);
 	const isHome = href === '/';
-	return { id: item._id, label: item.label, href, isHome };
-}
-
-/**
- * Convert a CMS NavigationMenu's items into the shape the ServicesMegaMenu
- * expects. Each item carries its CMS-authored description/headline/icon if
- * present; the mega menu falls back to hardcoded copy keyed by label/slug
- * when those fields are empty.
- */
-function buildMegaColumn(
-	menu: NavigationMenu | undefined,
-	siteStructure: StoreSettingsRecord['siteStructure'] | undefined,
-): MegaColumnItem[] {
-	if (!menu) return [];
-	return menu.items.map((it) => ({
-		id: it._id,
-		label: it.label,
-		href: resolveMenuItemHref(it, siteStructure),
-		slug: it.resolved?.slug ?? '',
-		description: it.description,
-		headline: it.headline,
-		icon: it.icon,
-	}));
-}
-
-function buildMegaHeader(menu: NavigationMenu | undefined): MegaHeader {
-	return {
-		title: menu?.title,
-		subtitle: menu?.subtitle,
+	const result: RenderedNavItem = {
+		id: item._id,
+		label: item.label,
+		href,
+		isHome,
 	};
+	if (item.isMegaMenu && item.megaMenuColumns?.length) {
+		result.megaMenu = {
+			header: { title: item.megaMenuTitle, subtitle: item.megaMenuSubtitle },
+			columns: buildMegaColumns(item.megaMenuColumns, siteStructure),
+		};
+	}
+	return result;
+}
+
+function buildMegaColumns(
+	cols: ResolvedMegaMenuColumn[] | undefined,
+	siteStructure: StoreSettingsRecord['siteStructure'] | undefined,
+): MegaMenuColumn[] {
+	if (!cols) return [];
+	return cols.map((col) => ({
+		id: col._id,
+		title: col.title,
+		subtitle: col.subtitle,
+		items: col.items.map(
+			(it): MegaMenuLink => ({
+				id: it._id,
+				label: it.label,
+				href: resolveMenuItemHref(it, siteStructure),
+				description: it.description,
+				headline: it.headline,
+				icon: it.icon,
+			}),
+		),
+	}));
 }
 
 export async function Nav() {
@@ -78,12 +81,6 @@ export async function Nav() {
 	const allItems = headerMenu?.items ?? [];
 	const siteStructure = settingsData?.settings?.siteStructure;
 
-	const col1Menu = menusBySlug.get('services-submenu-col-1');
-	const col2Menu = menusBySlug.get('services-submenu-col-2');
-	const megaCol1 = buildMegaColumn(col1Menu, siteStructure);
-	const megaCol2 = buildMegaColumn(col2Menu, siteStructure);
-	const megaHeader = buildMegaHeader(col1Menu);
-
 	const rendered = allItems.map((it) => toRendered(it, siteStructure));
 	const navItems = rendered.slice(0, -1);
 	const ctaItem = rendered.at(-1);
@@ -92,7 +89,11 @@ export async function Nav() {
 
 	return (
 		<header className="dp-container sticky top-0 z-50 flex h-[6.25rem] flex-row items-center justify-between">
-			<Link href="/" aria-label="Digital Potter — home">
+			<Link
+				href="/"
+				aria-label="Digital Potter — home"
+				className="bg-dp-yellowish/70 rounded-2xl p-2 backdrop-blur-xl"
+			>
 				<DigitalPotterLogo
 					width={262}
 					height={34}
@@ -101,38 +102,50 @@ export async function Nav() {
 			</Link>
 			<nav className="dp-box-design hidden p-1 lg:block">
 				<ul className="flex flex-row gap-1">
-					{navItems.map((item) => {
-						const isServices = item.label.toLowerCase() === 'services';
+					{allItems.slice(0, -1).map((item, idx) => {
+						const rendered = navItems[idx];
+						if (!rendered) return null;
+						if (item.isMegaMenu) {
+							return (
+								<li
+									key={rendered.id}
+									className="font-primary-font relative font-semibold uppercase"
+								>
+									<MegaMenu
+										triggerHref={rendered.href}
+										triggerLabel={rendered.label}
+										header={{
+											title: item.megaMenuTitle,
+											subtitle: item.megaMenuSubtitle,
+										}}
+										columns={buildMegaColumns(
+											item.megaMenuColumns,
+											siteStructure,
+										)}
+									/>
+								</li>
+							);
+						}
 						return (
 							<li
-								key={item.id}
+								key={rendered.id}
 								className="font-primary-font relative font-semibold uppercase"
 							>
-								{isServices ? (
-									<ServicesMegaMenu
-										triggerHref={item.href}
-										triggerLabel={item.label}
-										col1={megaCol1}
-										col2={megaCol2}
-										header={megaHeader}
-									/>
-								) : (
-									<Link
-										href={item.href}
-										className={twMerge(
-											'bg-dp-dark-green/0 hover:bg-dp-dark-green block rounded-2xl px-5 py-2.5 transition-all hover:text-white',
-										)}
-									>
-										{item.label}
-										<Indicator path={item.href} isHome={item.isHome} />
-									</Link>
-								)}
+								<Link
+									href={rendered.href}
+									className={twMerge(
+										'bg-dp-dark-green/0 hover:bg-dp-dark-green block rounded-2xl px-5 py-2.5 transition-all hover:text-white',
+									)}
+								>
+									{rendered.label}
+									<Indicator path={rendered.href} isHome={rendered.isHome} />
+								</Link>
 							</li>
 						);
 					})}
 				</ul>
 			</nav>
-			<div className="flex flex-row items-center gap-2 md:gap-4 lg:gap-8">
+			<div className="bg-dp-yellowish/95 flex flex-row items-center gap-2 rounded-2xl p-2 md:gap-4 lg:gap-8">
 				<ButtonLink
 					href={ctaHref}
 					variant="solid"

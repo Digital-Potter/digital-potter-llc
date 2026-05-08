@@ -130,13 +130,13 @@ export default function StepBusiness() {
 
 			{/* Honeypot — hidden from humans, kept off the tab order. Bots tend to fill it. */}
 			<div aria-hidden className="hidden">
-				<label htmlFor="website">Your website (leave blank)</label>
+				<label htmlFor="honeypot_url">Your website (leave blank)</label>
 				<input
-					id="website"
+					id="honeypot_url"
 					type="text"
 					tabIndex={-1}
 					autoComplete="off"
-					{...register('website')}
+					{...register('honeypot_url')}
 				/>
 			</div>
 		</div>

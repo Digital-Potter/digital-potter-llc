@@ -1,5 +1,6 @@
 import { cache } from 'react';
 import { fetchStoreSettingsOrNull } from './settings';
+import type { StoreSettingsRecord } from './types';
 
 /**
  * URL prefix used by every front-end route that consumes a slug-based
@@ -26,13 +27,39 @@ export type SiteUrls = {
 	course: (slug: string) => string;
 };
 
-const DEFAULTS = {
+export type SlugPrefixes = {
+	blog: string;
+	portfolio: string;
+	products: string;
+	productCategories: string;
+	courses: string;
+};
+
+const DEFAULTS: SlugPrefixes = {
 	blog: 'blog',
 	portfolio: 'portfolio',
 	products: 'products',
 	productCategories: 'collections',
 	courses: 'courses',
-} as const;
+};
+
+/**
+ * Synchronous resolver for the URL prefixes used by every slug-based
+ * resource. Reads `StoreSettings.siteStructure` overrides and falls back to
+ * the storefront-API defaults. Both `getSiteUrls()` and the menu-link
+ * resolver in `links.ts` derive their prefixes here so they can never drift.
+ */
+export function deriveSlugPrefixes(
+	ss?: StoreSettingsRecord['siteStructure'],
+): SlugPrefixes {
+	return {
+		blog: ss?.blogSlug || DEFAULTS.blog,
+		portfolio: ss?.projectsSlug || DEFAULTS.portfolio,
+		products: ss?.productsSlug || DEFAULTS.products,
+		productCategories: ss?.productCategoriesSlug || DEFAULTS.productCategories,
+		courses: ss?.coursesSlug || DEFAULTS.courses,
+	};
+}
 
 /**
  * Resolve all URL prefixes from the storefront `siteStructure` overrides.
@@ -41,32 +68,25 @@ const DEFAULTS = {
  */
 export const getSiteUrls = cache(async (): Promise<SiteUrls> => {
 	const settings = await fetchStoreSettingsOrNull();
-	const ss = settings?.settings?.siteStructure;
-
-	const blog = ss?.blogSlug ?? DEFAULTS.blog;
-	const portfolio = ss?.projectsSlug ?? DEFAULTS.portfolio;
-	const products = ss?.productsSlug ?? DEFAULTS.products;
-	const productCategories =
-		ss?.productCategoriesSlug ?? DEFAULTS.productCategories;
-	const courses = ss?.coursesSlug ?? DEFAULTS.courses;
+	const p = deriveSlugPrefixes(settings?.settings?.siteStructure);
 
 	return {
-		blog,
-		portfolio,
-		products,
-		productCategories,
-		courses,
-		blogIndex: `/${blog}`,
-		blogPost: (slug) => `/${blog}/${slug}`,
-		blogCategory: (slug) => `/${blog}/category/${slug}`,
-		blogTag: (tag) => `/${blog}?tag=${encodeURIComponent(tag)}`,
-		portfolioIndex: `/${portfolio}`,
-		project: (slug) => `/${portfolio}/${slug}`,
-		productsIndex: `/${products}`,
-		product: (slug) => `/${products}/${slug}`,
-		productCategoryIndex: `/${productCategories}`,
-		productCategory: (slug) => `/${productCategories}/${slug}`,
-		coursesIndex: `/${courses}`,
-		course: (slug) => `/${courses}/${slug}`,
+		blog: p.blog,
+		portfolio: p.portfolio,
+		products: p.products,
+		productCategories: p.productCategories,
+		courses: p.courses,
+		blogIndex: `/${p.blog}`,
+		blogPost: (slug) => `/${p.blog}/${slug}`,
+		blogCategory: (slug) => `/${p.blog}/category/${slug}`,
+		blogTag: (tag) => `/${p.blog}?tag=${encodeURIComponent(tag)}`,
+		portfolioIndex: `/${p.portfolio}`,
+		project: (slug) => `/${p.portfolio}/${slug}`,
+		productsIndex: `/${p.products}`,
+		product: (slug) => `/${p.products}/${slug}`,
+		productCategoryIndex: `/${p.productCategories}`,
+		productCategory: (slug) => `/${p.productCategories}/${slug}`,
+		coursesIndex: `/${p.courses}`,
+		course: (slug) => `/${p.courses}/${slug}`,
 	};
 });

@@ -63,10 +63,10 @@ export default function WhyWeBuiltTheDavid() {
 				<p className="text-dp-body/70 mt-10 text-center text-sm">
 					Curious how it works under the hood?{' '}
 					<Link
-						href="/services#ops"
+						href="/the-cms-we-built-for-our-own-clients"
 						className="text-dp-dark-green hover:text-dp-green font-bold"
 					>
-						See the SEO, CMS &amp; Maintenance service →
+						Learn more details about our CMS here →
 					</Link>
 				</p>
 			</div>

@@ -28,7 +28,7 @@ export default function CmsHero({
 					<ButtonLink href={primaryCtaHref} variant="solid">
 						{primaryCtaLabel}
 					</ButtonLink>
-					<ButtonLink href="/pricing" variant="outlined">
+					<ButtonLink href="/digital-potter-pricing" variant="outlined">
 						See pricing
 					</ButtonLink>
 				</div>

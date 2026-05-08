@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { CmsBlogPost } from '@/helpers/cms/types';
 import type { SiteUrls } from '@/helpers/cms/urls';
 
@@ -31,24 +32,13 @@ export default function PostHeader({ post, urls }: PostHeaderProps) {
 
 	return (
 		<section className="dp-container py-12 md:py-16">
-			<Link
-				href={urls.blogIndex}
-				className="text-dp-dark-green hover:text-dp-green font-primary-font inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase"
-			>
-				<svg
-					aria-hidden
-					className="h-3 w-3"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth={2.5}
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<path d="m15 18-6-6 6-6" />
-				</svg>
-				Back to all posts
-			</Link>
+			<Breadcrumbs
+				items={[
+					{ label: 'Home', href: '/' },
+					{ label: 'Blog', href: urls.blogIndex },
+					{ label: post.title, href: urls.blogPost(post.slug) },
+				]}
+			/>
 
 			<div className="mx-auto mt-10 max-w-4xl text-center">
 				{primaryCategory && (

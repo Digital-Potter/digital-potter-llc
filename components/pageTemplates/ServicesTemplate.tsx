@@ -9,12 +9,30 @@ import {
 	ServerIcon,
 } from '@/components/pages/services';
 import { FinalCta } from '@/components/pages/home';
+import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
+import {
+	JsonLd,
+	SERVICE_DESCRIPTORS,
+	serviceSchema,
+} from '@/helpers/seo/structuredData';
 
 export async function ServicesTemplate() {
-	const cta = await resolveCtaHref();
+	const [cta, settings] = await Promise.all([
+		resolveCtaHref(),
+		fetchStoreSettingsOrNull(),
+	]);
+	const tenant = settings?.tenant;
+	const ldData = tenant
+		? serviceSchema({
+				descriptor: SERVICE_DESCRIPTORS.general,
+				url: '/services',
+				tenant,
+			})
+		: null;
 
 	return (
 		<>
+			<JsonLd data={ldData} />
 			<ServicesHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
 
 			<ServiceSection
@@ -33,7 +51,7 @@ export async function ServicesTemplate() {
 					'Analytics and conversion tracking on every meaningful event',
 				]}
 				icon={CodeIcon}
-				ctaHref="/web-services"
+				ctaHref="/web-services-by-digital-potter"
 				ctaLabel="Explore web development"
 			/>
 
@@ -53,7 +71,7 @@ export async function ServicesTemplate() {
 				]}
 				icon={MobileIcon}
 				reverse
-				ctaHref="/mobile-development"
+				ctaHref="/mobile-development-services"
 				ctaLabel="Explore mobile development"
 			/>
 
@@ -72,7 +90,7 @@ export async function ServicesTemplate() {
 					'Hourly fallback for one-off changes when a retainer doesn’t fit',
 				]}
 				icon={WrenchIcon}
-				ctaHref="/maintenance"
+				ctaHref="/web-and-mobile-apps-maintenance-services"
 				ctaLabel="See retainer plans"
 			/>
 
@@ -91,7 +109,7 @@ export async function ServicesTemplate() {
 				]}
 				icon={ServerIcon}
 				reverse
-				ctaHref="/self-hosted"
+				ctaHref="/self-hosted-edition"
 				ctaLabel="Explore self-hosting"
 			/>
 

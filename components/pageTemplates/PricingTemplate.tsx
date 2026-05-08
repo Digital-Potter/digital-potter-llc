@@ -9,13 +9,40 @@ import {
 	PricingFaq,
 	DedicatedTierCallout,
 } from '@/components/pages/pricing';
+import { PRICING_FAQS } from '@/components/pages/pricing/pricingFaqs';
 import { FinalCta } from '@/components/pages/home';
+import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
+import {
+	JsonLd,
+	faqPageSchema,
+	webPageSchema,
+} from '@/helpers/seo/structuredData';
 
 export async function PricingTemplate() {
-	const cta = await resolveCtaHref();
+	const [cta, settings] = await Promise.all([
+		resolveCtaHref(),
+		fetchStoreSettingsOrNull(),
+	]);
+	const tenant = settings?.tenant;
 
 	return (
 		<>
+			{tenant ? (
+				<JsonLd
+					data={webPageSchema({
+						name: `${tenant.settings.storeName} Pricing`,
+						description:
+							'Transparent pricing for custom websites and mobile apps — one-time build fee plus monthly hosting and CMS.',
+						url: '/pricing',
+						tenant,
+					})}
+				/>
+			) : null}
+			<JsonLd
+				data={faqPageSchema(
+					PRICING_FAQS.map((f) => ({ question: f.question, answer: f.answer })),
+				)}
+			/>
 			<PricingHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
 			<HowPricingWorks />
 			<BuildScope />

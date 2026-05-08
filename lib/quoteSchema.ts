@@ -203,8 +203,10 @@ export const quoteSchema = z
 			message: 'Pick the best way to reach you.',
 		}),
 
-		// Honeypot — must be empty.
-		website: z.string().max(0).optional(),
+		// Honeypot — must be empty. Field name matches the API spec
+		// (`POST /api/storefront/messages`) so the marketing-site handler
+		// can forward the payload without renaming.
+		honeypot_url: z.string().max(0).optional(),
 	})
 	.superRefine((data, ctx) => {
 		const needsWeb = needsWebsite(data.needType);

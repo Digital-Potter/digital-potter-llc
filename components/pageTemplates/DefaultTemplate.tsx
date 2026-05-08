@@ -1,6 +1,8 @@
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import { FinalCta } from '@/components/pages/home';
+import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import type { CmsPage } from '@/helpers/cms/types';
+import { JsonLd, webPageSchema } from '@/helpers/seo/structuredData';
 
 /**
  * Fallback template used when a CMS page's `template` field is missing or
@@ -9,12 +11,29 @@ import type { CmsPage } from '@/helpers/cms/types';
  * a richer template is wired up later.
  */
 export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
-	const cta = await resolveCtaHref();
+	const [cta, settings] = await Promise.all([
+		resolveCtaHref(),
+		fetchStoreSettingsOrNull(),
+	]);
 	const title = page?.title ?? 'Digital Potter';
 	const subtitle = page?.subtitle ?? page?.excerpt;
 
+	const tenant = settings?.tenant;
+	const ldData =
+		page?.seo?.structuredData ||
+		(page && tenant
+			? webPageSchema({
+					name: page.title,
+					description: page.excerpt ?? page.subtitle,
+					url: `/${page.slug}`,
+					image: page.featuredImage?.url,
+					tenant,
+				})
+			: null);
+
 	return (
 		<>
+			<JsonLd data={ldData} />
 			<section className="dp-container py-20 md:py-28">
 				<div className="mx-auto max-w-4xl text-center">
 					<h1 className="text-balance">{title}</h1>

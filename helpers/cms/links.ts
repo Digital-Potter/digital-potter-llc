@@ -1,14 +1,21 @@
 import type { ResolvedMenuItem, StoreSettingsRecord } from './types';
+import { deriveSlugPrefixes } from './urls';
 
 type SiteStructure = StoreSettingsRecord['siteStructure'];
 
 /**
- * Maps a CMS-resolved menu item to the URL path the frontend renders.
+ * Maps a CMS-resolved menu item to the URL path the front-end renders.
  *
- * For "well-known" pages (homepage, blog index, products index, etc.) the
- * Site Structure section in the CMS tells us which Page record fills that
- * role; when a menu item points at that Page we map it to the canonical
- * frontend route (`/`, `/blog`, `/products`, …) instead of `/{slug}`.
+ * URL prefixes for blog / portfolio / products / collections / courses come
+ * from `siteStructure` overrides via `deriveSlugPrefixes`, so a tenant that
+ * sets `blogSlug = "digital-potter-blog"` gets menu links to
+ * `/digital-potter-blog/<post-slug>` — matching the dynamic catch-all route
+ * (`app/[...slug]/page.tsx`).
+ *
+ * `page` items just emit `/{slug}` (the page's own slug). The only special
+ * case is the homepage role: when the page's slug matches
+ * `siteStructure.homepageSlug`, we return `/` so the menu doesn't link to
+ * `/{homepage-slug}` (which would redirect anyway).
  */
 export function resolveMenuItemHref(
 	item: ResolvedMenuItem,
@@ -18,54 +25,27 @@ export function resolveMenuItemHref(
 	if (!item.resolved) return '#';
 
 	const slug = item.resolved.slug;
+	const p = deriveSlugPrefixes(siteStructure);
 
 	if (item.type === 'page') {
-		const canonical = canonicalRouteForPageSlug(slug, siteStructure);
-		if (canonical) return canonical;
+		if (siteStructure?.homepageSlug && slug === siteStructure.homepageSlug) {
+			return '/';
+		}
 		return `/${slug}`;
 	}
 
 	switch (item.type) {
 		case 'blog_post':
-			return `/blog/${slug}`;
+			return `/${p.blog}/${slug}`;
 		case 'blog_category':
-			return `/blog/category/${slug}`;
+			return `/${p.blog}/category/${slug}`;
 		case 'product':
-			return `/products/${slug}`;
+			return `/${p.products}/${slug}`;
 		case 'product_category':
-			return `/collections/${slug}`;
+			return `/${p.productCategories}/${slug}`;
 		case 'course':
-			return `/courses/${slug}`;
+			return `/${p.courses}/${slug}`;
 		default:
 			return '#';
 	}
-}
-
-/**
- * App routes stay at fixed segments (`/blog`, `/portfolio`, `/products`, ...).
- * The `*Slug` overrides in StoreSettings.siteStructure tell us which CMS Page
- * acts as the landing for each section, so a menu item pointing at that Page
- * resolves to the canonical front-end route. Per-tenant route renaming (e.g.
- * `/case-studies/...`) would need dynamic catch-alls — out of scope.
- */
-function canonicalRouteForPageSlug(
-	slug: string,
-	siteStructure: SiteStructure | undefined,
-): string | null {
-	if (!siteStructure) return null;
-	if (siteStructure.homepageSlug && slug === siteStructure.homepageSlug)
-		return '/';
-	if (siteStructure.blogSlug && slug === siteStructure.blogSlug) return '/blog';
-	if (siteStructure.productsSlug && slug === siteStructure.productsSlug)
-		return '/products';
-	if (
-		siteStructure.productCategoriesSlug &&
-		slug === siteStructure.productCategoriesSlug
-	)
-		return '/collections';
-	if (siteStructure.coursesSlug && slug === siteStructure.coursesSlug)
-		return '/courses';
-	if (siteStructure.projectsSlug && slug === siteStructure.projectsSlug)
-		return '/portfolio';
-	return null;
 }

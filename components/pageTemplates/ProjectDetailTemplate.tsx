@@ -6,8 +6,10 @@ import {
 	ProjectGallery,
 } from '@/components/pages/portfolio';
 import { FinalCta } from '@/components/pages/home';
+import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import { getSiteUrls } from '@/helpers/cms/urls';
 import type { CmsProject } from '@/helpers/cms/types';
+import { JsonLd, creativeWorkSchema } from '@/helpers/seo/structuredData';
 
 type ProjectDetailTemplateProps = {
 	project: CmsProject;
@@ -16,17 +18,21 @@ type ProjectDetailTemplateProps = {
 export async function ProjectDetailTemplate({
 	project,
 }: ProjectDetailTemplateProps) {
-	const [cta, urls] = await Promise.all([resolveCtaHref(), getSiteUrls()]);
+	const [cta, urls, settings] = await Promise.all([
+		resolveCtaHref(),
+		getSiteUrls(),
+		fetchStoreSettingsOrNull(),
+	]);
+
+	const tenant = settings?.tenant;
+	const ldData =
+		project.seo?.structuredData ||
+		(tenant ? creativeWorkSchema(project, urls, tenant) : null);
 
 	return (
 		<>
-			{project.seo?.structuredData ? (
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: project.seo.structuredData }}
-				/>
-			) : null}
-			<ProjectHeader project={project} backHref={urls.portfolioIndex} />
+			<JsonLd data={ldData} />
+			<ProjectHeader project={project} urls={urls} />
 			{project.content ? <ProjectBody html={project.content} /> : null}
 			{project.gallery && project.gallery.length > 0 ? (
 				<ProjectGallery images={project.gallery} title="Gallery" />

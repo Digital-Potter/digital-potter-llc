@@ -24,7 +24,7 @@ export default function PricingTeaser() {
 					</p>
 				</div>
 				<Link
-					href="/pricing"
+					href="/digital-potter-pricing"
 					className="text-dp-dark-green hover:text-dp-green font-primary-font shrink-0 text-sm font-bold tracking-wider uppercase"
 				>
 					See all plans →

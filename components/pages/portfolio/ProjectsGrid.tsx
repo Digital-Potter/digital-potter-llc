@@ -20,7 +20,9 @@ export default function ProjectsGrid({
 	const [active, setActive] = useState<string>('all');
 
 	const visible =
-		active === 'all' ? projects : projects.filter((p) => p.category === active);
+		active === 'all'
+			? projects
+			: projects.filter((p) => p.categories.includes(active));
 
 	return (
 		<section className="dp-container py-12 md:py-16">
@@ -124,10 +126,15 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
 					</span>
 				) : null}
 			</div>
-			<div className="mt-5 flex items-center gap-3 text-xs">
-				<span className="bg-dp-dark-green/10 text-dp-dark-green rounded-full px-3 py-1 font-bold tracking-wider uppercase">
-					{project.category}
-				</span>
+			<div className="mt-5 flex flex-wrap items-center gap-3 text-xs">
+				{project.categories.map((category) => (
+					<span
+						key={`${project.id}-${category}`}
+						className="bg-dp-dark-green/10 text-dp-dark-green rounded-full px-3 py-1 font-bold tracking-wider uppercase"
+					>
+						{category}
+					</span>
+				))}
 				{project.status === 'live' ? (
 					<span className="text-dp-body/60">Live</span>
 				) : null}

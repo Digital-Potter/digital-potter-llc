@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { CmsProject, ProjectDateRange } from '@/helpers/cms/types';
+import type { SiteUrls } from '@/helpers/cms/urls';
 
 type ProjectHeaderProps = {
 	project: CmsProject;
-	/** Where the "Back to portfolio" link points. Caller resolves it from siteStructure. */
-	backHref: string;
+	urls: SiteUrls;
 };
 
 function formatMonthYear(iso?: string) {
@@ -35,33 +35,19 @@ function formatDateRange(range?: ProjectDateRange): string | null {
 	return null;
 }
 
-export default function ProjectHeader({
-	project,
-	backHref,
-}: ProjectHeaderProps) {
+export default function ProjectHeader({ project, urls }: ProjectHeaderProps) {
 	const dateLabel = formatDateRange(project.dateRange);
 	const description = project.subtitle ?? project.excerpt;
 
 	return (
 		<section className="dp-container py-12 md:py-16">
-			<Link
-				href={backHref}
-				className="text-dp-dark-green hover:text-dp-green font-primary-font inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase"
-			>
-				<svg
-					aria-hidden
-					className="h-3 w-3"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth={2.5}
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<path d="m15 18-6-6 6-6" />
-				</svg>
-				Back to portfolio
-			</Link>
+			<Breadcrumbs
+				items={[
+					{ label: 'Home', href: '/' },
+					{ label: 'Portfolio', href: urls.portfolioIndex },
+					{ label: project.title, href: urls.project(project.slug) },
+				]}
+			/>
 
 			<div className="mx-auto mt-10 max-w-4xl text-center">
 				{project.categories && project.categories.length > 0 && (

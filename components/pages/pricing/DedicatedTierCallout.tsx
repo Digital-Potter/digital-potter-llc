@@ -35,7 +35,7 @@ export default function DedicatedTierCallout({
 							Talk about a custom tier
 						</Link>
 						<Link
-							href="/self-hosted"
+							href="/self-hosted-edition"
 							className="font-primary-font hover:text-dp-green text-dp-yellowish/80 text-center text-sm font-bold tracking-wider uppercase"
 						>
 							Self-hosting details →

@@ -36,7 +36,7 @@ export default function QuoteForm({ portfolioHref }: QuoteFormProps) {
 		defaultValues: {
 			websiteFeatures: [],
 			mobileFeatures: [],
-			website: '',
+			honeypot_url: '',
 		},
 	});
 
