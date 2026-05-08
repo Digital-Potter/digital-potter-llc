@@ -1,10 +1,12 @@
+import dynamic from 'next/dynamic';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import { PageSectionRenderer } from '@/components/sections/PageSectionRenderer';
-import {
-	ProjectHeader,
-	ProjectBody,
-	ProjectGallery,
-} from '@/components/pages/portfolio';
+import { ProjectHeader, ProjectBody } from '@/components/pages/portfolio';
+
+// Interactive paginated gallery — only loads when there are gallery images.
+const ProjectGallery = dynamic(
+	() => import('@/components/pages/portfolio/ProjectGallery'),
+);
 import { FinalCta } from '@/components/pages/home';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import { getSiteUrls } from '@/helpers/cms/urls';

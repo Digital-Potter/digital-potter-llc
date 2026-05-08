@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { type BlogPostCard } from './blogData';
 
@@ -45,11 +46,13 @@ function FeaturedPost({ post }: { post: BlogPostCard }) {
 		>
 			<div className="dp-box-design relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
 				{post.featuredImage?.url ? (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img
+					<Image
 						src={post.featuredImage.url}
 						alt={post.featuredImage.alt ?? post.title}
-						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+						fill
+						sizes="(min-width: 768px) 50vw, 100vw"
+						priority
+						className="object-cover transition-transform duration-500 group-hover:scale-105"
 					/>
 				) : (
 					<>
@@ -97,11 +100,12 @@ function PostCard({ post }: { post: BlogPostCard }) {
 		<Link href={post.href} className="group block h-full">
 			<div className="dp-box-design relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
 				{post.featuredImage?.url ? (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img
+					<Image
 						src={post.featuredImage.url}
 						alt={post.featuredImage.alt ?? post.title}
-						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+						fill
+						sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+						className="object-cover transition-transform duration-500 group-hover:scale-105"
 					/>
 				) : (
 					<>

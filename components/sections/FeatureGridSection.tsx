@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Section } from './Section';
 import SectionButtons from './SectionButtons';
 import type {
@@ -68,11 +69,12 @@ export function FeatureGridSection({ section }: { section: CmsSection }) {
 						>
 							{img?.url ? (
 								<div className="relative mb-4 aspect-square w-12 overflow-hidden rounded-xl">
-									{/* eslint-disable-next-line @next/next/no-img-element */}
-									<img
+									<Image
 										src={img.url}
 										alt={img.alt ?? col.title ?? ''}
-										className="h-full w-full object-cover"
+										fill
+										sizes="48px"
+										className="object-cover"
 									/>
 								</div>
 							) : (

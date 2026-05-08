@@ -1,7 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
 import { Golos_Text, Figtree } from 'next/font/google';
 import './globals.css';
+import { colors } from '@/lib/tokens';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import TrackPageVisit from '@/components/analytics/TrackPageVisit';
@@ -12,6 +13,12 @@ import {
 	siteBaseUrl,
 	websiteSchema,
 } from '@/helpers/seo/structuredData';
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	themeColor: colors.darkGreen,
+};
 
 const golosText = Golos_Text({
 	subsets: ['latin'],
@@ -73,8 +80,19 @@ export async function generateMetadata(): Promise<Metadata> {
 			images: seo?.defaultOgImage ? [seo.defaultOgImage] : undefined,
 		},
 		icons: {
-			icon: seo?.faviconUrl ?? '/favicon.ico',
-			apple: seo?.appleTouchIconUrl,
+			icon: [
+				{ url: '/icons/favicon.svg', type: 'image/svg+xml' },
+				{ url: '/icons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+			],
+			shortcut: seo?.faviconUrl ?? '/icons/favicon.ico',
+			apple: {
+				url: seo?.appleTouchIconUrl ?? '/icons/apple-touch-icon.png',
+				sizes: '180x180',
+			},
+		},
+		manifest: '/icons/site.webmanifest',
+		appleWebApp: {
+			title: 'Digital Potter',
 		},
 		robots:
 			seo?.robots?.allowIndexing === false
@@ -94,23 +112,6 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en" className={`${golosText.variable} ${figtree.variable}`}>
-			<head>
-				<link
-					rel="icon"
-					type="image/png"
-					href="/icons/favicon-96x96.png"
-					sizes="96x96"
-				/>
-				<link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-				<link rel="shortcut icon" href="/icons/favicon.ico" />
-				<link
-					rel="apple-touch-icon"
-					sizes="180x180"
-					href="/icons/apple-touch-icon.png"
-				/>
-				<meta name="apple-mobile-web-app-title" content="Digital Potter" />
-				<link rel="manifest" href="/icons/site.webmanifest" />
-			</head>
 			<body className="min-h-screen antialiased">
 				{tenant ? (
 					<>

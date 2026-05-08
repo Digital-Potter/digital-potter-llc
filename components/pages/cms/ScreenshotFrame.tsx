@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
 type ScreenshotFrameProps = {
@@ -7,6 +8,11 @@ type ScreenshotFrameProps = {
 	placeholderLabel?: string;
 	tilt?: 'left' | 'right' | 'none';
 	className?: string;
+	/** Intrinsic source dimensions; used by next/image to compute srcset and aspect. */
+	width?: number;
+	height?: number;
+	/** When true, sets `priority` on the underlying Image (above-the-fold hero use). */
+	priority?: boolean;
 };
 
 /**
@@ -24,6 +30,9 @@ export default function ScreenshotFrame({
 	placeholderLabel,
 	tilt = 'none',
 	className,
+	width = 1600,
+	height = 1200,
+	priority = false,
 }: ScreenshotFrameProps) {
 	const tiltClass =
 		tilt === 'left' ? '-rotate-1' : tilt === 'right' ? 'rotate-1' : '';
@@ -43,8 +52,15 @@ export default function ScreenshotFrame({
 					<span className="bg-dp-dark/15 h-2.5 w-2.5 rounded-full" />
 				</div>
 				{src ? (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img src={src} alt={alt} className="block w-full" />
+					<Image
+						src={src}
+						alt={alt}
+						width={width}
+						height={height}
+						sizes="(min-width: 1024px) 64rem, 100vw"
+						priority={priority}
+						className="block h-auto w-full"
+					/>
 				) : (
 					<div className="from-dp-green/15 via-dp-yellowish to-dp-dark-green/10 relative aspect-[4/3] w-full bg-gradient-to-br">
 						<div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-8 text-center">

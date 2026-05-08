@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Section } from './Section';
 import { ButtonLink } from '@/components/ui/Button';
 import type { CarouselSlide, CmsSection, MediaRef } from '@/helpers/cms/types';
@@ -69,11 +70,13 @@ export function CarouselSection({ section }: { section: CmsSection }) {
 								}`}
 							>
 								{img?.url && (
-									// eslint-disable-next-line @next/next/no-img-element
-									<img
+									<Image
 										src={img.url}
 										alt={img.alt ?? slide.title ?? ''}
-										className="absolute inset-0 h-full w-full object-cover"
+										fill
+										sizes="(min-width: 1024px) 64rem, 100vw"
+										priority={i === 0}
+										className="object-cover"
 									/>
 								)}
 								<div

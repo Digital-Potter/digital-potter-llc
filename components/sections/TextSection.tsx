@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Section } from './Section';
 import SectionButtons from './SectionButtons';
 import type {
@@ -63,11 +64,12 @@ export function TextSection({ section }: { section: CmsSection }) {
 							<li key={i} className="flex flex-col gap-4">
 								{img?.url && (
 									<div className="dp-box-design relative aspect-video overflow-hidden rounded-2xl">
-										{/* eslint-disable-next-line @next/next/no-img-element */}
-										<img
+										<Image
 											src={img.url}
 											alt={img.alt ?? col.title ?? ''}
-											className="h-full w-full object-cover"
+											fill
+											sizes={`(min-width: 1024px) ${Math.round(100 / colCount)}vw, 100vw`}
+											className="object-cover"
 										/>
 									</div>
 								)}

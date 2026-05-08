@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Section } from './Section';
 import { fetchBlogPostsOrEmpty } from '@/helpers/cms/blog';
@@ -43,12 +44,15 @@ export async function BlogListSection({ section }: { section: CmsSection }) {
 					<li key={p._id}>
 						<Link href={urls.blogPost(p.slug)} className="group block h-full">
 							{p.featuredImage?.url ? (
-								// eslint-disable-next-line @next/next/no-img-element
-								<img
-									src={p.featuredImage.url}
-									alt={p.featuredImage.alt ?? ''}
-									className="dp-box-design aspect-video w-full rounded-2xl object-cover"
-								/>
+								<div className="dp-box-design relative aspect-video w-full overflow-hidden rounded-2xl">
+									<Image
+										src={p.featuredImage.url}
+										alt={p.featuredImage.alt ?? ''}
+										fill
+										sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+										className="object-cover"
+									/>
+								</div>
 							) : (
 								<div className="dp-box-design from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 aspect-video w-full rounded-2xl bg-gradient-to-br" />
 							)}

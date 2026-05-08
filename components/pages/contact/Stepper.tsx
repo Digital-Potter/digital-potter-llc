@@ -16,7 +16,10 @@ const steps: { n: 1 | 2 | 3; label: string }[] = [
 
 export default function Stepper({ current, onJump, maxReached }: StepperProps) {
 	return (
-		<ol className="flex flex-col gap-2 md:flex-row md:gap-3">
+		<ol
+			aria-label={`Quote request progress, step ${current} of ${steps.length}`}
+			className="flex flex-col gap-2 md:flex-row md:gap-3"
+		>
 			{steps.map((s) => {
 				const isActive = s.n === current;
 				const isReached = s.n <= maxReached;
@@ -27,6 +30,10 @@ export default function Stepper({ current, onJump, maxReached }: StepperProps) {
 							type="button"
 							disabled={!canJump}
 							onClick={() => canJump && onJump?.(s.n)}
+							aria-current={isActive ? 'step' : undefined}
+							aria-label={`Step ${s.n} of ${steps.length}: ${s.label}${
+								isActive ? ' (current)' : ''
+							}`}
 							className={twMerge(
 								'font-primary-font flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left text-sm font-bold transition-colors',
 								isActive
@@ -38,6 +45,7 @@ export default function Stepper({ current, onJump, maxReached }: StepperProps) {
 							)}
 						>
 							<span
+								aria-hidden
 								className={twMerge(
 									'flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs',
 									isActive

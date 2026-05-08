@@ -43,6 +43,9 @@ export default function CmsHero({
 					src="/cms/featured-ss-cms-thedavid-by-digital-potter.png"
 					alt="theDavid dashboard with KPIs, store visits, and activity feed"
 					placeholderLabel="Dashboard"
+					width={1565}
+					height={1005}
+					priority
 				/>
 			</div>
 		</section>

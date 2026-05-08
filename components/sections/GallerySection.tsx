@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Section } from './Section';
 import type { CmsSection, MediaRef } from '@/helpers/cms/types';
 
@@ -35,11 +36,12 @@ export function GallerySection({ section }: { section: CmsSection }) {
 						key={`${img.url}-${i}`}
 						className="dp-box-design relative aspect-[4/3] overflow-hidden rounded-2xl"
 					>
-						{/* eslint-disable-next-line @next/next/no-img-element */}
-						<img
+						<Image
 							src={img.url}
 							alt={img.alt ?? ''}
-							className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+							fill
+							sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+							className="object-cover transition-transform duration-500 hover:scale-105"
 						/>
 					</li>
 				))}

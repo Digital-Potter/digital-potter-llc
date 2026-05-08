@@ -1,15 +1,23 @@
+import dynamic from 'next/dynamic';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	HomeHero,
 	TripleUsp,
 	ArtOfPottery,
-	TabbedServices,
 	ValueCallouts,
-	SocialProof,
 	BlogTeaser,
 	PricingTeaser,
 	FinalCta,
 } from '@/components/pages/home';
+
+// Below-the-fold interactive widgets — split into their own chunks so the
+// initial homepage payload stays small. They still SSR for SEO.
+const TabbedServices = dynamic(
+	() => import('@/components/pages/home/TabbedServices'),
+);
+const SocialProof = dynamic(
+	() => import('@/components/pages/home/SocialProof'),
+);
 
 /**
  * Templates intentionally ignore CMS page content for now — the user wants

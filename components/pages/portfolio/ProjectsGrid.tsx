@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import {
@@ -104,11 +105,12 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
 		>
 			<div className="dp-box-design relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
 				{project.featuredImage?.url ? (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img
+					<Image
 						src={project.featuredImage.url}
 						alt={project.featuredImage.alt ?? project.title}
-						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+						fill
+						sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+						className="object-cover transition-transform duration-500 group-hover:scale-105"
 					/>
 				) : (
 					<>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import { FinalCta } from '@/components/pages/home';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
@@ -45,11 +46,13 @@ export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
 				</div>
 				{page?.featuredImage?.url && (
 					<div className="mx-auto mt-12 max-w-5xl">
-						{/* eslint-disable-next-line @next/next/no-img-element */}
-						<img
+						<Image
 							src={page.featuredImage.url}
 							alt={page.featuredImage.alt ?? page.title ?? ''}
-							className="dp-box-design w-full rounded-3xl"
+							width={page.featuredImage.width ?? 1600}
+							height={page.featuredImage.height ?? 900}
+							sizes="(min-width: 1024px) 64rem, 100vw"
+							className="dp-box-design h-auto w-full rounded-3xl"
 						/>
 					</div>
 				)}

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { CmsProject, ProjectDateRange } from '@/helpers/cms/types';
 import type { SiteUrls } from '@/helpers/cms/urls';
@@ -118,11 +119,14 @@ export default function ProjectHeader({ project, urls }: ProjectHeaderProps) {
 
 			{project.featuredImage?.url && (
 				<div className="mx-auto mt-12 max-w-5xl">
-					{/* eslint-disable-next-line @next/next/no-img-element */}
-					<img
+					<Image
 						src={project.featuredImage.url}
 						alt={project.featuredImage.alt ?? project.title}
-						className="dp-box-design w-full rounded-3xl"
+						width={project.featuredImage.width ?? 1600}
+						height={project.featuredImage.height ?? 900}
+						sizes="(min-width: 1024px) 64rem, 100vw"
+						priority
+						className="dp-box-design h-auto w-full rounded-3xl"
 					/>
 				</div>
 			)}

@@ -81,14 +81,19 @@ export default function QuoteForm({ portfolioHref }: QuoteFormProps) {
 
 	return (
 		<FormProvider {...methods}>
-			<form onSubmit={onSubmit} noValidate>
+			<form onSubmit={onSubmit} noValidate aria-label="Quote request form">
 				<Stepper
 					current={step}
 					maxReached={maxReached}
 					onJump={(s) => setStep(s)}
 				/>
 
-				<div className="border-dp-green/40 mt-8 rounded-3xl border-2 bg-white/30 p-6 md:p-10">
+				<div
+					role="group"
+					aria-live="polite"
+					aria-label={`Step ${step} content`}
+					className="border-dp-green/40 mt-8 rounded-3xl border-2 bg-white/30 p-6 md:p-10"
+				>
 					{step === 1 && <StepProject />}
 					{step === 2 && <StepBudget />}
 					{step === 3 && <StepBusiness />}

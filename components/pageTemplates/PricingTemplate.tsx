@@ -1,14 +1,19 @@
+import dynamic from 'next/dynamic';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	PricingHero,
 	HowPricingWorks,
 	BuildScope,
-	BuildYourPlan,
 	ComparisonTable,
 	PopularCombos,
 	PricingFaq,
 	DedicatedTierCallout,
 } from '@/components/pages/pricing';
+
+// Interactive plan builder — heavy client component, below the fold.
+const BuildYourPlan = dynamic(
+	() => import('@/components/pages/pricing/BuildYourPlan'),
+);
 import { PRICING_FAQS } from '@/components/pages/pricing/pricingFaqs';
 import { FinalCta } from '@/components/pages/home';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';

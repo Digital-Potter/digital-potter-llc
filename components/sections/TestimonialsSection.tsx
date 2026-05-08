@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Section } from './Section';
 import type { CmsSection, MediaRef } from '@/helpers/cms/types';
 
@@ -82,11 +83,12 @@ export function TestimonialsSection({ section }: { section: CmsSection }) {
 								<div className="mt-6 flex items-center gap-3">
 									{avatar?.url && (
 										<div className="relative h-10 w-10 overflow-hidden rounded-full">
-											{/* eslint-disable-next-line @next/next/no-img-element */}
-											<img
+											<Image
 												src={avatar.url}
 												alt={avatar.alt ?? t.author ?? ''}
-												className="h-full w-full object-cover"
+												fill
+												sizes="40px"
+												className="object-cover"
 											/>
 										</div>
 									)}

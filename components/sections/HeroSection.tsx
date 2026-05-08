@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Section } from './Section';
 import SectionButtons from './SectionButtons';
 import type {
@@ -71,11 +72,14 @@ export function HeroSection({ section }: { section: CmsSection }) {
 			</div>
 			{image?.url && (
 				<div className="mx-auto mt-12 max-w-5xl">
-					{/* eslint-disable-next-line @next/next/no-img-element */}
-					<img
+					<Image
 						src={image.url}
 						alt={image.alt ?? section.title ?? ''}
-						className="dp-box-design w-full rounded-3xl"
+						width={image.width ?? 1600}
+						height={image.height ?? 900}
+						sizes="(min-width: 1024px) 64rem, 100vw"
+						priority
+						className="dp-box-design h-auto w-full rounded-3xl"
 					/>
 				</div>
 			)}
@@ -87,11 +91,12 @@ export function HeroSection({ section }: { section: CmsSection }) {
 							<li key={i} className="flex flex-col gap-3 text-center">
 								{colImg?.url && (
 									<div className="relative mx-auto h-12 w-12 overflow-hidden rounded-xl">
-										{/* eslint-disable-next-line @next/next/no-img-element */}
-										<img
+										<Image
 											src={colImg.url}
 											alt={colImg.alt ?? col.title ?? ''}
-											className="h-full w-full object-cover"
+											fill
+											sizes="48px"
+											className="object-cover"
 										/>
 									</div>
 								)}

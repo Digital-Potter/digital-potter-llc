@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { CmsBlogPost } from '@/helpers/cms/types';
@@ -66,11 +67,14 @@ export default function PostHeader({ post, urls }: PostHeaderProps) {
 
 			{post.featuredImage?.url && (
 				<div className="mx-auto mt-12 max-w-5xl">
-					{/* eslint-disable-next-line @next/next/no-img-element */}
-					<img
+					<Image
 						src={post.featuredImage.url}
 						alt={post.featuredImage.alt ?? post.title}
-						className="dp-box-design w-full rounded-3xl"
+						width={post.featuredImage.width ?? 1600}
+						height={post.featuredImage.height ?? 900}
+						sizes="(min-width: 1024px) 64rem, 100vw"
+						priority
+						className="dp-box-design h-auto w-full rounded-3xl"
 					/>
 				</div>
 			)}
