@@ -16,13 +16,12 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* House with tools */}
 				<path d="M4 14L16 4l12 10v14H4V14z" />
 				<path d="M12 28V20h8v8" />
 				<path d="M10 14h4v4h-4z" />
@@ -39,13 +38,12 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Scissors / styling */}
 				<circle cx="9" cy="9" r="3" />
 				<circle cx="9" cy="23" r="3" />
 				<line x1="11.8" y1="11.8" x2="26" y2="26" />
@@ -63,17 +61,16 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Shopping bag */}
 				<path d="M6 8h20l-2.5 16H8.5L6 8z" />
 				<path d="M11 8V6a5 5 0 0 1 10 0v2" />
-				<circle cx="13" cy="15" r="1" fill="#00d85c" />
-				<circle cx="19" cy="15" r="1" fill="#00d85c" />
+				<circle cx="13" cy="15" r="1" fill="currentColor" />
+				<circle cx="19" cy="15" r="1" fill="currentColor" />
 			</svg>
 		),
 	},
@@ -86,17 +83,16 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Palette / brush */}
 				<circle cx="16" cy="14" r="8" />
-				<circle cx="12" cy="11" r="1.5" fill="#00d85c" stroke="none" />
-				<circle cx="20" cy="11" r="1.5" fill="#00d85c" stroke="none" />
-				<circle cx="16" cy="18" r="1.5" fill="#00d85c" stroke="none" />
+				<circle cx="12" cy="11" r="1.5" fill="currentColor" stroke="none" />
+				<circle cx="20" cy="11" r="1.5" fill="currentColor" stroke="none" />
+				<circle cx="16" cy="18" r="1.5" fill="currentColor" stroke="none" />
 				<path d="M22 20c2 2 2 6-4 6s-4-4 4-6" />
 			</svg>
 		),
@@ -110,13 +106,12 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Cross / medical */}
 				<rect x="4" y="4" width="24" height="24" rx="4" />
 				<line x1="16" y1="10" x2="16" y2="22" />
 				<line x1="10" y1="16" x2="22" y2="16" />
@@ -133,13 +128,12 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Scales of justice */}
 				<line x1="16" y1="4" x2="16" y2="28" />
 				<line x1="8" y1="28" x2="24" y2="28" />
 				<line x1="7" y1="10" x2="25" y2="10" />
@@ -157,13 +151,12 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Location pin with building */}
 				<path d="M16 4C11.582 4 8 7.582 8 12c0 6 8 16 8 16s8-10 8-16c0-4.418-3.582-8-8-8z" />
 				<circle cx="16" cy="12" r="3" />
 			</svg>
@@ -178,13 +171,12 @@ const industries: Industry[] = [
 				width={32}
 				height={32}
 				fill="none"
-				stroke="#00d85c"
+				stroke="currentColor"
 				strokeWidth={1.75}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				aria-hidden
 			>
-				{/* Fork and knife */}
 				<line x1="11" y1="4" x2="11" y2="12" />
 				<path d="M8 4v6a3 3 0 0 0 6 0V4" />
 				<line x1="11" y1="15" x2="11" y2="28" />
