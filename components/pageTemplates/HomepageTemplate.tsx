@@ -3,6 +3,7 @@ import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	HomeHero,
 	TripleUsp,
+	WhoWeHelp,
 	ArtOfPottery,
 	ValueCallouts,
 	BlogTeaser,
@@ -31,6 +32,7 @@ export async function HomepageTemplate() {
 		<>
 			<HomeHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
 			<TripleUsp />
+			<WhoWeHelp />
 			<ArtOfPottery />
 			<TabbedServices />
 			<ValueCallouts />

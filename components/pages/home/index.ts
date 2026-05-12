@@ -1,5 +1,6 @@
 export { default as HomeHero } from './HomeHero';
 export { default as TripleUsp } from './TripleUsp';
+export { default as WhoWeHelp } from './WhoWeHelp';
 export { default as ArtOfPottery } from './ArtOfPottery';
 export { default as TabbedServices } from './TabbedServices';
 export { default as ValueCallouts } from './ValueCallouts';
