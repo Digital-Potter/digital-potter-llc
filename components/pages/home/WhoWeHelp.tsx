@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
+
 type Industry = {
 	name: string;
 	description: string;
-	icon: React.ReactNode;
+	icon: ReactNode;
 };
 
 const industries: Industry[] = [
