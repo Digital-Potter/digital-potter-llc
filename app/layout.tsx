@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
 import { Golos_Text, Figtree } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { colors } from '@/lib/tokens';
 import { Nav } from '@/components/layout/Nav';
@@ -39,6 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	const seo = data?.settings?.seo;
 	const tenantSettings = data?.tenant?.settings;
+	const webmaster = data?.settings?.webmasterTools;
 
 	const fallbackTitle = 'Digital Potter LLC | Custom Web & App Development';
 	const fallbackDescription =
@@ -98,6 +100,12 @@ export async function generateMetadata(): Promise<Metadata> {
 			seo?.robots?.allowIndexing === false
 				? { index: false, follow: false }
 				: undefined,
+		verification: {
+			google: webmaster?.googleSiteVerification || undefined,
+			other: webmaster?.bingSiteVerification
+				? { 'msvalidate.01': webmaster.bingSiteVerification }
+				: undefined,
+		},
 	};
 }
 
@@ -109,6 +117,9 @@ export default async function RootLayout({
 	const data = await fetchStoreSettingsOrNull();
 	const tenant = data?.tenant ?? null;
 	const settings = data?.settings ?? null;
+	const ga = settings?.googleAnalytics;
+	const gaId =
+		ga?.trackingEnabled && ga.measurementId ? ga.measurementId : null;
 
 	return (
 		<html lang="en" className={`${golosText.variable} ${figtree.variable}`}>
@@ -125,6 +136,7 @@ export default async function RootLayout({
 				<Suspense fallback={null}>
 					<TrackPageVisit />
 				</Suspense>
+				{gaId ? <GoogleAnalytics gaId={gaId} /> : null}
 			</body>
 		</html>
 	);

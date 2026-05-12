@@ -229,6 +229,14 @@ export interface StoreSettingsRecord {
 		appleTouchIconUrl?: string;
 		robots?: { allowIndexing?: boolean; extraDirectives?: string };
 	};
+	googleAnalytics?: {
+		measurementId?: string;
+		trackingEnabled?: boolean;
+	};
+	webmasterTools?: {
+		googleSiteVerification?: string;
+		bingSiteVerification?: string;
+	};
 }
 
 export interface StoreSettingsResponse {
