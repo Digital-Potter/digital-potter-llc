@@ -164,13 +164,13 @@ export default function MobileNav({
 																{col.title}
 															</p>
 														)}
-														<ul className="space-y-1">
+														<ul className="space-y-1.5">
 															{col.items.map((sub) => (
 																<li key={sub.id}>
 																	<Link
 																		href={sub.href}
 																		onMouseUp={onClose}
-																		className="hover:bg-dp-dark-green/5 group/sub block rounded-lg px-2 py-2 transition-colors"
+																		className="hover:bg-dp-dark-green/5 group/sub block rounded-lg px-2 py-3 transition-colors"
 																	>
 																		<span className="font-primary-font text-dp-dark block text-sm font-bold tracking-normal normal-case">
 																			{sub.headline ?? sub.label}

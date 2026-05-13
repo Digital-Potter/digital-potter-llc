@@ -53,14 +53,14 @@ export async function Footer() {
 							<h3 className="font-primary-font mb-3 text-sm font-bold tracking-wider uppercase">
 								{menu.name}
 							</h3>
-							<ul className="text-dp-body-soft space-y-2">
+							<ul className="text-dp-body-soft">
 								{menu.items.map((item) => {
 									const href = resolveMenuItemHref(item, siteStructure);
 									return (
 										<li key={item._id}>
 											<Link
 												href={href}
-												className="hover:text-dp-dark"
+												className="hover:text-dp-dark inline-block py-2"
 												target={item.openInNewTab ? '_blank' : undefined}
 												rel={
 													item.openInNewTab ? 'noopener noreferrer' : undefined

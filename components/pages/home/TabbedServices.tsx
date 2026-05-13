@@ -20,7 +20,7 @@ export default function TabbedServices() {
 			</div>
 
 			<div className="dp-box-design mx-auto mt-14 flex w-full max-w-5xl rounded-2xl p-1.5">
-				<ul
+				<div
 					role="tablist"
 					aria-label="Digital Potter services"
 					className="flex w-full flex-col gap-1 lg:flex-row"
@@ -29,33 +29,33 @@ export default function TabbedServices() {
 						const isActive = tab.id === active.id;
 						const Icon = tab.icon;
 						return (
-							<li key={tab.id} className="flex-1">
-								<button
-									role="tab"
-									aria-selected={isActive}
-									aria-controls={`panel-${tab.id}`}
-									id={`tab-${tab.id}`}
-									onClick={() => setActiveId(tab.id)}
+							<button
+								key={tab.id}
+								role="tab"
+								type="button"
+								aria-selected={isActive}
+								aria-controls={`panel-${tab.id}`}
+								id={`tab-${tab.id}`}
+								onClick={() => setActiveId(tab.id)}
+								className={twMerge(
+									'font-primary-font flex flex-1 items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold transition-all md:text-base',
+									isActive
+										? 'bg-dp-dark-green text-white shadow-md'
+										: 'text-dp-dark hover:bg-dp-light-gray',
+								)}
+							>
+								<Icon
+									aria-hidden
 									className={twMerge(
-										'font-primary-font flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold transition-all md:text-base',
-										isActive
-											? 'bg-dp-dark-green text-white shadow-md'
-											: 'text-dp-dark hover:bg-dp-light-gray',
+										'h-6 w-6 shrink-0 transition-colors',
+										isActive ? 'text-white' : 'text-dp-dark-green',
 									)}
-								>
-									<Icon
-										aria-hidden
-										className={twMerge(
-											'h-6 w-6 shrink-0 transition-colors',
-											isActive ? 'text-white' : 'text-dp-dark-green',
-										)}
-									/>
-									<span className="leading-tight">{tab.label}</span>
-								</button>
-							</li>
+								/>
+								<span className="leading-tight">{tab.label}</span>
+							</button>
 						);
 					})}
-				</ul>
+				</div>
 			</div>
 
 			<div

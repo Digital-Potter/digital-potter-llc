@@ -129,7 +129,6 @@ export default function MegaMenu({
 			</Link>
 
 			<div
-				role="menu"
 				aria-hidden={!open}
 				className={twMerge(
 					'absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 backdrop-blur-3xl transition-all duration-150',

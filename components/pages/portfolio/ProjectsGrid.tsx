@@ -27,46 +27,43 @@ export default function ProjectsGrid({
 
 	return (
 		<section className="dp-container py-12 md:py-16">
-			<ul
+			<div
 				role="tablist"
 				aria-label="Filter projects by category"
-				className="dp-box-design mx-auto flex max-w-4xl flex-wrap justify-center gap-1 rounded-full p-1.5"
+				className="dp-box-design mx-auto flex max-w-4xl flex-wrap justify-center gap-2 rounded-full p-2"
 			>
-				<li>
+				<button
+					role="tab"
+					type="button"
+					aria-selected={active === 'all'}
+					onClick={() => setActive('all')}
+					className={twMerge(
+						'font-primary-font min-h-[44px] rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
+						active === 'all'
+							? 'bg-dp-dark-green text-white'
+							: 'text-dp-dark hover:bg-dp-light-gray',
+					)}
+				>
+					All
+				</button>
+				{categories.map((c) => (
 					<button
+						key={c}
 						role="tab"
 						type="button"
-						aria-selected={active === 'all'}
-						onClick={() => setActive('all')}
+						aria-selected={active === c}
+						onClick={() => setActive(c)}
 						className={twMerge(
-							'font-primary-font rounded-full px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors',
-							active === 'all'
+							'font-primary-font min-h-[44px] rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
+							active === c
 								? 'bg-dp-dark-green text-white'
 								: 'text-dp-dark hover:bg-dp-light-gray',
 						)}
 					>
-						All
+						{c}
 					</button>
-				</li>
-				{categories.map((c) => (
-					<li key={c}>
-						<button
-							role="tab"
-							type="button"
-							aria-selected={active === c}
-							onClick={() => setActive(c)}
-							className={twMerge(
-								'font-primary-font rounded-full px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors',
-								active === c
-									? 'bg-dp-dark-green text-white'
-									: 'text-dp-dark hover:bg-dp-light-gray',
-							)}
-						>
-							{c}
-						</button>
-					</li>
 				))}
-			</ul>
+			</div>
 
 			<ul className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{visible.map((p) => (

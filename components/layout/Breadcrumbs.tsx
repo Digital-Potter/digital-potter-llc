@@ -58,19 +58,22 @@ export default function Breadcrumbs({ items, className }: BreadcrumbsProps) {
 					'font-primary-font text-xs font-bold tracking-wider uppercase'
 				}
 			>
-				<ol className="text-dp-body-soft flex flex-wrap items-center gap-2">
+				<ol className="text-dp-body-soft flex flex-wrap items-center gap-x-2 gap-y-1">
 					{items.map((item, i) => {
 						const isLast = i === items.length - 1;
 						return (
 							<li key={`${item.href}-${i}`} className="flex items-center gap-2">
 								{isLast ? (
-									<span className="text-dp-body-soft" aria-current="page">
+									<span
+										className="text-dp-body-soft inline-block py-2"
+										aria-current="page"
+									>
 										{item.label}
 									</span>
 								) : (
 									<Link
 										href={item.href}
-										className="text-dp-dark-green hover:text-dp-green"
+										className="text-dp-dark-green hover:text-dp-green inline-block py-2"
 									>
 										{item.label}
 									</Link>
