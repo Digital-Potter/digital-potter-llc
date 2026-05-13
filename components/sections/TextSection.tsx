@@ -44,7 +44,7 @@ export function TextSection({ section }: { section: CmsSection }) {
 			layout={hasColumns ? 'contained' : 'narrow'}
 		>
 			{(eyebrow || section.title || section.subtitle) && (
-				<div className="mx-auto mb-10 max-w-4xl text-center">
+				<div className="mx-auto mb-10 max-w-4xl">
 					{section.title && (
 						<h2 className="mt-4 text-balance">{section.title}</h2>
 					)}
@@ -74,13 +74,13 @@ export function TextSection({ section }: { section: CmsSection }) {
 									</div>
 								)}
 								{col.title && (
-									<h3 className="font-primary-font text-center text-xl font-bold md:text-2xl">
+									<h3 className="font-primary-font text-xl font-bold md:text-2xl">
 										{col.title}
 									</h3>
 								)}
 								{col.content && (
 									<div
-										className="prose prose-base prose-headings:font-primary-font prose-p:text-dp-body/85 prose-strong:text-dp-dark prose-a:text-dp-dark-green hover:prose-a:text-dp-green max-w-none text-center text-sm md:text-base"
+										className="prose prose-base prose-headings:font-primary-font prose-p:text-dp-body/85 prose-strong:text-dp-dark prose-a:text-dp-dark-green hover:prose-a:text-dp-green max-w-none text-sm md:text-base"
 										dangerouslySetInnerHTML={{ __html: col.content }}
 									/>
 								)}
@@ -89,7 +89,7 @@ export function TextSection({ section }: { section: CmsSection }) {
 					})}
 				</ul>
 			) : c?.body ? (
-				<div className="text-dp-body/85 mt-6 space-y-5 text-center text-base whitespace-pre-wrap md:text-lg">
+				<div className="text-dp-body/85 mt-6 space-y-5 text-base whitespace-pre-wrap md:text-lg">
 					{c.body}
 				</div>
 			) : null}

@@ -5,11 +5,11 @@ interface SlotResult {
 	endsAt: string;
 }
 
-type Props = { slot: SlotResult };
+type Props = { slot: SlotResult; timezone: string };
 
-function formatSlot(iso: string): string {
+function formatSlot(iso: string, timezone: string): string {
 	return new Date(iso).toLocaleString('en-US', {
-		timeZone: 'America/Chicago',
+		timeZone: timezone,
 		weekday: 'long',
 		month: 'long',
 		day: 'numeric',
@@ -18,7 +18,16 @@ function formatSlot(iso: string): string {
 	});
 }
 
-export default function BookingConfirmation({ slot }: Props) {
+function tzAbbreviation(iso: string, timezone: string): string {
+	const parts = new Intl.DateTimeFormat('en-US', {
+		timeZone: timezone,
+		timeZoneName: 'short',
+	}).formatToParts(new Date(iso));
+	return parts.find((p) => p.type === 'timeZoneName')?.value ?? timezone;
+}
+
+export default function BookingConfirmation({ slot, timezone }: Props) {
+	const abbr = tzAbbreviation(slot.startsAt, timezone);
 	return (
 		<div className="dp-box-design rounded-3xl px-8 py-16 text-center">
 			<div className="bg-dp-green mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full text-3xl font-bold">
@@ -28,7 +37,7 @@ export default function BookingConfirmation({ slot }: Props) {
 			<p className="text-dp-dark/70 mx-auto mt-4 max-w-md">
 				We&apos;ll confirm your call for{' '}
 				<strong className="text-dp-dark">
-					{formatSlot(slot.startsAt)} CST
+					{formatSlot(slot.startsAt, timezone)} {abbr}
 				</strong>{' '}
 				within a few hours. Check your inbox for a confirmation email once
 				it&apos;s locked in.

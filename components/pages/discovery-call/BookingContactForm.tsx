@@ -12,12 +12,13 @@ type Guest = { name: string; email: string; phone: string; notes: string };
 
 type Props = {
 	slot: SlotResult;
+	timezone: string;
 	onSubmit: (guest: Guest) => Promise<void>;
 };
 
-function formatSlot(iso: string): string {
+function formatSlot(iso: string, timezone: string): string {
 	return new Date(iso).toLocaleString('en-US', {
-		timeZone: 'America/Chicago',
+		timeZone: timezone,
 		weekday: 'long',
 		month: 'long',
 		day: 'numeric',
@@ -26,7 +27,19 @@ function formatSlot(iso: string): string {
 	});
 }
 
-export default function BookingContactForm({ slot, onSubmit }: Props) {
+function tzAbbreviation(iso: string, timezone: string): string {
+	const parts = new Intl.DateTimeFormat('en-US', {
+		timeZone: timezone,
+		timeZoneName: 'short',
+	}).formatToParts(new Date(iso));
+	return parts.find((p) => p.type === 'timeZoneName')?.value ?? timezone;
+}
+
+export default function BookingContactForm({
+	slot,
+	timezone,
+	onSubmit,
+}: Props) {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
@@ -75,7 +88,8 @@ export default function BookingContactForm({ slot, onSubmit }: Props) {
 			<p className="text-dp-dark/70 mb-6 text-sm">
 				Booking for{' '}
 				<span className="text-dp-dark font-semibold">
-					{formatSlot(slot.startsAt)} CST
+					{formatSlot(slot.startsAt, timezone)}{' '}
+					{tzAbbreviation(slot.startsAt, timezone)}
 				</span>{' '}
 				· 45 min
 			</p>

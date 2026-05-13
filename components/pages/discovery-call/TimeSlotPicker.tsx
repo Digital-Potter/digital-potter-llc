@@ -13,14 +13,23 @@ type Props = {
 	selectedSlot: SlotResult | null;
 	onSlotSelect: (slot: SlotResult) => void;
 	selectedDate: string | null;
+	timezone: string;
 };
 
-function formatSlot(iso: string): string {
+function formatSlot(iso: string, timezone: string): string {
 	return new Date(iso).toLocaleTimeString('en-US', {
-		timeZone: 'America/Chicago',
+		timeZone: timezone,
 		hour: 'numeric',
 		minute: '2-digit',
 	});
+}
+
+function tzAbbreviation(iso: string, timezone: string): string {
+	const parts = new Intl.DateTimeFormat('en-US', {
+		timeZone: timezone,
+		timeZoneName: 'short',
+	}).formatToParts(new Date(iso));
+	return parts.find((p) => p.type === 'timeZoneName')?.value ?? timezone;
 }
 
 export default function TimeSlotPicker({
@@ -29,6 +38,7 @@ export default function TimeSlotPicker({
 	selectedSlot,
 	onSlotSelect,
 	selectedDate,
+	timezone,
 }: Props) {
 	if (!selectedDate) {
 		return (
@@ -61,11 +71,15 @@ export default function TimeSlotPicker({
 		);
 	}
 
+	const abbr = tzAbbreviation(slots[0].startsAt, timezone);
+
 	return (
 		<div>
 			<p className="font-primary-font text-dp-dark mb-3 text-xs font-bold tracking-wider uppercase">
 				Available Times{' '}
-				<span className="text-dp-dark/40 font-normal normal-case">(CST)</span>
+				<span className="text-dp-dark/40 font-normal normal-case">
+					({abbr})
+				</span>
 			</p>
 			<div className="flex flex-col gap-2">
 				{slots.map((slot) => {
@@ -81,7 +95,7 @@ export default function TimeSlotPicker({
 									: 'border-dp-dark/20 text-dp-dark hover:border-dp-dark-green/50 bg-white/50',
 							)}
 						>
-							{formatSlot(slot.startsAt)}
+							{formatSlot(slot.startsAt, timezone)}
 						</button>
 					);
 				})}
