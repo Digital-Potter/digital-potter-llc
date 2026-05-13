@@ -24,9 +24,12 @@ export default function MobileHero({
 					Store-quality UX, and a release cadence that doesn&apos;t burn out
 					your team.
 				</p>
-				<div className="mt-10 flex justify-center">
+				<div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
 					<ButtonLink href={primaryCtaHref} variant="solid">
 						{primaryCtaLabel}
+					</ButtonLink>
+					<ButtonLink href="/contact-us" variant="outlined">
+						Schedule a Discovery Call
 					</ButtonLink>
 				</div>
 			</div>

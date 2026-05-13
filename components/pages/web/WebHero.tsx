@@ -23,9 +23,12 @@ export default function WebHero({
 					first commit, owned by you on day one. No templates, no
 					template-builder lock-in, no surprise traffic gates.
 				</p>
-				<div className="mt-10 flex justify-center">
+				<div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
 					<ButtonLink href={primaryCtaHref} variant="solid">
 						{primaryCtaLabel}
+					</ButtonLink>
+					<ButtonLink href="/contact-us" variant="outlined">
+						Schedule a Discovery Call
 					</ButtonLink>
 				</div>
 			</div>

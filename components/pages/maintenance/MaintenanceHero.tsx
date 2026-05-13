@@ -24,9 +24,12 @@ export default function MaintenanceHero({
 					that fits how often you actually ship, or pay hourly when you only
 					need help once.
 				</p>
-				<div className="mt-10 flex justify-center">
+				<div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
 					<ButtonLink href={primaryCtaHref} variant="solid">
 						{primaryCtaLabel}
+					</ButtonLink>
+					<ButtonLink href="/contact-us" variant="outlined">
+						Schedule a Discovery Call
 					</ButtonLink>
 				</div>
 			</div>
