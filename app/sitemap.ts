@@ -4,7 +4,7 @@ import { fetchPages } from '@/helpers/cms/pages';
 import { fetchProjectsOrEmpty } from '@/helpers/cms/projects';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import { getSiteUrls } from '@/helpers/cms/urls';
-import { siteBaseUrl } from '@/helpers/seo/structuredData';
+import { resolveSiteOrigin } from '@/helpers/seo/structuredData';
 
 export const revalidate = 3600;
 
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const sm = data?.settings?.seo?.sitemap;
 	if (sm?.enabled === false) return [];
 
-	const base = siteBaseUrl();
+	const base = resolveSiteOrigin(data?.settings?.storefront?.domain);
 	const entries: Entry[] = [];
 
 	entries.push({ url: base, lastModified: new Date(), priority: 1.0 });

@@ -11,7 +11,7 @@ import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import {
 	JsonLd,
 	organizationSchema,
-	siteBaseUrl,
+	resolveSiteOrigin,
 	websiteSchema,
 } from '@/helpers/seo/structuredData';
 
@@ -63,7 +63,9 @@ export async function generateMetadata(): Promise<Metadata> {
 		tenantSettings?.storeName ?? 'Digital Potter | Virginia, USA';
 
 	return {
-		metadataBase: new URL(siteBaseUrl()),
+		metadataBase: new URL(
+			resolveSiteOrigin(data?.settings?.storefront?.domain),
+		),
 		title: {
 			default: defaultTitle,
 			template: titleTemplate,

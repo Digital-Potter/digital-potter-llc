@@ -25,6 +25,29 @@ export function siteBaseUrl(): string {
 	return 'http://localhost:3001';
 }
 
+/**
+ * Resolve the canonical site origin with priority:
+ *   1. admin's `storefront.domain` (Site Options → SEO → Storefront domain)
+ *   2. `NEXT_PUBLIC_SITE_URL` / `SITE_URL` env vars
+ *   3. `http://localhost:3001` fallback for dev
+ *
+ * Used by routes that already fetch store settings (sitemap, robots, manifest)
+ * so the admin's typed domain wins over env vars on production. Falls back
+ * gracefully when settings are unreachable.
+ */
+export function resolveSiteOrigin(domain?: string | null): string {
+	if (domain && domain.trim().length > 0) {
+		const raw = domain.trim();
+		const withProto = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+		try {
+			return new URL(withProto).origin;
+		} catch {
+			// fall through
+		}
+	}
+	return siteBaseUrl();
+}
+
 /** Resolve a relative path or pass through an absolute URL. */
 export function absoluteUrl(path?: string): string {
 	if (!path) return siteBaseUrl();

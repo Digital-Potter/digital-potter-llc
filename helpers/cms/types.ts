@@ -212,6 +212,9 @@ export interface StoreSettingsRecord {
 			string
 		>
 	>;
+	storefront?: {
+		domain?: string;
+	};
 	siteStructure?: {
 		homepageSlug?: string | null;
 		blogSlug?: string | null;

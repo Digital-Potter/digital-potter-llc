@@ -1,12 +1,12 @@
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
-import { siteBaseUrl } from '@/helpers/seo/structuredData';
+import { resolveSiteOrigin } from '@/helpers/seo/structuredData';
 
 export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
 	const data = await fetchStoreSettingsOrNull();
 	const robots = data?.settings?.seo?.robots;
-	const base = siteBaseUrl();
+	const base = resolveSiteOrigin(data?.settings?.storefront?.domain);
 
 	const lines: string[] = ['User-agent: *'];
 
