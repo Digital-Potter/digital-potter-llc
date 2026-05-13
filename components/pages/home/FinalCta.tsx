@@ -17,9 +17,12 @@ export default function FinalCta({ href, label }: FinalCtaProps) {
 					We&apos;ll come back with a tailored proposal — no templates, no
 					Frankenstein stack, just a plan built for you.
 				</p>
-				<div className="mt-10 flex justify-center">
+				<div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
 					<ButtonLink href={href} variant="solid">
 						{label}
+					</ButtonLink>
+					<ButtonLink href="/contact-us" variant="outlined">
+						Schedule a Discovery Call
 					</ButtonLink>
 				</div>
 			</div>
