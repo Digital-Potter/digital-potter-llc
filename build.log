@@ -1,0 +1,55 @@
+
+> digital-potter-llc@1.1.1 build
+> next build
+
+   ▲ Next.js 15.4.1
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1000ms
+   Skipping validation of types
+   Linting ...
+   Collecting page data ...
+   Generating static pages (0/6) ...
+   Generating static pages (1/6) 
+   Generating static pages (2/6) 
+   Generating static pages (4/6) 
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
+}
+ ✓ Generating static pages (6/6)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS  Revalidate  Expire
+┌ ○ /                                      200 B         121 kB          1m      1y
+├ ○ /_not-found                            126 B        99.7 kB
+├ ƒ /[...slug]                           38.2 kB         159 kB
+└ ƒ /api/quote                             126 B        99.7 kB
++ First Load JS shared by all            99.6 kB
+  ├ chunks/4bd1b696-cf72ae8a39fa05aa.js  54.1 kB
+  ├ chunks/964-eda38e26c0391a47.js       43.5 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
