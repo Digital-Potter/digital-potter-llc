@@ -1,9 +1,4 @@
-import {
-	FRONTEND_ONETIME,
-	FRONTEND_INSTALLMENT_MONTHLY,
-	FRONTEND_INSTALLMENT_MONTHS,
-	HOSTING_MONTHLY,
-} from '@/lib/pricing';
+import { FRONTEND_ONETIME, HOSTING_MONTHLY } from '@/lib/pricing';
 
 type Card = {
 	tag: string;
@@ -17,22 +12,23 @@ const cards: Card[] = [
 	{
 		tag: '01 — Foundation',
 		headline: 'Custom frontend build',
-		body: 'A one-time investment for your custom-designed Next.js foundation. The base covers everything a typical small business needs to launch. Custom features beyond that are quoted in your proposal — see the next section for what each includes.',
-		price: `Starting at $${FRONTEND_ONETIME.toLocaleString()}`,
-		priceDetail: `or $${FRONTEND_INSTALLMENT_MONTHLY}/mo × ${FRONTEND_INSTALLMENT_MONTHS} months · custom features quoted separately`,
+		body: 'A one-time investment for your custom-designed Next.js platform. Three tiers — Starter, Growth, Premium — so the price reflects what you actually need. See the next section for what fits each.',
+		price: `From $${FRONTEND_ONETIME.toLocaleString()}`,
+		priceDetail: 'Starter from $4,500 · Growth $9k–$18k · Premium $20k+',
 	},
 	{
 		tag: '02 — Recurring',
-		headline: 'Hosting + CMS',
-		body: 'Managed hosting, daily backups, SSL, CDN, security patches, and full content management. One flat fee — no traffic gates, no plan jumps as you grow.',
-		price: `$${HOSTING_MONTHLY}`,
-		priceDetail: 'per month, billed monthly or annually (15% off)',
+		headline: 'Hosting + platform management',
+		body: 'Managed hosting, daily backups, SSL, CDN, security patches, and CMS access. Three tiers depending on how active your platform is — start at Essentials, move up only when the business needs it.',
+		price: `From $${HOSTING_MONTHLY}/mo`,
+		priceDetail:
+			'Essentials $50 · Growth $149 · Pro $349 — billed monthly or annually (15% off)',
 	},
 	{
 		tag: '03 — Optional',
 		headline: 'Modules for your business',
 		body: 'Add only what you need: ecommerce, restaurant, bookings, or membership. Stack any combination. Most clients pick one, some pick two.',
-		price: '+$25 to $50',
+		price: '+$49 to $99',
 		priceDetail: 'per module, per month',
 	},
 ];
@@ -48,8 +44,9 @@ export default function HowPricingWorks() {
 					Three line items. That&apos;s the whole model.
 				</h2>
 				<p className="text-dp-body/80 mt-6 text-balance">
-					A custom frontend you own, hosting + CMS at a flat monthly fee, and
-					optional modules if your business needs them. No surprises.
+					A custom frontend you own, hosting + platform management at a flat
+					monthly fee, and optional modules if your business needs them. Every
+					line shown up front — your proposal pins the final scope and price.
 				</p>
 			</div>
 

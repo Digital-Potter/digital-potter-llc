@@ -1,8 +1,11 @@
 export { default as PricingHero } from './PricingHero';
+export { default as TypicalInvestment } from './TypicalInvestment';
 export { default as HowPricingWorks } from './HowPricingWorks';
 export { default as BuildScope } from './BuildScope';
+export { default as HostingTiers } from './HostingTiers';
 export { default as BuildYourPlan } from './BuildYourPlan';
 export { default as ComparisonTable } from './ComparisonTable';
 export { default as PopularCombos } from './PopularCombos';
 export { default as PricingFaq } from './PricingFaq';
+export { default as WhoThisIsNotFor } from './WhoThisIsNotFor';
 export { default as DedicatedTierCallout } from './DedicatedTierCallout';

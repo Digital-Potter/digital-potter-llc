@@ -11,13 +11,13 @@ const rows: Row[] = [
 		label: 'Monthly base',
 		shopify: '$39',
 		wix: '$17–$39',
-		dp: '$50',
+		dp: '$50 (Essentials)',
 	},
 	{
 		label: 'Build cost',
 		shopify: '$0 (template)',
 		wix: '$0 (template)',
-		dp: '$3,500 one-time',
+		dp: 'From $4,500 (custom)',
 		dpEmphasis: true,
 	},
 	{
@@ -71,12 +71,13 @@ export default function ComparisonTable() {
 					How we compare
 				</p>
 				<h2 className="mt-6 text-balance">
-					More expensive on day one. Cheaper to live with.
+					Same monthly spend. Different ceiling.
 				</h2>
 				<p className="text-dp-body/80 mt-6 text-balance">
-					Template platforms feel cheap until you outgrow them. Digital Potter
-					is custom from the start, with the recurring fee of a basic Shopify
-					plan and none of the lock-in.
+					At Essentials our recurring fee is in the same neighborhood as a basic
+					Shopify or Wix plan — but you get custom design, owned code, no
+					transaction fees, and no traffic gates. Template platforms feel cheap
+					until you outgrow them.
 				</p>
 			</div>
 

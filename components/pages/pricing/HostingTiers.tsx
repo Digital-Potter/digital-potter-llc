@@ -1,31 +1,24 @@
 import { twMerge } from 'tailwind-merge';
-import { BUILD_TIERS } from '@/lib/pricing';
+import { HOSTING_TIERS } from '@/lib/pricing';
 
-function formatRange(low: number, high: number | null): string {
-	const lowLabel = `$${low.toLocaleString()}`;
-	if (high === null) return `${lowLabel}+`;
-	return `${lowLabel} – $${high.toLocaleString()}`;
-}
-
-export default function BuildScope() {
+export default function HostingTiers() {
 	return (
 		<section className="dp-container py-16 md:py-24">
 			<div className="mx-auto max-w-4xl text-center">
 				<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
-					Build tiers
+					Hosting + platform tiers
 				</p>
 				<h2 className="mt-6 text-balance">
-					Three tiers. Your scope decides where you land.
+					Start at Essentials. Move up only when the business asks for it.
 				</h2>
 				<p className="text-dp-body/80 mt-6 text-balance">
-					We sell foundations, not features. Most serious small businesses land
-					in Growth. Starter is for tight-scope launches; Premium is for custom
-					platforms and apps. Your proposal pins a fixed price after discovery.
+					Every tier covers the platform — what changes is how actively we
+					manage it with you. No traffic gates, no plan jumps based on visits.
 				</p>
 			</div>
 
 			<div className="mt-14 grid gap-6 lg:grid-cols-3 lg:gap-8">
-				{BUILD_TIERS.map((tier) => {
+				{HOSTING_TIERS.map((tier) => {
 					const isHighlight = !!tier.highlight;
 					return (
 						<article
@@ -37,7 +30,7 @@ export default function BuildScope() {
 						>
 							{isHighlight ? (
 								<span className="bg-dp-green text-dp-dark font-primary-font absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold tracking-widest uppercase shadow-md">
-									Most clients
+									Recommended
 								</span>
 							) : null}
 							<p
@@ -49,7 +42,10 @@ export default function BuildScope() {
 								{tier.label}
 							</p>
 							<p className="font-primary-font text-dp-dark mt-4 text-3xl font-bold md:text-4xl">
-								{formatRange(tier.rangeLow, tier.rangeHigh)}
+								${tier.price}
+								<span className="text-dp-body/60 ml-1 text-base font-medium">
+									/mo
+								</span>
 							</p>
 							<p className="text-dp-body/70 mt-2 text-sm">{tier.tagline}</p>
 							<p className="text-dp-body/85 mt-5 text-sm md:text-base">
@@ -82,9 +78,8 @@ export default function BuildScope() {
 			</div>
 
 			<p className="text-dp-body/70 mx-auto mt-10 max-w-2xl text-center text-sm">
-				Not sure where your project lands? That&apos;s the point of the
-				discovery call — we listen, scope, and send you a proposal with the
-				exact line items and a fixed price before any work begins.
+				Switch tiers any time — your monthly fee adjusts on the next billing
+				cycle. Annual prepay gets you 15% off.
 			</p>
 		</section>
 	);

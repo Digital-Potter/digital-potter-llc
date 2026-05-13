@@ -2,11 +2,14 @@ import dynamic from 'next/dynamic';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	PricingHero,
+	TypicalInvestment,
 	HowPricingWorks,
 	BuildScope,
+	HostingTiers,
 	ComparisonTable,
 	PopularCombos,
 	PricingFaq,
+	WhoThisIsNotFor,
 	DedicatedTierCallout,
 } from '@/components/pages/pricing';
 
@@ -49,12 +52,15 @@ export async function PricingTemplate() {
 				)}
 			/>
 			<PricingHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
+			<TypicalInvestment />
 			<HowPricingWorks />
 			<BuildScope />
+			<HostingTiers />
 			<BuildYourPlan ctaHref={cta.href} ctaLabel="Get a custom proposal" />
 			<ComparisonTable />
 			<PopularCombos />
 			<PricingFaq />
+			<WhoThisIsNotFor />
 			<DedicatedTierCallout ctaHref={cta.href} />
 			<FinalCta href={cta.href} label={cta.label} />
 		</>

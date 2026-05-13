@@ -39,7 +39,8 @@ export function GallerySection({ section }: { section: CmsSection }) {
 						<Image
 							src={img.url}
 							alt={img.alt ?? ''}
-							fill
+							width={img.width ?? 800}
+							height={img.height ?? 600}
 							sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
 							className="object-cover transition-transform duration-500 hover:scale-105"
 						/>

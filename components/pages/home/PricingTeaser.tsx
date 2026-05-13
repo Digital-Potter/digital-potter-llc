@@ -1,10 +1,8 @@
 import Link from 'next/link';
+import { FRONTEND_ONETIME, HOSTING_MONTHLY } from '@/lib/pricing';
 
-// Working pricing baseline. The full table lives in
-// docs/PROJECT_CONVENTIONS.md → "Pricing baseline" — update both when
-// numbers change.
-const monthly = '$50';
-const oneTime = '$3,500';
+const monthly = `$${HOSTING_MONTHLY}`;
+const oneTime = `$${FRONTEND_ONETIME.toLocaleString()}`;
 
 export default function PricingTeaser() {
 	return (

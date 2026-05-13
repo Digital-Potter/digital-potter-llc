@@ -11,19 +11,29 @@ export type PricingFaq = {
 
 export const PRICING_FAQS: PricingFaq[] = [
 	{
+		question: "What's the difference between Starter, Growth, and Premium?",
+		answer:
+			'Starter ($4,500–$8,000) is a serious foundation for a small business — brochure-style sites for service businesses, trades, and single-location restaurants. Growth ($9,000–$18,000) is where most clients land — professional services, multi-location businesses, deeper integrations, and custom components. Premium ($20,000+) is for custom platforms, ecommerce at scale, mobile apps, and SaaS. Your discovery call places you in the right tier and your proposal pins a fixed price.',
+	},
+	{
 		question: 'Why is the frontend a separate one-time fee?',
 		answer:
-			"Because we build it from scratch for you. The $3,500 covers the brand discovery, custom design, and the initial Next.js codebase. After that, your team adds and edits unlimited pages through the CMS — at no extra charge from us. We're not a template platform, so we don't earn margin by selling you new templates every year.",
+			"Because we build it from scratch for you. The build investment ($4,500 and up) covers brand discovery, custom design, the initial Next.js codebase, and the page templates your CMS uses going forward. After that, your team adds and edits unlimited pages through the CMS — at no extra charge from us. We're not a template platform, so we don't earn margin by selling you new templates every year.",
 	},
 	{
 		question: 'What happens if my site gets a lot of traffic?',
 		answer:
-			"For typical SMB traffic our shared infrastructure handles it without issue, and your monthly fee stays flat. If we forecast unusually heavy traffic during discovery — say a viral product launch or a media-driven brand — we'll recommend a dedicated hosting tier in your proposal. There are no surprise upgrades.",
+			"For typical SMB traffic the Essentials and Growth hosting tiers handle it without issue, and your monthly fee stays flat regardless of visits. If we forecast unusually heavy traffic during discovery — a viral product launch, a media-driven brand, or a high-volume ecommerce store — we'll recommend the Pro tier or dedicated infrastructure in your proposal. No surprise upgrades.",
 	},
 	{
 		question: 'Can I pay annually?',
 		answer:
-			'Yes — annual prepay gets you 15% off the recurring fee. Most clients start monthly and switch to annual after the first quarter once they see the value.',
+			'Yes — annual prepay gets you 15% off any recurring tier (Essentials, Growth, or Pro). Most clients start monthly and switch to annual after the first quarter once they see the value.',
+	},
+	{
+		question: 'Do you offer financing for the build?',
+		answer:
+			"Yes — for engagements above $10k we offer a private installment plan after we've scoped the work in your proposal. We don't advertise it publicly because financing terms depend on project size and shape, but bring it up on your discovery call if it would help.",
 	},
 	{
 		question: "What does 'you own the code' actually mean?",
@@ -43,11 +53,11 @@ export const PRICING_FAQS: PricingFaq[] = [
 	{
 		question: 'How long until I can launch?',
 		answer:
-			'Brochure builds usually launch in 4–6 weeks from kickoff. Builds with modules (ecommerce, bookings, membership) typically take 6–10 weeks. We confirm the exact timeline in your proposal after discovery.',
+			'Starter builds usually launch in 4–6 weeks from kickoff. Growth builds with modules typically take 6–10 weeks. Premium engagements (custom platforms, apps) run 10–24 weeks depending on scope. We confirm the exact timeline in your proposal after discovery.',
 	},
 	{
 		question: 'What if my needs change after launch?',
 		answer:
-			"Add a module any time — your monthly fee just adjusts on the next billing cycle. For bigger changes (a new section of the site, a deeper integration, a redesign), we quote it as a separate engagement. Most clients don't need this in year one, but we're always there when you do.",
+			"Add a module any time — your monthly fee just adjusts on the next billing cycle. Move between hosting tiers the same way. For bigger changes (a new section of the site, a deeper integration, a redesign), we quote it as a separate engagement. Most clients don't need this in year one, but we're always there when you do.",
 	},
 ];

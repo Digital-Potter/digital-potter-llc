@@ -88,7 +88,7 @@ export async function Nav() {
 	const ctaLabel = ctaItem?.label ?? 'Let´s Connect';
 
 	return (
-		<header className="dp-container sticky top-0 z-50 flex h-[6.25rem] flex-row items-center justify-between">
+		<header className="dp-container sticky top-0 z-50 flex h-[6.25rem] flex-row items-center justify-between will-change-transform">
 			<Link
 				href="/"
 				aria-label="Digital Potter — home"
