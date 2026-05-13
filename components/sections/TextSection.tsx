@@ -62,17 +62,27 @@ export function TextSection({ section }: { section: CmsSection }) {
 						const img = imageRef(col.image);
 						return (
 							<li key={i} className="flex flex-col gap-4">
-								{img?.url && (
-									<div className="dp-box-design relative aspect-video overflow-hidden rounded-2xl">
+								{img?.url &&
+									(img.width && img.height ? (
 										<Image
 											src={img.url}
 											alt={img.alt ?? col.title ?? ''}
-											fill
+											width={img.width}
+											height={img.height}
 											sizes={`(min-width: 1024px) ${Math.round(100 / colCount)}vw, 100vw`}
-											className="object-cover"
+											className="dp-box-design h-auto w-full rounded-2xl"
 										/>
-									</div>
-								)}
+									) : (
+										<div className="dp-box-design relative aspect-square overflow-hidden rounded-2xl">
+											<Image
+												src={img.url}
+												alt={img.alt ?? col.title ?? ''}
+												fill
+												sizes={`(min-width: 1024px) ${Math.round(100 / colCount)}vw, 100vw`}
+												className="object-cover"
+											/>
+										</div>
+									))}
 								{col.title && (
 									<h3 className="font-primary-font text-xl font-bold md:text-2xl">
 										{col.title}
