@@ -5,14 +5,28 @@ import type {
 	StorefrontList,
 } from './types';
 
-export const fetchBlogPosts = (page = 1, limit = 10) =>
-	apiGet<StorefrontList<CmsBlogPost>>(
-		`/api/storefront/blog?page=${page}&limit=${limit}`,
-	);
+export type BlogPostsQuery = {
+	page?: number;
+	limit?: number;
+	category?: string;
+	tag?: string;
+};
 
-export async function fetchBlogPostsOrEmpty(page = 1, limit = 10) {
+export const fetchBlogPosts = (q: BlogPostsQuery = {}) => {
+	const params = new URLSearchParams();
+	if (q.page) params.set('page', String(q.page));
+	if (q.limit) params.set('limit', String(q.limit));
+	if (q.category) params.set('category', q.category);
+	if (q.tag) params.set('tag', q.tag);
+	const qs = params.toString();
+	return apiGet<StorefrontList<CmsBlogPost>>(
+		`/api/storefront/blog${qs ? `?${qs}` : ''}`,
+	);
+};
+
+export async function fetchBlogPostsOrEmpty(q: BlogPostsQuery = {}) {
 	try {
-		return await fetchBlogPosts(page, limit);
+		return await fetchBlogPosts(q);
 	} catch (err) {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn('[cms] fetchBlogPosts failed:', err);

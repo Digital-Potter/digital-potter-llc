@@ -10,7 +10,7 @@ import {
 
 export default async function BlogTeaser() {
 	const urls = await getSiteUrls();
-	const list = await fetchBlogPostsOrEmpty(1, 3);
+	const list = await fetchBlogPostsOrEmpty({ limit: 3 });
 	const posts: BlogPostCard[] =
 		list.items.length > 0
 			? list.items.map((p) => mapCmsBlogPostToCard(p, urls))

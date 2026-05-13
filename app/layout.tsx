@@ -41,6 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	const seo = data?.settings?.seo;
 	const tenantSettings = data?.tenant?.settings;
 	const webmaster = data?.settings?.webmasterTools;
+	const generated = seo?.generatedIcons;
 
 	const fallbackTitle = 'Digital Potter LLC | Custom Web & App Development';
 	const fallbackDescription =
@@ -83,16 +84,26 @@ export async function generateMetadata(): Promise<Metadata> {
 		},
 		icons: {
 			icon: [
-				{ url: '/icons/favicon.svg', type: 'image/svg+xml' },
-				{ url: '/icons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+				generated?.favicon32Url
+					? { url: generated.favicon32Url, sizes: '32x32', type: 'image/png' }
+					: { url: '/icons/favicon.svg', type: 'image/svg+xml' },
+				generated?.favicon96Url
+					? { url: generated.favicon96Url, sizes: '96x96', type: 'image/png' }
+					: {
+							url: '/icons/favicon-96x96.png',
+							sizes: '96x96',
+							type: 'image/png',
+						},
 			],
-			shortcut: seo?.faviconUrl ?? '/icons/favicon.ico',
+			shortcut: generated?.faviconIcoUrl ?? '/icons/favicon.ico',
 			apple: {
-				url: seo?.appleTouchIconUrl ?? '/icons/apple-touch-icon.png',
+				url:
+					generated?.appleTouchUrl ??
+					seo?.appleTouchIconUrl ??
+					'/icons/apple-touch-icon.png',
 				sizes: '180x180',
 			},
 		},
-		manifest: '/icons/site.webmanifest',
 		appleWebApp: {
 			title: 'Digital Potter',
 		},

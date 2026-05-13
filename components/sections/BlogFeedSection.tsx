@@ -17,7 +17,7 @@ export async function BlogFeedSection({ section }: { section: CmsSection }) {
 	const limit = c?.postCount ?? c?.count ?? 3;
 	let items: Awaited<ReturnType<typeof fetchBlogPosts>>['items'] = [];
 	try {
-		const r = await fetchBlogPosts(1, limit);
+		const r = await fetchBlogPosts({ limit });
 		items = r.items;
 	} catch {
 		// CMS unavailable — render empty silently

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
+import { BlogCategoryTemplate } from '@/components/pageTemplates/BlogCategoryTemplate';
 import { BlogPostTemplate } from '@/components/pageTemplates/BlogPostTemplate';
 import { BlogTemplate } from '@/components/pageTemplates/BlogTemplate';
 import { PortfolioTemplate } from '@/components/pageTemplates/PortfolioTemplate';
+import { ProjectCategoryTemplate } from '@/components/pageTemplates/ProjectCategoryTemplate';
 import { ProjectDetailTemplate } from '@/components/pageTemplates/ProjectDetailTemplate';
 import { UnsupportedResourceTemplate } from '@/components/pageTemplates/UnsupportedResourceTemplate';
 import { resolveTemplate } from '@/components/pageTemplates/registry';
@@ -22,6 +24,7 @@ type Route =
 	| { kind: 'blog-category'; slug: string }
 	| { kind: 'portfolio-index' }
 	| { kind: 'project-detail'; slug: string }
+	| { kind: 'project-category'; slug: string }
 	| { kind: 'products-index' }
 	| { kind: 'product-detail'; slug: string }
 	| { kind: 'product-category'; slug: string }
@@ -71,6 +74,8 @@ async function classify(slugs: string[]): Promise<Route> {
 
 	if (first === urls.portfolio) {
 		if (slugs.length === 1) return { kind: 'portfolio-index' };
+		if (slugs.length === 3 && second === 'category')
+			return { kind: 'project-category', slug: third };
 		if (slugs.length === 2) return { kind: 'project-detail', slug: second };
 		return { kind: 'not-found' };
 	}
@@ -110,11 +115,18 @@ export async function generateMetadata({
 		case 'redirect-home':
 			return {};
 		case 'blog-index':
-		case 'blog-category':
 			return buildPageMetadata({
 				slug: (await getSiteUrls()).blog,
 				fallback: BLOG_FALLBACK,
 			});
+		case 'blog-category':
+			return {
+				title: { absolute: `${route.slug} — Digital Potter Blog` },
+				description: `Posts in the ${route.slug} category.`,
+				alternates: {
+					canonical: (await getSiteUrls()).blogCategory(route.slug),
+				},
+			};
 		case 'blog-post': {
 			const data = await fetchBlogPostBySlugOrNull(route.slug);
 			if (!data?.post) {
@@ -143,6 +155,16 @@ export async function generateMetadata({
 				slug: (await getSiteUrls()).portfolio,
 				fallback: PORTFOLIO_FALLBACK,
 			});
+		case 'project-category': {
+			const urls = await getSiteUrls();
+			return {
+				title: { absolute: `${route.slug} — Digital Potter Portfolio` },
+				description: `Case studies in the ${route.slug} category.`,
+				alternates: {
+					canonical: `${urls.portfolioIndex}/category/${route.slug}`,
+				},
+			};
+		}
 		case 'project-detail': {
 			const project = await fetchProjectBySlugOrNull(route.slug);
 			if (!project) {
@@ -191,11 +213,9 @@ export default async function CatchAllRoute({
 		case 'redirect-home':
 			redirect('/');
 		case 'blog-index':
-		case 'blog-category':
-			// Storefront doesn't yet expose a category-filtered list, so a
-			// /<blogSlug>/category/<cat> URL falls through to the blog index for
-			// now. Wire a real category template once the API supports it.
 			return <BlogTemplate />;
+		case 'blog-category':
+			return <BlogCategoryTemplate categorySlug={route.slug} />;
 		case 'blog-post': {
 			const data = await fetchBlogPostBySlugOrNull(route.slug);
 			if (!data) notFound();
@@ -203,6 +223,8 @@ export default async function CatchAllRoute({
 		}
 		case 'portfolio-index':
 			return <PortfolioTemplate />;
+		case 'project-category':
+			return <ProjectCategoryTemplate categorySlug={route.slug} />;
 		case 'project-detail': {
 			const project = await fetchProjectBySlugOrNull(route.slug);
 			if (!project) notFound();

@@ -20,7 +20,7 @@ export async function BlogTemplate() {
 	const [cta, urls, list, settings] = await Promise.all([
 		resolveCtaHref(),
 		getSiteUrls(),
-		fetchBlogPostsOrEmpty(1, 24),
+		fetchBlogPostsOrEmpty({ limit: 24 }),
 		fetchStoreSettingsOrNull(),
 	]);
 	const posts =

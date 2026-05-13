@@ -227,7 +227,36 @@ export interface StoreSettingsRecord {
 		defaultOgImage?: string;
 		faviconUrl?: string;
 		appleTouchIconUrl?: string;
+		generatedIcons?: {
+			faviconIcoUrl?: string;
+			favicon16Url?: string;
+			favicon32Url?: string;
+			favicon96Url?: string;
+			favicon192Url?: string;
+			favicon512Url?: string;
+			appleTouchUrl?: string;
+		};
 		robots?: { allowIndexing?: boolean; extraDirectives?: string };
+		sitemap?: {
+			enabled?: boolean;
+			includePages?: boolean;
+			includeBlog?: boolean;
+			includeProducts?: boolean;
+			includeCategories?: boolean;
+			customUrls?: {
+				loc: string;
+				lastmod?: string;
+				priority?: number;
+				changefreq?:
+					| 'always'
+					| 'hourly'
+					| 'daily'
+					| 'weekly'
+					| 'monthly'
+					| 'yearly'
+					| 'never';
+			}[];
+		};
 	};
 	googleAnalytics?: {
 		measurementId?: string;

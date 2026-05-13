@@ -23,7 +23,7 @@ type BlogListContent = {
 export async function BlogListSection({ section }: { section: CmsSection }) {
 	const c = section.content as BlogListContent | undefined;
 	const limit = c?.limit ?? 6;
-	const r = await fetchBlogPostsOrEmpty(1, limit);
+	const r = await fetchBlogPostsOrEmpty({ limit });
 	if (r.items.length === 0) return null;
 	const urls = await getSiteUrls();
 
