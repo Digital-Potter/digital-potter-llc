@@ -28,7 +28,7 @@ export default function MaintenanceHero({
 					<ButtonLink href={primaryCtaHref} variant="solid">
 						{primaryCtaLabel}
 					</ButtonLink>
-					<ButtonLink href="/contact-us" variant="outlined">
+					<ButtonLink href="/discovery-call" variant="outlined">
 						Schedule a Discovery Call
 					</ButtonLink>
 				</div>

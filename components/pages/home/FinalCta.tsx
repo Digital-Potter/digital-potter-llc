@@ -21,7 +21,7 @@ export default function FinalCta({ href, label }: FinalCtaProps) {
 					<ButtonLink href={href} variant="solid">
 						{label}
 					</ButtonLink>
-					<ButtonLink href="/contact-us" variant="outlined">
+					<ButtonLink href="/discovery-call" variant="outlined">
 						Schedule a Discovery Call
 					</ButtonLink>
 				</div>
