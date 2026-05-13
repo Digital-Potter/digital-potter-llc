@@ -68,7 +68,7 @@ export function VideoSection({ section }: { section: CmsSection }) {
 					/>
 				</div>
 				{c?.caption && (
-					<figcaption className="text-dp-body/60 mt-4 text-center text-sm">
+					<figcaption className="text-dp-body-soft mt-4 text-center text-sm">
 						{c.caption}
 					</figcaption>
 				)}

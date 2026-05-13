@@ -22,7 +22,7 @@ export async function UnsupportedResourceTemplate({
 			<section className="dp-container py-20 md:py-28">
 				<div className="mx-auto max-w-3xl text-center">
 					<h1 className="text-balance">{title}</h1>
-					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-lg text-balance md:text-xl">
+					<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-lg text-balance md:text-xl">
 						{subtitle}
 					</p>
 				</div>

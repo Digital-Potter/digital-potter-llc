@@ -44,7 +44,7 @@ export async function Footer() {
 								className="w-[160px] md:w-[180px]"
 							/>
 						</Link>
-						<p className="text-dp-body/70 mt-4 text-base">
+						<p className="text-dp-body-soft mt-4 text-base">
 							© {new Date().getFullYear()} Digital Potter LLC.
 						</p>
 					</div>
@@ -53,7 +53,7 @@ export async function Footer() {
 							<h3 className="font-primary-font mb-3 text-sm font-bold tracking-wider uppercase">
 								{menu.name}
 							</h3>
-							<ul className="text-dp-body/70 space-y-2">
+							<ul className="text-dp-body-soft space-y-2">
 								{menu.items.map((item) => {
 									const href = resolveMenuItemHref(item, siteStructure);
 									return (

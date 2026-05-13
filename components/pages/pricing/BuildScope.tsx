@@ -17,7 +17,7 @@ export default function BuildScope() {
 				<h2 className="mt-6 text-balance">
 					Three tiers. Your scope decides where you land.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					We sell foundations, not features. Most serious small businesses land
 					in Growth. Starter is for tight-scope launches; Premium is for custom
 					platforms and apps. Your proposal pins a fixed price after discovery.
@@ -43,7 +43,7 @@ export default function BuildScope() {
 							<p
 								className={twMerge(
 									'font-primary-font text-xs font-bold tracking-widest uppercase',
-									isHighlight ? 'text-dp-dark-green' : 'text-dp-body/60',
+									isHighlight ? 'text-dp-dark-green' : 'text-dp-body-soft',
 								)}
 							>
 								{tier.label}
@@ -51,7 +51,7 @@ export default function BuildScope() {
 							<p className="font-primary-font text-dp-dark mt-4 text-3xl font-bold md:text-4xl">
 								{formatRange(tier.rangeLow, tier.rangeHigh)}
 							</p>
-							<p className="text-dp-body/70 mt-2 text-sm">{tier.tagline}</p>
+							<p className="text-dp-body-soft mt-2 text-sm">{tier.tagline}</p>
 							<p className="text-dp-body/85 mt-5 text-sm md:text-base">
 								{tier.bestFor}
 							</p>
@@ -81,7 +81,7 @@ export default function BuildScope() {
 				})}
 			</div>
 
-			<p className="text-dp-body/70 mx-auto mt-10 max-w-2xl text-center text-sm">
+			<p className="text-dp-body-soft mx-auto mt-10 max-w-2xl text-center text-sm">
 				Not sure where your project lands? That&apos;s the point of the
 				discovery call — we listen, scope, and send you a proposal with the
 				exact line items and a fixed price before any work begins.

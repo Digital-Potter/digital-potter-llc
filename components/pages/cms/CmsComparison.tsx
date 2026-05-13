@@ -82,7 +82,7 @@ export default function CmsComparison() {
 				<h2 className="mt-6 text-balance">
 					Not WordPress. Not a SaaS. Something better for our use case.
 				</h2>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					We tried each of these for years before building our own. Here&apos;s
 					what we kept, what we threw out, and what we added that nobody else
 					ships.
@@ -95,25 +95,25 @@ export default function CmsComparison() {
 						<tr className="border-dp-dark/10 border-b">
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/60 px-6 py-5 text-xs font-bold tracking-widest uppercase"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-xs font-bold tracking-widest uppercase"
 							>
 								Feature
 							</th>
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/70 px-6 py-5 text-sm font-bold"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-sm font-bold"
 							>
 								WordPress
 							</th>
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/70 px-6 py-5 text-sm font-bold"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-sm font-bold"
 							>
 								Contentful
 							</th>
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/70 px-6 py-5 text-sm font-bold"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-sm font-bold"
 							>
 								Strapi
 							</th>
@@ -137,9 +137,9 @@ export default function CmsComparison() {
 								>
 									{r.feature}
 								</th>
-								<td className="text-dp-body/75 px-6 py-5">{r.wordpress}</td>
-								<td className="text-dp-body/75 px-6 py-5">{r.contentful}</td>
-								<td className="text-dp-body/75 px-6 py-5">{r.strapi}</td>
+								<td className="text-dp-body-soft px-6 py-5">{r.wordpress}</td>
+								<td className="text-dp-body-soft px-6 py-5">{r.contentful}</td>
+								<td className="text-dp-body-soft px-6 py-5">{r.strapi}</td>
 								<td
 									className={
 										r.dpEmphasis

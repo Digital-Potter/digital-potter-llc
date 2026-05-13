@@ -18,7 +18,7 @@ export default function MobileHero({
 				<h1 className="mt-6 text-balance">
 					Native-quality apps shipped in half the time.
 				</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					We build cross-platform mobile apps with React Native and Expo — one
 					codebase that runs on iOS and Android, with native performance, App
 					Store-quality UX, and a release cadence that doesn&apos;t burn out

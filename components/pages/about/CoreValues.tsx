@@ -32,7 +32,7 @@ export default function CoreValues() {
 				<h2 className="mt-6 text-balance">
 					Four principles that guide every project.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					These aren&apos;t a poster on the wall. They&apos;re how we decide
 					what to ship, what to delete, and what to push back on.
 				</p>
@@ -59,7 +59,7 @@ export default function CoreValues() {
 						<h3 className="font-primary-font mt-5 text-lg font-bold md:text-xl">
 							{v.title}
 						</h3>
-						<p className="text-dp-body/80 mt-3 text-sm md:text-base">
+						<p className="text-dp-body-soft mt-3 text-sm md:text-base">
 							{v.body}
 						</p>
 					</li>

@@ -143,7 +143,7 @@ export default function MegaMenu({
 						<p className="font-primary-font text-dp-dark-green text-xs font-bold tracking-widest uppercase">
 							{eyebrow}
 						</p>
-						<p className="text-dp-body/80 font-secondary-font mt-2 text-sm tracking-normal normal-case">
+						<p className="text-dp-body-soft font-secondary-font mt-2 text-sm tracking-normal normal-case">
 							{subtitle}
 						</p>
 					</div>
@@ -166,7 +166,7 @@ export default function MegaMenu({
 											</p>
 										)}
 										{col.subtitle && (
-											<p className="text-dp-body/70 font-secondary-font mt-1 text-xs tracking-normal normal-case">
+											<p className="text-dp-body-soft font-secondary-font mt-1 text-xs tracking-normal normal-case">
 												{col.subtitle}
 											</p>
 										)}
@@ -189,7 +189,7 @@ export default function MegaMenu({
 													{item.headline ?? item.label}
 												</span>
 												{item.description && (
-													<span className="text-dp-body/70 font-secondary-font block text-sm tracking-normal normal-case">
+													<span className="text-dp-body-soft font-secondary-font block text-sm tracking-normal normal-case">
 														{item.description}
 													</span>
 												)}

@@ -52,14 +52,16 @@ export default function PostHeader({ post, urls }: PostHeaderProps) {
 				)}
 				<h1 className="mt-6 text-balance">{post.title}</h1>
 				{post.subtitle && (
-					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-lg text-balance md:text-xl">
+					<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-lg text-balance md:text-xl">
 						{post.subtitle}
 					</p>
 				)}
 				{(author || date) && (
-					<p className="text-dp-body/70 mt-8 text-sm">
+					<p className="text-dp-body-soft mt-8 text-sm">
 						{author && <span className="text-dp-dark font-bold">{author}</span>}
-						{author && date && <span className="text-dp-body/40 mx-2">·</span>}
+						{author && date && (
+							<span className="text-dp-body-soft mx-2">·</span>
+						)}
 						{date && <span>{date}</span>}
 					</p>
 				)}

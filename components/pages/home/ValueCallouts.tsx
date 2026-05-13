@@ -19,7 +19,7 @@ export default function ValueCallouts() {
 					<h3 className="text-2xl md:text-3xl">
 						Crafted experiences that convert visitors into customers.
 					</h3>
-					<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+					<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 						Pretty designs are easy. Designs that move people through your
 						funnel are not. We build for both — beautiful work that pays for
 						itself.
@@ -43,7 +43,7 @@ export default function ValueCallouts() {
 					<h3 className="text-2xl md:text-3xl">
 						Update your site in seconds — without breaking anything.
 					</h3>
-					<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+					<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 						Every Digital Potter site is powered by our own CMS, so your team
 						edits content like it&apos;s a Google Doc — and ships it without
 						waiting on engineers.

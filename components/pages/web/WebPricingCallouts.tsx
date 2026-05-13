@@ -28,7 +28,7 @@ export default function WebPricingCallouts() {
 				<h2 className="mt-6 text-balance">
 					The three numbers you need before you commit.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Honest answers to the questions every business asks before hiring an
 					agency.
 				</p>
@@ -46,7 +46,7 @@ export default function WebPricingCallouts() {
 						<h3 className="font-primary-font text-dp-dark mt-4 text-xl font-bold md:text-2xl">
 							{c.title}
 						</h3>
-						<p className="text-dp-body/80 mt-4 text-base">{c.body}</p>
+						<p className="text-dp-body-soft mt-4 text-base">{c.body}</p>
 					</li>
 				))}
 			</ul>

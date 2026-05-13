@@ -40,7 +40,7 @@ export default function WhyReactNativeExpo() {
 				<h2 className="mt-6 text-balance">
 					Why we build with React Native + Expo.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Two layers of tooling that, together, give you native quality at a
 					small-team budget. Here&apos;s what each one solves.
 				</p>
@@ -56,7 +56,7 @@ export default function WhyReactNativeExpo() {
 							{r.tag}
 						</p>
 						<h3 className="mt-4 text-xl md:text-2xl">{r.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{r.body}
 						</p>
 						<ul className="mt-6 space-y-3">

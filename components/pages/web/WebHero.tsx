@@ -18,7 +18,7 @@ export default function WebHero({
 				<h1 className="mt-6 text-balance">
 					Custom Next.js websites that grow with your business.
 				</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Every site we ship is hand-crafted Next.js — fast, SEO-ready from the
 					first commit, owned by you on day one. No templates, no
 					template-builder lock-in, no surprise traffic gates.

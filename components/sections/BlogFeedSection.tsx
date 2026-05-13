@@ -39,7 +39,7 @@ export async function BlogFeedSection({ section }: { section: CmsSection }) {
 								<div className="dp-box-design relative aspect-video w-full overflow-hidden rounded-2xl">
 									<Image
 										src={p.featuredImage.url}
-										alt={p.featuredImage.alt ?? ''}
+										alt={p.featuredImage.alt ?? p.title}
 										fill
 										sizes="(min-width: 768px) 33vw, 100vw"
 										className="object-cover"
@@ -52,7 +52,7 @@ export async function BlogFeedSection({ section }: { section: CmsSection }) {
 								{p.title}
 							</h3>
 							{p.excerpt && (
-								<p className="text-dp-body/75 mt-3 text-base">{p.excerpt}</p>
+								<p className="text-dp-body-soft mt-3 text-base">{p.excerpt}</p>
 							)}
 							<span className="text-dp-dark-green group-hover:text-dp-green mt-4 inline-block text-sm font-bold">
 								Read more →

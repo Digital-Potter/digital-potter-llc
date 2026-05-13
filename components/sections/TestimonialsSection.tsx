@@ -92,7 +92,7 @@ export function TestimonialsSection({ section }: { section: CmsSection }) {
 											/>
 										</div>
 									)}
-									<div className="text-dp-body/70 text-sm">
+									<div className="text-dp-body-soft text-sm">
 										{t.author && (
 											<div className="text-dp-dark font-bold">{t.author}</div>
 										)}

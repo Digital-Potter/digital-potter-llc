@@ -41,7 +41,7 @@ export default function WhatWeBuildWeb() {
 				<h2 className="mt-6 text-balance">
 					Sites with a job to do — not just a digital business card.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Four categories cover most of what we&apos;ve shipped. Yours probably
 					falls in one of them.
 				</p>
@@ -54,10 +54,10 @@ export default function WhatWeBuildWeb() {
 						className="border-dp-dark/10 hover:border-dp-green/50 rounded-3xl border bg-white/50 p-8 transition-colors md:p-10"
 					>
 						<h3 className="text-xl md:text-2xl">{site.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{site.body}
 						</p>
-						<p className="text-dp-body/60 mt-4 text-sm italic">
+						<p className="text-dp-body-soft mt-4 text-sm italic">
 							{site.examples}
 						</p>
 					</li>

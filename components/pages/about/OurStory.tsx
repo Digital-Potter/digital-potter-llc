@@ -54,7 +54,7 @@ export default function OurStory() {
 								<p className="font-primary-font text-dp-dark-green text-3xl font-bold md:text-4xl">
 									{f.stat}
 								</p>
-								<p className="text-dp-body/75 mt-2 text-sm md:text-base">
+								<p className="text-dp-body-soft mt-2 text-sm md:text-base">
 									{f.label}
 								</p>
 							</li>

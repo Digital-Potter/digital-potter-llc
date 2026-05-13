@@ -53,7 +53,7 @@ export function FeatureGridSection({ section }: { section: CmsSection }) {
 				<div className="mx-auto mb-12 max-w-4xl text-center">
 					{section.title && <h2 className="text-balance">{section.title}</h2>}
 					{section.subtitle && (
-						<p className="text-dp-body/80 mt-4 text-balance">
+						<p className="text-dp-body-soft mt-4 text-balance">
 							{section.subtitle}
 						</p>
 					)}
@@ -90,7 +90,7 @@ export function FeatureGridSection({ section }: { section: CmsSection }) {
 							)}
 							{col.content && (
 								<div
-									className="prose prose-sm prose-p:text-dp-body/75 prose-strong:text-dp-dark prose-a:text-dp-dark-green mt-3 max-w-none"
+									className="prose prose-sm prose-p:text-dp-body-soft prose-strong:text-dp-dark prose-a:text-dp-dark-green mt-3 max-w-none"
 									dangerouslySetInnerHTML={{ __html: col.content }}
 								/>
 							)}

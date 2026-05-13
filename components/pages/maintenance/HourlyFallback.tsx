@@ -17,7 +17,7 @@ export default function HourlyFallback({ ctaHref }: HourlyFallbackProps) {
 						Hourly support at{' '}
 						<span className="text-dp-dark-green">${HOURLY_RATE}/hr</span>
 					</p>
-					<p className="text-dp-body/80 mt-3 text-base">
+					<p className="text-dp-body-soft mt-3 text-base">
 						Pay only when you need help, with a {HOURLY_MIN_HOURS}-hour minimum
 						per request. No priority queue — retainer clients are served first.
 						If you find yourself calling more than once a quarter, the Care Plan

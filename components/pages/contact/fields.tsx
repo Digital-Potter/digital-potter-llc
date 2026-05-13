@@ -32,7 +32,7 @@ export function FieldShell({
 			</label>
 			{children}
 			{hint && !error ? (
-				<p className="text-dp-body/60 mt-2 text-xs">{hint}</p>
+				<p className="text-dp-body-soft mt-2 text-xs">{hint}</p>
 			) : null}
 			{error ? (
 				<p className="mt-2 text-xs text-red-700" role="alert">

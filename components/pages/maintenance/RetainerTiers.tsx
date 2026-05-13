@@ -16,7 +16,7 @@ export default function RetainerTiers({ ctaHref }: RetainerTiersProps) {
 				<h2 className="mt-6 text-balance">
 					Pick the level of attention your business needs.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Each tier includes monthly hours of dev or design work plus everything
 					below it. Cancel any time with 30 days notice.
 				</p>
@@ -41,15 +41,15 @@ export default function RetainerTiers({ ctaHref }: RetainerTiersProps) {
 							<p className="font-primary-font text-dp-dark mt-4 text-xs font-bold tracking-widest uppercase">
 								{tier.label}
 							</p>
-							<p className="text-dp-body/75 mt-2 text-sm">{tier.tagline}</p>
+							<p className="text-dp-body-soft mt-2 text-sm">{tier.tagline}</p>
 							<div className="mt-6">
 								<p className="font-primary-font text-dp-dark-green text-4xl font-bold md:text-5xl">
 									${tier.price.toLocaleString()}
-									<span className="text-dp-body/60 ml-1 text-base font-medium">
+									<span className="text-dp-body-soft ml-1 text-base font-medium">
 										/mo
 									</span>
 								</p>
-								<p className="text-dp-body/70 mt-2 text-sm">{tier.hours}</p>
+								<p className="text-dp-body-soft mt-2 text-sm">{tier.hours}</p>
 							</div>
 							<p className="text-dp-body/85 mt-6 text-base">{tier.bestFor}</p>
 							<ul className="mt-6 space-y-3">

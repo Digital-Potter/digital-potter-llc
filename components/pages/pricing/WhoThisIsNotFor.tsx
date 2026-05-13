@@ -24,7 +24,7 @@ export default function WhoThisIsNotFor() {
 				<h2 className="mt-6 text-balance">
 					Who we’re a fit for — and who we’re not.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Clarity up front saves everyone time. If the right column describes
 					your project, we’ll happily point you toward a better-suited option.
 				</p>
@@ -100,7 +100,7 @@ export default function WhoThisIsNotFor() {
 						{notFit.map((item) => (
 							<li
 								key={item}
-								className="text-dp-body/75 flex items-start gap-3 text-base"
+								className="text-dp-body-soft flex items-start gap-3 text-base"
 							>
 								<svg
 									aria-hidden
@@ -120,7 +120,7 @@ export default function WhoThisIsNotFor() {
 				</article>
 			</div>
 
-			<p className="text-dp-body/70 mx-auto mt-10 max-w-2xl text-center text-sm">
+			<p className="text-dp-body-soft mx-auto mt-10 max-w-2xl text-center text-sm">
 				Not sure where you land? Send us the brief anyway. If we’re not the
 				right fit, we’ll tell you and point you somewhere that is.
 			</p>

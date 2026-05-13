@@ -15,7 +15,7 @@ export default function PricingTeaser() {
 						<span className="text-dp-dark-green">{monthly}/month</span> for
 						hosting & CMS
 					</p>
-					<p className="text-dp-body/70 mt-1 text-sm">
+					<p className="text-dp-body-soft mt-1 text-sm">
 						The base price is the foundation. Custom features are quoted in your
 						proposal. You own the code, no per-page fees, no traffic gates, no
 						lock-in.

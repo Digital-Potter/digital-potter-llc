@@ -4,6 +4,7 @@
 :root {
 	--dp-yellowish: #fffdee;
 	--dp-body: #331f1f;
+	--dp-body-soft: #5c4d4d;
 	--dp-light-gray: #efefef;
 	--dp-green: #00d85c;
 	--dp-dark: #331f1f;
@@ -16,6 +17,7 @@
 	--color-dp-bg: var(--dp-yellowish);
 	--color-dp-yellowish: var(--dp-yellowish);
 	--color-dp-body: var(--dp-body);
+	--color-dp-body-soft: var(--dp-body-soft);
 	--color-dp-light-gray: var(--dp-light-gray);
 	--color-dp-green: var(--dp-green);
 	--color-dp-dark: var(--dp-dark);

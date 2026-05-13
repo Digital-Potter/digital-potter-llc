@@ -29,7 +29,7 @@ export default function LicenseTerms() {
 					License & IP terms
 				</p>
 				<h2 className="mt-6 text-balance">The legal bit, in plain English.</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Five things to know before the formal agreement. The full license is
 					short and we&apos;re happy to walk through it on a call.
 				</p>
@@ -44,7 +44,7 @@ export default function LicenseTerms() {
 						<p className="font-primary-font text-dp-dark text-base font-bold md:text-lg">
 							{p.title}
 						</p>
-						<p className="text-dp-body/80 mt-2 text-base">{p.body}</p>
+						<p className="text-dp-body-soft mt-2 text-base">{p.body}</p>
 					</li>
 				))}
 			</ul>

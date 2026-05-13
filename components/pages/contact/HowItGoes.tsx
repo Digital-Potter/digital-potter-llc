@@ -21,7 +21,7 @@ export default function HowItGoes() {
 		<section className="dp-container py-16 md:py-24">
 			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">How the process goes.</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Three steps from your first message to your first sprint. No
 					surprises, no marketing-speak.
 				</p>
@@ -36,7 +36,7 @@ export default function HowItGoes() {
 							{s.n}
 						</span>
 						<h3 className="mt-4 text-xl md:text-2xl">{s.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{s.body}
 						</p>
 					</li>

@@ -29,7 +29,7 @@ export default function SelfHostedProcess() {
 				<h2 className="mt-6 text-balance">
 					Six to eight weeks from kickoff to your team running it.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Standard timeline. Compliance-heavy environments add audit phases; we
 					map them in your scope of work.
 				</p>
@@ -45,12 +45,12 @@ export default function SelfHostedProcess() {
 							<span className="bg-dp-dark-green text-dp-green font-primary-font inline-flex h-12 w-12 items-center justify-center rounded-2xl text-base font-bold">
 								{p.n}
 							</span>
-							<span className="text-dp-body/60 text-xs font-bold tracking-wider uppercase">
+							<span className="text-dp-body-soft text-xs font-bold tracking-wider uppercase">
 								{p.duration}
 							</span>
 						</div>
 						<h3 className="mt-5 text-xl md:text-2xl">{p.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{p.body}
 						</p>
 					</li>

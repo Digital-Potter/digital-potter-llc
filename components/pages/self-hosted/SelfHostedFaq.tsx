@@ -48,7 +48,7 @@ export default function SelfHostedFaq() {
 				<h2 className="mt-6 text-balance">
 					Eight questions every platform team asks.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					If yours isn&apos;t here, ask in the contact form — we answer every
 					inquiry within one business day.
 				</p>

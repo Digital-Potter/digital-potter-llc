@@ -40,7 +40,7 @@ export default function Stepper({ current, onJump, maxReached }: StepperProps) {
 									? 'bg-dp-dark border-dp-dark text-dp-green'
 									: isReached
 										? 'border-dp-dark-green/40 bg-dp-dark-green/5 text-dp-dark hover:bg-dp-dark-green/10'
-										: 'border-dp-dark/15 text-dp-body/50 bg-white/40',
+										: 'border-dp-dark/15 text-dp-body-soft bg-white/40',
 								canJump ? 'cursor-pointer' : '',
 							)}
 						>
@@ -52,7 +52,7 @@ export default function Stepper({ current, onJump, maxReached }: StepperProps) {
 										? 'bg-dp-green text-dp-dark'
 										: isReached
 											? 'bg-dp-dark-green text-white'
-											: 'bg-dp-dark/15 text-dp-body/60',
+											: 'bg-dp-dark/15 text-dp-body-soft',
 								)}
 							>
 								{s.n}

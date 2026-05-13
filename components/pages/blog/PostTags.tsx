@@ -11,7 +11,7 @@ export default function PostTags({ tags, urls }: PostTagsProps) {
 	return (
 		<section className="dp-container py-8">
 			<div className="mx-auto max-w-3xl">
-				<p className="font-primary-font text-dp-body/60 text-xs font-bold tracking-widest uppercase">
+				<p className="font-primary-font text-dp-body-soft text-xs font-bold tracking-widest uppercase">
 					Tags
 				</p>
 				<ul className="mt-4 flex flex-wrap gap-2">

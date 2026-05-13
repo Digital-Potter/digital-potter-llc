@@ -43,7 +43,7 @@ export default function HowPricingWorks() {
 				<h2 className="mt-6 text-balance">
 					Three line items. That&apos;s the whole model.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					A custom frontend you own, hosting + platform management at a flat
 					monthly fee, and optional modules if your business needs them. Every
 					line shown up front — your proposal pins the final scope and price.
@@ -60,13 +60,13 @@ export default function HowPricingWorks() {
 							{card.tag}
 						</span>
 						<h3 className="mt-4 text-xl md:text-2xl">{card.headline}</h3>
-						<p className="text-dp-body/80 mt-4 text-base">{card.body}</p>
+						<p className="text-dp-body-soft mt-4 text-base">{card.body}</p>
 						<div className="border-dp-dark/10 mt-auto border-t pt-6">
 							<p className="font-primary-font text-dp-dark-green text-3xl font-bold md:text-4xl">
 								{card.price}
 							</p>
 							{card.priceDetail ? (
-								<p className="text-dp-body/70 mt-1 text-sm">
+								<p className="text-dp-body-soft mt-1 text-sm">
 									{card.priceDetail}
 								</p>
 							) : null}

@@ -56,7 +56,7 @@ export default function SocialProof() {
 
 	return (
 		<section className="dp-container py-16 md:py-24">
-			<p className="text-dp-body/60 text-center text-xs font-bold tracking-widest uppercase">
+			<p className="text-dp-body-soft text-center text-xs font-bold tracking-widest uppercase">
 				What our clients say
 			</p>
 
@@ -76,11 +76,11 @@ export default function SocialProof() {
 					</p>
 				</blockquote>
 
-				<figcaption className="text-dp-body/70 mt-6 text-sm">
+				<figcaption className="text-dp-body-soft mt-6 text-sm">
 					<span className="text-dp-dark font-bold">{current.name}</span>
 					{' · '}
 					{current.company}
-					<span className="text-dp-body/50 mx-2">|</span>
+					<span className="text-dp-body-soft mx-2">|</span>
 					<span className="text-xs">Source: {current.source}</span>
 				</figcaption>
 			</figure>

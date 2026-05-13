@@ -77,7 +77,7 @@ export default function ProjectsGrid({
 			</ul>
 
 			{visible.length === 0 ? (
-				<p className="text-dp-body/70 mt-12 text-center text-base">
+				<p className="text-dp-body-soft mt-12 text-center text-base">
 					Nothing in this category yet.{' '}
 					<button
 						type="button"
@@ -116,7 +116,7 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
 					<>
 						<div className="from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 absolute inset-0 bg-gradient-to-br" />
 						<div className="absolute inset-0 flex items-center justify-center">
-							<span className="text-dp-body/30 text-xs font-bold tracking-widest uppercase">
+							<span className="text-dp-body-soft text-xs font-bold tracking-widest uppercase">
 								Project cover
 							</span>
 						</div>
@@ -138,19 +138,19 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
 					</span>
 				))}
 				{project.status === 'live' ? (
-					<span className="text-dp-body/60">Live</span>
+					<span className="text-dp-body-soft">Live</span>
 				) : null}
 			</div>
 			<h3 className="font-primary-font group-hover:text-dp-dark-green mt-4 text-xl font-bold transition-colors md:text-2xl">
 				{project.title}
 			</h3>
-			<p className="text-dp-body/75 mt-3 text-base">{project.excerpt}</p>
+			<p className="text-dp-body-soft mt-3 text-base">{project.excerpt}</p>
 			{isLinked ? (
 				<span className="text-dp-dark-green group-hover:text-dp-green mt-4 inline-block text-sm font-bold">
 					Read the case study →
 				</span>
 			) : (
-				<span className="text-dp-body/50 mt-4 inline-block text-sm font-bold">
+				<span className="text-dp-body-soft mt-4 inline-block text-sm font-bold">
 					Case study in progress
 				</span>
 			)}

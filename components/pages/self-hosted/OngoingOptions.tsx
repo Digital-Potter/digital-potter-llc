@@ -33,7 +33,7 @@ export default function OngoingOptions() {
 					After we hand over the keys
 				</p>
 				<h2 className="mt-6 text-balance">Two paths for ongoing operations.</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Most orgs choose the maintenance contract for the steady upgrade
 					cadence. Some prefer to run it themselves and just call us when they
 					need help.
@@ -54,7 +54,7 @@ export default function OngoingOptions() {
 							{p.tag}
 						</p>
 						<h3 className="mt-4 text-xl md:text-2xl">{p.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{p.body}
 						</p>
 						<ul className="mt-6 space-y-3">

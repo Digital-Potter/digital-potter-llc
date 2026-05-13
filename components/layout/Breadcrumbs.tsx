@@ -58,13 +58,13 @@ export default function Breadcrumbs({ items, className }: BreadcrumbsProps) {
 					'font-primary-font text-xs font-bold tracking-wider uppercase'
 				}
 			>
-				<ol className="text-dp-body/60 flex flex-wrap items-center gap-2">
+				<ol className="text-dp-body-soft flex flex-wrap items-center gap-2">
 					{items.map((item, i) => {
 						const isLast = i === items.length - 1;
 						return (
 							<li key={`${item.href}-${i}`} className="flex items-center gap-2">
 								{isLast ? (
-									<span className="text-dp-body/80" aria-current="page">
+									<span className="text-dp-body-soft" aria-current="page">
 										{item.label}
 									</span>
 								) : (
@@ -76,7 +76,7 @@ export default function Breadcrumbs({ items, className }: BreadcrumbsProps) {
 									</Link>
 								)}
 								{!isLast && (
-									<span className="text-dp-body/40" aria-hidden>
+									<span className="text-dp-body-soft" aria-hidden>
 										/
 									</span>
 								)}

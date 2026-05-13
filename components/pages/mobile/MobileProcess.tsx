@@ -51,7 +51,7 @@ export default function MobileProcess() {
 						<h3 className="font-primary-font mt-4 text-base font-bold md:text-lg">
 							{p.title}
 						</h3>
-						<p className="text-dp-body/80 mt-3 text-sm">{p.body}</p>
+						<p className="text-dp-body-soft mt-3 text-sm">{p.body}</p>
 					</li>
 				))}
 			</ol>

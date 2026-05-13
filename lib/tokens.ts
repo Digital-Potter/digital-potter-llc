@@ -1,6 +1,7 @@
 export const colors = {
 	yellowish: '#fffdee',
 	body: '#331f1f',
+	bodySoft: '#5c4d4d',
 	green: '#00d85c',
 	dark: '#331f1f',
 	darkGreen: '#007431',

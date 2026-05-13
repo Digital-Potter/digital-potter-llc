@@ -14,7 +14,7 @@ export default function SelfHostedHero({
 					Self-Hosted Edition
 				</p>
 				<h1 className="mt-6 text-balance">Run theDavid in your own cloud.</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					For organizations with data sovereignty, compliance, or scale needs
 					that go beyond a managed plan. Same CMS, your infrastructure, your
 					perimeter.

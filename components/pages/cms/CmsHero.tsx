@@ -19,7 +19,7 @@ export default function CmsHero({
 				<h1 className="mt-6 text-balance">
 					The CMS we built for our own clients.
 				</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Multi-tenant. Headless. Built around editorial control. theDavid
 					powers every Digital Potter site — your marketing team writes,
 					designers ship, engineers stay focused on shipping features.

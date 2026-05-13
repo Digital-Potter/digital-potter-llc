@@ -55,12 +55,12 @@ export default function WhyWeBuiltTheDavid() {
 							<h3 className="font-primary-font mt-4 text-lg font-bold md:text-xl">
 								{p.title}
 							</h3>
-							<p className="text-dp-body/80 mt-3 text-base">{p.body}</p>
+							<p className="text-dp-body-soft mt-3 text-base">{p.body}</p>
 						</li>
 					))}
 				</ul>
 
-				<p className="text-dp-body/70 mt-10 text-center text-sm">
+				<p className="text-dp-body-soft mt-10 text-center text-sm">
 					Curious how it works under the hood?{' '}
 					<Link
 						href="/the-cms-we-built-for-our-own-clients"

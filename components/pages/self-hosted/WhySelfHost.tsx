@@ -32,7 +32,7 @@ export default function WhySelfHost() {
 				<h2 className="mt-6 text-balance">
 					Four reasons organizations move theDavid in-house.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Most clients are happy on the managed plan. These four reasons are
 					when the math (or the audit) flips toward owning the infrastructure.
 				</p>
@@ -48,7 +48,7 @@ export default function WhySelfHost() {
 							{`0${i + 1}`}
 						</span>
 						<h3 className="mt-4 text-xl md:text-2xl">{r.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{r.body}
 						</p>
 					</li>

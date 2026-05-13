@@ -78,16 +78,16 @@ export default function ScreenshotFrame({
 								<circle cx="9" cy="9" r="2" />
 								<path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
 							</svg>
-							<p className="text-dp-body/40 font-primary-font text-xs font-bold tracking-widest uppercase">
+							<p className="text-dp-body-soft font-primary-font text-xs font-bold tracking-widest uppercase">
 								{placeholderLabel ?? 'Screenshot'}
 							</p>
-							<p className="text-dp-body/30 text-sm">{alt}</p>
+							<p className="text-dp-body-soft text-sm">{alt}</p>
 						</div>
 					</div>
 				)}
 			</div>
 			{caption && (
-				<figcaption className="text-dp-body/60 mt-4 text-center text-sm">
+				<figcaption className="text-dp-body-soft mt-4 text-center text-sm">
 					{caption}
 				</figcaption>
 			)}

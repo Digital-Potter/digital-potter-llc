@@ -28,7 +28,7 @@ export default function MobilePricingCallouts() {
 				<h2 className="mt-6 text-balance">
 					The three numbers and the three accounts that matter.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Honest answers to the questions every founder asks before they commit
 					to a mobile app project.
 				</p>
@@ -46,7 +46,7 @@ export default function MobilePricingCallouts() {
 						<h3 className="font-primary-font text-dp-dark mt-4 text-xl font-bold md:text-2xl">
 							{c.title}
 						</h3>
-						<p className="text-dp-body/80 mt-4 text-base">{c.body}</p>
+						<p className="text-dp-body-soft mt-4 text-base">{c.body}</p>
 					</li>
 				))}
 			</ul>

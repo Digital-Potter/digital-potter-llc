@@ -54,7 +54,7 @@ export default function UnderTheHood() {
 					Under the hood
 				</p>
 				<h2 className="mt-6 text-balance">Boring choices on purpose.</h2>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Each tool earns its place by being the best long-term option for the
 					problem — not the trendiest. Everything ships production-ready.
 				</p>

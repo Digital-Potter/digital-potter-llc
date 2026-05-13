@@ -50,7 +50,7 @@ export default function WebTechStack() {
 					Under the hood
 				</p>
 				<h2 className="mt-6 text-balance">The stack we ship every site on.</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Boring choices on purpose. Each tool earns its place by being the best
 					long-term option for the problem — not the trendiest.
 				</p>

@@ -18,7 +18,7 @@ export default function PortfolioHero({
 				<h1 className="mt-6 text-balance">
 					The websites and apps we&apos;ve shipped.
 				</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					A mix of restaurants, retailers, and B2B platforms. Each one started
 					as a blank page and ended as a custom Next.js build that the
 					client&apos;s team can run themselves.

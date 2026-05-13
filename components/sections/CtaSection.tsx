@@ -27,7 +27,7 @@ export function CtaSection({ section }: { section: CmsSection }) {
 					</p>
 				)}
 				{c?.description && (
-					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+					<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 						{c.description}
 					</p>
 				)}

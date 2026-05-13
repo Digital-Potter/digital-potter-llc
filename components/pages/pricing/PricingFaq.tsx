@@ -10,7 +10,7 @@ export default function PricingFaq() {
 				<h2 className="mt-6 text-balance">
 					The questions every business owner asks us.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					If yours isn&apos;t here, ask in the contact form — we answer every
 					inquiry within one business day.
 				</p>

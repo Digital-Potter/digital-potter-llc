@@ -18,7 +18,7 @@ export default async function HomeHero({
 					<h1 className="text-balance">
 						Beautifully crafted web and mobile apps.
 					</h1>
-					<p className="text-dp-body/80 mt-6 text-balance">
+					<p className="text-dp-body-soft mt-6 text-balance">
 						Designed for clarity, delight, and results. We hand-craft every
 						pixel and every line of code so your site fits your business like it
 						was made for it — because it was.
@@ -51,7 +51,7 @@ function HeroVisualPlaceholder() {
 				<div className="bg-dp-dark/10 h-3 w-2/3 rounded-full" />
 				<div className="bg-dp-dark/10 h-3 w-2/5 rounded-full" />
 				<div className="bg-dp-green/40 mt-6 h-10 w-32 rounded-full" />
-				<p className="text-dp-body/60 mt-4 text-sm tracking-wider uppercase">
+				<p className="text-dp-body-soft mt-4 text-sm tracking-wider uppercase">
 					Our canvas is ready for your vision.
 				</p>
 			</div>

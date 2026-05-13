@@ -54,7 +54,7 @@ export async function BlogCategoryTemplate({
 						Category
 					</p>
 					<h1 className="mt-6 text-balance">{categoryName}</h1>
-					<p className="text-dp-body/60 mt-6 text-sm">
+					<p className="text-dp-body-soft mt-6 text-sm">
 						{list.total} {list.total === 1 ? 'post' : 'posts'} in this category.
 					</p>
 				</div>

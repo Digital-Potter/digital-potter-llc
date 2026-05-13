@@ -41,7 +41,7 @@ export default function WhatWeBuild() {
 					Apps that solve a specific business problem — not just a digital
 					brochure.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Four categories cover most of what we&apos;ve shipped. Yours probably
 					falls in one of them.
 				</p>
@@ -54,10 +54,10 @@ export default function WhatWeBuild() {
 						className="border-dp-dark/10 hover:border-dp-green/50 rounded-3xl border bg-white/50 p-8 transition-colors md:p-10"
 					>
 						<h3 className="text-xl md:text-2xl">{app.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{app.body}
 						</p>
-						<p className="text-dp-body/60 mt-4 text-sm italic">
+						<p className="text-dp-body-soft mt-4 text-sm italic">
 							{app.examples}
 						</p>
 					</li>

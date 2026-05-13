@@ -67,13 +67,13 @@ export default function ProjectHeader({ project, urls }: ProjectHeaderProps) {
 				<h1 className="mt-6 text-balance">{project.title}</h1>
 
 				{description && (
-					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+					<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 						{description}
 					</p>
 				)}
 
 				{(dateLabel || project.locationText) && (
-					<p className="text-dp-body/70 mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
+					<p className="text-dp-body-soft mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
 						{dateLabel && (
 							<span className="inline-flex items-center gap-1.5">
 								<svg
@@ -93,7 +93,7 @@ export default function ProjectHeader({ project, urls }: ProjectHeaderProps) {
 							</span>
 						)}
 						{dateLabel && project.locationText && (
-							<span className="text-dp-body/40">·</span>
+							<span className="text-dp-body-soft">·</span>
 						)}
 						{project.locationText && (
 							<span className="inline-flex items-center gap-1.5">

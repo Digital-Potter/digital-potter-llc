@@ -192,7 +192,7 @@ export default function WhoWeHelp() {
 		<section className="dp-container py-16 md:py-24">
 			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">Built for businesses like yours.</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					From local trades to growing e-commerce brands — we&apos;ve worked
 					with businesses like these and know exactly what they need to win
 					online.
@@ -208,7 +208,7 @@ export default function WhoWeHelp() {
 						<h3 className="font-primary-font mt-4 text-lg leading-snug font-bold">
 							{industry.name}
 						</h3>
-						<p className="text-dp-body/80 mt-2 text-sm md:text-base">
+						<p className="text-dp-body-soft mt-2 text-sm md:text-base">
 							{industry.description}
 						</p>
 					</li>

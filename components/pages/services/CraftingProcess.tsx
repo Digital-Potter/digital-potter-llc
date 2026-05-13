@@ -26,7 +26,7 @@ export default function CraftingProcess() {
 				<h2 className="mt-6 text-balance">
 					Three phases from your first message to long-term partnership.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					No surprises, no marketing-speak, no last-minute scope creep.
 					Here&apos;s exactly what working with Digital Potter looks like.
 				</p>
@@ -41,7 +41,7 @@ export default function CraftingProcess() {
 							{s.n}
 						</span>
 						<h3 className="mt-5 text-xl md:text-2xl">{s.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{s.body}
 						</p>
 					</li>

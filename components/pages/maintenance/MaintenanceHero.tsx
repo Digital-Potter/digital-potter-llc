@@ -18,7 +18,7 @@ export default function MaintenanceHero({
 				<h1 className="mt-6 text-balance">
 					We don&apos;t disappear after launch.
 				</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Custom websites and apps need ongoing care — security patches, content
 					tweaks, performance work, the occasional new feature. Pick a retainer
 					that fits how often you actually ship, or pay hourly when you only

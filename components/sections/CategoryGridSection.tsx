@@ -27,7 +27,7 @@ export function CategoryGridSection({ section }: { section: CmsSection }) {
 			<div className="mx-auto max-w-4xl text-center">
 				{section.title && <h2 className="text-balance">{section.title}</h2>}
 				{section.subtitle && (
-					<p className="text-dp-body/80 mt-4 text-balance">
+					<p className="text-dp-body-soft mt-4 text-balance">
 						{section.subtitle}
 					</p>
 				)}

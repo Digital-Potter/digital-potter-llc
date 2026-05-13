@@ -11,7 +11,7 @@ export default function HostingTiers() {
 				<h2 className="mt-6 text-balance">
 					Start at Essentials. Move up only when the business asks for it.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Every tier covers the platform — what changes is how actively we
 					manage it with you. No traffic gates, no plan jumps based on visits.
 				</p>
@@ -36,18 +36,18 @@ export default function HostingTiers() {
 							<p
 								className={twMerge(
 									'font-primary-font text-xs font-bold tracking-widest uppercase',
-									isHighlight ? 'text-dp-dark-green' : 'text-dp-body/60',
+									isHighlight ? 'text-dp-dark-green' : 'text-dp-body-soft',
 								)}
 							>
 								{tier.label}
 							</p>
 							<p className="font-primary-font text-dp-dark mt-4 text-3xl font-bold md:text-4xl">
 								${tier.price}
-								<span className="text-dp-body/60 ml-1 text-base font-medium">
+								<span className="text-dp-body-soft ml-1 text-base font-medium">
 									/mo
 								</span>
 							</p>
-							<p className="text-dp-body/70 mt-2 text-sm">{tier.tagline}</p>
+							<p className="text-dp-body-soft mt-2 text-sm">{tier.tagline}</p>
 							<p className="text-dp-body/85 mt-5 text-sm md:text-base">
 								{tier.bestFor}
 							</p>
@@ -77,7 +77,7 @@ export default function HostingTiers() {
 				})}
 			</div>
 
-			<p className="text-dp-body/70 mx-auto mt-10 max-w-2xl text-center text-sm">
+			<p className="text-dp-body-soft mx-auto mt-10 max-w-2xl text-center text-sm">
 				Switch tiers any time — your monthly fee adjusts on the next billing
 				cycle. Annual prepay gets you 15% off.
 			</p>

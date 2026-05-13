@@ -21,7 +21,7 @@ export default async function BlogTeaser() {
 			<div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
 				<div className="max-w-4xl">
 					<h2 className="text-balance">Fresh ideas & expert tips.</h2>
-					<p className="text-dp-body/80 mt-4 text-balance">
+					<p className="text-dp-body-soft mt-4 text-balance">
 						Notes from the studio on building, shipping, and maintaining digital
 						products that earn their keep.
 					</p>
@@ -35,7 +35,7 @@ export default async function BlogTeaser() {
 			</div>
 
 			<ul className="mt-12 grid gap-8 md:grid-cols-3">
-				{posts.map((post) => (
+				{posts.map((post, idx) => (
 					<li key={post.slug}>
 						<Link href={post.href} className="group block h-full">
 							<div className="dp-box-design relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
@@ -44,14 +44,16 @@ export default async function BlogTeaser() {
 										src={post.featuredImage.url}
 										alt={post.featuredImage.alt ?? post.title}
 										fill
-										sizes="(min-width: 768px) 33vw, 100vw"
+										sizes="(min-width: 1024px) 400px, (min-width: 768px) 33vw, 100vw"
+										priority={idx === 0}
+										fetchPriority={idx === 0 ? 'high' : 'auto'}
 										className="object-cover transition-transform duration-500 group-hover:scale-105"
 									/>
 								) : (
 									<>
 										<div className="from-dp-green/30 via-dp-yellowish to-dp-dark-green/20 absolute inset-0 bg-gradient-to-br" />
 										<div className="absolute inset-0 flex items-center justify-center">
-											<span className="text-dp-body/30 text-xs font-bold tracking-widest uppercase">
+											<span className="text-dp-body-soft text-xs font-bold tracking-widest uppercase">
 												Article cover
 											</span>
 										</div>
@@ -63,14 +65,16 @@ export default async function BlogTeaser() {
 									{post.category}
 								</span>
 								{post.readTime && (
-									<span className="text-dp-body/60">{post.readTime}</span>
+									<span className="text-dp-body-soft">{post.readTime}</span>
 								)}
 							</div>
 							<h3 className="font-primary-font group-hover:text-dp-dark-green mt-4 text-xl font-bold transition-colors md:text-2xl">
 								{post.title}
 							</h3>
 							{post.excerpt && (
-								<p className="text-dp-body/75 mt-3 text-base">{post.excerpt}</p>
+								<p className="text-dp-body-soft mt-3 text-base">
+									{post.excerpt}
+								</p>
 							)}
 							<span className="text-dp-dark-green group-hover:text-dp-green mt-4 inline-block text-sm font-bold">
 								Read more →

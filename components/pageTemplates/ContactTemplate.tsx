@@ -62,7 +62,7 @@ export async function ContactTemplate() {
 					<h1 className="text-balance">
 						Contact Digital Potter and let&apos;s create together.
 					</h1>
-					<p className="text-dp-body/80 mt-6 text-balance">
+					<p className="text-dp-body-soft mt-6 text-balance">
 						We&apos;d love to hear about your project and discuss how we can
 						craft the perfect solution for your business. Tell us a few things
 						below and we&apos;ll get back within one business day.

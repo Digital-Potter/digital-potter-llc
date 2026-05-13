@@ -176,7 +176,7 @@ export default function MobileNav({
 																			{sub.headline ?? sub.label}
 																		</span>
 																		{sub.description && (
-																			<span className="text-dp-body/70 font-secondary-font block text-xs tracking-normal normal-case">
+																			<span className="text-dp-body-soft font-secondary-font block text-xs tracking-normal normal-case">
 																				{sub.description}
 																			</span>
 																		)}

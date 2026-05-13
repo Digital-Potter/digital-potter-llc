@@ -73,7 +73,7 @@ export default function ComparisonTable() {
 				<h2 className="mt-6 text-balance">
 					Same monthly spend. Different ceiling.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					At Essentials our recurring fee is in the same neighborhood as a basic
 					Shopify or Wix plan — but you get custom design, owned code, no
 					transaction fees, and no traffic gates. Template platforms feel cheap
@@ -87,19 +87,19 @@ export default function ComparisonTable() {
 						<tr className="border-dp-dark/10 border-b">
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/60 px-6 py-5 text-xs font-bold tracking-widest uppercase"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-xs font-bold tracking-widest uppercase"
 							>
 								Feature
 							</th>
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/70 px-6 py-5 text-sm font-bold"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-sm font-bold"
 							>
 								Shopify Basic
 							</th>
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/70 px-6 py-5 text-sm font-bold"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-sm font-bold"
 							>
 								Wix Premium
 							</th>
@@ -123,10 +123,10 @@ export default function ComparisonTable() {
 								>
 									{r.label}
 								</th>
-								<td className="text-dp-body/75 px-6 py-5">
+								<td className="text-dp-body-soft px-6 py-5">
 									{typeof r.shopify === 'string' ? r.shopify : r.shopify.value}
 								</td>
-								<td className="text-dp-body/75 px-6 py-5">
+								<td className="text-dp-body-soft px-6 py-5">
 									{typeof r.wix === 'string' ? r.wix : r.wix.value}
 								</td>
 								<td
@@ -143,7 +143,7 @@ export default function ComparisonTable() {
 					</tbody>
 				</table>
 			</div>
-			<p className="text-dp-body/60 mt-4 text-center text-xs">
+			<p className="text-dp-body-soft mt-4 text-center text-xs">
 				Pricing reflects publicly listed plans as of 2026. Compare based on your
 				specific business — we&apos;re happy to discuss tradeoffs in your
 				proposal.

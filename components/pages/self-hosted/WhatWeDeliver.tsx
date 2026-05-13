@@ -51,7 +51,7 @@ export default function WhatWeDeliver() {
 				<h2 className="mt-6 text-balance">
 					Three deliverables. One running platform. Your perimeter.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					An end-to-end engagement that ends with your team running theDavid
 					independently — with us on speed-dial when you want backup.
 				</p>
@@ -67,7 +67,7 @@ export default function WhatWeDeliver() {
 							{d.tag}
 						</p>
 						<h3 className="mt-4 text-xl md:text-2xl">{d.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base">{d.body}</p>
+						<p className="text-dp-body-soft mt-4 text-base">{d.body}</p>
 						<ul className="mt-6 space-y-3">
 							{d.bullets.map((b) => (
 								<li

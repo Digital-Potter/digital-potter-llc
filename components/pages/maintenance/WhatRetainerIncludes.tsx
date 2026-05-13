@@ -29,7 +29,7 @@ export default function WhatRetainerIncludes() {
 				<h2 className="mt-6 text-balance">
 					Two layers, two scopes — no overlap.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Your ${HOSTING_MONTHLY}/mo Hosting + CMS plan covers platform-level
 					basics. The retainer is for active development work on your specific
 					site.
@@ -42,7 +42,7 @@ export default function WhatRetainerIncludes() {
 						In your ${HOSTING_MONTHLY}/mo plan
 					</p>
 					<h3 className="mt-3 text-xl md:text-2xl">Platform basics</h3>
-					<p className="text-dp-body/75 mt-3 text-sm">
+					<p className="text-dp-body-soft mt-3 text-sm">
 						Always running, no time billed.
 					</p>
 					<ul className="mt-6 space-y-3">
@@ -69,7 +69,7 @@ export default function WhatRetainerIncludes() {
 						In your retainer
 					</p>
 					<h3 className="mt-3 text-xl md:text-2xl">Active development work</h3>
-					<p className="text-dp-body/75 mt-3 text-sm">
+					<p className="text-dp-body-soft mt-3 text-sm">
 						Time billed against your monthly hours bucket.
 					</p>
 					<ul className="mt-6 space-y-3">

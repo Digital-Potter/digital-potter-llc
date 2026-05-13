@@ -23,16 +23,20 @@ export const viewport: Viewport = {
 
 const golosText = Golos_Text({
 	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
+	weight: ['400', '700'],
 	variable: '--primary-font',
 	display: 'swap',
+	preload: true,
+	adjustFontFallback: true,
 });
 
 const figtree = Figtree({
 	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
+	weight: ['400', '700'],
 	variable: '--secondary-font',
 	display: 'swap',
+	preload: true,
+	adjustFontFallback: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -134,9 +138,35 @@ export default async function RootLayout({
 	const gaId =
 		ga?.trackingEnabled && ga.measurementId ? ga.measurementId : null;
 
+	const cmsOrigin = (() => {
+		const v = process.env.NEXT_PUBLIC_CMS;
+		if (!v) return null;
+		try {
+			return new URL(v).origin;
+		} catch {
+			return null;
+		}
+	})();
+
 	return (
 		<html lang="en" className={`${golosText.variable} ${figtree.variable}`}>
+			<head>
+				{cmsOrigin ? (
+					<link rel="preconnect" href={cmsOrigin} crossOrigin="anonymous" />
+				) : null}
+				<link
+					rel="preconnect"
+					href="https://cf.digitalpotter.io"
+					crossOrigin="anonymous"
+				/>
+			</head>
 			<body className="min-h-screen antialiased">
+				<a
+					href="#main"
+					className="bg-dp-dark-green sr-only z-50 rounded-md px-4 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+				>
+					Skip to main content
+				</a>
 				{tenant ? (
 					<>
 						<JsonLd data={organizationSchema(tenant, settings)} />
@@ -144,7 +174,7 @@ export default async function RootLayout({
 					</>
 				) : null}
 				<Nav />
-				<main>{children}</main>
+				<main id="main">{children}</main>
 				<Footer />
 				<Suspense fallback={null}>
 					<TrackPageVisit />

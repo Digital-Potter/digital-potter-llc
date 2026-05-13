@@ -23,7 +23,7 @@ export default function WhyWeBuiltIt() {
 				<h2 className="mt-6 text-balance">
 					Built for the way teams actually work.
 				</h2>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					We&apos;ve shipped sites on WordPress, Webflow, and Squarespace. Each
 					one got us 80% of the way there and bled us on the last 20%. So we
 					built our own — and it&apos;s what powers every site we ship.
@@ -40,7 +40,7 @@ export default function WhyWeBuiltIt() {
 							{`0${i + 1}`}
 						</span>
 						<h3 className="mt-4 text-xl md:text-2xl">{p.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{p.body}
 						</p>
 					</li>

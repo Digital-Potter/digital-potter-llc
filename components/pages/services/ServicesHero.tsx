@@ -19,7 +19,7 @@ export default function ServicesHero({
 					No more Frankenstein monsters — just streamlined, beautifully crafted
 					solutions.
 				</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Three services built to work together. Use one when you need it, all
 					three when you&apos;re ready to grow. Every engagement starts with
 					questions, not a template.

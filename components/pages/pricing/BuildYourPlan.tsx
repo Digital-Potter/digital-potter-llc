@@ -40,7 +40,7 @@ export default function BuildYourPlan({
 				<h2 className="mt-6 text-balance">
 					Pick the modules your business actually needs.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Combine any modules with the base plan. Most clients pick one, some
 					pick two — your bill updates as you click.
 				</p>
@@ -55,7 +55,7 @@ export default function BuildYourPlan({
 								<p className="font-primary-font text-dp-dark text-sm font-bold tracking-wider uppercase">
 									Base — included for everyone
 								</p>
-								<p className="text-dp-body/80 mt-2 text-base md:text-lg">
+								<p className="text-dp-body-soft mt-2 text-base md:text-lg">
 									Hosting + CMS access, daily backups, SSL, CDN, security
 									patches, unlimited pages.
 								</p>
@@ -90,7 +90,7 @@ export default function BuildYourPlan({
 												<p className="font-primary-font text-dp-dark text-base font-bold md:text-lg">
 													{m.label}
 												</p>
-												<p className="text-dp-body/70 mt-1 text-sm">
+												<p className="text-dp-body-soft mt-1 text-sm">
 													{m.tagline}
 												</p>
 											</div>
@@ -118,7 +118,7 @@ export default function BuildYourPlan({
 											{m.bullets.map((b) => (
 												<li
 													key={b}
-													className="text-dp-body/75 flex items-start gap-2 text-sm"
+													className="text-dp-body-soft flex items-start gap-2 text-sm"
 												>
 													<span
 														aria-hidden
@@ -147,19 +147,19 @@ export default function BuildYourPlan({
 
 						<dl className="mt-6 space-y-3 text-sm">
 							<div className="flex items-center justify-between">
-								<dt className="text-dp-body/80">Hosting + CMS</dt>
+								<dt className="text-dp-body-soft">Hosting + CMS</dt>
 								<dd className="text-dp-dark font-bold">
 									${HOSTING_MONTHLY}/mo
 								</dd>
 							</div>
 							{selectedModules.length === 0 ? (
-								<div className="text-dp-body/50 text-sm italic">
+								<div className="text-dp-body-soft text-sm italic">
 									No modules selected — base plan only
 								</div>
 							) : (
 								selectedModules.map((m) => (
 									<div key={m.id} className="flex items-center justify-between">
-										<dt className="text-dp-body/80">{m.label}</dt>
+										<dt className="text-dp-body-soft">{m.label}</dt>
 										<dd className="text-dp-dark font-bold">+${m.price}/mo</dd>
 									</div>
 								))
@@ -167,16 +167,16 @@ export default function BuildYourPlan({
 						</dl>
 
 						<div className="border-dp-dark/15 mt-6 border-t pt-6">
-							<p className="text-dp-body/70 text-xs font-bold tracking-wider uppercase">
+							<p className="text-dp-body-soft text-xs font-bold tracking-wider uppercase">
 								Monthly total
 							</p>
 							<p className="font-primary-font text-dp-dark-green mt-1 text-4xl font-bold md:text-5xl">
 								${monthly}
-								<span className="text-dp-body/60 ml-1 text-base font-medium">
+								<span className="text-dp-body-soft ml-1 text-base font-medium">
 									/mo
 								</span>
 							</p>
-							<p className="text-dp-body/70 mt-3 text-sm">
+							<p className="text-dp-body-soft mt-3 text-sm">
 								Plus a one-time custom frontend build{' '}
 								<span className="text-dp-dark font-bold">
 									starting at ${FRONTEND_ONETIME.toLocaleString()}
@@ -192,7 +192,7 @@ export default function BuildYourPlan({
 						>
 							{ctaLabel}
 						</Link>
-						<p className="text-dp-body/60 mt-3 text-center text-xs">
+						<p className="text-dp-body-soft mt-3 text-center text-xs">
 							We&apos;ll confirm the final scope and price in your proposal.
 						</p>
 					</div>

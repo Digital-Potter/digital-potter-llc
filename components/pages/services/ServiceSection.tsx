@@ -52,7 +52,7 @@ export default function ServiceSection({
 						</div>
 					</div>
 					<h2 className="mt-6 text-balance">{headline}</h2>
-					<p className="text-dp-body/80 mt-6 text-base md:text-lg">{body}</p>
+					<p className="text-dp-body-soft mt-6 text-base md:text-lg">{body}</p>
 					<div className="mt-8">
 						<ButtonLink href={ctaHref} variant="solid">
 							{ctaLabel}

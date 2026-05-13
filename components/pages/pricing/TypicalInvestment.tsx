@@ -10,7 +10,7 @@ export default function TypicalInvestment() {
 				<h2 className="mt-6 text-balance">
 					What businesses like yours typically invest.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Real ranges from our pipeline so you can size the conversation before
 					it starts. Your proposal pins the exact fixed price after discovery.
 				</p>
@@ -22,7 +22,7 @@ export default function TypicalInvestment() {
 						<tr className="border-dp-dark/10 border-b">
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/60 px-6 py-5 text-xs font-bold tracking-widest uppercase"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-xs font-bold tracking-widest uppercase"
 							>
 								Business type
 							</th>
@@ -34,7 +34,7 @@ export default function TypicalInvestment() {
 							</th>
 							<th
 								scope="col"
-								className="font-primary-font text-dp-body/60 px-6 py-5 text-xs font-bold tracking-widest uppercase"
+								className="font-primary-font text-dp-body-soft px-6 py-5 text-xs font-bold tracking-widest uppercase"
 							>
 								Tier
 							</th>
@@ -55,7 +55,7 @@ export default function TypicalInvestment() {
 								<td className="bg-dp-dark-green/5 text-dp-dark px-6 py-5 font-bold">
 									{row.rangeLabel}
 								</td>
-								<td className="text-dp-body/75 px-6 py-5 text-sm">
+								<td className="text-dp-body-soft px-6 py-5 text-sm">
 									{row.note ?? ''}
 								</td>
 							</tr>
@@ -64,7 +64,7 @@ export default function TypicalInvestment() {
 				</table>
 			</div>
 
-			<p className="text-dp-body/60 mt-4 text-center text-xs">
+			<p className="text-dp-body-soft mt-4 text-center text-xs">
 				Build investment only. Recurring hosting + CMS billed separately, from
 				$50/mo.
 			</p>

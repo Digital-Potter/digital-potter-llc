@@ -33,7 +33,7 @@ export async function BlogListSection({ section }: { section: CmsSection }) {
 				<div className="mx-auto mb-10 max-w-4xl text-center">
 					<h2 className="text-balance">{section.title}</h2>
 					{section.subtitle && (
-						<p className="text-dp-body/80 mt-4 text-balance">
+						<p className="text-dp-body-soft mt-4 text-balance">
 							{section.subtitle}
 						</p>
 					)}
@@ -47,7 +47,7 @@ export async function BlogListSection({ section }: { section: CmsSection }) {
 								<div className="dp-box-design relative aspect-video w-full overflow-hidden rounded-2xl">
 									<Image
 										src={p.featuredImage.url}
-										alt={p.featuredImage.alt ?? ''}
+										alt={p.featuredImage.alt ?? p.title}
 										fill
 										sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
 										className="object-cover"
@@ -60,7 +60,7 @@ export async function BlogListSection({ section }: { section: CmsSection }) {
 								{p.title}
 							</h3>
 							{p.excerpt && (
-								<p className="text-dp-body/75 mt-3 text-base">{p.excerpt}</p>
+								<p className="text-dp-body-soft mt-3 text-base">{p.excerpt}</p>
 							)}
 						</Link>
 					</li>

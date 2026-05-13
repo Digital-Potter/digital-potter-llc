@@ -50,7 +50,9 @@ export default function RelatedPosts({ posts, urls }: RelatedPostsProps) {
 									{p.title}
 								</h3>
 								{p.excerpt && (
-									<p className="text-dp-body/75 mt-3 text-base">{p.excerpt}</p>
+									<p className="text-dp-body-soft mt-3 text-base">
+										{p.excerpt}
+									</p>
 								)}
 								<span className="text-dp-dark-green group-hover:text-dp-green mt-4 inline-block text-sm font-bold">
 									Read more →

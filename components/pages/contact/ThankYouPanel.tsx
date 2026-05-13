@@ -27,7 +27,7 @@ export default function ThankYouPanel({
 			<h2 className="mt-6 text-balance">
 				{name ? `Thanks, ${name}.` : 'Thank you.'}
 			</h2>
-			<p className="text-dp-body/80 mx-auto mt-6 max-w-xl text-balance">
+			<p className="text-dp-body-soft mx-auto mt-6 max-w-xl text-balance">
 				We&apos;ve got your message. A real human from the studio will reach out
 				within one business day with the next step. In the meantime, feel free
 				to look around.

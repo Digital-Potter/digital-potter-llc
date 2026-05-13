@@ -16,7 +16,7 @@ export default function AboutHero({
 					About Digital Potter
 				</p>
 				<h1 className="mt-6 text-balance">Crafting digital excellence.</h1>
-				<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Personalized web and mobile applications designed specifically for
 					your business — built by a small studio in Virginia, used by clients
 					across the country.

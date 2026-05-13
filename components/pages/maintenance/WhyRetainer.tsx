@@ -27,7 +27,7 @@ export default function WhyRetainer() {
 				<h2 className="mt-6 text-balance">
 					Hourly is a fallback, not a strategy.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Most clients who try hourly switch to a retainer within six months.
 					Here&apos;s why we recommend you start there.
 				</p>
@@ -43,7 +43,7 @@ export default function WhyRetainer() {
 							{`0${i + 1}`}
 						</span>
 						<h3 className="mt-4 text-xl md:text-2xl">{r.title}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{r.body}
 						</p>
 					</li>

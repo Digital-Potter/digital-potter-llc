@@ -25,7 +25,7 @@ export default function TripleUsp() {
 				<h2 className="text-balance">
 					Three things every Digital Potter site gives you.
 				</h2>
-				<p className="text-dp-body/80 mt-6 text-balance">
+				<p className="text-dp-body-soft mt-6 text-balance">
 					Most agencies pick one. We deliver all three on every project — and
 					it&apos;s why our clients stay.
 				</p>
@@ -40,7 +40,7 @@ export default function TripleUsp() {
 							{`0${i + 1}`}
 						</span>
 						<h3 className="mt-4 text-xl md:text-2xl">{card.headline}</h3>
-						<p className="text-dp-body/80 mt-4 text-base md:text-lg">
+						<p className="text-dp-body-soft mt-4 text-base md:text-lg">
 							{card.body}
 						</p>
 					</li>

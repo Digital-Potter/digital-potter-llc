@@ -61,7 +61,7 @@ export function HeroSection({ section }: { section: CmsSection }) {
 					</p>
 				)}
 				{c?.description && (
-					<p className="text-dp-body/80 mx-auto mt-6 max-w-2xl text-balance">
+					<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 						{c.description}
 					</p>
 				)}
@@ -107,7 +107,7 @@ export function HeroSection({ section }: { section: CmsSection }) {
 								)}
 								{col.content && (
 									<div
-										className="prose prose-sm prose-p:text-dp-body/75 max-w-none"
+										className="prose prose-sm prose-p:text-dp-body-soft max-w-none"
 										dangerouslySetInnerHTML={{ __html: col.content }}
 									/>
 								)}
