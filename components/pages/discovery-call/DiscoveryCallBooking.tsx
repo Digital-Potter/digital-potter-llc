@@ -66,6 +66,8 @@ export default function DiscoveryCallBooking() {
 		email: string;
 		phone: string;
 		notes: string;
+		consentSMS: boolean;
+		honeypot_url: string;
 	}) {
 		if (!selectedSlot) return;
 
@@ -80,6 +82,8 @@ export default function DiscoveryCallBooking() {
 				service: { name: 'Discovery Call' },
 				guest: { name: guest.name, email: guest.email, phone: guest.phone },
 				customerNotes: guest.notes || undefined,
+				consentSMS: guest.consentSMS,
+				honeypot_url: guest.honeypot_url,
 			}),
 		});
 

@@ -8,7 +8,14 @@ interface SlotResult {
 	endsAt: string;
 }
 
-type Guest = { name: string; email: string; phone: string; notes: string };
+type Guest = {
+	name: string;
+	email: string;
+	phone: string;
+	notes: string;
+	consentSMS: boolean;
+	honeypot_url: string;
+};
 
 type Props = {
 	slot: SlotResult;
@@ -44,6 +51,8 @@ export default function BookingContactForm({
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [notes, setNotes] = useState('');
+	const [consentSMS, setConsentSMS] = useState(false);
+	const [honeypotUrl, setHoneypotUrl] = useState('');
 	const [submitting, setSubmitting] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -71,6 +80,8 @@ export default function BookingContactForm({
 				email: email.trim(),
 				phone: phone.trim(),
 				notes: notes.trim(),
+				consentSMS,
+				honeypot_url: honeypotUrl.trim(),
 			});
 		} catch (err) {
 			setError(
@@ -140,6 +151,34 @@ export default function BookingContactForm({
 					/>
 				</FieldShell>
 
+				<div className="sm:col-span-2">
+					<div className="flex items-start gap-3">
+						<input
+							id="dc-consentSMS"
+							type="checkbox"
+							className="mt-1"
+							checked={consentSMS}
+							onChange={(e) => setConsentSMS(e.target.checked)}
+						/>
+						<label htmlFor="dc-consentSMS" className="text-dp-dark/80 text-sm">
+							I consent to SMS communications.
+						</label>
+					</div>
+				</div>
+
+				{/* Honeypot: bots tend to fill hidden fields; humans never see this. */}
+				<div aria-hidden className="hidden">
+					<label htmlFor="dc-honeypot-url">Your website (leave blank)</label>
+					<input
+						id="dc-honeypot-url"
+						type="text"
+						tabIndex={-1}
+						autoComplete="off"
+						value={honeypotUrl}
+						onChange={(e) => setHoneypotUrl(e.target.value)}
+					/>
+				</div>
+
 				{error && (
 					<p className="text-sm text-red-700 sm:col-span-2" role="alert">
 						{error}
@@ -147,6 +186,27 @@ export default function BookingContactForm({
 				)}
 
 				<div className="sm:col-span-2">
+					<p className="text-dp-dark/70 mb-3 text-xs md:text-sm">
+						By clicking the button below, you agree to our{' '}
+						<a
+							href="https://digitalpotter.io/terms-conditions"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:no-underline"
+						>
+							Terms and Conditions
+						</a>{' '}
+						and{' '}
+						<a
+							href="https://digitalpotter.io/privacy-policy-for-digital-potter-llc"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:no-underline"
+						>
+							Privacy Policy
+						</a>
+						.
+					</p>
 					<button
 						type="submit"
 						disabled={submitting}
