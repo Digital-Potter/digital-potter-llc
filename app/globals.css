@@ -143,6 +143,18 @@
 		);
 	}
 
+	/* Keep content scrollable while visually hiding the scrollbar. */
+	.scrollbar-none {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.scrollbar-none::-webkit-scrollbar {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
 	@media screen and (max-width: 768px) {
 		h1 {
 			font-size: 3.5rem;

@@ -30,7 +30,7 @@ export default function ProjectsGrid({
 			<div
 				role="tablist"
 				aria-label="Filter projects by category"
-				className="dp-box-design mx-auto flex max-w-4xl flex-wrap justify-center gap-2 rounded-full p-2"
+				className="dp-box-design scrollbar-none mx-auto flex w-full max-w-full gap-2 overflow-x-auto rounded-full p-2 whitespace-nowrap"
 			>
 				<button
 					role="tab"
@@ -38,7 +38,7 @@ export default function ProjectsGrid({
 					aria-selected={active === 'all'}
 					onClick={() => setActive('all')}
 					className={twMerge(
-						'font-primary-font min-h-[44px] rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
+						'font-primary-font min-h-[44px] shrink-0 rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
 						active === 'all'
 							? 'bg-dp-dark-green text-white'
 							: 'text-dp-dark hover:bg-dp-light-gray',
@@ -54,7 +54,7 @@ export default function ProjectsGrid({
 						aria-selected={active === c}
 						onClick={() => setActive(c)}
 						className={twMerge(
-							'font-primary-font min-h-[44px] rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
+							'font-primary-font min-h-[44px] shrink-0 rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
 							active === c
 								? 'bg-dp-dark-green text-white'
 								: 'text-dp-dark hover:bg-dp-light-gray',
