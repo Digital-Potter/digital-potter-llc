@@ -102,7 +102,7 @@ export default function StepBusiness() {
 					<TextField
 						id="phone"
 						type="tel"
-						placeholder="+1 555 123 4567"
+						placeholder="+1 757 327 4449"
 						autoComplete="tel"
 						{...register('phone')}
 					/>
@@ -127,6 +127,38 @@ export default function StepBusiness() {
 					/>
 				</FieldShell>
 			</div>
+
+			<FieldShell id="consentSMS" label="" error={errors.consentSMS?.message}>
+				<div className="flex items-start gap-3">
+					<input
+						id="consentSMS"
+						type="checkbox"
+						className="mt-1"
+						{...register('consentSMS')}
+					/>
+					<label htmlFor="consentSMS" className="text-sm">
+						I consent to SMS communications and accept the{' '}
+						<a
+							href="https://digitalpotter.io/terms-conditions"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:no-underline"
+						>
+							terms and conditions
+						</a>{' '}
+						and{' '}
+						<a
+							href="https://digitalpotter.io/privacy-policy-for-digital-potter-llc"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:no-underline"
+						>
+							privacy policy
+						</a>
+						.
+					</label>
+				</div>
+			</FieldShell>
 
 			{/* Honeypot — hidden from humans, kept off the tab order. Bots tend to fill it. */}
 			<div aria-hidden className="hidden">

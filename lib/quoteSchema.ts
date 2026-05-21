@@ -202,6 +202,7 @@ export const quoteSchema = z
 		bestContact: z.enum(bestContactOptions, {
 			message: 'Pick the best way to reach you.',
 		}),
+		consentSMS: z.boolean().optional(),
 
 		// Honeypot — must be empty. Field name matches the API spec
 		// (`POST /api/storefront/messages`) so the marketing-site handler
@@ -346,5 +347,6 @@ export function getStepFields(
 		'email',
 		'phone',
 		'bestContact',
+		'consentSMS',
 	];
 }

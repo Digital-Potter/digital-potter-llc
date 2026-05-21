@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import { FinalCta } from '@/components/pages/home';
+import { normalizeCmsRichText } from '@/helpers/cms/richText';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import type { CmsPage } from '@/helpers/cms/types';
 import { JsonLd, webPageSchema } from '@/helpers/seo/structuredData';
@@ -18,6 +19,9 @@ export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
 	]);
 	const title = page?.title ?? 'Digital Potter';
 	const subtitle = page?.subtitle ?? page?.excerpt;
+	const renderedContent = normalizeCmsRichText(
+		page?.content || 'Digital Potter Legal',
+	);
 
 	const tenant = settings?.tenant;
 	const ldData =
@@ -60,7 +64,7 @@ export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
 			<main>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: page?.content || 'Digital Potter Legal',
+						__html: renderedContent,
 					}}
 					className="dp-container dp-prose mx-auto mb-20 max-w-4xl"
 				/>
