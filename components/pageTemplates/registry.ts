@@ -53,6 +53,7 @@ export const templateRegistry: Record<string, TemplateComponent> = {
 	'projects-listing': PortfolioTemplate,
 	blog: BlogTemplate,
 	'blog-listing': BlogTemplate,
+	'text-page': DefaultTemplate, // for legal pages and other misc content that doesn't need a custom template
 	default: DefaultTemplate,
 };
 

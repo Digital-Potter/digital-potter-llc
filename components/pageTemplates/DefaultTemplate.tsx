@@ -57,6 +57,14 @@ export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
 					</div>
 				)}
 			</section>
+			<main>
+				<div
+					dangerouslySetInnerHTML={{
+						__html: page?.content || 'Digital Potter Legal',
+					}}
+					className="dp-container dp-prose mx-auto mb-20 max-w-4xl"
+				/>
+			</main>
 			<FinalCta href={cta.href} label={cta.label} />
 		</>
 	);

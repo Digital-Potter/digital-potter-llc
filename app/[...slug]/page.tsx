@@ -31,6 +31,7 @@ type Route =
 	| { kind: 'courses-index' }
 	| { kind: 'course-detail'; slug: string }
 	| { kind: 'cms-page'; slug: string }
+	| { kind: 'text-page'; slug: string }
 	| { kind: 'not-found' };
 
 const BLOG_FALLBACK = {
@@ -98,6 +99,10 @@ async function classify(slugs: string[]): Promise<Route> {
 
 	if (slugs.length === 1) {
 		return { kind: 'cms-page', slug: first };
+	}
+
+	if (slugs.length === 1) {
+		return { kind: 'text-page', slug: first };
 	}
 
 	return { kind: 'not-found' };
@@ -195,6 +200,11 @@ export async function generateMetadata({
 			return buildPageMetadata({
 				slug: route.slug,
 				fallback: { title: 'Digital Potter' },
+			});
+		case 'text-page':
+			return buildPageMetadata({
+				slug: route.slug,
+				fallback: { title: 'Digital Potter Legal' },
 			});
 		default:
 			return { title: 'Not found', robots: { index: false, follow: false } };
