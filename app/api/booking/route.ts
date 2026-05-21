@@ -192,9 +192,10 @@ export async function POST(req: Request) {
 				body: JSON.stringify(forwardPayload),
 			},
 		);
-		const data = await res.json();
-		return NextResponse.json(data, { status: res.status });
-	} catch {
+		const cmsResponse = await res.json();
+		return NextResponse.json(cmsResponse, { status: res.status });
+	} catch (err) {
+		console.warn('[booking] forward failed:', err);
 		return NextResponse.json(
 			{ error: 'Could not reach booking service' },
 			{ status: 502 },
