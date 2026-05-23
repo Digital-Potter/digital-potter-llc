@@ -7,6 +7,7 @@ export const revalidate = 3600;
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
 	const data = await fetchStoreSettingsOrNull();
 	const tenant = data?.tenant?.settings;
+	const seo = data?.settings?.seo;
 	const icons = data?.settings?.seo?.generatedIcons;
 
 	const iconList: MetadataRoute.Manifest['icons'] = [];
@@ -14,6 +15,12 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
 		iconList.push({
 			src: icons.favicon192Url,
 			sizes: '192x192',
+			type: 'image/png',
+			purpose: 'any',
+		});
+	} else if (seo?.faviconUrl) {
+		iconList.push({
+			src: seo.faviconUrl,
 			type: 'image/png',
 			purpose: 'any',
 		});
@@ -29,6 +36,12 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
 		iconList.push({
 			src: icons.favicon512Url,
 			sizes: '512x512',
+			type: 'image/png',
+			purpose: 'any',
+		});
+	} else if (seo?.faviconUrl) {
+		iconList.push({
+			src: seo.faviconUrl,
 			type: 'image/png',
 			purpose: 'any',
 		});

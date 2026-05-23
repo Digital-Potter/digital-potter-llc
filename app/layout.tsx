@@ -92,16 +92,21 @@ export async function generateMetadata(): Promise<Metadata> {
 			icon: [
 				generated?.favicon32Url
 					? { url: generated.favicon32Url, sizes: '32x32', type: 'image/png' }
-					: { url: '/icons/favicon.svg', type: 'image/svg+xml' },
+					: seo?.faviconUrl
+						? { url: seo.faviconUrl, type: 'image/png' }
+						: { url: '/icons/favicon.svg', type: 'image/svg+xml' },
 				generated?.favicon96Url
 					? { url: generated.favicon96Url, sizes: '96x96', type: 'image/png' }
-					: {
-							url: '/icons/favicon-96x96.png',
-							sizes: '96x96',
-							type: 'image/png',
-						},
+					: seo?.faviconUrl
+						? { url: seo.faviconUrl, type: 'image/png' }
+						: {
+								url: '/icons/favicon-96x96.png',
+								sizes: '96x96',
+								type: 'image/png',
+							},
 			],
-			shortcut: generated?.faviconIcoUrl ?? '/icons/favicon.ico',
+			shortcut:
+				generated?.faviconIcoUrl ?? seo?.faviconUrl ?? '/icons/favicon.ico',
 			apple: {
 				url:
 					generated?.appleTouchUrl ??
