@@ -88,30 +88,44 @@ export async function generateMetadata(): Promise<Metadata> {
 			description,
 			images: seo?.defaultOgImage ? [seo.defaultOgImage] : undefined,
 		},
+		// Safari-friendly favicon chain — see clients/MIGRATION_PLAYBOOK.md
+		// "Recurring gotchas → Favicons & Safari". This site additionally
+		// serves /favicon.ico via a route handler at
+		// `app/favicon.ico/route.ts` that redirects to whichever favicon
+		// the CMS has configured (or /icons/favicon.ico as fallback).
+		// We don't emit a `shortcut` here — that route is the canonical
+		// source for /favicon.ico and adding a tag would double-up.
+		// We also skip the SVG favicon link: Safari's SVG-favicon
+		// support is inconsistent across versions, especially on heavy
+		// SVGs (the brand SVG is multi-MB). PNG keeps every browser
+		// happy. apple-touch-icon + PNG variants live at public/ root
+		// so Safari's default GET /apple-touch-icon.png finds them.
 		icons: {
 			icon: [
 				generated?.favicon32Url
 					? { url: generated.favicon32Url, sizes: '32x32', type: 'image/png' }
 					: seo?.faviconUrl
 						? { url: seo.faviconUrl, type: 'image/png' }
-						: { url: '/icons/favicon.svg', type: 'image/svg+xml' },
-				generated?.favicon96Url
-					? { url: generated.favicon96Url, sizes: '96x96', type: 'image/png' }
-					: seo?.faviconUrl
-						? { url: seo.faviconUrl, type: 'image/png' }
 						: {
-								url: '/icons/favicon-96x96.png',
+								url: '/favicon-96x96.png',
 								sizes: '96x96',
 								type: 'image/png',
 							},
+				...(generated?.favicon96Url
+					? [
+							{
+								url: generated.favicon96Url,
+								sizes: '96x96',
+								type: 'image/png',
+							},
+						]
+					: []),
 			],
-			shortcut:
-				generated?.faviconIcoUrl ?? seo?.faviconUrl ?? '/icons/favicon.ico',
 			apple: {
 				url:
 					generated?.appleTouchUrl ??
 					seo?.appleTouchIconUrl ??
-					'/icons/apple-touch-icon.png',
+					'/apple-touch-icon.png',
 				sizes: '180x180',
 			},
 		},
