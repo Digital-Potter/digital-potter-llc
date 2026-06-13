@@ -7,7 +7,9 @@ import { ProjectHeader, ProjectBody } from '@/components/pages/portfolio';
 const ProjectGallery = dynamic(
 	() => import('@/components/pages/portfolio/ProjectGallery'),
 );
-import { FinalCta } from '@/components/pages/home';
+import ClosingCta from '@/components/shared/ClosingCta';
+import TestimonialQuote from '@/components/shared/TestimonialQuote';
+import { testimonials } from '@/components/shared/testimonials.data';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import { getSiteUrls } from '@/helpers/cms/urls';
 import type { CmsProject } from '@/helpers/cms/types';
@@ -30,6 +32,7 @@ export async function ProjectDetailTemplate({
 	const ldData =
 		project.seo?.structuredData ||
 		(tenant ? creativeWorkSchema(project, urls, tenant) : null);
+	const clientQuote = testimonials.find((t) => t.projectSlug === project.slug);
 
 	return (
 		<>
@@ -42,7 +45,13 @@ export async function ProjectDetailTemplate({
 			{project.sections && project.sections.length > 0 ? (
 				<PageSectionRenderer sections={project.sections} />
 			) : null}
-			<FinalCta href={cta.href} label={cta.label} />
+			{clientQuote ? <TestimonialQuote id={clientQuote.id} /> : null}
+			<ClosingCta
+				heading="Want results like this for your business?"
+				body="Every project here started with a free 45-minute discovery call. Tell us what you're building and leave with a plan and an honest price."
+				secondaryHref={cta.href}
+				secondaryLabel={cta.label}
+			/>
 		</>
 	);
 }

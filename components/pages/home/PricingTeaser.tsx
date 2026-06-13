@@ -1,32 +1,51 @@
-import Link from 'next/link';
+import { ButtonLink } from '@/components/ui/Button';
 import { FRONTEND_ONETIME, HOSTING_MONTHLY } from '@/lib/pricing';
 
 const monthly = `$${HOSTING_MONTHLY}`;
 const oneTime = `$${FRONTEND_ONETIME.toLocaleString()}`;
 
+const promises = [
+	'You own the code',
+	'No per-page fees',
+	'No traffic gates',
+	'No lock-in',
+];
+
 export default function PricingTeaser() {
 	return (
-		<section className="dp-container py-8 md:py-12">
-			<div className="border-dp-dark-green/20 bg-dp-dark-green/5 mx-auto flex max-w-4xl flex-col items-center justify-between gap-4 rounded-2xl border px-6 py-5 md:flex-row md:gap-8 md:px-8">
-				<div className="text-center md:text-left">
-					<p className="text-dp-dark font-primary-font text-base font-bold md:text-lg">
-						Custom site starting at{' '}
-						<span className="text-dp-dark-green">{oneTime}</span> +{' '}
-						<span className="text-dp-dark-green">{monthly}/month</span> for
-						hosting & CMS
-					</p>
-					<p className="text-dp-body-soft mt-1 text-sm">
-						The base price is the foundation. Custom features are quoted in your
-						proposal. You own the code, no per-page fees, no traffic gates, no
-						lock-in.
-					</p>
+		<section className="dp-container py-16 md:py-24">
+			<div className="border-dp-dark-green/20 bg-dp-dark-green/5 mx-auto max-w-4xl rounded-3xl border px-8 py-12 text-center md:px-14">
+				<h2 className="text-3xl md:text-4xl">
+					Transparent pricing. No surprises.
+				</h2>
+				<p className="text-dp-dark font-primary-font mt-6 text-xl font-bold md:text-2xl">
+					Custom site from <span className="text-dp-dark-green">{oneTime}</span>{' '}
+					+ <span className="text-dp-dark-green">{monthly}/month</span> for
+					hosting & theDavid
+				</p>
+				<p className="text-dp-body-soft mx-auto mt-3 max-w-2xl text-base md:text-lg">
+					The base price is the foundation. Custom features are quoted in your
+					proposal — in writing, before you commit.
+				</p>
+				<ul className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+					{promises.map((p) => (
+						<li
+							key={p}
+							className="text-dp-body/85 flex items-center gap-2 text-sm font-bold md:text-base"
+						>
+							<span
+								aria-hidden
+								className="bg-dp-green inline-block h-2 w-2 rounded-full"
+							/>
+							{p}
+						</li>
+					))}
+				</ul>
+				<div className="mt-9">
+					<ButtonLink href="/digital-potter-pricing" variant="solid">
+						See Pricing & Plans
+					</ButtonLink>
 				</div>
-				<Link
-					href="/digital-potter-pricing"
-					className="text-dp-dark-green hover:text-dp-green font-primary-font shrink-0 text-sm font-bold tracking-wider uppercase"
-				>
-					See all plans →
-				</Link>
 			</div>
 		</section>
 	);

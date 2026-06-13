@@ -16,13 +16,12 @@ export default function ServicesHero({
 					Premium Digital Services
 				</p>
 				<h1 className="mt-6 text-balance">
-					No more Frankenstein monsters — just streamlined, beautifully crafted
-					solutions.
+					One studio. Your website, your app, and everything after launch.
 				</h1>
 				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
-					Three services built to work together. Use one when you need it, all
-					three when you&apos;re ready to grow. Every engagement starts with
-					questions, not a template.
+					Four services built to work together — use one now, add the rest as
+					you grow. No Frankenstein stack of vendors, and every engagement
+					starts with questions, not a template.
 				</p>
 				<div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
 					<ButtonLink href={primaryCtaHref} variant="solid">

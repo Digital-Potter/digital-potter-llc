@@ -1,4 +1,4 @@
-import FeatureBlock from './FeatureBlock';
+import FeatureBlock from '@/components/shared/FeatureBlock';
 
 const features = [
 	{

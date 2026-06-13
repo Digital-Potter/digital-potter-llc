@@ -1,11 +1,12 @@
-import { resolveCtaHref } from '@/components/layout/cta-href';
 import {
 	PostHeader,
 	PostBody,
 	PostTags,
 	RelatedPosts,
 } from '@/components/pages/blog';
-import { FinalCta } from '@/components/pages/home';
+import AuthorBio from '@/components/pages/blog/AuthorBio';
+import InlinePostCta from '@/components/pages/blog/InlinePostCta';
+import ClosingCta from '@/components/shared/ClosingCta';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import { getSiteUrls } from '@/helpers/cms/urls';
 import type { CmsBlogPost } from '@/helpers/cms/types';
@@ -20,8 +21,7 @@ export async function BlogPostTemplate({
 	post,
 	related,
 }: BlogPostTemplateProps) {
-	const [cta, urls, settings] = await Promise.all([
-		resolveCtaHref(),
+	const [urls, settings] = await Promise.all([
 		getSiteUrls(),
 		fetchStoreSettingsOrNull(),
 	]);
@@ -36,11 +36,18 @@ export async function BlogPostTemplate({
 			<JsonLd data={ldData} />
 			<PostHeader post={post} urls={urls} />
 			{post.content ? <PostBody html={post.content} /> : null}
+			<InlinePostCta />
 			{post.tags && post.tags.length > 0 ? (
 				<PostTags tags={post.tags} urls={urls} />
 			) : null}
+			<AuthorBio />
 			<RelatedPosts posts={related} urls={urls} />
-			<FinalCta href={cta.href} label={cta.label} />
+			<ClosingCta
+				heading="Enough reading — let's talk about your project."
+				body="Bring what you just read to a free 45-minute discovery call. You'll leave with a plan and an honest price, whether or not you hire us."
+				secondaryHref={urls.blogIndex}
+				secondaryLabel="Keep reading"
+			/>
 		</>
 	);
 }

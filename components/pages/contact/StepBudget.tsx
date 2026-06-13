@@ -11,6 +11,7 @@ import {
 	paymentPreferenceOptions,
 	paymentsNeededOptions,
 	targetLaunchOptions,
+	websiteBudgetOptions,
 	type QuoteFormData,
 } from '@/lib/quoteSchema';
 
@@ -28,24 +29,47 @@ export default function StepBudget() {
 	return (
 		<div className="space-y-8">
 			{needsWeb && (
-				<FieldShell
-					id="hostingBudget"
-					label="Monthly budget — CMS hosting & management"
-					error={errors.hostingBudget?.message}
-				>
-					<Controller
-						control={control}
-						name="hostingBudget"
-						render={({ field }) => (
-							<RadioGroup
-								name="hostingBudget"
-								options={hostingBudgetOptions}
-								value={field.value}
-								onChange={field.onChange}
-							/>
-						)}
-					/>
-				</FieldShell>
+				<>
+					<FieldShell
+						id="websiteBudget"
+						label="Website build — one-time investment range"
+						error={errors.websiteBudget?.message}
+						hint="Custom builds start at $1,900. Your proposal pins an exact number before you commit."
+					>
+						<Controller
+							control={control}
+							name="websiteBudget"
+							render={({ field }) => (
+								<RadioGroup
+									name="websiteBudget"
+									options={websiteBudgetOptions}
+									value={field.value}
+									onChange={field.onChange}
+								/>
+							)}
+						/>
+					</FieldShell>
+
+					<FieldShell
+						id="hostingBudget"
+						label="Monthly budget — hosting, CMS & care"
+						error={errors.hostingBudget?.message}
+						hint="Hosting + theDavid CMS is $24.99/mo flat. Modules and maintenance retainers stack on top."
+					>
+						<Controller
+							control={control}
+							name="hostingBudget"
+							render={({ field }) => (
+								<RadioGroup
+									name="hostingBudget"
+									options={hostingBudgetOptions}
+									value={field.value}
+									onChange={field.onChange}
+								/>
+							)}
+						/>
+					</FieldShell>
+				</>
 			)}
 
 			{needsApp && (
@@ -53,7 +77,7 @@ export default function StepBudget() {
 					id="mobileBudget"
 					label="Mobile app — initial investment range"
 					error={errors.mobileBudget?.message}
-					hint="Custom mobile apps start at $20K. Pick the range that lines up with how you're thinking about it."
+					hint="Custom mobile apps start at $12,500. Pick the range that lines up with how you're thinking about it."
 				>
 					<Controller
 						control={control}

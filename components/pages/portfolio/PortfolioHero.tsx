@@ -16,12 +16,12 @@ export default function PortfolioHero({
 					Selected Work
 				</p>
 				<h1 className="mt-6 text-balance">
-					The websites and apps we&apos;ve shipped.
+					Real businesses. Real sites. Real results.
 				</h1>
 				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
-					A mix of restaurants, retailers, and B2B platforms. Each one started
-					as a blank page and ended as a custom Next.js build that the
-					client&apos;s team can run themselves.
+					Restaurants, trades, retailers, artists, and platforms. Every one
+					started as a blank page and ended as a custom build the client&apos;s
+					own team runs — and your project could be the next card on this page.
 				</p>
 				<div className="mt-10 flex justify-center">
 					<ButtonLink href={primaryCtaHref} variant="solid">

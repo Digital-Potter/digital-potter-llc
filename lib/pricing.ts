@@ -2,12 +2,12 @@
 // pricing-aware component pulls from this file. Documentation in
 // docs/PROJECT_CONVENTIONS.md → "Pricing baseline".
 
-export const HOSTING_MONTHLY = 50;
-export const FRONTEND_ONETIME = 4500;
+export const HOSTING_MONTHLY = 24.99;
+export const FRONTEND_ONETIME = 1900;
 export const ANNUAL_PREPAY_DISCOUNT_PCT = 15;
 
 // Mobile app development
-export const MOBILE_APP_ONETIME = 30000;
+export const MOBILE_APP_ONETIME = 12500;
 
 // Maintenance & support
 export const HOURLY_RATE = 250;
@@ -96,8 +96,8 @@ export const BUILD_TIERS: BuildTier[] = [
 		id: 'starter',
 		label: 'Starter',
 		tagline: 'A serious foundation for a small business',
-		rangeLow: 4500,
-		rangeHigh: 8000,
+		rangeLow: 1900,
+		rangeHigh: 3500,
 		bestFor:
 			'Single-location service businesses, trades, restaurants, and brochure sites that need a credible online presence with room to grow.',
 		bullets: [
@@ -116,8 +116,8 @@ export const BUILD_TIERS: BuildTier[] = [
 		id: 'growth',
 		label: 'Growth',
 		tagline: 'Where most serious small businesses land',
-		rangeLow: 9000,
-		rangeHigh: 18000,
+		rangeLow: 4000,
+		rangeHigh: 7500,
 		highlight: true,
 		bestFor:
 			'Professional services, multi-location businesses, and growing brands that need custom components, deeper integrations, and a site that pulls real weight in the business.',
@@ -136,10 +136,10 @@ export const BUILD_TIERS: BuildTier[] = [
 		id: 'premium',
 		label: 'Premium',
 		tagline: 'Custom platforms, apps, and SaaS',
-		rangeLow: 20000,
+		rangeLow: 8500,
 		rangeHigh: null,
 		bestFor:
-			'Businesses building a real digital product: a custom platform, a mobile app, a SaaS, or a multi-tenant operation. Engagements scoped per project — typically $20k–$100k+.',
+			'Businesses building a real digital product: a custom platform, a mobile app, a SaaS, or a multi-tenant operation. Engagements scoped per project — typically $8.5k–$40k+.',
 		bullets: [
 			'Everything in Growth',
 			'Custom backend logic, calculators, or admin dashboards',
@@ -171,7 +171,7 @@ export const HOSTING_TIERS: HostingTier[] = [
 		id: 'essentials',
 		label: 'Essentials',
 		tagline: 'Flat-fee managed hosting + CMS',
-		price: 50,
+		price: 24.99,
 		bestFor:
 			'Small businesses with a live site that needs to stay healthy and current.',
 		bullets: [
@@ -186,7 +186,7 @@ export const HOSTING_TIERS: HostingTier[] = [
 		id: 'growth',
 		label: 'Growth',
 		tagline: 'Active platform management',
-		price: 149,
+		price: 74.99,
 		highlight: true,
 		bestFor:
 			'Businesses that publish often, run paid traffic, or need a partner watching the platform week to week.',
@@ -204,7 +204,7 @@ export const HOSTING_TIERS: HostingTier[] = [
 		id: 'pro',
 		label: 'Pro',
 		tagline: 'Strategic platform partnership',
-		price: 349,
+		price: 174.99,
 		bestFor:
 			'High-traffic sites, ecommerce stores, or businesses where downtime or slow pages cost real revenue.',
 		bullets: [
@@ -234,7 +234,7 @@ export const MODULES: PricingModule[] = [
 		id: 'restaurant',
 		label: 'Restaurant',
 		tagline: 'Menus, hours, and reservations',
-		price: 49,
+		price: 25,
 		bullets: [
 			'Menu management with seasonal swaps',
 			'Hours, holidays, and special events',
@@ -246,7 +246,7 @@ export const MODULES: PricingModule[] = [
 		id: 'booking',
 		label: 'Booking & Events',
 		tagline: 'Calendar, capacity, and check-in',
-		price: 79,
+		price: 40,
 		bullets: [
 			'Bookable calendar with capacity rules',
 			'Waitlist and confirmation emails',
@@ -258,7 +258,7 @@ export const MODULES: PricingModule[] = [
 		id: 'ecommerce',
 		label: 'Ecommerce',
 		tagline: 'Products, checkout, and orders',
-		price: 99,
+		price: 50,
 		bullets: [
 			'Stripe checkout connected to your own Stripe account',
 			'Inventory and product variants',
@@ -270,7 +270,7 @@ export const MODULES: PricingModule[] = [
 		id: 'subscription',
 		label: 'Subscription / Membership',
 		tagline: 'Gated content and recurring billing',
-		price: 99,
+		price: 50,
 		bullets: [
 			'Member-only pages and gated content',
 			'Recurring billing through your own Stripe account',
@@ -320,27 +320,27 @@ export type TypicalInvestmentRow = {
 export const TYPICAL_INVESTMENTS: TypicalInvestmentRow[] = [
 	{
 		businessType: 'Small business / brochure site',
-		rangeLabel: '$4,500 – $8,000',
+		rangeLabel: '$1,900 – $3,500',
 		note: 'Starter tier',
 	},
 	{
 		businessType: 'Professional services site',
-		rangeLabel: '$9,000 – $15,000',
+		rangeLabel: '$4,000 – $6,500',
 		note: 'Growth tier',
 	},
 	{
 		businessType: 'Ecommerce platform',
-		rangeLabel: '$15,000 – $30,000',
+		rangeLabel: '$6,500 – $12,500',
 		note: 'Growth → Premium',
 	},
 	{
 		businessType: 'Mobile app MVP',
-		rangeLabel: '$30,000 – $75,000',
+		rangeLabel: '$12,500 – $30,000',
 		note: 'Premium tier',
 	},
 	{
 		businessType: 'Custom platform / SaaS',
-		rangeLabel: '$30,000 – $100,000+',
+		rangeLabel: '$12,500 – $40,000+',
 		note: 'Premium tier',
 	},
 ];
@@ -350,5 +350,6 @@ export function calculateMonthly(selectedIds: ModuleId[]): number {
 		(acc, m) => acc + m.price,
 		0,
 	);
-	return HOSTING_MONTHLY + moduleTotal;
+	// Round to cents: the base price has a fractional component.
+	return Math.round((HOSTING_MONTHLY + moduleTotal) * 100) / 100;
 }

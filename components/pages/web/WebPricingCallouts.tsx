@@ -4,7 +4,7 @@ const callouts = [
 	{
 		tag: '01 — Build',
 		title: `Custom frontend from $${FRONTEND_ONETIME.toLocaleString()}`,
-		body: "A one-time build covers design, development, content migration, accessibility, performance tuning, and launch. Final scope and price land in your proposal after a discovery week — but $4,500 is where most marketing sites start, and that's a fixed budget, not an hourly meter.",
+		body: "A one-time build covers design, development, content migration, accessibility, performance tuning, and launch. Final scope and price land in your proposal after a discovery week — but $1,900 is where most marketing sites start, and that's a fixed budget, not an hourly meter.",
 	},
 	{
 		tag: '02 — Run',

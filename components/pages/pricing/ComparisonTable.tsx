@@ -11,13 +11,13 @@ const rows: Row[] = [
 		label: 'Monthly base',
 		shopify: '$39',
 		wix: '$17–$39',
-		dp: '$50 (Essentials)',
+		dp: '$24.99 (Essentials)',
 	},
 	{
 		label: 'Build cost',
 		shopify: '$0 (template)',
 		wix: '$0 (template)',
-		dp: 'From $4,500 (custom)',
+		dp: 'From $1,900 (custom)',
 		dpEmphasis: true,
 	},
 	{

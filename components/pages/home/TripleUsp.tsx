@@ -23,11 +23,11 @@ export default function TripleUsp() {
 		<section className="dp-container py-16 md:py-24">
 			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">
-					Three things every Digital Potter site gives you.
+					Most agencies give you one of these. We deliver all three.
 				</h2>
 				<p className="text-dp-body-soft mt-6 text-balance">
-					Most agencies pick one. We deliver all three on every project — and
-					it&apos;s why our clients stay.
+					Custom design, content you control, and code you own — on every
+					project. It&apos;s why our clients stay.
 				</p>
 			</div>
 			<ul className="mt-14 grid gap-6 md:grid-cols-3">

@@ -1,10 +1,12 @@
 export { default as HomeHero } from './HomeHero';
+export { default as TrustBar } from './TrustBar';
 export { default as TripleUsp } from './TripleUsp';
+export { default as DavidShowcase } from './DavidShowcase';
+export { default as HowItWorks } from './HowItWorks';
 export { default as WhoWeHelp } from './WhoWeHelp';
-export { default as ArtOfPottery } from './ArtOfPottery';
 export { default as TabbedServices } from './TabbedServices';
-export { default as ValueCallouts } from './ValueCallouts';
 export { default as SocialProof } from './SocialProof';
 export { default as BlogTeaser } from './BlogTeaser';
 export { default as PricingTeaser } from './PricingTeaser';
+export { default as HomeFaq } from './HomeFaq';
 export { default as FinalCta } from './FinalCta';

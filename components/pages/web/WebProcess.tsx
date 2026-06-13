@@ -22,7 +22,7 @@ const phases = [
 	{
 		n: '05',
 		title: 'Launch & ongoing care',
-		body: 'DNS cutover, monitoring, and a soft-launch period to watch how the site behaves under real traffic. From there, your $50/mo plan keeps the site fast, patched, and content-ready — and we&apos;re available for new work as the business grows.',
+		body: 'DNS cutover, monitoring, and a soft-launch period to watch how the site behaves under real traffic. From there, your $24.99/mo plan keeps the site fast, patched, and content-ready — and we&apos;re available for new work as the business grows.',
 	},
 ];
 

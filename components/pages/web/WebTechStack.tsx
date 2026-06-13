@@ -49,10 +49,13 @@ export default function WebTechStack() {
 				<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
 					Under the hood
 				</p>
-				<h2 className="mt-6 text-balance">The stack we ship every site on.</h2>
+				<h2 className="mt-6 text-balance">
+					Boring on purpose: the stack that won&apos;t strand you.
+				</h2>
 				<p className="text-dp-body-soft mt-6 text-balance">
-					Boring choices on purpose. Each tool earns its place by being the best
-					long-term option for the problem — not the trendiest.
+					Every tool here is mainstream, documented, and hireable-for. If we
+					disappeared tomorrow, any competent developer could pick up your
+					codebase and keep going — that&apos;s the point.
 				</p>
 			</div>
 

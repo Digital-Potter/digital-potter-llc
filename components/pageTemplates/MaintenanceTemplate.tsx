@@ -6,7 +6,9 @@ import {
 	WhatRetainerIncludes,
 	WhyRetainer,
 } from '@/components/pages/maintenance';
-import { FinalCta } from '@/components/pages/home';
+import WithoutMaintenance from '@/components/pages/maintenance/WithoutMaintenance';
+import ClosingCta from '@/components/shared/ClosingCta';
+import TestimonialQuote from '@/components/shared/TestimonialQuote';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import {
 	JsonLd,
@@ -32,11 +34,18 @@ export async function MaintenanceTemplate() {
 		<>
 			<JsonLd data={ldData} />
 			<MaintenanceHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
+			<WithoutMaintenance />
 			<RetainerTiers ctaHref={cta.href} />
 			<HourlyFallback ctaHref={cta.href} />
 			<WhatRetainerIncludes />
+			<TestimonialQuote id="verity-electric" />
 			<WhyRetainer />
-			<FinalCta href={cta.href} label={cta.label} />
+			<ClosingCta
+				heading="Launch day is the start, not the finish line."
+				body="Tell us what you're running — site, store, or app — on a free 45-minute call, and we'll recommend the retainer that fits how often you actually ship. No tier-upselling, ever."
+				secondaryHref="/contact-digital-potter"
+				secondaryLabel="Request hourly help instead"
+			/>
 		</>
 	);
 }

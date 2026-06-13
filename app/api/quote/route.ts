@@ -144,6 +144,7 @@ function buildBody(d: QuoteFormData): string {
 		}
 		if (d.replacingSite) sections.push(kv('Existing site', d.replacingSite));
 		if (d.domain) sections.push(kv('Domain', d.domain));
+		if (d.websiteBudget) sections.push(kv('Build budget', d.websiteBudget));
 		if (d.hostingBudget) sections.push(kv('Hosting budget', d.hostingBudget));
 		if (d.hostingModel) sections.push(kv('Hosting model', d.hostingModel));
 		if (d.expectedTraffic) {

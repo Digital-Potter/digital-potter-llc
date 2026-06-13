@@ -66,7 +66,7 @@ export default function TypicalInvestment() {
 
 			<p className="text-dp-body-soft mt-4 text-center text-xs">
 				Build investment only. Recurring hosting + CMS billed separately, from
-				$50/mo.
+				$24.99/mo.
 			</p>
 		</section>
 	);

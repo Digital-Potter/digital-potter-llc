@@ -14,7 +14,7 @@ const cards: Card[] = [
 		headline: 'Custom frontend build',
 		body: 'A one-time investment for your custom-designed Next.js platform. Three tiers — Starter, Growth, Premium — so the price reflects what you actually need. See the next section for what fits each.',
 		price: `From $${FRONTEND_ONETIME.toLocaleString()}`,
-		priceDetail: 'Starter from $4,500 · Growth $9k–$18k · Premium $20k+',
+		priceDetail: 'Starter from $1,900 · Growth $4k–$7.5k · Premium $8.5k+',
 	},
 	{
 		tag: '02 — Recurring',
@@ -22,13 +22,13 @@ const cards: Card[] = [
 		body: 'Managed hosting, daily backups, SSL, CDN, security patches, and CMS access. Three tiers depending on how active your platform is — start at Essentials, move up only when the business needs it.',
 		price: `From $${HOSTING_MONTHLY}/mo`,
 		priceDetail:
-			'Essentials $50 · Growth $149 · Pro $349 — billed monthly or annually (15% off)',
+			'Essentials $24.99 · Growth $74.99 · Pro $174.99 — billed monthly or annually (15% off)',
 	},
 	{
 		tag: '03 — Optional',
 		headline: 'Modules for your business',
 		body: 'Add only what you need: ecommerce, restaurant, bookings, or membership. Stack any combination. Most clients pick one, some pick two.',
-		price: '+$49 to $99',
+		price: '+$25 to $50',
 		priceDetail: 'per module, per month',
 	},
 ];

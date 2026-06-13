@@ -9,15 +9,17 @@ export default function BlogHero({ totalPosts }: BlogHeroProps) {
 				<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
 					Notes from the studio
 				</p>
-				<h1 className="mt-6 text-balance">Fresh ideas & expert tips.</h1>
+				<h1 className="mt-6 text-balance">
+					Straight answers about websites, apps, and what they should cost.
+				</h1>
 				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
 					Field notes on building custom websites and apps, opinions on the
 					tools we use every day, and the occasional rant about why the
 					template-builder economy is bad for small businesses.
 				</p>
-				{totalPosts ? (
+				{totalPosts && totalPosts >= 5 ? (
 					<p className="text-dp-body-soft mt-6 text-sm">
-						{totalPosts} {totalPosts === 1 ? 'post' : 'posts'} and counting.
+						{totalPosts} posts and counting.
 					</p>
 				) : null}
 			</div>

@@ -31,6 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	entries.push({ url: base, lastModified: new Date(), priority: 1.0 });
 
+	// Static app routes that don't live in the CMS.
+	entries.push({ url: absolute(base, '/discovery-call'), priority: 0.9 });
+
 	if (sm?.includePages !== false) {
 		try {
 			const pages = await fetchPages();

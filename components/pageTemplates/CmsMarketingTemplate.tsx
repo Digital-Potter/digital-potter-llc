@@ -6,7 +6,8 @@ import {
 	UnderTheHood,
 	CmsComparison,
 } from '@/components/pages/cms';
-import { FinalCta } from '@/components/pages/home';
+import ClosingCta from '@/components/shared/ClosingCta';
+import TestimonialQuote from '@/components/shared/TestimonialQuote';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import {
 	JsonLd,
@@ -23,7 +24,7 @@ export async function CmsMarketingTemplate() {
 	const ldData = tenant
 		? serviceSchema({
 				descriptor: SERVICE_DESCRIPTORS.cms,
-				url: '/cms',
+				url: '/the-cms-we-built-for-our-own-clients',
 				tenant,
 			})
 		: null;
@@ -36,7 +37,13 @@ export async function CmsMarketingTemplate() {
 			<CmsFeatures />
 			<UnderTheHood />
 			<CmsComparison />
-			<FinalCta href={cta.href} label={cta.label} />
+			<TestimonialQuote id="fellerman-glass" />
+			<ClosingCta
+				heading="Get theDavid with your next website."
+				body="theDavid isn't sold separately — it comes with every site we build, from $1,900 plus $24.99/month. One platform, your content, zero developer dependency."
+				secondaryHref="/digital-potter-pricing"
+				secondaryLabel="See pricing"
+			/>
 		</>
 	);
 }

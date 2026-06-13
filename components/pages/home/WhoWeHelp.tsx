@@ -189,7 +189,10 @@ const industries: Industry[] = [
 
 export default function WhoWeHelp() {
 	return (
-		<section className="dp-container py-16 md:py-24">
+		<section
+			id="who-we-help"
+			className="dp-container scroll-mt-24 py-16 md:py-24"
+		>
 			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">Built for businesses like yours.</h2>
 				<p className="text-dp-body-soft mt-6 text-balance">

@@ -3,12 +3,14 @@ import {
 	ServicesHero,
 	ServiceSection,
 	CraftingProcess,
+	NotSureChooser,
 	CodeIcon,
 	MobileIcon,
 	WrenchIcon,
 	ServerIcon,
 } from '@/components/pages/services';
-import { FinalCta } from '@/components/pages/home';
+import ClosingCta from '@/components/shared/ClosingCta';
+import TestimonialQuote from '@/components/shared/TestimonialQuote';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import {
 	JsonLd,
@@ -39,18 +41,17 @@ export async function ServicesTemplate() {
 				id="web"
 				tag="Service · Web Development"
 				badge="Most popular"
-				headline="Custom Next.js websites that grow with your business."
-				body="Marketing sites, ecommerce, booking-first sites, and multi-region storefronts. Every site is hand-crafted Next.js — fast, SEO-ready from the first commit, and yours to keep when our engagement ends. UI/UX research and design are built into every project."
+				headline="Websites that earn their keep."
+				body="Marketing sites, ecommerce, booking-first sites, and multi-region storefronts — hand-crafted Next.js, fast and SEO-ready from the first commit, and yours to keep when our engagement ends."
 				bullets={[
-					'User research, journey mapping, and custom visual design — no themes',
-					'Marketing sites, ecommerce, booking flows, multi-region storefronts',
-					'Performance budgets enforced — every page under 2 seconds',
-					'SEO architecture (schema, sitemaps, OG, canonical) from day one',
-					'WCAG 2.1 AA accessibility on every device size',
-					'Headless CMS integration for content team self-service',
-					'Analytics and conversion tracking on every meaningful event',
+					'Custom design from a blank canvas — research, journeys, no themes',
+					'SEO architecture and sub-2-second pages from day one',
+					'theDavid CMS included — your team runs content without us',
+					'Analytics on every meaningful event, so you see what converts',
 				]}
 				icon={CodeIcon}
+				bestFor="Getting found locally and turning visitors into customers"
+				startsAt="$1,900"
 				ctaHref="/web-services-by-digital-potter"
 				ctaLabel="Explore web development"
 			/>
@@ -58,19 +59,18 @@ export async function ServicesTemplate() {
 			<ServiceSection
 				id="mobile"
 				tag="Service · Mobile App Development"
-				headline="Native-quality apps shipped in half the time."
-				body="Cross-platform mobile apps built with React Native and Expo — one codebase that runs on iOS and Android with native performance, App Store-quality UX, and a release cadence that doesn't burn out your team."
+				headline="Apps your customers actually keep."
+				body="Cross-platform apps built with React Native and Expo — one codebase running on iOS and Android with native performance, App Store-quality UX, and same-day fixes that skip store review."
 				bullets={[
-					'Customer-facing apps, internal tools, events, membership apps',
-					'Native iOS and Android UI rendered with platform components',
-					'Stripe payments, Apple Pay, Google Pay, biometric auth',
-					'Push notifications, secure storage, offline-tolerant data',
-					'Over-the-air updates via Expo — same-day fixes without store review',
-					'App Store and Google Play submission handled for you',
-					'Crash reporting and product analytics wired in by default',
+					'One codebase, both stores — native look and feel on each',
+					'Payments, push notifications, offline mode, biometric auth',
+					'Over-the-air updates — ship fixes without waiting on Apple',
+					'Store submission, crash reporting, and analytics handled for you',
 				]}
 				icon={MobileIcon}
 				reverse
+				bestFor="Bookings, ordering, loyalty, and member experiences on the phone"
+				startsAt="$12,500"
 				ctaHref="/mobile-development-services"
 				ctaLabel="Explore mobile development"
 			/>
@@ -78,18 +78,17 @@ export async function ServicesTemplate() {
 			<ServiceSection
 				id="maintenance"
 				tag="Service · Maintenance & Support"
-				headline="We don't disappear after launch."
-				body="Most agencies build and bounce. We build and stay. Three retainer tiers (Care, Studio, Fractional CTO) plus hourly when you need it — pick the cadence that fits how often you actually ship."
+				headline="We build it. We also keep it alive."
+				body="Most agencies build and bounce. We build and stay. Three retainer tiers — Care, Studio, Fractional CTO — plus an hourly fallback, so you pick the cadence that matches how often you actually ship."
 				bullets={[
-					'99.9% uptime monitoring with on-call response and incident postmortems',
-					'Monthly security patches and dependency updates',
-					'Technical SEO audits, schema work, and rank monitoring',
-					'Daily backups, disaster recovery, and full ownership of your codebase',
-					'Quarterly performance reviews and optimization passes',
-					'Strategic advisory available as a Fractional CTO engagement',
-					'Hourly fallback for one-off changes when a retainer doesn’t fit',
+					'Uptime monitoring, security patches, and daily backups',
+					'Real dev hours every month — changes actually ship',
+					'Technical SEO audits and quarterly performance reviews',
+					'Fractional CTO advisory when you need a tech partner, not a vendor',
 				]}
 				icon={WrenchIcon}
+				bestFor="Any site or app that makes you money while you sleep"
+				startsAt="$399/mo"
 				ctaHref="/web-and-mobile-apps-maintenance-services"
 				ctaLabel="See retainer plans"
 			/>
@@ -97,25 +96,34 @@ export async function ServicesTemplate() {
 			<ServiceSection
 				id="self-hosted"
 				tag="Service · Self-Hosted CMS"
-				headline="Run theDavid CMS in your own cloud."
-				body="For organizations with data sovereignty, compliance (HIPAA / SOC 2), or scale needs that go beyond the managed plan. We deploy theDavid into your AWS, GCP, Azure, or on-prem environment, license the source, and train your team."
+				headline="theDavid CMS, in your cloud."
+				body="For organizations with data sovereignty, compliance (HIPAA / SOC 2), or scale needs beyond the managed plan. We deploy theDavid into your AWS, GCP, Azure, or on-prem environment, license the source, and train your team."
 				bullets={[
-					'Deployed into your AWS, GCP, Azure, or on-prem environment',
 					'You hold the data, the keys, and the audit trail',
-					'Compliance-ready (HIPAA, SOC 2, FedRAMP-friendly architecture)',
-					'Source license — fork it, audit it, modify it as your team grows',
-					'Optional ongoing engineering support on a separate retainer',
-					'Migration assistance from the managed plan when you outgrow it',
+					'Compliance-ready architecture — HIPAA, SOC 2, FedRAMP-friendly',
+					'Source license — fork it, audit it, extend it',
+					'Migration path from the managed plan when you outgrow it',
 				]}
 				icon={ServerIcon}
 				reverse
+				bestFor="Regulated industries and platform-scale operations"
+				startsAt="Custom-quoted"
 				ctaHref="/self-hosted-edition"
 				ctaLabel="Explore self-hosting"
 			/>
 
+			<NotSureChooser />
+
+			<TestimonialQuote id="ll-hair" />
+
 			<CraftingProcess />
 
-			<FinalCta href={cta.href} label={cta.label} />
+			<ClosingCta
+				heading="Stop guessing which service you need."
+				body="Bring us the business problem on a free 45-minute call. We'll tell you what to build, what to skip, and what it costs — in plain English."
+				secondaryHref="/digital-potter-pricing"
+				secondaryLabel="See transparent pricing"
+			/>
 		</>
 	);
 }

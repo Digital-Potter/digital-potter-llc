@@ -6,7 +6,9 @@ import {
 	CoreValues,
 	WhyWeBuiltTheDavid,
 } from '@/components/pages/about';
-import { FinalCta } from '@/components/pages/home';
+import MeetTheFounder from '@/components/pages/about/MeetTheFounder';
+import ClosingCta from '@/components/shared/ClosingCta';
+import TestimonialQuote from '@/components/shared/TestimonialQuote';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import {
 	JsonLd,
@@ -36,11 +38,18 @@ export async function AboutTemplate() {
 		<>
 			<JsonLd data={aboutSchema} />
 			<AboutHero primaryCtaHref={cta.href} primaryCtaLabel={cta.label} />
+			<MeetTheFounder />
 			<OurStory />
+			<WhyWeBuiltTheDavid />
+			<TestimonialQuote id="hair-we-share" />
 			<WhyChooseCustom />
 			<CoreValues />
-			<WhyWeBuiltTheDavid />
-			<FinalCta href={cta.href} label={cta.label} />
+			<ClosingCta
+				heading="Come meet the person who'd actually build it."
+				body="A free 45-minute discovery call — no account managers, no sales script. Just your business, what it needs online, and an honest number."
+				secondaryHref="/contact-digital-potter"
+				secondaryLabel="Send us a message instead"
+			/>
 		</>
 	);
 }

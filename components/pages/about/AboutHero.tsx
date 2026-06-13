@@ -15,11 +15,13 @@ export default function AboutHero({
 				<p className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
 					About Digital Potter
 				</p>
-				<h1 className="mt-6 text-balance">Crafting digital excellence.</h1>
+				<h1 className="mt-6 text-balance">
+					Twenty years of shaping the web, one business at a time.
+				</h1>
 				<p className="text-dp-body-soft mx-auto mt-6 max-w-2xl text-balance">
-					Personalized web and mobile applications designed specifically for
-					your business — built by a small studio in Virginia, used by clients
-					across the country.
+					Custom web and mobile applications shaped to your business — built by
+					a small studio in Virginia, trusted by clients across the country,
+					with no account managers between you and the person doing the work.
 				</p>
 				<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 					<Link

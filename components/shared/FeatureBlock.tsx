@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import ScreenshotFrame from './ScreenshotFrame';
 
@@ -10,6 +11,8 @@ type FeatureBlockProps = {
 	screenshotAlt: string;
 	screenshotPlaceholder?: string;
 	reverse?: boolean;
+	linkHref?: string;
+	linkLabel?: string;
 };
 
 export default function FeatureBlock({
@@ -21,6 +24,8 @@ export default function FeatureBlock({
 	screenshotAlt,
 	screenshotPlaceholder,
 	reverse,
+	linkHref,
+	linkLabel,
 }: FeatureBlockProps) {
 	return (
 		<section className="dp-container py-16 md:py-24">
@@ -53,6 +58,16 @@ export default function FeatureBlock({
 							</li>
 						))}
 					</ul>
+					{linkHref && linkLabel && (
+						<p className="mt-7">
+							<Link
+								href={linkHref}
+								className="text-dp-dark-green hover:text-dp-green font-primary-font text-sm font-bold tracking-wide uppercase"
+							>
+								{linkLabel} →
+							</Link>
+						</p>
+					)}
 				</div>
 
 				<div className="relative">

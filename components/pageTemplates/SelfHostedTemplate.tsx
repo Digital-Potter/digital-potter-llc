@@ -8,7 +8,8 @@ import {
 	SelfHostedProcess,
 	SelfHostedFaq,
 } from '@/components/pages/self-hosted';
-import { FinalCta } from '@/components/pages/home';
+import PlatformTour from '@/components/pages/self-hosted/PlatformTour';
+import ClosingCta from '@/components/shared/ClosingCta';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import {
 	JsonLd,
@@ -35,12 +36,18 @@ export async function SelfHostedTemplate() {
 			<JsonLd data={ldData} />
 			<SelfHostedHero primaryCtaHref={cta.href} />
 			<WhySelfHost />
+			<PlatformTour />
 			<WhatWeDeliver />
 			<OngoingOptions />
 			<LicenseTerms />
 			<SelfHostedProcess />
 			<SelfHostedFaq />
-			<FinalCta href={cta.href} label={cta.label} />
+			<ClosingCta
+				heading="Your cloud. Your data. Our platform."
+				body="Bring your compliance requirements and infrastructure questions to a free 45-minute call with the engineer who built theDavid. You'll leave knowing exactly what a self-hosted deployment looks like for your org."
+				secondaryHref="/contact-digital-potter"
+				secondaryLabel="Talk to us about self-hosting"
+			/>
 		</>
 	);
 }

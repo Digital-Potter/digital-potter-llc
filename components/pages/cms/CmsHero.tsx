@@ -1,5 +1,5 @@
 import { ButtonLink } from '@/components/ui/Button';
-import ScreenshotFrame from './ScreenshotFrame';
+import ScreenshotFrame from '@/components/shared/ScreenshotFrame';
 
 type CmsHeroProps = {
 	primaryCtaHref: string;

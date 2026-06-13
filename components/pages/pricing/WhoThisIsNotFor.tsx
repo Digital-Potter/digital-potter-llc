@@ -8,7 +8,7 @@ const goodFit = [
 
 const notFit = [
 	'You’re looking for a DIY template — Wix, Squarespace, and Shopify themes solve this well.',
-	'Your hard budget cap is under $4,500 for the build.',
+	'Your hard budget cap is under $1,900 for the build.',
 	'You want the cheapest option on the market and plan to switch agencies often.',
 	'You expect to handle design, copy, and deployment yourself.',
 	'You need it launched this week with no discovery and no scope.',

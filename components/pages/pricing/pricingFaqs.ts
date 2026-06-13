@@ -13,12 +13,12 @@ export const PRICING_FAQS: PricingFaq[] = [
 	{
 		question: "What's the difference between Starter, Growth, and Premium?",
 		answer:
-			'Starter ($4,500–$8,000) is a serious foundation for a small business — brochure-style sites for service businesses, trades, and single-location restaurants. Growth ($9,000–$18,000) is where most clients land — professional services, multi-location businesses, deeper integrations, and custom components. Premium ($20,000+) is for custom platforms, ecommerce at scale, mobile apps, and SaaS. Your discovery call places you in the right tier and your proposal pins a fixed price.',
+			'Starter ($1,900–$3,500) is a serious foundation for a small business — brochure-style sites for service businesses, trades, and single-location restaurants. Growth ($4,000–$7,500) is where most clients land — professional services, multi-location businesses, deeper integrations, and custom components. Premium ($8,500+) is for custom platforms, ecommerce at scale, mobile apps, and SaaS. Your discovery call places you in the right tier and your proposal pins a fixed price.',
 	},
 	{
 		question: 'Why is the frontend a separate one-time fee?',
 		answer:
-			"Because we build it from scratch for you. The build investment ($4,500 and up) covers brand discovery, custom design, the initial Next.js codebase, and the page templates your CMS uses going forward. After that, your team adds and edits unlimited pages through the CMS — at no extra charge from us. We're not a template platform, so we don't earn margin by selling you new templates every year.",
+			"Because we build it from scratch for you. The build investment ($1,900 and up) covers brand discovery, custom design, the initial Next.js codebase, and the page templates your CMS uses going forward. After that, your team adds and edits unlimited pages through the CMS — at no extra charge from us. We're not a template platform, so we don't earn margin by selling you new templates every year.",
 	},
 	{
 		question: 'What happens if my site gets a lot of traffic?',
@@ -33,7 +33,7 @@ export const PRICING_FAQS: PricingFaq[] = [
 	{
 		question: 'Do you offer financing for the build?',
 		answer:
-			"Yes — for engagements above $10k we offer a private installment plan after we've scoped the work in your proposal. We don't advertise it publicly because financing terms depend on project size and shape, but bring it up on your discovery call if it would help.",
+			"Yes — for engagements above $5k we offer a private installment plan after we've scoped the work in your proposal. We don't advertise it publicly because financing terms depend on project size and shape, but bring it up on your discovery call if it would help.",
 	},
 	{
 		question: "What does 'you own the code' actually mean?",

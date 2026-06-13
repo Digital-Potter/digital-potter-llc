@@ -80,19 +80,25 @@ export const appStoreAccountsOptions = [
 
 // ---- Step 2 — Budget and timelines ----
 
+export const websiteBudgetOptions = [
+	'$1,900 – $3,500 (marketing site)',
+	'$4,000 – $7,500 (ecommerce / booking)',
+	'$8,500+ (custom web application)',
+	'Not sure — help me scope it',
+] as const;
+
 export const hostingBudgetOptions = [
-	'$100 – $300 / month',
-	'$300 – $600 / month',
-	'$600 – $1500 / month',
-	'$1500+ / month',
+	'$25 – $75 / month (hosting + CMS, maybe a module)',
+	'$100 – $500 / month (platform + Care or Studio retainer)',
+	'$500 – $2,500+ / month (Studio / Fractional CTO)',
 	'Enterprise (self-host)',
 ] as const;
 
 export const mobileBudgetOptions = [
-	'$15K – $25K (basic MVP)',
-	'$25K – $50K (standard production app)',
-	'$50K – $100K (feature-rich app)',
-	'$100K+ (enterprise / multi-platform)',
+	'$12,500 – $20K (focused MVP)',
+	'$20K – $40K (standard production app)',
+	'$40K – $75K (feature-rich app)',
+	'$75K+ (enterprise / multi-platform)',
 	'Open to discuss',
 ] as const;
 
@@ -169,6 +175,7 @@ export const quoteSchema = z
 		appStoreAccounts: z.enum(appStoreAccountsOptions).optional(),
 
 		// Budget — partly conditional
+		websiteBudget: z.enum(websiteBudgetOptions).optional(),
 		hostingBudget: z.enum(hostingBudgetOptions).optional(),
 		mobileBudget: z.enum(mobileBudgetOptions).optional(),
 		paymentPreference: z.enum(paymentPreferenceOptions, {
@@ -240,6 +247,13 @@ export const quoteSchema = z
 					code: 'custom',
 					path: ['domain'],
 					message: 'Tell us about your domain.',
+				});
+			}
+			if (!data.websiteBudget) {
+				ctx.addIssue({
+					code: 'custom',
+					path: ['websiteBudget'],
+					message: 'Pick a build budget range.',
 				});
 			}
 			if (!data.hostingBudget) {
@@ -330,7 +344,12 @@ export function getStepFields(
 			'targetLaunch',
 		];
 		if (needsWeb) {
-			fields.push('hostingBudget', 'hostingModel', 'expectedTraffic');
+			fields.push(
+				'websiteBudget',
+				'hostingBudget',
+				'hostingModel',
+				'expectedTraffic',
+			);
 		}
 		if (needsApp) {
 			fields.push('mobileBudget');

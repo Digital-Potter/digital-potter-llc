@@ -13,6 +13,9 @@ type ServiceSectionProps = {
 	badge?: string;
 	ctaHref: string;
 	ctaLabel: string;
+	/** "Who is this for / what does it cost" strip rendered above the CTA. */
+	bestFor?: string;
+	startsAt?: string;
 };
 
 export default function ServiceSection({
@@ -26,6 +29,8 @@ export default function ServiceSection({
 	badge,
 	ctaHref,
 	ctaLabel,
+	bestFor,
+	startsAt,
 }: ServiceSectionProps) {
 	return (
 		<section id={id} className="dp-container py-16 md:py-24">
@@ -53,6 +58,26 @@ export default function ServiceSection({
 					</div>
 					<h2 className="mt-6 text-balance">{headline}</h2>
 					<p className="text-dp-body-soft mt-6 text-base md:text-lg">{body}</p>
+					{(bestFor || startsAt) && (
+						<dl className="border-dp-dark/10 mt-6 flex flex-col gap-2 rounded-2xl border bg-white/50 px-5 py-4 text-sm sm:flex-row sm:gap-8">
+							{bestFor && (
+								<div>
+									<dt className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
+										Best for
+									</dt>
+									<dd className="text-dp-body mt-0.5">{bestFor}</dd>
+								</div>
+							)}
+							{startsAt && (
+								<div className="shrink-0">
+									<dt className="text-dp-dark-green font-primary-font text-xs font-bold tracking-widest uppercase">
+										Starts at
+									</dt>
+									<dd className="text-dp-dark mt-0.5 font-bold">{startsAt}</dd>
+								</div>
+							)}
+						</dl>
+					)}
 					<div className="mt-8">
 						<ButtonLink href={ctaHref} variant="solid">
 							{ctaLabel}

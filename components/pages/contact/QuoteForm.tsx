@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
@@ -88,6 +89,11 @@ export default function QuoteForm({ portfolioHref }: QuoteFormProps) {
 					onJump={(s) => setStep(s)}
 				/>
 
+				<p className="text-dp-body-soft mt-4 text-center text-sm">
+					About 3 minutes · No commitment · A real reply from a human within one
+					business day
+				</p>
+
 				<div
 					role="group"
 					aria-live="polite"
@@ -137,6 +143,17 @@ export default function QuoteForm({ portfolioHref }: QuoteFormProps) {
 						)}
 					</div>
 				</div>
+
+				<p className="text-dp-body-soft mt-6 text-center text-sm">
+					Forms not your thing?{' '}
+					<Link
+						href="/discovery-call"
+						className="text-dp-dark-green hover:text-dp-green font-bold"
+					>
+						Book a free discovery call instead
+					</Link>{' '}
+					— same outcome, zero typing.
+				</p>
 			</form>
 		</FormProvider>
 	);

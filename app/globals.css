@@ -143,6 +143,53 @@
 		);
 	}
 
+	/* Homepage hero entrance: copy first, showcase second. */
+	@keyframes dp-fade-up {
+		from {
+			opacity: 0;
+			transform: translateY(24px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes dp-drift {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	.dp-hero-reveal {
+		animation: dp-fade-up 0.7s ease-out both;
+	}
+
+	.dp-hero-reveal-late {
+		animation: dp-fade-up 0.9s ease-out 0.25s both;
+	}
+
+	.dp-float {
+		animation: dp-drift 6s ease-in-out infinite;
+	}
+
+	.dp-float-delayed {
+		animation: dp-drift 7s ease-in-out 1.5s infinite;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.dp-hero-reveal,
+		.dp-hero-reveal-late,
+		.dp-float,
+		.dp-float-delayed {
+			animation: none;
+		}
+	}
+
 	/* Keep content scrollable while visually hiding the scrollbar. */
 	.scrollbar-none {
 		-ms-overflow-style: none;
