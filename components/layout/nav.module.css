@@ -91,7 +91,9 @@ CSS by Norman @ Digital Potter */
 	top: 20px;
 	height: 95vh;
 	width: 80vw;
-	transform: translateX(100%);
+	/* NOTE: the slide transform lives ONLY in `.mobileClose nav` /
+	   `.mobileOpen nav` above. Setting it here would override the open state
+	   (equal specificity, later in source) and the panel would never appear. */
 	padding-top: 100px;
 	z-index: 1000;
 	overflow-y: auto;
