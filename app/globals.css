@@ -55,6 +55,13 @@
 		@apply mx-auto w-11/12 max-w-[1500px];
 	}
 
+	/* CMS-authored rich text can contain long unbroken strings (URLs, code).
+	   Break them so they never force horizontal overflow on small screens. */
+	.prose,
+	.dp-prose {
+		overflow-wrap: break-word;
+	}
+
 	section,
 	header {
 		@apply mx-auto w-11/12 max-w-[1500px];

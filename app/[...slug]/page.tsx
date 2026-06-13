@@ -112,10 +112,6 @@ async function classify(slugs: string[]): Promise<Route> {
 		return { kind: 'cms-page', slug: first };
 	}
 
-	if (slugs.length === 1) {
-		return { kind: 'text-page', slug: first };
-	}
-
 	return { kind: 'not-found' };
 }
 

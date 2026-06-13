@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import type { MouseEvent } from 'react';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import mobileNavStyles from './nav.module.css';
 import type { MegaMenuColumn } from './MegaMenu';
@@ -31,23 +30,16 @@ export default function MobileNav({
 	ctaHref,
 	ctaLabel,
 }: MobileNavProps) {
-	const navRef = useRef<HTMLDivElement>(null);
+	const [open, setOpen] = useState(false);
 	const [expandedId, setExpandedId] = useState<string | null>(null);
+	const openerRef = useRef<HTMLButtonElement>(null);
+	const closerRef = useRef<HTMLButtonElement>(null);
 
-	const onOpen = (e: MouseEvent) => {
-		e.preventDefault();
-		if (navRef) {
-			navRef.current?.classList.add(`${mobileNavStyles.mobileOpen}`);
-			navRef.current?.classList.remove(`${mobileNavStyles.mobileClose}`);
-		}
-	};
-
-	const onClose = (e: MouseEvent) => {
-		e.preventDefault();
-		if (navRef) {
-			navRef.current?.classList.add(`${mobileNavStyles.mobileClose}`);
-			navRef.current?.classList.remove(`${mobileNavStyles.mobileOpen}`);
-		}
+	const openMenu = () => setOpen(true);
+	// No preventDefault: this also fires from nav links, where blocking the
+	// event would cancel navigation. Buttons pass no event.
+	const closeMenu = () => {
+		setOpen(false);
 		setExpandedId(null);
 	};
 
@@ -55,13 +47,35 @@ export default function MobileNav({
 		setExpandedId((current) => (current === id ? null : id));
 	};
 
+	// When open: trap nothing fancy, but move focus to the close button, allow
+	// Escape to dismiss, lock body scroll, and return focus to the opener on close.
+	useEffect(() => {
+		if (!open) return;
+		const opener = openerRef.current; // persistent hamburger button
+		closerRef.current?.focus();
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') closeMenu();
+		};
+		document.addEventListener('keydown', onKey);
+		const prevOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+		return () => {
+			document.removeEventListener('keydown', onKey);
+			document.body.style.overflow = prevOverflow;
+			opener?.focus();
+		};
+	}, [open]);
+
 	return (
 		<Fragment>
 			<div className={mobileNavStyles.openerContainer}>
 				<button
+					ref={openerRef}
 					className={mobileNavStyles.opener}
-					onClick={onOpen}
+					onClick={openMenu}
 					aria-label="Open menu"
+					aria-expanded={open}
+					aria-controls="mobile-nav-panel"
 				>
 					<div className={mobileNavStyles.openerLineOne} />
 					<div className={mobileNavStyles.openerLineTwo} />
@@ -70,15 +84,19 @@ export default function MobileNav({
 			</div>
 
 			<div
-				ref={navRef}
+				id="mobile-nav-panel"
+				role="dialog"
+				aria-modal="true"
+				aria-label="Site menu"
 				className={twMerge(
 					`${mobileNavStyles.mobileNavContainer}`,
-					`${mobileNavStyles.mobileClose}`,
+					open ? mobileNavStyles.mobileOpen : mobileNavStyles.mobileClose,
 				)}
 			>
 				<button
+					ref={closerRef}
 					className={mobileNavStyles.closer}
-					onClick={onClose}
+					onClick={closeMenu}
 					aria-label="Close menu"
 				>
 					<div className={mobileNavStyles.closeLineOne} />
@@ -139,7 +157,7 @@ export default function MobileNav({
 											>
 												<Link
 													href={navItem.href}
-													onMouseUp={onClose}
+													onClick={closeMenu}
 													className="font-primary-font text-dp-dark-green border-dp-dark-green/40 hover:bg-dp-dark-green hover:border-dp-dark-green inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 px-4 py-2.5 text-sm font-bold tracking-wider uppercase transition-colors hover:text-white"
 												>
 													Go to {navItem.label}
@@ -169,7 +187,7 @@ export default function MobileNav({
 																<li key={sub.id}>
 																	<Link
 																		href={sub.href}
-																		onMouseUp={onClose}
+																		onClick={closeMenu}
 																		className="hover:bg-dp-dark-green/5 group/sub block rounded-lg px-2 py-3 transition-colors"
 																	>
 																		<span className="font-primary-font text-dp-dark block text-sm font-bold tracking-normal normal-case">
@@ -191,7 +209,7 @@ export default function MobileNav({
 									) : (
 										<Link
 											href={navItem.href}
-											onMouseUp={onClose}
+											onClick={closeMenu}
 											className="font-primary-font bg-dp-body/0 hover:text-dp-dark-green hover:bg-dp-body/5 w-full rounded-xl py-2 text-base font-bold uppercase transition-all duration-300 group-hover:transition-all"
 										>
 											{navItem.label}
@@ -204,7 +222,7 @@ export default function MobileNav({
 							<li className={mobileNavStyles.navMobileItem}>
 								<Link
 									href={ctaHref}
-									onMouseUp={onClose}
+									onClick={closeMenu}
 									className="font-primary-font bg-dp-green text-dp-dark hover:bg-dp-dark hover:text-dp-green border-dp-green hover:border-dp-dark rounded-dp-20 mt-4 inline-block w-full border-2 px-6 py-3 text-center text-base font-bold uppercase shadow-2xl transition-all"
 								>
 									{ctaLabel}

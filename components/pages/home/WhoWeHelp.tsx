@@ -191,7 +191,7 @@ export default function WhoWeHelp() {
 	return (
 		<section
 			id="who-we-help"
-			className="dp-container scroll-mt-24 py-16 md:py-24"
+			className="dp-container scroll-mt-28 py-16 md:py-24"
 		>
 			<div className="mx-auto max-w-4xl text-center">
 				<h2 className="text-balance">Built for businesses like yours.</h2>
