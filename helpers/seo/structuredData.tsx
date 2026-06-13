@@ -123,6 +123,21 @@ export function organizationSchema(
 		out.telephone = tenant.settings.contactPhone;
 	if (tenant.settings.address) out.address = tenant.settings.address;
 	if (sameAs.length > 0) out.sameAs = sameAs;
+
+	// A contactPoint is what Google attaches to the Organization knowledge
+	// entity (the bare email/telephone above are weaker signals).
+	if (tenant.settings.contactEmail || tenant.settings.contactPhone) {
+		const contactPoint: Json = {
+			'@type': 'ContactPoint',
+			contactType: 'customer support',
+			areaServed: 'US',
+		};
+		if (tenant.settings.contactPhone)
+			contactPoint.telephone = tenant.settings.contactPhone;
+		if (tenant.settings.contactEmail)
+			contactPoint.email = tenant.settings.contactEmail;
+		out.contactPoint = [contactPoint];
+	}
 	return out;
 }
 

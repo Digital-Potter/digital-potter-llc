@@ -43,7 +43,7 @@ export async function ContactTemplate() {
 				type: 'ContactPage',
 				name: `Contact ${tenant.settings.storeName}`,
 				description: 'Get in touch about your web or mobile app project.',
-				url: '/contact',
+				url: '/contact-digital-potter',
 				tenant,
 				mainEntity:
 					contactPoints.length > 0

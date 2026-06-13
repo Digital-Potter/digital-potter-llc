@@ -12,6 +12,13 @@ type BuildPageMetadataInput = {
 	/** CMS Page slug to look up. If missing or not found, only globals + fallback drive the metadata. */
 	slug?: string | null;
 	fallback: Fallback;
+	/**
+	 * The route's own path (e.g. '/', '/digital-potter-pricing'). Used as a
+	 * self-referencing canonical when the CMS page doesn't author one — without
+	 * it, trailing-slash / query-param / casing variants can be indexed as
+	 * duplicates. Resolved against `metadataBase` (the admin storefront domain).
+	 */
+	path?: string;
 };
 
 /**
@@ -56,6 +63,7 @@ function pickOgImageUrl(
 export async function buildPageMetadata({
 	slug,
 	fallback,
+	path,
 }: BuildPageMetadataInput): Promise<Metadata> {
 	const [settings, page] = await Promise.all([
 		fetchStoreSettingsOrNull(),
@@ -106,9 +114,10 @@ export async function buildPageMetadata({
 			description,
 			images: ogImageUrl ? [ogImageUrl] : undefined,
 		},
-		alternates: pageSeo?.canonicalUrl
-			? { canonical: pageSeo.canonicalUrl }
-			: undefined,
+		alternates:
+			pageSeo?.canonicalUrl || path
+				? { canonical: pageSeo?.canonicalUrl ?? path }
+				: undefined,
 		robots: noIndex ? { index: false, follow: false } : undefined,
 	};
 }

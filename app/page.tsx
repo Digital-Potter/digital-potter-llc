@@ -12,7 +12,11 @@ const FALLBACK = {
 export async function generateMetadata(): Promise<Metadata> {
 	const settings = await fetchStoreSettingsOrNull();
 	const homepageSlug = settings?.settings?.siteStructure?.homepageSlug;
-	return buildPageMetadata({ slug: homepageSlug, fallback: FALLBACK });
+	return buildPageMetadata({
+		slug: homepageSlug,
+		fallback: FALLBACK,
+		path: '/',
+	});
 }
 
 export default function Home() {

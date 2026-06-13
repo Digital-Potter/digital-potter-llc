@@ -134,6 +134,7 @@ export async function generateMetadata({
 			return buildPageMetadata({
 				slug: (await getSiteUrls()).blog,
 				fallback: BLOG_FALLBACK,
+				path: `/${slug.join('/')}`,
 			});
 		case 'blog-category':
 			return {
@@ -170,6 +171,7 @@ export async function generateMetadata({
 			return buildPageMetadata({
 				slug: (await getSiteUrls()).portfolio,
 				fallback: PORTFOLIO_FALLBACK,
+				path: `/${slug.join('/')}`,
 			});
 		case 'project-category': {
 			const urls = await getSiteUrls();
@@ -221,11 +223,13 @@ export async function generateMetadata({
 			return buildPageMetadata({
 				slug: route.slug,
 				fallback: { title: 'Digital Potter' },
+				path: `/${slug.join('/')}`,
 			});
 		case 'text-page':
 			return buildPageMetadata({
 				slug: route.slug,
 				fallback: { title: 'Digital Potter Legal' },
+				path: `/${slug.join('/')}`,
 			});
 		default:
 			return { title: 'Not found', robots: { index: false, follow: false } };

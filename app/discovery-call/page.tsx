@@ -4,15 +4,24 @@ import CallAgenda from '@/components/pages/discovery-call/CallAgenda';
 import MeetYourHost from '@/components/pages/discovery-call/MeetYourHost';
 import TestimonialQuote from '@/components/shared/TestimonialQuote';
 
+const DISCOVERY_DESCRIPTION =
+	'Book a free 45-minute discovery call with Digital Potter. You leave with a plan and a real price — even if we never work together.';
+
 export const metadata: Metadata = {
 	title: 'Schedule a Discovery Call | Digital Potter',
-	description:
-		'Book a free 45-minute discovery call with Digital Potter. You leave with a plan and a real price — even if we never work together.',
+	description: DISCOVERY_DESCRIPTION,
+	alternates: { canonical: '/discovery-call' },
+	openGraph: {
+		title: 'Schedule a Discovery Call | Digital Potter',
+		description: DISCOVERY_DESCRIPTION,
+		type: 'website',
+	},
 };
 
 export default function DiscoveryCallPage() {
 	return (
-		<main className="bg-dp-yellowish min-h-screen">
+		// Not <main>: the root layout already provides the page's <main> landmark.
+		<div className="bg-dp-yellowish min-h-screen">
 			<div className="dp-container py-16 md:py-24">
 				<div className="mx-auto max-w-5xl">
 					<div className="mb-10 text-center">
@@ -30,6 +39,6 @@ export default function DiscoveryCallPage() {
 				</div>
 			</div>
 			<TestimonialQuote id="fellerman-glass" />
-		</main>
+		</div>
 	);
 }

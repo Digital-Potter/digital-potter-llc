@@ -41,7 +41,7 @@ export async function PricingTemplate() {
 						name: `${tenant.settings.storeName} Pricing`,
 						description:
 							'Transparent pricing for custom websites and mobile apps — one-time build fee plus monthly hosting and CMS.',
-						url: '/pricing',
+						url: '/digital-potter-pricing',
 						tenant,
 					})}
 				/>
