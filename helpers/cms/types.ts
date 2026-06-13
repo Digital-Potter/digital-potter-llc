@@ -206,12 +206,8 @@ export interface StoreSettingsRecord {
 	socialLinks?: Partial<
 		Record<'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok', string>
 	>;
-	policies?: Partial<
-		Record<
-			'refundPolicy' | 'privacyPolicy' | 'termsOfService' | 'shippingPolicy',
-			string
-		>
-	>;
+	/** Live policies (content present), as title + slug for footer links. */
+	policies?: { title: string; slug: string }[];
 	storefront?: {
 		domain?: string;
 	};

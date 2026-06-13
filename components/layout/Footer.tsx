@@ -20,6 +20,7 @@ export async function Footer() {
 		a.slug.localeCompare(b.slug),
 	);
 	const siteStructure = settingsData?.settings?.siteStructure;
+	const policies = settingsData?.settings?.policies ?? [];
 
 	// Layout: chrome (logo + ©) | N menu columns | CTA
 	const colCount = 1 + columns.length + 1;
@@ -80,6 +81,20 @@ export async function Footer() {
 						</ButtonLink>
 					</div>
 				</div>
+				{policies.length > 0 && (
+					<ul className="border-dp-dark/10 text-dp-body-soft mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t pt-6">
+						{policies.map((policy) => (
+							<li key={policy.slug}>
+								<Link
+									href={`/policies/${policy.slug}`}
+									className="hover:text-dp-dark inline-block"
+								>
+									{policy.title}
+								</Link>
+							</li>
+						))}
+					</ul>
+				)}
 			</Container>
 		</footer>
 	);

@@ -5,11 +5,13 @@ import { BlogPostTemplate } from '@/components/pageTemplates/BlogPostTemplate';
 import { BlogTemplate } from '@/components/pageTemplates/BlogTemplate';
 import { PortfolioTemplate } from '@/components/pageTemplates/PortfolioTemplate';
 import { ProjectCategoryTemplate } from '@/components/pageTemplates/ProjectCategoryTemplate';
+import { PolicyTemplate } from '@/components/pageTemplates/PolicyTemplate';
 import { ProjectDetailTemplate } from '@/components/pageTemplates/ProjectDetailTemplate';
 import { UnsupportedResourceTemplate } from '@/components/pageTemplates/UnsupportedResourceTemplate';
 import { resolveTemplate } from '@/components/pageTemplates/registry';
 import { fetchBlogPostBySlugOrNull } from '@/helpers/cms/blog';
 import { fetchPageBySlugOrNull } from '@/helpers/cms/pages';
+import { fetchPolicyBySlugOrNull } from '@/helpers/cms/policies';
 import { fetchProjectBySlugOrNull } from '@/helpers/cms/projects';
 import { buildPageMetadata } from '@/helpers/cms/pageMetadata';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
@@ -30,6 +32,7 @@ type Route =
 	| { kind: 'product-category'; slug: string }
 	| { kind: 'courses-index' }
 	| { kind: 'course-detail'; slug: string }
+	| { kind: 'policy'; slug: string }
 	| { kind: 'cms-page'; slug: string }
 	| { kind: 'text-page'; slug: string }
 	| { kind: 'not-found' };
@@ -94,6 +97,14 @@ async function classify(slugs: string[]): Promise<Route> {
 	if (first === urls.courses) {
 		if (slugs.length === 1) return { kind: 'courses-index' };
 		if (slugs.length === 2) return { kind: 'course-detail', slug: second };
+		return { kind: 'not-found' };
+	}
+
+	// Legal policies live at /policies/<slug>, served from store settings.
+	// Bare /policies has no index — send it home rather than 404.
+	if (first === 'policies') {
+		if (slugs.length === 1) return { kind: 'redirect-home' };
+		if (slugs.length === 2) return { kind: 'policy', slug: second };
 		return { kind: 'not-found' };
 	}
 
@@ -196,6 +207,16 @@ export async function generateMetadata({
 					: undefined,
 			};
 		}
+		case 'policy': {
+			const policy = await fetchPolicyBySlugOrNull(route.slug);
+			if (!policy) {
+				return {
+					title: 'Policy not found',
+					robots: { index: false, follow: false },
+				};
+			}
+			return { title: { absolute: `${policy.title} — Digital Potter` } };
+		}
 		case 'cms-page':
 			return buildPageMetadata({
 				slug: route.slug,
@@ -275,6 +296,11 @@ export default async function CatchAllRoute({
 					subtitle="This course link isn't wired up on the marketing site yet."
 				/>
 			);
+		case 'policy': {
+			const policy = await fetchPolicyBySlugOrNull(route.slug);
+			if (!policy) notFound();
+			return <PolicyTemplate policy={policy} />;
+		}
 		case 'cms-page': {
 			const page = await fetchPageBySlugOrNull(route.slug);
 			if (!page) notFound();
