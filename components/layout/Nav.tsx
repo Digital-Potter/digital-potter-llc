@@ -97,7 +97,7 @@ export async function Nav() {
 				<DigitalPotterLogo
 					width={262}
 					height={34}
-					className="w-[140px] md:w-[190px] lg:w-[262px]"
+					className="w-32 sm:w-[140px] md:w-[180px] xl:w-[262px]"
 				/>
 			</Link>
 			<nav aria-label="Primary" className="dp-box-design hidden p-1 lg:block">
@@ -145,7 +145,7 @@ export async function Nav() {
 					})}
 				</ul>
 			</nav>
-			<div className="bg-dp-yellowish/95 flex flex-row items-center gap-2 rounded-2xl p-2 md:gap-4 lg:gap-8">
+			<div className="bg-dp-yellowish/95 flex flex-row items-center gap-2 rounded-2xl p-2 max-sm:max-w-48 md:gap-4 lg:gap-8">
 				<ButtonLink
 					href={ctaHref}
 					variant="solid"
