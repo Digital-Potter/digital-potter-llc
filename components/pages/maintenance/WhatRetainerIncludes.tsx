@@ -65,7 +65,7 @@ export default function WhatRetainerIncludes() {
 				</article>
 
 				<article className="border-dp-green/40 rounded-3xl border-2 bg-white/40 p-8 md:p-10">
-					<p className="font-primary-font text-dp-green text-xs font-bold tracking-widest uppercase">
+					<p className="font-primary-font text-dp-dark-green text-xs font-bold tracking-widest uppercase">
 						In your retainer
 					</p>
 					<h3 className="mt-3 text-xl md:text-2xl">Active development work</h3>

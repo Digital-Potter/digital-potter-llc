@@ -207,7 +207,7 @@ export default function WhoWeHelp() {
 						key={industry.name}
 						className="border-dp-dark/10 rounded-3xl border bg-white/50 p-6 md:p-8"
 					>
-						<div className="text-dp-green">{industry.icon}</div>
+						<div className="text-dp-dark-green">{industry.icon}</div>
 						<h3 className="font-primary-font mt-4 text-lg leading-snug font-bold">
 							{industry.name}
 						</h3>

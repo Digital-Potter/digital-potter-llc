@@ -257,3 +257,19 @@
 		}
 	}
 }
+
+/* Site-wide reduced-motion fallback. The hero block above opts specific
+   animations out individually; this catches everything else (the many
+   transition, hover-scale and rotate utilities, carousel fades, loading
+   skeletons) for users who ask the OS to minimize motion. Kept outside
+   @layer base and marked important so it always wins. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

@@ -42,7 +42,7 @@ export default function TimeSlotPicker({
 }: Props) {
 	if (!selectedDate) {
 		return (
-			<div className="text-dp-dark/50 flex h-40 items-center justify-center text-sm">
+			<div className="text-dp-dark/70 flex h-40 items-center justify-center text-sm">
 				← Select a date
 			</div>
 		);
@@ -63,7 +63,7 @@ export default function TimeSlotPicker({
 
 	if (slots.length === 0) {
 		return (
-			<div className="text-dp-dark/50 flex h-40 items-center justify-center text-center text-sm">
+			<div className="text-dp-dark/70 flex h-40 items-center justify-center text-center text-sm">
 				No availability on this date.
 				<br />
 				Try another day.
@@ -75,19 +75,27 @@ export default function TimeSlotPicker({
 
 	return (
 		<div>
-			<p className="font-primary-font text-dp-dark mb-3 text-xs font-bold tracking-wider uppercase">
+			<p
+				id="time-slot-label"
+				className="font-primary-font text-dp-dark mb-3 text-xs font-bold tracking-wider uppercase"
+			>
 				Available Times{' '}
-				<span className="text-dp-dark/40 font-normal normal-case">
+				<span className="text-dp-dark/60 font-normal normal-case">
 					({abbr})
 				</span>
 			</p>
-			<div className="flex flex-col gap-2">
+			<div
+				role="group"
+				aria-labelledby="time-slot-label"
+				className="flex flex-col gap-2"
+			>
 				{slots.map((slot) => {
 					const isSelected = selectedSlot?.startsAt === slot.startsAt;
 					return (
 						<button
 							key={slot.startsAt}
 							onClick={() => onSlotSelect(slot)}
+							aria-pressed={isSelected}
 							className={twMerge(
 								'cursor-pointer rounded-full border-2 px-4 py-2 text-center text-sm font-medium transition-colors',
 								isSelected

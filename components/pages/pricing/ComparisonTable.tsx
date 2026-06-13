@@ -83,6 +83,9 @@ export default function ComparisonTable() {
 
 			<div className="border-dp-dark/10 mt-14 overflow-x-auto rounded-3xl border bg-white/40">
 				<table className="w-full min-w-[640px] text-left text-sm md:text-base">
+					<caption className="sr-only">
+						Pricing and features compared: Shopify, Wix, and Digital Potter.
+					</caption>
 					<thead>
 						<tr className="border-dp-dark/10 border-b">
 							<th

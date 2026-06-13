@@ -9,7 +9,7 @@ function Stars() {
 	return (
 		<span
 			aria-label="Five star rating"
-			className="text-dp-green tracking-tight"
+			className="text-dp-dark-green tracking-tight"
 		>
 			★★★★★
 		</span>

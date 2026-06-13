@@ -1,9 +1,12 @@
 'use client';
 
-import type {
-	ReactNode,
-	InputHTMLAttributes,
-	SelectHTMLAttributes,
+import {
+	cloneElement,
+	isValidElement,
+	type ReactElement,
+	type ReactNode,
+	type InputHTMLAttributes,
+	type SelectHTMLAttributes,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -13,7 +16,17 @@ type FieldShellProps = {
 	error?: string;
 	children: ReactNode;
 	hint?: string;
+	/**
+	 * Set for radio/checkbox groups: renders a <fieldset>/<legend> so the
+	 * group prompt is programmatically associated with the choices (a plain
+	 * <label htmlFor> can't point at a group). Single inputs keep the
+	 * label + injected aria-describedby/aria-invalid wiring.
+	 */
+	group?: boolean;
 };
+
+const labelClasses =
+	'font-primary-font text-dp-dark mb-2 block text-sm font-bold tracking-wider uppercase';
 
 export function FieldShell({
 	id,
@@ -21,24 +34,52 @@ export function FieldShell({
 	error,
 	children,
 	hint,
+	group,
 }: FieldShellProps) {
+	const errorId = `${id}-error`;
+	const hintId = `${id}-hint`;
+	const describedBy = error ? errorId : hint ? hintId : undefined;
+
+	const hintEl =
+		hint && !error ? (
+			<p id={hintId} className="text-dp-body-soft mt-2 text-xs">
+				{hint}
+			</p>
+		) : null;
+	const errorEl = error ? (
+		<p id={errorId} className="mt-2 text-xs text-red-700" role="alert">
+			{error}
+		</p>
+	) : null;
+
+	if (group) {
+		return (
+			<fieldset aria-describedby={describedBy}>
+				<legend className={labelClasses}>{label}</legend>
+				{children}
+				{hintEl}
+				{errorEl}
+			</fieldset>
+		);
+	}
+
+	// Single input/select: inject the error/hint association + invalid state
+	// onto the control so screen readers announce it.
+	const control = isValidElement(children)
+		? cloneElement(children as ReactElement<Record<string, unknown>>, {
+				'aria-invalid': error ? true : undefined,
+				'aria-describedby': describedBy,
+			})
+		: children;
+
 	return (
 		<div>
-			<label
-				htmlFor={id}
-				className="font-primary-font text-dp-dark mb-2 block text-sm font-bold tracking-wider uppercase"
-			>
+			<label htmlFor={id} className={labelClasses}>
 				{label}
 			</label>
-			{children}
-			{hint && !error ? (
-				<p className="text-dp-body-soft mt-2 text-xs">{hint}</p>
-			) : null}
-			{error ? (
-				<p className="mt-2 text-xs text-red-700" role="alert">
-					{error}
-				</p>
-			) : null}
+			{control}
+			{hintEl}
+			{errorEl}
 		</div>
 	);
 }

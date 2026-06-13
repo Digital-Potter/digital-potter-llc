@@ -28,6 +28,7 @@ export default function StepProject() {
 	return (
 		<div className="space-y-8">
 			<FieldShell
+				group
 				id="needType"
 				label="What are you looking to build?"
 				error={errors.needType?.message}
@@ -50,6 +51,7 @@ export default function StepProject() {
 			{needsWeb && (
 				<>
 					<FieldShell
+						group
 						id="websiteType"
 						label="Type of website"
 						error={errors.websiteType?.message}
@@ -69,6 +71,7 @@ export default function StepProject() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="websiteFeatures"
 						label="Which website features matter most? (pick any)"
 						error={errors.websiteFeatures?.message}
@@ -88,6 +91,7 @@ export default function StepProject() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="replacingSite"
 						label="Replacing an existing site?"
 						error={errors.replacingSite?.message}
@@ -107,6 +111,7 @@ export default function StepProject() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="domain"
 						label="Domain status"
 						error={errors.domain?.message}
@@ -130,6 +135,7 @@ export default function StepProject() {
 			{needsApp && (
 				<>
 					<FieldShell
+						group
 						id="appType"
 						label="Type of mobile app"
 						error={errors.appType?.message}
@@ -149,6 +155,7 @@ export default function StepProject() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="mobileFeatures"
 						label="Which mobile features matter most? (pick any)"
 						error={errors.mobileFeatures?.message}
@@ -168,6 +175,7 @@ export default function StepProject() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="appStoreAccounts"
 						label="App Store and Google Play developer accounts"
 						error={errors.appStoreAccounts?.message}

@@ -29,14 +29,27 @@ export function CarouselSection({ section }: { section: CmsSection }) {
 	const intervalSeconds = Math.max(1, c?.carouselInterval ?? 5);
 
 	const [active, setActive] = useState(0);
+	const [paused, setPaused] = useState(false);
+	const [reduceMotion, setReduceMotion] = useState(false);
+
+	// Respect the OS "reduce motion" setting — never auto-advance for those users.
+	useEffect(() => {
+		const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+		setReduceMotion(mq.matches);
+		const onChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+		mq.addEventListener('change', onChange);
+		return () => mq.removeEventListener('change', onChange);
+	}, []);
+
+	const isPlaying = autoPlay && !paused && !reduceMotion && slides.length > 1;
 
 	useEffect(() => {
-		if (!autoPlay || slides.length <= 1) return;
+		if (!isPlaying) return;
 		const id = setInterval(() => {
 			setActive((i) => (i + 1) % slides.length);
 		}, intervalSeconds * 1000);
 		return () => clearInterval(id);
-	}, [autoPlay, intervalSeconds, slides.length]);
+	}, [isPlaying, intervalSeconds, slides.length]);
 
 	if (slides.length === 0) return null;
 
@@ -56,8 +69,16 @@ export function CarouselSection({ section }: { section: CmsSection }) {
 				</div>
 			)}
 
-			<div className="relative mx-auto max-w-5xl">
-				<div className="dp-box-design relative aspect-[16/9] overflow-hidden rounded-3xl">
+			<div
+				className="relative mx-auto max-w-5xl"
+				role="group"
+				aria-roledescription="carousel"
+				aria-label={section.title || 'Image carousel'}
+			>
+				<div
+					className="dp-box-design relative aspect-[16/9] overflow-hidden rounded-3xl"
+					aria-live={isPlaying ? 'off' : 'polite'}
+				>
 					{slides.map((slide, i) => {
 						const img = imageRef(slide.image);
 						const overlay = (slide.overlayOpacity ?? 40) / 100;
@@ -151,19 +172,50 @@ export function CarouselSection({ section }: { section: CmsSection }) {
 					</>
 				)}
 
-				{showDots && slides.length > 1 && (
-					<div className="mt-4 flex justify-center gap-2">
-						{slides.map((_, i) => (
+				{(showDots || (autoPlay && !reduceMotion)) && slides.length > 1 && (
+					<div className="mt-4 flex items-center justify-center gap-1">
+						{autoPlay && !reduceMotion && (
 							<button
-								key={i}
 								type="button"
-								onClick={() => go(i)}
-								aria-label={`Go to slide ${i + 1}`}
-								className={`h-2.5 w-2.5 rounded-full transition ${
-									i === active ? 'bg-dp-dark-green' : 'bg-dp-dark/20'
-								}`}
-							/>
-						))}
+								onClick={() => setPaused((p) => !p)}
+								aria-label={
+									isPlaying
+										? 'Pause automatic slideshow'
+										: 'Play automatic slideshow'
+								}
+								className="text-dp-dark/70 hover:text-dp-dark mr-1 inline-flex h-6 w-6 items-center justify-center rounded-full transition-colors"
+							>
+								<svg
+									aria-hidden
+									viewBox="0 0 24 24"
+									className="h-3.5 w-3.5"
+									fill="currentColor"
+								>
+									{isPlaying ? (
+										<path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+									) : (
+										<path d="M8 5v14l11-7z" />
+									)}
+								</svg>
+							</button>
+						)}
+						{showDots &&
+							slides.map((_, i) => (
+								<button
+									key={i}
+									type="button"
+									onClick={() => go(i)}
+									aria-label={`Go to slide ${i + 1}`}
+									className="inline-flex h-6 w-6 items-center justify-center rounded-full"
+								>
+									<span
+										aria-hidden
+										className={`block h-2.5 w-2.5 rounded-full transition ${
+											i === active ? 'bg-dp-dark-green' : 'bg-dp-dark/20'
+										}`}
+									/>
+								</button>
+							))}
 					</div>
 				)}
 			</div>

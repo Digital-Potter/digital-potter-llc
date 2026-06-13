@@ -31,6 +31,7 @@ export default function StepBudget() {
 			{needsWeb && (
 				<>
 					<FieldShell
+						group
 						id="websiteBudget"
 						label="Website build — one-time investment range"
 						error={errors.websiteBudget?.message}
@@ -51,6 +52,7 @@ export default function StepBudget() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="hostingBudget"
 						label="Monthly budget — hosting, CMS & care"
 						error={errors.hostingBudget?.message}
@@ -74,6 +76,7 @@ export default function StepBudget() {
 
 			{needsApp && (
 				<FieldShell
+					group
 					id="mobileBudget"
 					label="Mobile app — initial investment range"
 					error={errors.mobileBudget?.message}
@@ -95,6 +98,7 @@ export default function StepBudget() {
 			)}
 
 			<FieldShell
+				group
 				id="paymentPreference"
 				label="Build payment preference"
 				error={errors.paymentPreference?.message}
@@ -114,6 +118,7 @@ export default function StepBudget() {
 			</FieldShell>
 
 			<FieldShell
+				group
 				id="maintenance"
 				label="Maintenance & support after launch"
 				error={errors.maintenance?.message}
@@ -135,6 +140,7 @@ export default function StepBudget() {
 			{needsWeb && (
 				<>
 					<FieldShell
+						group
 						id="hostingModel"
 						label="CMS hosting model"
 						error={errors.hostingModel?.message}
@@ -154,6 +160,7 @@ export default function StepBudget() {
 					</FieldShell>
 
 					<FieldShell
+						group
 						id="expectedTraffic"
 						label="Expected monthly visitors"
 						error={errors.expectedTraffic?.message}
@@ -175,6 +182,7 @@ export default function StepBudget() {
 			)}
 
 			<FieldShell
+				group
 				id="paymentsNeeded"
 				label="Will you need payment processing?"
 				error={errors.paymentsNeeded?.message}
@@ -195,6 +203,7 @@ export default function StepBudget() {
 			</FieldShell>
 
 			<FieldShell
+				group
 				id="targetLaunch"
 				label="Target launch"
 				error={errors.targetLaunch?.message}

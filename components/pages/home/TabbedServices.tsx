@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ButtonLink } from '@/components/ui/Button';
 import { tabs } from './tabbedServices.data';
@@ -8,6 +8,33 @@ import { tabs } from './tabbedServices.data';
 export default function TabbedServices() {
 	const [activeId, setActiveId] = useState(tabs[0].id);
 	const active = tabs.find((t) => t.id === activeId) ?? tabs[0];
+	const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+	// APG tabs keyboard pattern: arrow keys / Home / End move between tabs.
+	function onTabKeyDown(e: React.KeyboardEvent, idx: number) {
+		let next = idx;
+		switch (e.key) {
+			case 'ArrowRight':
+			case 'ArrowDown':
+				next = (idx + 1) % tabs.length;
+				break;
+			case 'ArrowLeft':
+			case 'ArrowUp':
+				next = (idx - 1 + tabs.length) % tabs.length;
+				break;
+			case 'Home':
+				next = 0;
+				break;
+			case 'End':
+				next = tabs.length - 1;
+				break;
+			default:
+				return;
+		}
+		e.preventDefault();
+		setActiveId(tabs[next].id);
+		tabRefs.current[next]?.focus();
+	}
 
 	return (
 		<section className="dp-container py-16 md:py-24">
@@ -25,18 +52,23 @@ export default function TabbedServices() {
 					aria-label="Digital Potter services"
 					className="flex w-full flex-col gap-1 lg:flex-row"
 				>
-					{tabs.map((tab) => {
+					{tabs.map((tab, idx) => {
 						const isActive = tab.id === active.id;
 						const Icon = tab.icon;
 						return (
 							<button
 								key={tab.id}
+								ref={(el) => {
+									tabRefs.current[idx] = el;
+								}}
 								role="tab"
 								type="button"
 								aria-selected={isActive}
 								aria-controls={`panel-${tab.id}`}
 								id={`tab-${tab.id}`}
+								tabIndex={isActive ? 0 : -1}
 								onClick={() => setActiveId(tab.id)}
+								onKeyDown={(e) => onTabKeyDown(e, idx)}
 								className={twMerge(
 									'font-primary-font flex flex-1 items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold transition-all md:text-base',
 									isActive

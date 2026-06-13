@@ -140,7 +140,11 @@ export default function BuildYourPlan({
 
 				{/* Total card (sticky on lg+) */}
 				<aside className="lg:sticky lg:top-28 lg:self-start">
-					<div className="border-dp-green/40 rounded-3xl border-2 bg-white/60 p-6 md:p-8">
+					{/* Announce running-total changes as modules are toggled. */}
+					<div
+						aria-live="polite"
+						className="border-dp-green/40 rounded-3xl border-2 bg-white/60 p-6 md:p-8"
+					>
 						<p className="font-primary-font text-dp-dark text-sm font-bold tracking-wider uppercase">
 							Your build
 						</p>

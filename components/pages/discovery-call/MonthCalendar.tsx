@@ -1,9 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const WEEKDAY_NAMES = [
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+];
 const MONTH_NAMES = [
 	'January',
 	'February',
@@ -73,6 +82,7 @@ export default function MonthCalendar({ selectedDate, onDateSelect }: Props) {
 	type Cell = {
 		day: number;
 		key: string;
+		label: string;
 		disabled: boolean;
 		isWeekend: boolean;
 	} | null;
@@ -82,12 +92,61 @@ export default function MonthCalendar({ selectedDate, onDateSelect }: Props) {
 		const dateObj = new Date(viewYear, viewMonth, d);
 		const key = toDateKey(viewYear, viewMonth, d);
 		const dow = dateObj.getDay();
+		const disabled = dateObj < minDate || dateObj > maxDate;
+		const isWeekend = dow === 0 || dow === 6;
+		const human = `${WEEKDAY_NAMES[dow]}, ${MONTH_NAMES[viewMonth]} ${d}, ${viewYear}`;
 		cells.push({
 			day: d,
 			key,
-			isWeekend: dow === 0 || dow === 6,
-			disabled: dateObj < minDate || dateObj > maxDate,
+			// Screen readers announce a real date, not "2026-06-16" digit-by-digit.
+			label: disabled || isWeekend ? `${human}, unavailable` : human,
+			isWeekend,
+			disabled,
 		});
+	}
+
+	// Roving-tabindex keyboard navigation: one Tab stop into the grid, then
+	// arrow keys / Home / End move focus between selectable days.
+	const gridRef = useRef<HTMLDivElement>(null);
+	const [focusKey, setFocusKey] = useState<string | null>(null);
+	const enabledKeys = cells
+		.filter((c): c is NonNullable<Cell> => !!c && !(c.disabled || c.isWeekend))
+		.map((c) => c.key);
+	const activeKey =
+		focusKey && enabledKeys.includes(focusKey)
+			? focusKey
+			: selectedDate && enabledKeys.includes(selectedDate)
+				? selectedDate
+				: (enabledKeys[0] ?? null);
+
+	function onGridKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+		if (!enabledKeys.length) return;
+		const idx = activeKey ? enabledKeys.indexOf(activeKey) : 0;
+		let next = idx;
+		switch (e.key) {
+			case 'ArrowRight':
+			case 'ArrowDown':
+				next = Math.min(enabledKeys.length - 1, idx + 1);
+				break;
+			case 'ArrowLeft':
+			case 'ArrowUp':
+				next = Math.max(0, idx - 1);
+				break;
+			case 'Home':
+				next = 0;
+				break;
+			case 'End':
+				next = enabledKeys.length - 1;
+				break;
+			default:
+				return;
+		}
+		e.preventDefault();
+		const nextKey = enabledKeys[next];
+		setFocusKey(nextKey);
+		gridRef.current
+			?.querySelector<HTMLButtonElement>(`[data-key="${nextKey}"]`)
+			?.focus();
 	}
 
 	return (
@@ -96,7 +155,7 @@ export default function MonthCalendar({ selectedDate, onDateSelect }: Props) {
 				<button
 					onClick={prevMonth}
 					disabled={!canGoPrev}
-					className="text-dp-dark/50 hover:text-dp-dark rounded-lg p-2 text-2xl leading-none transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+					className="text-dp-dark/70 hover:text-dp-dark rounded-lg p-2 text-2xl leading-none transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 					aria-label="Previous month"
 				>
 					‹
@@ -107,25 +166,32 @@ export default function MonthCalendar({ selectedDate, onDateSelect }: Props) {
 				<button
 					onClick={nextMonth}
 					disabled={!canGoNext}
-					className="text-dp-dark/50 hover:text-dp-dark rounded-lg p-2 text-2xl leading-none transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+					className="text-dp-dark/70 hover:text-dp-dark rounded-lg p-2 text-2xl leading-none transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 					aria-label="Next month"
 				>
 					›
 				</button>
 			</div>
 
-			<div className="mb-2 grid grid-cols-7 text-center">
+			{/* Decorative: each day button already announces its full weekday. */}
+			<div className="mb-2 grid grid-cols-7 text-center" aria-hidden="true">
 				{DAY_LABELS.map((d) => (
 					<div
 						key={d}
-						className="text-dp-dark/40 py-1 text-xs font-semibold tracking-wide uppercase"
+						className="text-dp-dark/50 py-1 text-xs font-semibold tracking-wide uppercase"
 					>
 						{d}
 					</div>
 				))}
 			</div>
 
-			<div className="grid grid-cols-7 gap-1">
+			<div
+				ref={gridRef}
+				role="group"
+				aria-label="Choose an appointment date"
+				className="grid grid-cols-7 gap-1"
+				onKeyDown={onGridKeyDown}
+			>
 				{cells.map((cell, i) => {
 					if (!cell) return <div key={`e-${i}`} />;
 					const isSelected = cell.key === selectedDate;
@@ -134,18 +200,20 @@ export default function MonthCalendar({ selectedDate, onDateSelect }: Props) {
 					return (
 						<button
 							key={cell.key}
+							data-key={cell.key}
 							disabled={isDisabled}
 							onClick={() => !isDisabled && onDateSelect(cell.key)}
+							tabIndex={cell.key === activeKey ? 0 : -1}
 							className={twMerge(
 								'aspect-square rounded-lg text-sm font-medium transition-colors',
 								isDisabled
-									? 'text-dp-dark/25 cursor-not-allowed'
+									? 'text-dp-dark/40 cursor-not-allowed'
 									: isSelected
 										? 'bg-dp-green text-dp-dark font-bold'
 										: 'text-dp-dark hover:bg-dp-green/20 cursor-pointer',
 							)}
-							aria-label={cell.key}
-							aria-pressed={isSelected}
+							aria-label={cell.label}
+							aria-current={isSelected ? 'date' : undefined}
 						>
 							{cell.day}
 						</button>

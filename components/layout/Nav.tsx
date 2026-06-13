@@ -100,7 +100,7 @@ export async function Nav() {
 					className="w-[140px] md:w-[190px] lg:w-[262px]"
 				/>
 			</Link>
-			<nav className="dp-box-design hidden p-1 lg:block">
+			<nav aria-label="Primary" className="dp-box-design hidden p-1 lg:block">
 				<ul className="flex flex-row gap-1">
 					{allItems.slice(0, -1).map((item, idx) => {
 						const rendered = navItems[idx];

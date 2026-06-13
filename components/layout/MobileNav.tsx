@@ -85,7 +85,7 @@ export default function MobileNav({
 					<div className={mobileNavStyles.closeLineTwo} />
 				</button>
 
-				<nav role="navigation">
+				<nav aria-label="Mobile">
 					<ul className={mobileNavStyles.mobileNavList}>
 						{navItems.map((navItem) => {
 							const hasMega =

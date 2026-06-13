@@ -61,14 +61,14 @@ export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
 					</div>
 				)}
 			</section>
-			<main>
-				<div
-					dangerouslySetInnerHTML={{
-						__html: renderedContent,
-					}}
-					className="dp-container dp-prose mx-auto mb-20 max-w-4xl"
-				/>
-			</main>
+			{/* Not <main>: the root layout already provides the single <main>
+			    landmark; a nested one is invalid and confuses assistive tech. */}
+			<div
+				dangerouslySetInnerHTML={{
+					__html: renderedContent,
+				}}
+				className="dp-container dp-prose mx-auto mb-20 max-w-4xl"
+			/>
 			<FinalCta href={cta.href} label={cta.label} />
 		</>
 	);

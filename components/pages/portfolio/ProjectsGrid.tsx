@@ -28,14 +28,13 @@ export default function ProjectsGrid({
 	return (
 		<section className="dp-container py-12 md:py-16">
 			<div
-				role="tablist"
+				role="group"
 				aria-label="Filter projects by category"
 				className="dp-box-design scrollbar-none mx-auto flex w-full max-w-full gap-2 overflow-x-auto rounded-full p-2 whitespace-nowrap"
 			>
 				<button
-					role="tab"
 					type="button"
-					aria-selected={active === 'all'}
+					aria-pressed={active === 'all'}
 					onClick={() => setActive('all')}
 					className={twMerge(
 						'font-primary-font min-h-[44px] shrink-0 rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
@@ -49,9 +48,8 @@ export default function ProjectsGrid({
 				{categories.map((c) => (
 					<button
 						key={c}
-						role="tab"
 						type="button"
-						aria-selected={active === c}
+						aria-pressed={active === c}
 						onClick={() => setActive(c)}
 						className={twMerge(
 							'font-primary-font min-h-[44px] shrink-0 rounded-full px-5 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors',
@@ -64,6 +62,12 @@ export default function ProjectsGrid({
 					</button>
 				))}
 			</div>
+
+			{/* Announce the filtered result count to screen-reader users. */}
+			<p className="sr-only" role="status" aria-live="polite">
+				Showing {visible.length} {visible.length === 1 ? 'project' : 'projects'}
+				{active === 'all' ? '' : ` in ${active}`}.
+			</p>
 
 			<ul className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{visible.map((p) => (
