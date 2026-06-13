@@ -146,10 +146,14 @@ CSS by Norman @ Digital Potter */
 	height: 25px;
 	cursor: pointer;
 	z-index: 1001;
-	top: 50px;
+	/* Positioned relative to <nav> (which starts 20px down), so 28px keeps the
+	   X at ~50px from the viewport top — and it now slides with the panel. */
+	top: 28px;
 	right: 20px;
 	padding: 0;
-	transition: all 0.4s ease-out;
+	/* Only the hover scale/rotate animates here. `all` would also transition the
+	   inherited visibility, making the X linger after the panel slides closed. */
+	transition: transform 0.3s ease-out;
 }
 
 .closer .closeLineOne {

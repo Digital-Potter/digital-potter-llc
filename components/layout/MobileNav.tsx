@@ -93,17 +93,19 @@ export default function MobileNav({
 					open ? mobileNavStyles.mobileOpen : mobileNavStyles.mobileClose,
 				)}
 			>
-				<button
-					ref={closerRef}
-					className={mobileNavStyles.closer}
-					onClick={closeMenu}
-					aria-label="Close menu"
-				>
-					<div className={mobileNavStyles.closeLineOne} />
-					<div className={mobileNavStyles.closeLineTwo} />
-				</button>
-
 				<nav aria-label="Mobile">
+					{/* Inside <nav> so the X slides in/out with the panel itself,
+					    rather than sitting on the (full-viewport) container. */}
+					<button
+						ref={closerRef}
+						className={mobileNavStyles.closer}
+						onClick={closeMenu}
+						aria-label="Close menu"
+					>
+						<div className={mobileNavStyles.closeLineOne} />
+						<div className={mobileNavStyles.closeLineTwo} />
+					</button>
+
 					<ul className={mobileNavStyles.mobileNavList}>
 						{navItems.map((navItem) => {
 							const hasMega =
