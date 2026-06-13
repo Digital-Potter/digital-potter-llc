@@ -103,7 +103,11 @@ export default function TabbedServices() {
 							{active.body}
 						</p>
 						<div className="mt-8">
-							<ButtonLink href={active.href} variant="solid">
+							<ButtonLink
+								href={active.href}
+								variant="solid"
+								ariaLabel={`Learn more about ${active.label}`}
+							>
 								Learn more
 							</ButtonLink>
 						</div>

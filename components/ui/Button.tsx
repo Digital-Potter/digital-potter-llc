@@ -67,13 +67,20 @@ export function ButtonLink({
 	className,
 	children,
 	openInNewTab,
-}: CommonProps & { href: string; openInNewTab?: boolean }) {
+	ariaLabel,
+}: CommonProps & {
+	href: string;
+	openInNewTab?: boolean;
+	/** Descriptive accessible name when the visible text is generic (e.g. "Learn more"). */
+	ariaLabel?: string;
+}) {
 	const externalProps = openInNewTab
 		? { target: '_blank', rel: 'noopener noreferrer' }
 		: undefined;
 	return (
 		<Link
 			href={href}
+			aria-label={ariaLabel}
 			className={twMerge(baseClasses, variantClasses[variant], className)}
 			{...externalProps}
 		>

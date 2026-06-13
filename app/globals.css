@@ -165,14 +165,14 @@
 		);
 	}
 
-	/* Homepage hero entrance: copy first, showcase second. */
+	/* Homepage hero entrance. Transform-only (NO opacity): the hero <h1> is
+	   the LCP element, and animating its opacity from 0 defers LCP. A subtle
+	   slide keeps the entrance feel while the text paints immediately. */
 	@keyframes dp-fade-up {
 		from {
-			opacity: 0;
-			transform: translateY(24px);
+			transform: translateY(14px);
 		}
 		to {
-			opacity: 1;
 			transform: translateY(0);
 		}
 	}
@@ -188,11 +188,7 @@
 	}
 
 	.dp-hero-reveal {
-		animation: dp-fade-up 0.7s ease-out both;
-	}
-
-	.dp-hero-reveal-late {
-		animation: dp-fade-up 0.9s ease-out 0.25s both;
+		animation: dp-fade-up 0.6s ease-out both;
 	}
 
 	.dp-float {
@@ -205,7 +201,6 @@
 
 	@media (prefers-reduced-motion: reduce) {
 		.dp-hero-reveal,
-		.dp-hero-reveal-late,
 		.dp-float,
 		.dp-float-delayed {
 			animation: none;
