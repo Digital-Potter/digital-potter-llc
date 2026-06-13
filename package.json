@@ -61,5 +61,12 @@
 		"tailwindcss": "4.1.11",
 		"ts-node": "10.9.2",
 		"typescript": "5.9.3"
-	}
+	},
+	"browserslist": [
+		"chrome >= 109",
+		"edge >= 109",
+		"firefox >= 102",
+		"safari >= 15.4",
+		"ios_saf >= 15.4"
+	]
 }

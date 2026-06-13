@@ -35,7 +35,7 @@ export default async function BlogTeaser() {
 			</div>
 
 			<ul className="mt-12 grid gap-8 md:grid-cols-3">
-				{posts.map((post, idx) => (
+				{posts.map((post) => (
 					<li key={post.slug}>
 						<Link href={post.href} className="group block h-full">
 							<div className="dp-box-design relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
@@ -45,8 +45,7 @@ export default async function BlogTeaser() {
 										alt={post.featuredImage.alt ?? post.title}
 										fill
 										sizes="(min-width: 1024px) 400px, (min-width: 768px) 33vw, 100vw"
-										priority={idx === 0}
-										fetchPriority={idx === 0 ? 'high' : 'auto'}
+										loading="lazy"
 										className="object-cover transition-transform duration-500 group-hover:scale-105"
 									/>
 								) : (

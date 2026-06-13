@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import {
 	fetchNavigationOrEmpty,
 	fetchStoreSettingsOrNull,
@@ -10,7 +11,9 @@ export type CtaInfo = { href: string; label: string };
 // 404'd whenever the CMS header nav was empty/unreachable.
 const FALLBACK: CtaInfo = { href: '/discovery-call', label: 'Let´s Connect' };
 
-export async function resolveCtaHref(): Promise<CtaInfo> {
+// Memoized: the homepage resolves the CTA in both the Footer and the
+// HomepageTemplate, so cache() collapses the duplicate work per request.
+export const resolveCtaHref = cache(async (): Promise<CtaInfo> => {
 	const [{ menus }, settingsData] = await Promise.all([
 		fetchNavigationOrEmpty('header'),
 		fetchStoreSettingsOrNull(),
@@ -22,4 +25,4 @@ export async function resolveCtaHref(): Promise<CtaInfo> {
 		href: resolveMenuItemHref(lastItem, settingsData?.settings?.siteStructure),
 		label: lastItem.label,
 	};
-}
+});
