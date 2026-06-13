@@ -92,7 +92,7 @@ export async function Nav() {
 			<Link
 				href="/"
 				aria-label="Digital Potter — home"
-				className="bg-dp-yellowish/70 rounded-2xl p-2 backdrop-blur-md"
+				className="bg-dp-yellowish/90 rounded-2xl p-2"
 			>
 				<DigitalPotterLogo
 					width={262}

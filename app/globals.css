@@ -118,14 +118,15 @@
 
 	.dp-box-design {
 		border-radius: 20px;
-		background: rgba(255, 253, 238, 0.301);
-		/* Frosted-glass look retained, but a lighter blur: a 40px backdrop
-		   blur on the sticky header forces iOS Safari to recomposite the
-		   whole viewport every scroll frame (the "content paints late /
-		   white space on scroll" symptom). 16px keeps the aesthetic at a
-		   fraction of the repaint cost. The mobile menu keeps its 40px. */
-		-webkit-backdrop-filter: blur(16px);
-		backdrop-filter: blur(16px);
+		/* A semi-opaque cream instead of a translucent bg + backdrop-filter.
+		   On iOS Safari any backdrop-filter that scrolls through the viewport
+		   (this class is on the hero frame) makes the area fail to repaint
+		   during scroll — the "content paints late / blank then fills in"
+		   symptom. The border + inset highlights below keep the glass edge,
+		   so it still reads as a frosted card without the filter cost.
+		   (The slide-in mobile menu keeps its real blur — it's an overlay,
+		   not on the scroll path.) */
+		background: rgba(255, 253, 238, 0.82);
 		border: 1px solid rgba(255, 255, 255, 0.3);
 		box-shadow:
 			0 0 35px rgba(0, 0, 0, 0.2),

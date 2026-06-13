@@ -26,14 +26,19 @@ export default async function HomeHero({
 	const urls = await getSiteUrls();
 	return (
 		<section className="dp-container relative pt-16 pb-10 md:pt-24">
-			{/* Soft brand glow behind the hero, Termius-style but in our palette */}
+			{/* Soft brand glow behind the hero. Painted with radial-gradients
+			    rather than a blurred element: a 100–120px `filter: blur()` on a
+			    large box is the single most expensive thing on this page for
+			    iOS Safari and is the main cause of the late/blank scroll paint.
+			    The gradients give the same soft glow at ~zero GPU cost. */}
 			<div
 				aria-hidden
 				className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full overflow-hidden"
-			>
-				<div className="bg-dp-green/15 absolute top-24 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full blur-[120px]" />
-				<div className="bg-dp-dark-green/10 absolute top-72 left-1/4 h-72 w-72 rounded-full blur-[100px]" />
-			</div>
+				style={{
+					background:
+						'radial-gradient(34rem 30rem at 50% 13rem, rgba(0, 216, 92, 0.15), transparent 72%), radial-gradient(20rem 18rem at 26% 20rem, rgba(0, 116, 49, 0.1), transparent 72%)',
+				}}
+			/>
 
 			<div className="dp-hero-reveal mx-auto max-w-4xl text-center">
 				<h1 className="text-balance">
@@ -101,7 +106,7 @@ function HeroShowcase({ portfolioHref }: { portfolioHref: string }) {
 			{/* Floating outcome cards — hidden on small screens */}
 			<div
 				aria-hidden
-				className="dp-float border-dp-dark/10 absolute -top-6 -left-4 z-10 hidden rounded-2xl border bg-white/90 px-5 py-4 shadow-xl backdrop-blur md:block lg:-left-12"
+				className="dp-float border-dp-dark/10 absolute -top-6 -left-4 z-10 hidden rounded-2xl border bg-white/95 px-5 py-4 shadow-xl md:block lg:-left-12"
 			>
 				<p className="font-primary-font text-sm font-bold">
 					<span className="bg-dp-green mr-2 inline-block h-2.5 w-2.5 rounded-full" />
@@ -113,7 +118,7 @@ function HeroShowcase({ portfolioHref }: { portfolioHref: string }) {
 			</div>
 			<div
 				aria-hidden
-				className="dp-float-delayed border-dp-dark/10 absolute top-20 -right-4 z-10 hidden rounded-2xl border bg-white/90 px-5 py-4 shadow-xl backdrop-blur md:block lg:-right-12"
+				className="dp-float-delayed border-dp-dark/10 absolute top-20 -right-4 z-10 hidden rounded-2xl border bg-white/95 px-5 py-4 shadow-xl md:block lg:-right-12"
 			>
 				<p className="font-primary-font text-sm font-bold">
 					Order #1042 · <span className="text-dp-dark-green">Paid</span>

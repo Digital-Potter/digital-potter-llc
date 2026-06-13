@@ -131,13 +131,13 @@ export default function MegaMenu({
 			<div
 				aria-hidden={!open}
 				className={twMerge(
-					'absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 backdrop-blur-3xl transition-all duration-150',
+					'absolute top-full left-1/2 mt-3 w-[44rem] -translate-x-1/2 transition-all duration-150',
 					open
 						? 'visible translate-y-0 opacity-100'
 						: 'pointer-events-none invisible translate-y-1 opacity-0',
 				)}
 			>
-				<div className="bg-dp-yellowish/95 border-dp-dark/10 rounded-3xl border-2 p-6 normal-case shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] backdrop-blur-3xl">
+				<div className="bg-dp-yellowish/95 border-dp-dark/10 rounded-3xl border-2 p-6 normal-case shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)]">
 					<div className="px-2 pb-3">
 						<p className="font-primary-font text-dp-dark-green text-xs font-bold tracking-widest uppercase">
 							{eyebrow}
