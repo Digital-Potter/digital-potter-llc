@@ -32,6 +32,15 @@
 }
 
 @layer base {
+	/* Clip horizontal overflow at the root so off-canvas / decorative
+	   elements (e.g. the slide-in mobile menu, hero glow blobs) can never
+	   widen the document. `clip` (not `hidden`) does NOT create a scroll
+	   container, so `position: sticky` on the header keeps working. */
+	html,
+	body {
+		overflow-x: clip;
+	}
+
 	body {
 		@apply text-dp-body bg-dp-yellowish font-secondary-font;
 	}
@@ -103,8 +112,13 @@
 	.dp-box-design {
 		border-radius: 20px;
 		background: rgba(255, 253, 238, 0.301);
-		-webkit-backdrop-filter: blur(40px);
-		backdrop-filter: blur(40px);
+		/* Frosted-glass look retained, but a lighter blur: a 40px backdrop
+		   blur on the sticky header forces iOS Safari to recomposite the
+		   whole viewport every scroll frame (the "content paints late /
+		   white space on scroll" symptom). 16px keeps the aesthetic at a
+		   fraction of the repaint cost. The mobile menu keeps its 40px. */
+		-webkit-backdrop-filter: blur(16px);
+		backdrop-filter: blur(16px);
 		border: 1px solid rgba(255, 255, 255, 0.3);
 		box-shadow:
 			0 0 35px rgba(0, 0, 0, 0.2),

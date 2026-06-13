@@ -84,15 +84,15 @@ export async function Nav() {
 	const rendered = allItems.map((it) => toRendered(it, siteStructure));
 	const navItems = rendered.slice(0, -1);
 	const ctaItem = rendered.at(-1);
-	const ctaHref = ctaItem?.href ?? '/lets-connect';
+	const ctaHref = ctaItem?.href ?? '/discovery-call';
 	const ctaLabel = ctaItem?.label ?? 'Let´s Connect';
 
 	return (
-		<header className="dp-container sticky top-0 z-50 flex h-[6.25rem] flex-row items-center justify-between will-change-transform">
+		<header className="dp-container sticky top-0 z-50 flex h-[6.25rem] flex-row items-center justify-between">
 			<Link
 				href="/"
 				aria-label="Digital Potter — home"
-				className="bg-dp-yellowish/70 rounded-2xl p-2 backdrop-blur-xl"
+				className="bg-dp-yellowish/70 rounded-2xl p-2 backdrop-blur-md"
 			>
 				<DigitalPotterLogo
 					width={262}

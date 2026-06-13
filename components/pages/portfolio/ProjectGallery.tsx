@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import RightArrow from '@/components/icons/RightArrow';
@@ -76,6 +76,12 @@ function Lightbox({
 }) {
 	const count = images.length;
 	const img = images[index];
+	// Derive "loaded" from which src has finished decoding rather than
+	// resetting a boolean in an effect on every navigation — switching images
+	// flips this to false automatically (the spinner re-shows) with no effect.
+	const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+	const loaded = loadedSrc === img.url;
+	const closeRef = useRef<HTMLButtonElement>(null);
 
 	const goPrev = useCallback(
 		() => onNavigate((index - 1 + count) % count),
@@ -85,6 +91,15 @@ function Lightbox({
 		() => onNavigate((index + 1) % count),
 		[index, count, onNavigate],
 	);
+
+	// Focus management: move focus into the dialog on open and restore it to
+	// the triggering thumbnail on close. Runs once for the dialog's lifetime
+	// (NOT on every navigation), so the prev/next buttons don't steal focus.
+	useEffect(() => {
+		const prevFocused = document.activeElement as HTMLElement | null;
+		closeRef.current?.focus();
+		return () => prevFocused?.focus?.();
+	}, []);
 
 	useEffect(() => {
 		const onKey = (e: KeyboardEvent) => {
@@ -110,23 +125,40 @@ function Lightbox({
 			className="bg-dp-dark/70 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
 			onClick={onClose}
 		>
-			{/* The image itself — no box, no chrome, just the expanded picture */}
+			{/* The image itself — capped at 70% of the viewport so it never
+			    fills the screen edge-to-edge. */}
 			<div
-				className="relative h-[88vh] w-[92vw]"
+				className="relative h-[70vh] w-[70vw]"
 				onClick={(e) => e.stopPropagation()}
 			>
+				{/* Spinner shown until the (potentially large) image decodes,
+				    so expanding never looks like a frozen screen. */}
+				{!loaded && (
+					<div className="absolute inset-0 flex items-center justify-center">
+						<span
+							className="border-dp-yellowish/30 border-t-dp-yellowish/90 h-12 w-12 animate-spin rounded-full border-4"
+							aria-hidden
+						/>
+						<span className="sr-only">Loading image…</span>
+					</div>
+				)}
 				<Image
 					src={img.url}
 					alt={img.alt ?? ''}
 					fill
-					sizes="92vw"
-					quality={90}
-					className="cursor-zoom-out object-contain drop-shadow-2xl"
+					sizes="70vw"
+					quality={80}
+					onLoad={() => setLoadedSrc(img.url)}
+					className={twMerge(
+						'cursor-zoom-out object-contain drop-shadow-2xl transition-opacity duration-300',
+						loaded ? 'opacity-100' : 'opacity-0',
+					)}
 					onClick={onClose}
 				/>
 			</div>
 
 			<button
+				ref={closeRef}
 				type="button"
 				onClick={onClose}
 				aria-label="Close image preview"

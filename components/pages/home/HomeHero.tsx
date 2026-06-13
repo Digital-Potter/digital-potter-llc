@@ -29,7 +29,7 @@ export default async function HomeHero({
 			{/* Soft brand glow behind the hero, Termius-style but in our palette */}
 			<div
 				aria-hidden
-				className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full overflow-visible"
+				className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full overflow-hidden"
 			>
 				<div className="bg-dp-green/15 absolute top-24 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full blur-[120px]" />
 				<div className="bg-dp-dark-green/10 absolute top-72 left-1/4 h-72 w-72 rounded-full blur-[100px]" />
@@ -93,7 +93,11 @@ export default async function HomeHero({
  */
 function HeroShowcase({ portfolioHref }: { portfolioHref: string }) {
 	return (
-		<div className="dp-hero-reveal-late relative mx-auto mt-16 max-w-5xl md:mt-20">
+		// NOTE: intentionally NOT animated. This block contains the hero
+		// dashboard image, which is the LCP element — animating it from
+		// opacity:0 defers LCP by the animation's delay+duration. It paints
+		// immediately; only the copy above uses an entrance reveal.
+		<div className="relative mx-auto mt-16 max-w-5xl md:mt-20">
 			{/* Floating outcome cards — hidden on small screens */}
 			<div
 				aria-hidden
