@@ -7,6 +7,7 @@ import type {
 	CmsSection,
 	MediaRef,
 } from '@/helpers/cms/types';
+import { toMediaRef } from '@/helpers/cms/media';
 
 type HeroContent = {
 	image?: MediaRef | string;
@@ -17,12 +18,6 @@ type HeroContent = {
 	/** Legacy. */
 	description?: string;
 };
-
-function imageRef(image: HeroContent['image']): MediaRef | null {
-	if (!image) return null;
-	if (typeof image === 'string') return { url: image };
-	return image;
-}
 
 const colsClass: Record<number, string> = {
 	1: 'grid-cols-1',
@@ -36,7 +31,7 @@ const colsClass: Record<number, string> = {
 export function HeroSection({ section }: { section: CmsSection }) {
 	const c = section.content as HeroContent | undefined;
 	const eyebrow = c?.eyebrow ?? section.label;
-	const image = imageRef(c?.image);
+	const image = toMediaRef(c?.image);
 	const columns = c?.columns ?? [];
 	const colCount = Math.min(Math.max(columns.length, 1), 6);
 
@@ -86,7 +81,7 @@ export function HeroSection({ section }: { section: CmsSection }) {
 			{columns.length > 0 && (
 				<ul className={`mt-16 grid gap-8 ${colsClass[colCount]}`}>
 					{columns.map((col, i) => {
-						const colImg = imageRef(col.image);
+						const colImg = toMediaRef(col.image);
 						return (
 							<li key={i} className="flex flex-col gap-3 text-center">
 								{colImg?.url && (

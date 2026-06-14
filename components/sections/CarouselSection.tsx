@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Section } from './Section';
 import { ButtonLink } from '@/components/ui/Button';
-import type { CarouselSlide, CmsSection, MediaRef } from '@/helpers/cms/types';
+import type { CarouselSlide, CmsSection } from '@/helpers/cms/types';
+import { toMediaRef } from '@/helpers/cms/media';
 
 type CarouselContent = {
 	slides?: CarouselSlide[];
@@ -13,12 +14,6 @@ type CarouselContent = {
 	carouselShowDots?: boolean;
 	carouselShowArrows?: boolean;
 };
-
-function imageRef(image: CarouselSlide['image']): MediaRef | null {
-	if (!image) return null;
-	if (typeof image === 'string') return { url: image };
-	return image;
-}
 
 export function CarouselSection({ section }: { section: CmsSection }) {
 	const c = section.content as CarouselContent | undefined;
@@ -80,7 +75,7 @@ export function CarouselSection({ section }: { section: CmsSection }) {
 					aria-live={isPlaying ? 'off' : 'polite'}
 				>
 					{slides.map((slide, i) => {
-						const img = imageRef(slide.image);
+						const img = toMediaRef(slide.image);
 						const overlay = (slide.overlayOpacity ?? 40) / 100;
 						return (
 							<div

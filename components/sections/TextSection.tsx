@@ -1,12 +1,8 @@
 import Image from 'next/image';
 import { Section } from './Section';
 import SectionButtons from './SectionButtons';
-import type {
-	BlockButton,
-	BlockColumn,
-	CmsSection,
-	MediaRef,
-} from '@/helpers/cms/types';
+import type { BlockButton, BlockColumn, CmsSection } from '@/helpers/cms/types';
+import { toMediaRef } from '@/helpers/cms/media';
 
 type TextContent = {
 	columns?: BlockColumn[];
@@ -24,12 +20,6 @@ const colsClass: Record<number, string> = {
 	5: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
 	6: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-6',
 };
-
-function imageRef(image: BlockColumn['image']): MediaRef | null {
-	if (!image) return null;
-	if (typeof image === 'string') return { url: image };
-	return image;
-}
 
 export function TextSection({ section }: { section: CmsSection }) {
 	const c = section.content as TextContent | undefined;
@@ -59,7 +49,7 @@ export function TextSection({ section }: { section: CmsSection }) {
 			{hasColumns ? (
 				<ul className={`grid gap-8 ${colsClass[colCount]}`}>
 					{columns.map((col, i) => {
-						const img = imageRef(col.image);
+						const img = toMediaRef(col.image);
 						return (
 							<li key={i} className="flex flex-col gap-4">
 								{img?.url &&

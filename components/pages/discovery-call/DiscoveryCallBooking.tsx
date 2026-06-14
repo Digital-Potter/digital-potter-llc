@@ -14,6 +14,7 @@ interface SlotResult {
 type Phase = 'picking' | 'confirmed';
 
 const FALLBACK_TZ = 'America/New_York';
+const DISCOVERY_CALL_DURATION_MINUTES = 45;
 
 export default function DiscoveryCallBooking() {
 	const [phase, setPhase] = useState<Phase>('picking');
@@ -22,6 +23,7 @@ export default function DiscoveryCallBooking() {
 	const [slots, setSlots] = useState<SlotResult[]>([]);
 	const [timezone, setTimezone] = useState<string>(FALLBACK_TZ);
 	const [loadingSlots, setLoadingSlots] = useState(false);
+	const [slotsError, setSlotsError] = useState(false);
 	const [confirmedSlot, setConfirmedSlot] = useState<SlotResult | null>(null);
 
 	const timeSlotsRef = useRef<HTMLDivElement>(null);
@@ -31,16 +33,36 @@ export default function DiscoveryCallBooking() {
 		if (!selectedDate) return;
 		setSelectedSlot(null);
 		setSlots([]);
+		setSlotsError(false);
 		setLoadingSlots(true);
 
-		fetch(`/api/booking/availability?date=${selectedDate}&durationMinutes=45`)
-			.then((r) => r.json())
+		// Sequence guard: if the user switches dates quickly, ignore a slower
+		// earlier response so stale slots from the previous date can't overwrite
+		// the current one (which would let them book the wrong day).
+		let cancelled = false;
+		fetch(
+			`/api/booking/availability?date=${selectedDate}&durationMinutes=${DISCOVERY_CALL_DURATION_MINUTES}`,
+		)
+			.then((r) => {
+				if (!r.ok) throw new Error(`availability ${r.status}`);
+				return r.json();
+			})
 			.then((data) => {
+				if (cancelled) return;
 				setSlots(data.slots ?? []);
 				if (data.timezone) setTimezone(data.timezone);
 			})
-			.catch(() => setSlots([]))
-			.finally(() => setLoadingSlots(false));
+			.catch(() => {
+				// Distinguish a real failure from genuine no-availability.
+				if (!cancelled) setSlotsError(true);
+			})
+			.finally(() => {
+				if (!cancelled) setLoadingSlots(false);
+			});
+
+		return () => {
+			cancelled = true;
+		};
 	}, [selectedDate]);
 
 	// Bring slot picker into view after a date is chosen. `block: 'nearest'`
@@ -77,7 +99,7 @@ export default function DiscoveryCallBooking() {
 			body: JSON.stringify({
 				type: 'appointment',
 				startsAt: selectedSlot.startsAt,
-				durationMinutes: 45,
+				durationMinutes: DISCOVERY_CALL_DURATION_MINUTES,
 				timezone,
 				service: { name: 'Discovery Call' },
 				guest: { name: guest.name, email: guest.email, phone: guest.phone },
@@ -88,10 +110,13 @@ export default function DiscoveryCallBooking() {
 		});
 
 		if (!res.ok) {
-			const data = await res.json().catch(() => ({}));
+			// Both the local route and the CMS return errors under `error`.
+			const data = (await res.json().catch(() => ({}))) as {
+				error?: string;
+				message?: string;
+			};
 			throw new Error(
-				(data as { message?: string }).message ??
-					'Booking failed. Please try again.',
+				data.error ?? data.message ?? 'Booking failed. Please try again.',
 			);
 		}
 
@@ -116,6 +141,7 @@ export default function DiscoveryCallBooking() {
 					<TimeSlotPicker
 						slots={slots}
 						loading={loadingSlots}
+						error={slotsError}
 						selectedSlot={selectedSlot}
 						onSlotSelect={setSelectedSlot}
 						selectedDate={selectedDate}

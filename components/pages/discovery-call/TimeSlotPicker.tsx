@@ -10,6 +10,7 @@ interface SlotResult {
 type Props = {
 	slots: SlotResult[];
 	loading: boolean;
+	error?: boolean;
 	selectedSlot: SlotResult | null;
 	onSlotSelect: (slot: SlotResult) => void;
 	selectedDate: string | null;
@@ -35,6 +36,7 @@ function tzAbbreviation(iso: string, timezone: string): string {
 export default function TimeSlotPicker({
 	slots,
 	loading,
+	error,
 	selectedSlot,
 	onSlotSelect,
 	selectedDate,
@@ -57,6 +59,21 @@ export default function TimeSlotPicker({
 						className="bg-dp-dark/10 h-10 animate-pulse rounded-full"
 					/>
 				))}
+			</div>
+		);
+	}
+
+	// A real fetch failure — distinct from a date that genuinely has no slots,
+	// so we don't tell the user "no availability" when the service is down.
+	if (error) {
+		return (
+			<div
+				role="alert"
+				className="text-dp-dark/70 flex h-40 items-center justify-center text-center text-sm"
+			>
+				Couldn&apos;t load times.
+				<br />
+				Please pick the date again.
 			</div>
 		);
 	}

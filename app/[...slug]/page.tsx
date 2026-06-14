@@ -249,7 +249,9 @@ export default async function CatchAllRoute({
 			return <BlogCategoryTemplate categorySlug={route.slug} />;
 		case 'blog-post': {
 			const data = await fetchBlogPostBySlugOrNull(route.slug);
-			if (!data) notFound();
+			// Match generateMetadata's `!data?.post` guard: a 200 envelope with a
+			// null post (draft/unpublished) must 404, not render a null post.
+			if (!data?.post) notFound();
 			return <BlogPostTemplate post={data.post} related={data.related ?? []} />;
 		}
 		case 'portfolio-index':

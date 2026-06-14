@@ -64,8 +64,15 @@ export default function QuoteForm({ portfolioHref }: QuoteFormProps) {
 				body: JSON.stringify(data),
 			});
 			if (!res.ok) {
-				const text = await res.text();
-				throw new Error(text || `HTTP ${res.status}`);
+				// The quote API returns a friendly message under `error` (validation,
+				// rate-limit). Surface that, not the raw JSON body.
+				const body = (await res.json().catch(() => null)) as {
+					error?: string;
+				} | null;
+				throw new Error(
+					body?.error ??
+						`Something went wrong (HTTP ${res.status}). Please try again.`,
+				);
 			}
 			setSubmitState({ state: 'success', name: data.yourName });
 		} catch (err) {

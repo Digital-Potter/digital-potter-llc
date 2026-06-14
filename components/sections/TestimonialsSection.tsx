@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Section } from './Section';
 import type { CmsSection, MediaRef } from '@/helpers/cms/types';
+import { toMediaRef } from '@/helpers/cms/media';
 
 type Testimonial = {
 	quote: string;
@@ -16,12 +17,6 @@ type TestimonialsContent = {
 	/** Legacy field name. */
 	items?: Testimonial[];
 };
-
-function imageRef(image: Testimonial['image']): MediaRef | null {
-	if (!image) return null;
-	if (typeof image === 'string') return { url: image };
-	return image;
-}
 
 function Stars({ count }: { count: number }) {
 	const filled = Math.max(0, Math.min(5, Math.round(count)));
@@ -57,7 +52,7 @@ export function TestimonialsSection({ section }: { section: CmsSection }) {
 			)}
 			<ul className="grid gap-6 md:grid-cols-2">
 				{items.map((t, i) => {
-					const avatar = imageRef(t.image);
+					const avatar = toMediaRef(t.image);
 					return (
 						<li
 							key={i}
