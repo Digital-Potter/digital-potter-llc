@@ -106,9 +106,10 @@ export default function TabbedServices() {
 							<ButtonLink
 								href={active.href}
 								variant="solid"
+								className="text-balanced"
 								ariaLabel={`Learn more about ${active.label}`}
 							>
-								Learn more
+								Continue to {active.label}
 							</ButtonLink>
 						</div>
 					</div>
