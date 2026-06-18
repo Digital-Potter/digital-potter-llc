@@ -15,6 +15,18 @@ type FetchOpts = {
 	tags?: string[];
 };
 
+/** Draft-preview access options threaded from the page into CMS fetches. */
+export type PreviewOpts = { preview?: boolean; token?: string };
+
+/**
+ * Append a `?preview=1&token=...` query when a valid preview token is present,
+ * so the CMS returns draft-overlaid content. Empty string otherwise.
+ */
+export const previewQuery = (opts?: PreviewOpts): string =>
+	opts?.preview && opts.token
+		? `?preview=1&token=${encodeURIComponent(opts.token)}`
+		: '';
+
 export async function apiGet<T = unknown>(
 	path: string,
 	opts: FetchOpts = {},

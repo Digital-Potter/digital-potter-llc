@@ -84,6 +84,35 @@ export function TextSection({ section }: { section: CmsSection }) {
 										dangerouslySetInnerHTML={{ __html: col.content }}
 									/>
 								)}
+								{col.listItems && col.listItems.length > 0 && (
+									<ul className="flex flex-col gap-4">
+										{col.listItems.map((item, idx) => (
+											<li key={idx} className="flex items-start gap-3">
+												{item.icon && (
+													<Image
+														src={item.icon}
+														alt=""
+														width={24}
+														height={24}
+														className="mt-1 h-6 w-6 shrink-0 object-contain"
+													/>
+												)}
+												<div>
+													{item.title && (
+														<p className="font-primary-font font-semibold">
+															{item.title}
+														</p>
+													)}
+													{item.subtitle && (
+														<p className="text-dp-body/85 text-sm">
+															{item.subtitle}
+														</p>
+													)}
+												</div>
+											</li>
+										))}
+									</ul>
+								)}
 							</li>
 						);
 					})}

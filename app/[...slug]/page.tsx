@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import { cookies, draftMode } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
+import PreviewBanner from '@/components/PreviewBanner';
 import { BlogCategoryTemplate } from '@/components/pageTemplates/BlogCategoryTemplate';
 import { BlogPostTemplate } from '@/components/pageTemplates/BlogPostTemplate';
 import { BlogTemplate } from '@/components/pageTemplates/BlogTemplate';
@@ -240,6 +243,23 @@ export default async function CatchAllRoute({
 	const { slug = [] } = await params;
 	const route = await classify(slug);
 
+	const { isEnabled: isPreview } = await draftMode();
+	const token = isPreview
+		? (await cookies()).get('preview_token')?.value
+		: undefined;
+	const previewOpts = { preview: isPreview, token };
+
+	/** Prefix the preview banner above rendered content while in draft mode. */
+	const withBanner = (label: string, node: ReactNode): ReactNode =>
+		isPreview ? (
+			<>
+				<PreviewBanner label={label} />
+				{node}
+			</>
+		) : (
+			node
+		);
+
 	switch (route.kind) {
 		case 'redirect-home':
 			redirect('/');
@@ -248,20 +268,26 @@ export default async function CatchAllRoute({
 		case 'blog-category':
 			return <BlogCategoryTemplate categorySlug={route.slug} />;
 		case 'blog-post': {
-			const data = await fetchBlogPostBySlugOrNull(route.slug);
+			const data = await fetchBlogPostBySlugOrNull(route.slug, previewOpts);
 			// Match generateMetadata's `!data?.post` guard: a 200 envelope with a
 			// null post (draft/unpublished) must 404, not render a null post.
 			if (!data?.post) notFound();
-			return <BlogPostTemplate post={data.post} related={data.related ?? []} />;
+			return withBanner(
+				route.slug,
+				<BlogPostTemplate post={data.post} related={data.related ?? []} />,
+			);
 		}
 		case 'portfolio-index':
 			return <PortfolioTemplate />;
 		case 'project-category':
 			return <ProjectCategoryTemplate categorySlug={route.slug} />;
 		case 'project-detail': {
-			const project = await fetchProjectBySlugOrNull(route.slug);
+			const project = await fetchProjectBySlugOrNull(route.slug, previewOpts);
 			if (!project) notFound();
-			return <ProjectDetailTemplate project={project} />;
+			return withBanner(
+				route.slug,
+				<ProjectDetailTemplate project={project} />,
+			);
 		}
 		case 'products-index':
 			return (
@@ -304,10 +330,10 @@ export default async function CatchAllRoute({
 			return <PolicyTemplate policy={policy} />;
 		}
 		case 'cms-page': {
-			const page = await fetchPageBySlugOrNull(route.slug);
+			const page = await fetchPageBySlugOrNull(route.slug, previewOpts);
 			if (!page) notFound();
 			const Template = resolveTemplate(page.template);
-			return <Template page={page} />;
+			return withBanner(route.slug, <Template page={page} />);
 		}
 		default:
 			notFound();

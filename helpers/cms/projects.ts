@@ -1,4 +1,4 @@
-import { apiGet } from './client';
+import { apiGet, previewQuery, type PreviewOpts } from './client';
 import type { CmsProject, StorefrontList, StorefrontItem } from './types';
 
 export type ProjectsQuery = {
@@ -40,14 +40,18 @@ export async function fetchProjectsOrEmpty(q: ProjectsQuery = {}) {
 	}
 }
 
-export const fetchProjectBySlug = (slug: string) =>
-	apiGet<StorefrontItem<CmsProject>>(`/api/storefront/projects/${slug}`).then(
-		(r) => r.item,
-	);
+export const fetchProjectBySlug = (slug: string, opts?: PreviewOpts) =>
+	apiGet<StorefrontItem<CmsProject>>(
+		`/api/storefront/projects/${slug}${previewQuery(opts)}`,
+		opts?.preview ? { revalidate: false } : {},
+	).then((r) => r.item);
 
-export async function fetchProjectBySlugOrNull(slug: string) {
+export async function fetchProjectBySlugOrNull(
+	slug: string,
+	opts?: PreviewOpts,
+) {
 	try {
-		return await fetchProjectBySlug(slug);
+		return await fetchProjectBySlug(slug, opts);
 	} catch (err) {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn('[cms] fetchProjectBySlug failed:', err);

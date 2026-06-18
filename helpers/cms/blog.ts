@@ -1,4 +1,4 @@
-import { apiGet } from './client';
+import { apiGet, previewQuery, type PreviewOpts } from './client';
 import type {
 	CmsBlogPost,
 	CmsBlogPostDetailResponse,
@@ -46,12 +46,18 @@ export async function fetchBlogPostsOrEmpty(q: BlogPostsQuery = {}) {
  * Detail endpoint returns `{ post, related }` — not a wrapped item.
  * Caller decides whether to use the related array.
  */
-export const fetchBlogPostBySlug = (slug: string) =>
-	apiGet<CmsBlogPostDetailResponse>(`/api/storefront/blog/${slug}`);
+export const fetchBlogPostBySlug = (slug: string, opts?: PreviewOpts) =>
+	apiGet<CmsBlogPostDetailResponse>(
+		`/api/storefront/blog/${slug}${previewQuery(opts)}`,
+		opts?.preview ? { revalidate: false } : {},
+	);
 
-export async function fetchBlogPostBySlugOrNull(slug: string) {
+export async function fetchBlogPostBySlugOrNull(
+	slug: string,
+	opts?: PreviewOpts,
+) {
 	try {
-		return await fetchBlogPostBySlug(slug);
+		return await fetchBlogPostBySlug(slug, opts);
 	} catch (err) {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn('[cms] fetchBlogPostBySlug failed:', err);

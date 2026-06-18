@@ -1,4 +1,4 @@
-import { apiGet } from './client';
+import { apiGet, previewQuery, type PreviewOpts } from './client';
 import type { CmsPage, StorefrontList } from './types';
 
 /**
@@ -10,16 +10,18 @@ type PageDetailResponse = {
 	page: CmsPage;
 };
 
-export const fetchPage = (slug: string) =>
-	apiGet<PageDetailResponse>(`/api/storefront/pages/${slug}`).then(
-		(r) => r.page,
-	);
+export const fetchPage = (slug: string, opts?: PreviewOpts) =>
+	apiGet<PageDetailResponse>(
+		`/api/storefront/pages/${slug}${previewQuery(opts)}`,
+		opts?.preview ? { revalidate: false } : {},
+	).then((r) => r.page);
 
 export async function fetchPageBySlugOrNull(
 	slug: string,
+	opts?: PreviewOpts,
 ): Promise<CmsPage | null> {
 	try {
-		return await fetchPage(slug);
+		return await fetchPage(slug, opts);
 	} catch (err) {
 		if (process.env.NODE_ENV !== 'production') {
 			console.warn(`[cms] fetchPage(${slug}) failed:`, err);

@@ -61,10 +61,18 @@ export type SectionSettings = {
  * writes `content.columns[]`; image is either a Media object (after picker
  * select) or a string URL on legacy data.
  */
+/** A single icon/title/subtitle item in a column's list (Text module). */
+export type ColumnListItem = {
+	icon?: string;
+	title?: string;
+	subtitle?: string;
+};
+
 export type BlockColumn = {
 	title?: string;
 	content?: string;
 	image?: MediaRef | string;
+	listItems?: ColumnListItem[];
 };
 
 export type CarouselSlide = {
