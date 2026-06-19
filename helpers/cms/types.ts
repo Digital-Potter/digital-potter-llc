@@ -43,6 +43,9 @@ export type BlockButton = {
 	url: string;
 	style?: 'primary' | 'secondary';
 	openInNewTab?: boolean;
+	/** When set, the button links to an existing item; the API resolves it to
+	 * the item's current slug and writes it back to `url` before rendering. */
+	reference?: { type: string; id: string; label?: string };
 };
 
 export type SectionLayout = 'full' | 'contained' | 'narrow';
