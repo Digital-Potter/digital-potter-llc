@@ -159,7 +159,10 @@ export async function generateMetadata({
 					absolute: post.seo?.metaTitle ?? `${post.title} — Digital Potter`,
 				},
 				description: post.seo?.metaDescription ?? post.excerpt ?? post.subtitle,
-				openGraph: ogImageUrl ? { images: [ogImageUrl] } : undefined,
+				openGraph: {
+					type: 'article',
+					images: ogImageUrl ? [ogImageUrl] : undefined,
+				},
 				alternates: post.seo?.canonicalUrl
 					? { canonical: post.seo.canonicalUrl }
 					: undefined,
@@ -199,7 +202,10 @@ export async function generateMetadata({
 				},
 				description:
 					project.seo?.metaDescription ?? project.subtitle ?? project.excerpt,
-				openGraph: ogImageUrl ? { images: [ogImageUrl] } : undefined,
+				openGraph: {
+					type: 'article',
+					images: ogImageUrl ? [ogImageUrl] : undefined,
+				},
 				alternates: project.seo?.canonicalUrl
 					? { canonical: project.seo.canonicalUrl }
 					: undefined,
