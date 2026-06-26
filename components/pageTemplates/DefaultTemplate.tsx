@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import { FinalCta } from '@/components/pages/home';
-import { normalizeCmsRichText } from '@/helpers/cms/richText';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 import { fetchStoreSettingsOrNull } from '@/helpers/cms/settings';
 import type { CmsPage } from '@/helpers/cms/types';
 import { JsonLd, webPageSchema } from '@/helpers/seo/structuredData';
@@ -19,7 +19,7 @@ export async function DefaultTemplate({ page }: { page: CmsPage | null }) {
 	]);
 	const title = page?.title ?? 'Digital Potter';
 	const subtitle = page?.subtitle ?? page?.excerpt;
-	const renderedContent = normalizeCmsRichText(
+	const renderedContent = renderCmsHtml(
 		page?.content || 'Digital Potter Legal',
 	);
 

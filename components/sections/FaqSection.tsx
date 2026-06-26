@@ -1,5 +1,6 @@
 import { Section } from './Section';
 import type { CmsSection } from '@/helpers/cms/types';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 
 type FaqEntry = {
 	question?: string;
@@ -57,7 +58,7 @@ export function FaqSection({ section }: { section: CmsSection }) {
 							</summary>
 							<div
 								className="prose prose-base prose-p:text-dp-body/85 prose-a:text-dp-dark-green hover:prose-a:text-dp-green max-w-none px-6 pb-6"
-								dangerouslySetInnerHTML={{ __html: it.a }}
+								dangerouslySetInnerHTML={{ __html: renderCmsHtml(it.a) }}
 							/>
 						</details>
 					</li>

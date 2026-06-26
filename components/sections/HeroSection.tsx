@@ -8,6 +8,7 @@ import type {
 	MediaRef,
 } from '@/helpers/cms/types';
 import { toMediaRef } from '@/helpers/cms/media';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 
 type HeroContent = {
 	image?: MediaRef | string;
@@ -103,7 +104,9 @@ export function HeroSection({ section }: { section: CmsSection }) {
 								{col.content && (
 									<div
 										className="prose prose-sm prose-p:text-dp-body-soft max-w-none"
-										dangerouslySetInnerHTML={{ __html: col.content }}
+										dangerouslySetInnerHTML={{
+											__html: renderCmsHtml(col.content),
+										}}
 									/>
 								)}
 							</li>

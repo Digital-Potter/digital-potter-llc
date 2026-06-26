@@ -1,4 +1,4 @@
-import { normalizeCmsRichText } from '@/helpers/cms/richText';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 
 type PostBodyProps = {
 	html: string;
@@ -10,7 +10,7 @@ type PostBodyProps = {
  * untrusted authors ever land in the loop, wrap with DOMPurify here.
  */
 export default function PostBody({ html }: PostBodyProps) {
-	const renderedHtml = normalizeCmsRichText(html);
+	const renderedHtml = renderCmsHtml(html);
 
 	return (
 		<section className="dp-container py-8 md:py-12">
