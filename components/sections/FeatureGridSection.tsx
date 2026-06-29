@@ -3,6 +3,7 @@ import { Section } from './Section';
 import SectionButtons from './SectionButtons';
 import type { BlockButton, BlockColumn, CmsSection } from '@/helpers/cms/types';
 import { toMediaRef } from '@/helpers/cms/media';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 
 type FeatureGridContent = {
 	columns?: BlockColumn[];
@@ -81,7 +82,9 @@ export function FeatureGridSection({ section }: { section: CmsSection }) {
 							{col.content && (
 								<div
 									className="prose prose-sm prose-p:text-dp-body-soft prose-strong:text-dp-dark prose-a:text-dp-dark-green mt-3 max-w-none"
-									dangerouslySetInnerHTML={{ __html: col.content }}
+									dangerouslySetInnerHTML={{
+										__html: renderCmsHtml(col.content),
+									}}
 								/>
 							)}
 						</li>

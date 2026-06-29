@@ -1,7 +1,7 @@
 import { resolveCtaHref } from '@/components/layout/cta-href';
 import { FinalCta } from '@/components/pages/home';
 import type { CmsPolicy } from '@/helpers/cms/policies';
-import { normalizeCmsRichText } from '@/helpers/cms/richText';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 
 /**
  * Renders a legal policy (title + rich-text body) served straight from store
@@ -11,7 +11,7 @@ import { normalizeCmsRichText } from '@/helpers/cms/richText';
  */
 export async function PolicyTemplate({ policy }: { policy: CmsPolicy }) {
 	const cta = await resolveCtaHref();
-	const renderedContent = normalizeCmsRichText(policy.content);
+	const renderedContent = renderCmsHtml(policy.content);
 
 	return (
 		<>

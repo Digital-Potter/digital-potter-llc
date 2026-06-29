@@ -1,5 +1,5 @@
 import { Section } from './Section';
-import { normalizeCmsRichText } from '@/helpers/cms/richText';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 import type { CmsSection } from '@/helpers/cms/types';
 
 type HtmlContent = {
@@ -13,7 +13,7 @@ export function HtmlSection({ section }: { section: CmsSection }) {
 	const c = section.content as HtmlContent | undefined;
 	const html = c?.htmlContent ?? c?.html;
 	if (!html) return null;
-	const renderedHtml = normalizeCmsRichText(html);
+	const renderedHtml = renderCmsHtml(html);
 	// CMS content is trusted — only admins author it. If untrusted input ever
 	// lands here, sanitize before rendering.
 	return (

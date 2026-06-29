@@ -3,6 +3,7 @@ import { Section } from './Section';
 import SectionButtons from './SectionButtons';
 import type { BlockButton, BlockColumn, CmsSection } from '@/helpers/cms/types';
 import { toMediaRef } from '@/helpers/cms/media';
+import { renderCmsHtml } from '@/helpers/cms/richText';
 
 type TextContent = {
 	columns?: BlockColumn[];
@@ -81,7 +82,9 @@ export function TextSection({ section }: { section: CmsSection }) {
 								{col.content && (
 									<div
 										className="prose prose-base prose-headings:font-primary-font prose-p:text-dp-body/85 prose-strong:text-dp-dark prose-a:text-dp-dark-green hover:prose-a:text-dp-green max-w-none text-sm md:text-base"
-										dangerouslySetInnerHTML={{ __html: col.content }}
+										dangerouslySetInnerHTML={{
+											__html: renderCmsHtml(col.content),
+										}}
 									/>
 								)}
 								{col.listItems && col.listItems.length > 0 && (
